@@ -77,7 +77,7 @@ export function SiteHeader() {
         <div className="site-header__actions">
           <LanguageToggle />
           <Link className="btn btn--ghost" href="/login">
-            <LocalizedText text={{ en: "Log In", bn: "লগ ইন" }} />
+            <LocalizedText text={{ en: "Staff CMS", bn: "স্টাফ সিএমএস" }} />
           </Link>
         </div>
       </div>

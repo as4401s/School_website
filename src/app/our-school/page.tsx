@@ -97,17 +97,17 @@ export default function OurSchoolPage() {
 
           <div className="grid-3">
             {spaceCards.map((card) => (
-              <article className="teacher-card" key={card.title.en}>
-                <div className="teacher-card__image-wrap">
+              <article className="tour-card" key={card.title.en}>
+                <div className="tour-card__image-wrap">
                   <Image
                     alt={card.title.en}
-                    className="teacher-card__image"
+                    className="tour-card__image"
                     fill
                     sizes="(max-width: 1080px) 100vw, 33vw"
                     src={card.imageUrl}
                   />
                 </div>
-                <div className="teacher-card__body">
+                <div className="tour-card__body">
                   <LocalizedText as="h3" text={card.title} />
                   <LocalizedText as="p" text={card.text} />
                 </div>

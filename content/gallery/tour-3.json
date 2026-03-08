@@ -1,0 +1,14 @@
+{
+  "id": "tour-3",
+  "order": 30,
+  "published": true,
+  "title": {
+    "en": "Parent Meeting",
+    "bn": "অভিভাবক বৈঠক"
+  },
+  "summary": {
+    "en": "Moments from a school meeting with families.",
+    "bn": "অভিভাবকদের সঙ্গে বিদ্যালয়ের এক বৈঠকের মুহূর্ত।"
+  },
+  "imageUrl": "/media/tour-3.jpg"
+}

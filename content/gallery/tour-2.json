@@ -1,0 +1,14 @@
+{
+  "id": "tour-2",
+  "order": 20,
+  "published": true,
+  "title": {
+    "en": "Independence Day",
+    "bn": "স্বাধীনতা দিবস"
+  },
+  "summary": {
+    "en": "Teachers and children during school celebrations.",
+    "bn": "বিদ্যালয়ের অনুষ্ঠানে শিক্ষক ও শিক্ষার্থীরা।"
+  },
+  "imageUrl": "/media/tour-2.jpg"
+}

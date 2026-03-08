@@ -5,13 +5,21 @@ import {
   LocalizedDate,
   LocalizedText,
 } from "@/components/language-provider";
-import { getNewsPostBySlug } from "@/lib/content";
+import { getNewsPostBySlug, getNewsPosts } from "@/lib/content";
 
 type PostPageProps = {
   params: Promise<{
     slug: string;
   }>;
 };
+
+export async function generateStaticParams() {
+  const posts = await getNewsPosts();
+
+  return posts.map((post) => ({
+    slug: post.slug,
+  }));
+}
 
 export default async function PostPage({ params }: PostPageProps) {
   const { slug } = await params;

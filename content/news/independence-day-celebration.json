@@ -1,0 +1,26 @@
+{
+  "id": "independence-day-celebration",
+  "slug": "independence-day-celebration",
+  "published": true,
+  "featured": false,
+  "publishedAt": "2025-09-08",
+  "title": {
+    "en": "Independence Day Celebration",
+    "bn": "স্বাধীনতা দিবস উদ্‌যাপন"
+  },
+  "excerpt": {
+    "en": "Celebration of Independence Day on 15th August with cultural programs and the hoisting of the national flag.",
+    "bn": "১৫ই আগস্ট সাংস্কৃতিক অনুষ্ঠান ও জাতীয় পতাকা উত্তোলনের মাধ্যমে স্বাধীনতা দিবস উদ্‌যাপন।"
+  },
+  "body": [
+    {
+      "en": "Children and teachers marked Independence Day through cultural participation and a formal flag hoisting ceremony.",
+      "bn": "শিক্ষার্থী ও শিক্ষকরা সাংস্কৃতিক অংশগ্রহণ এবং আনুষ্ঠানিক পতাকা উত্তোলনের মাধ্যমে স্বাধীনতা দিবস পালন করেছেন।"
+    },
+    {
+      "en": "The event brought together the school community in a spirit of pride, participation, and celebration.",
+      "bn": "এই অনুষ্ঠান বিদ্যালয় পরিবারকে গর্ব, অংশগ্রহণ ও উৎসবের আবহে একত্র করেছে।"
+    }
+  ],
+  "imageUrl": "/media/post-independence.jpeg"
+}

@@ -1,325 +1,225 @@
-import {
-  documents,
-  gallery,
-  newsPosts,
-  resultNotices,
-  type BilingualText,
-  type DocumentItem,
-  type GalleryItem,
-  type NewsPost,
-  type ResultNotice,
+import { promises as fs } from "node:fs";
+import path from "node:path";
+import { cache } from "react";
+
+import { z } from "zod";
+
+import type {
+  BilingualText,
+  DocumentItem,
+  GalleryItem,
+  NewsPost,
+  ResultNotice,
 } from "@/data/site-content";
-import { createServerSupabaseClient } from "@/lib/supabase/server";
-import { hasSupabaseEnv } from "@/lib/supabase/env";
 
-type RawNewsPost = {
-  id: string;
-  title: string;
-  title_bn?: string | null;
-  slug: string;
-  excerpt: string;
-  excerpt_bn?: string | null;
-  body: string;
-  body_bn?: string | null;
-  cover_image_url: string | null;
-  published_at: string;
-  featured: boolean | null;
+const contentRoot = path.join(process.cwd(), "content");
+
+const bilingualTextSchema = z.object({
+  en: z.string().trim().min(1),
+  bn: z.string().trim().min(1),
+});
+
+const newsPostSchema = z.object({
+  id: z.string().trim().min(1).optional(),
+  slug: z.string().trim().min(1).optional(),
+  published: z.boolean().default(true),
+  featured: z.boolean().optional().default(false),
+  publishedAt: z.string().trim().min(1),
+  title: bilingualTextSchema,
+  excerpt: bilingualTextSchema,
+  body: z.array(bilingualTextSchema).min(1),
+  imageUrl: z.string().trim().min(1),
+});
+
+const resultNoticeSchema = z.object({
+  id: z.string().trim().min(1).optional(),
+  slug: z.string().trim().min(1).optional(),
+  published: z.boolean().default(true),
+  publishedAt: z.string().trim().min(1).optional(),
+  title: bilingualTextSchema,
+  summary: bilingualTextSchema,
+  details: z.array(bilingualTextSchema).min(1),
+  location: bilingualTextSchema,
+  eventDate: z.string().trim().min(1).optional(),
+  status: bilingualTextSchema,
+});
+
+const documentSchema = z.object({
+  id: z.string().trim().min(1).optional(),
+  slug: z.string().trim().min(1).optional(),
+  published: z.boolean().default(true),
+  order: z.number().int().optional(),
+  title: bilingualTextSchema,
+  category: bilingualTextSchema,
+  description: bilingualTextSchema,
+  href: z.string().optional().default(""),
+});
+
+const galleryItemSchema = z.object({
+  id: z.string().trim().min(1).optional(),
+  order: z.number().int().optional(),
+  published: z.boolean().default(true),
+  title: bilingualTextSchema,
+  summary: bilingualTextSchema,
+  imageUrl: z.string().trim().min(1),
+});
+
+type NewsPostFile = z.infer<typeof newsPostSchema>;
+type ResultNoticeFile = z.infer<typeof resultNoticeSchema>;
+type DocumentFile = z.infer<typeof documentSchema>;
+type GalleryItemFile = z.infer<typeof galleryItemSchema>;
+type RecordWithFileSlug<T> = T & {
+  _fileSlug: string;
 };
 
-type RawDocument = {
-  id: string;
-  title: string;
-  title_bn?: string | null;
-  category: string;
-  category_bn?: string | null;
-  description: string;
-  description_bn?: string | null;
-  file_url: string | null;
+type CmsCollections = {
+  news: NewsPost[];
+  results: ResultNotice[];
+  documents: DocumentItem[];
+  gallery: GalleryItem[];
 };
 
-type RawResult = {
-  id: string;
-  title: string;
-  title_bn?: string | null;
-  slug: string;
-  summary: string;
-  summary_bn?: string | null;
-  details: string;
-  details_bn?: string | null;
-  location: string;
-  location_bn?: string | null;
-  result_date: string | null;
-  status: string;
-  status_bn?: string | null;
-};
-
-type RawGalleryItem = {
-  id: string;
-  title: string;
-  title_bn?: string | null;
-  caption: string | null;
-  caption_bn?: string | null;
-  image_url: string;
-};
-
-type PortalCollections = {
-  news: RawNewsPost[];
-  documents: RawDocument[];
-  results: RawResult[];
-  gallery: RawGalleryItem[];
-  error?: string;
-};
-
-function toBilingualText(
-  english: string | null | undefined,
-  bengali: string | null | undefined,
-): BilingualText {
-  const fallback = english?.trim() || "";
-
-  return {
-    en: fallback,
-    bn: bengali?.trim() || fallback,
-  };
+function compareDatesDescending(left: string | undefined, right: string | undefined) {
+  const leftTime = left ? new Date(left).getTime() : 0;
+  const rightTime = right ? new Date(right).getTime() : 0;
+  return rightTime - leftTime;
 }
 
-function splitBody(value: string | null | undefined, fallback?: string | null | undefined) {
-  if (!value) {
-    return [];
-  }
+async function readCollection<T extends Record<string, unknown>>(
+  directory: string,
+  schema: z.ZodType<T>,
+) {
+  const folder = path.join(contentRoot, directory);
+  const entries = await fs.readdir(folder, { withFileTypes: true });
 
-  const englishParts = value
-    .split("\n\n")
-    .map((entry) => entry.trim())
-    .filter(Boolean);
-  const bengaliParts = fallback
-    ? fallback
-        .split("\n\n")
-        .map((entry) => entry.trim())
-        .filter(Boolean)
-    : [];
+  const files = entries
+    .filter((entry) => entry.isFile() && entry.name.endsWith(".json"))
+    .map((entry) => entry.name)
+    .sort();
 
-  return englishParts.map((entry, index) =>
-    toBilingualText(entry, bengaliParts[index]),
+  const records = await Promise.all(
+    files.map(async (fileName) => {
+      const filePath = path.join(folder, fileName);
+      const raw = await fs.readFile(filePath, "utf8");
+      return {
+        ...schema.parse(JSON.parse(raw)),
+        _fileSlug: fileName.replace(/\.json$/, ""),
+      } as RecordWithFileSlug<T>;
+    }),
   );
+
+  return records;
 }
 
-function mapNewsPost(row: RawNewsPost): NewsPost {
+function normalizeBilingualText(value: BilingualText): BilingualText {
   return {
-    id: row.id,
-    title: toBilingualText(row.title, row.title_bn),
-    slug: row.slug,
-    excerpt: toBilingualText(row.excerpt, row.excerpt_bn),
-    body: splitBody(row.body, row.body_bn),
-    imageUrl: row.cover_image_url || "/media/post-raksha.jpeg",
-    publishedAt: row.published_at,
-    featured: Boolean(row.featured),
+    en: value.en.trim(),
+    bn: value.bn.trim(),
   };
 }
 
-function mapDocument(row: RawDocument): DocumentItem {
+function mapNewsPost(record: RecordWithFileSlug<NewsPostFile>): NewsPost {
+  const slug = record.slug || record._fileSlug;
+
   return {
-    id: row.id,
-    title: toBilingualText(row.title, row.title_bn),
-    category: toBilingualText(row.category, row.category_bn),
-    description: toBilingualText(row.description, row.description_bn),
-    href: row.file_url || undefined,
+    id: record.id || slug,
+    slug,
+    publishedAt: record.publishedAt,
+    featured: record.featured,
+    title: normalizeBilingualText(record.title),
+    excerpt: normalizeBilingualText(record.excerpt),
+    body: record.body.map(normalizeBilingualText),
+    imageUrl: record.imageUrl,
   };
 }
 
-function mapResult(row: RawResult): ResultNotice {
+function mapResultNotice(record: RecordWithFileSlug<ResultNoticeFile>): ResultNotice {
+  const slug = record.slug || record._fileSlug;
+
   return {
-    id: row.id,
-    title: toBilingualText(row.title, row.title_bn),
-    slug: row.slug,
-    summary: toBilingualText(row.summary, row.summary_bn),
-    details: splitBody(row.details, row.details_bn),
-    location: toBilingualText(row.location, row.location_bn),
-    eventDate: row.result_date || undefined,
-    status: toBilingualText(row.status, row.status_bn),
+    id: record.id || slug,
+    slug,
+    title: normalizeBilingualText(record.title),
+    summary: normalizeBilingualText(record.summary),
+    details: record.details.map(normalizeBilingualText),
+    location: normalizeBilingualText(record.location),
+    eventDate: record.eventDate,
+    status: normalizeBilingualText(record.status),
   };
 }
 
-function mapGalleryItem(row: RawGalleryItem): GalleryItem {
+function mapDocument(record: RecordWithFileSlug<DocumentFile>): DocumentItem {
   return {
-    id: row.id,
-    title: toBilingualText(row.title, row.title_bn),
-    imageUrl: row.image_url,
-    summary: toBilingualText(
-      row.caption || "School gallery image.",
-      row.caption_bn,
-    ),
+    id: record.id || record.slug || record._fileSlug,
+    title: normalizeBilingualText(record.title),
+    category: normalizeBilingualText(record.category),
+    description: normalizeBilingualText(record.description),
+    href: record.href?.trim() || undefined,
   };
 }
+
+function mapGalleryItem(record: RecordWithFileSlug<GalleryItemFile>): GalleryItem {
+  return {
+    id: record.id || record._fileSlug,
+    title: normalizeBilingualText(record.title),
+    summary: normalizeBilingualText(record.summary),
+    imageUrl: record.imageUrl,
+  };
+}
+
+const loadCmsCollections = cache(async (): Promise<CmsCollections> => {
+  const [newsFiles, resultFiles, documentFiles, galleryFiles] = await Promise.all([
+    readCollection("news", newsPostSchema),
+    readCollection("results", resultNoticeSchema),
+    readCollection("documents", documentSchema),
+    readCollection("gallery", galleryItemSchema),
+  ]);
+
+  return {
+    news: newsFiles
+      .filter((record) => record.published)
+      .sort((left, right) => compareDatesDescending(left.publishedAt, right.publishedAt))
+      .map(mapNewsPost),
+    results: resultFiles
+      .filter((record) => record.published)
+      .sort((left, right) => {
+        const eventSort = compareDatesDescending(left.eventDate, right.eventDate);
+        return eventSort !== 0
+          ? eventSort
+          : compareDatesDescending(left.publishedAt, right.publishedAt);
+      })
+      .map(mapResultNotice),
+    documents: documentFiles
+      .filter((record) => record.published)
+      .sort((left, right) => (left.order ?? 999) - (right.order ?? 999))
+      .map(mapDocument),
+    gallery: galleryFiles
+      .filter((record) => record.published)
+      .sort((left, right) => (left.order ?? 999) - (right.order ?? 999))
+      .map(mapGalleryItem),
+  };
+});
 
 export async function getNewsPosts() {
-  if (!hasSupabaseEnv()) {
-    return newsPosts;
-  }
-
-  try {
-    const supabase = await createServerSupabaseClient();
-    const { data, error } = await supabase
-      .from("news_posts")
-      .select(
-        "id,title,title_bn,slug,excerpt,excerpt_bn,body,body_bn,cover_image_url,published_at,featured",
-      )
-      .eq("published", true)
-      .order("published_at", { ascending: false });
-
-    if (error || !data?.length) {
-      return newsPosts;
-    }
-
-    return data.map((row) => mapNewsPost(row as RawNewsPost));
-  } catch {
-    return newsPosts;
-  }
+  return (await loadCmsCollections()).news;
 }
 
 export async function getNewsPostBySlug(slug: string) {
-  const items = await getNewsPosts();
-  return items.find((item) => item.slug === slug) || null;
+  return (await getNewsPosts()).find((post) => post.slug === slug) || null;
 }
 
 export async function getResults() {
-  if (!hasSupabaseEnv()) {
-    return resultNotices;
-  }
-
-  try {
-    const supabase = await createServerSupabaseClient();
-    const { data, error } = await supabase
-      .from("results")
-      .select(
-        "id,title,title_bn,slug,summary,summary_bn,details,details_bn,location,location_bn,result_date,status,status_bn",
-      )
-      .eq("published", true)
-      .order("created_at", { ascending: false });
-
-    if (error || !data?.length) {
-      return resultNotices;
-    }
-
-    return data.map((row) => mapResult(row as RawResult));
-  } catch {
-    return resultNotices;
-  }
+  return (await loadCmsCollections()).results;
 }
 
 export async function getResultBySlug(slug: string) {
-  const items = await getResults();
-  return items.find((item) => item.slug === slug) || null;
+  return (await getResults()).find((result) => result.slug === slug) || null;
 }
 
 export async function getDocuments() {
-  if (!hasSupabaseEnv()) {
-    return documents;
-  }
-
-  try {
-    const supabase = await createServerSupabaseClient();
-    const { data, error } = await supabase
-      .from("documents")
-      .select(
-        "id,title,title_bn,category,category_bn,description,description_bn,file_url",
-      )
-      .eq("published", true)
-      .order("created_at", { ascending: false });
-
-    if (error || !data?.length) {
-      return documents;
-    }
-
-    return data.map((row) => mapDocument(row as RawDocument));
-  } catch {
-    return documents;
-  }
+  return (await loadCmsCollections()).documents;
 }
 
 export async function getGalleryItems() {
-  if (!hasSupabaseEnv()) {
-    return gallery;
-  }
-
-  try {
-    const supabase = await createServerSupabaseClient();
-    const { data, error } = await supabase
-      .from("gallery_items")
-      .select("id,title,title_bn,caption,caption_bn,image_url")
-      .eq("published", true)
-      .order("display_order", { ascending: true });
-
-    if (error || !data?.length) {
-      return gallery;
-    }
-
-    return data.map((row) => mapGalleryItem(row as RawGalleryItem));
-  } catch {
-    return gallery;
-  }
-}
-
-export async function getPortalCollections(): Promise<PortalCollections> {
-  if (!hasSupabaseEnv()) {
-    return {
-      news: [],
-      documents: [],
-      results: [],
-      gallery: [],
-      error: "Supabase is not configured yet.",
-    };
-  }
-
-  try {
-    const supabase = await createServerSupabaseClient();
-    const [newsQuery, documentsQuery, resultsQuery, galleryQuery] =
-      await Promise.all([
-        supabase
-          .from("news_posts")
-          .select(
-            "id,title,title_bn,slug,excerpt,excerpt_bn,body,body_bn,cover_image_url,published_at,featured",
-          )
-          .order("published_at", { ascending: false }),
-        supabase
-          .from("documents")
-          .select(
-            "id,title,title_bn,category,category_bn,description,description_bn,file_url",
-          )
-          .order("created_at", { ascending: false }),
-        supabase
-          .from("results")
-          .select(
-            "id,title,title_bn,slug,summary,summary_bn,details,details_bn,location,location_bn,result_date,status,status_bn",
-          )
-          .order("created_at", { ascending: false }),
-        supabase
-          .from("gallery_items")
-          .select("id,title,title_bn,caption,caption_bn,image_url")
-          .order("display_order", { ascending: true }),
-      ]);
-
-    const firstError = [
-      newsQuery.error,
-      documentsQuery.error,
-      resultsQuery.error,
-      galleryQuery.error,
-    ].find(Boolean);
-
-    return {
-      news: (newsQuery.data || []) as RawNewsPost[],
-      documents: (documentsQuery.data || []) as RawDocument[],
-      results: (resultsQuery.data || []) as RawResult[],
-      gallery: (galleryQuery.data || []) as RawGalleryItem[],
-      error: firstError?.message,
-    };
-  } catch (error) {
-    return {
-      news: [],
-      documents: [],
-      results: [],
-      gallery: [],
-      error:
-        error instanceof Error ? error.message : "Portal collections could not be loaded.",
-    };
-  }
+  return (await loadCmsCollections()).gallery;
 }

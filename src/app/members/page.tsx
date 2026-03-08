@@ -1,20 +1,20 @@
 import { LocalizedText } from "@/components/language-provider";
-import { LoginForm } from "@/components/login-form";
 import { PageIntro } from "@/components/page-intro";
+import { StaffAccessCard } from "@/components/staff-access-card";
 
 const introEyebrow = {
-  en: "Members",
-  bn: "সদস্য",
+  en: "Staff Access",
+  bn: "স্টাফ অ্যাক্সেস",
 };
 
 const introTitle = {
-  en: "Members access",
-  bn: "সদস্য প্রবেশাধিকার",
+  en: "Authorised editor access",
+  bn: "অনুমোদিত সম্পাদক প্রবেশাধিকার",
 };
 
 const introSummary = {
-  en: "Use this page to sign in to member areas.",
-  bn: "সদস্যদের অংশে প্রবেশ করতে এই পৃষ্ঠা ব্যবহার করুন।",
+  en: "This school website uses a staff CMS for editor access rather than a public members area.",
+  bn: "এই বিদ্যালয়ের ওয়েবসাইটে জনসাধারণের সদস্য অংশের বদলে সম্পাদকদের জন্য স্টাফ সিএমএস ব্যবহার করা হয়।",
 };
 
 export default function MembersPage() {
@@ -26,17 +26,17 @@ export default function MembersPage() {
           <article className="portal-card stack">
             <LocalizedText
               as="h3"
-              text={{ en: "Member login", bn: "সদস্য লগ ইন" }}
+              text={{ en: "No public member accounts", bn: "কোনও পাবলিক সদস্য অ্যাকাউন্ট নেই" }}
             />
             <LocalizedText
               as="p"
               text={{
-                en: "Authorised members can use this area to sign in.",
-                bn: "অনুমোদিত সদস্যরা এই অংশ ব্যবহার করে লগ ইন করতে পারবেন।",
+                en: "Only authorised school editors receive access to the content management area.",
+                bn: "শুধু অনুমোদিত বিদ্যালয় সম্পাদকরাই কনটেন্ট ব্যবস্থাপনার অংশে প্রবেশাধিকার পাবেন।",
               }}
             />
           </article>
-          <LoginForm nextPath="/portal" />
+          <StaffAccessCard />
         </div>
       </section>
     </>

@@ -1,0 +1,19 @@
+{
+  "id": "term-1-update",
+  "slug": "term-1-update",
+  "published": true,
+  "order": 20,
+  "title": {
+    "en": "Term 1 Notice",
+    "bn": "টার্ম ১ নোটিশ"
+  },
+  "category": {
+    "en": "Results",
+    "bn": "ফলাফল"
+  },
+  "description": {
+    "en": "Latest public notice related to Term 1 updates.",
+    "bn": "টার্ম ১ সংক্রান্ত সর্বশেষ জনসাধারণের নোটিশ।"
+  },
+  "href": "/events/term-1-results"
+}

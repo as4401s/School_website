@@ -1,0 +1,19 @@
+{
+  "id": "general-circulars",
+  "slug": "general-circulars",
+  "published": true,
+  "order": 30,
+  "title": {
+    "en": "General Circulars",
+    "bn": "সাধারণ বিজ্ঞপ্তি"
+  },
+  "category": {
+    "en": "School Updates",
+    "bn": "বিদ্যালয় আপডেট"
+  },
+  "description": {
+    "en": "Important notices and school information for families.",
+    "bn": "অভিভাবক ও শিক্ষার্থীদের জন্য গুরুত্বপূর্ণ নোটিশ ও বিদ্যালয়ের তথ্য।"
+  },
+  "href": ""
+}

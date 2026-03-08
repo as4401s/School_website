@@ -1,21 +1,19 @@
-import Link from "next/link";
-
 import { LocalizedText } from "@/components/language-provider";
 import { PageIntro } from "@/components/page-intro";
 
 const introEyebrow = {
-  en: "Groups",
-  bn: "গ্রুপস",
+  en: "Staff Workflow",
+  bn: "স্টাফ ওয়ার্কফ্লো",
 };
 
 const introTitle = {
-  en: "Community groups",
-  bn: "কমিউনিটি গ্রুপ",
+  en: "How content approval works",
+  bn: "কনটেন্ট অনুমোদনের ধাপ",
 };
 
 const introSummary = {
-  en: "School groups and shared updates for authorised members.",
-  bn: "অনুমোদিত সদস্যদের জন্য স্কুল গ্রুপ ও শেয়ার করা আপডেট।",
+  en: "School editors can submit updates through the CMS, and the main administrator keeps repository control.",
+  bn: "বিদ্যালয়ের সম্পাদকরা সিএমএসের মাধ্যমে আপডেট জমা দিতে পারবেন, আর প্রধান প্রশাসক রিপোজিটরির নিয়ন্ত্রণ বজায় রাখবেন।",
 };
 
 export default function GroupsPage() {
@@ -28,13 +26,10 @@ export default function GroupsPage() {
             <LocalizedText
               as="p"
               text={{
-                en: "This area is available to authorised members after sign-in.",
-                bn: "লগ ইন করার পর অনুমোদিত সদস্যদের জন্য এই অংশ উপলব্ধ।",
+                en: "Use the staff CMS to upload documents, gallery images, notices, and news. The site owner can review and publish those changes through GitHub and Vercel.",
+                bn: "নথি, গ্যালারির ছবি, নোটিশ ও সংবাদ আপলোড করতে স্টাফ সিএমএস ব্যবহার করুন। সাইটের প্রধান প্রশাসক GitHub ও Vercel-এর মাধ্যমে সেই পরিবর্তনগুলি পর্যালোচনা ও প্রকাশ করতে পারবেন।",
               }}
             />
-            <Link className="btn btn--accent" href="/login?next=/portal">
-              <LocalizedText text={{ en: "Go to Login", bn: "লগ ইন করুন" }} />
-            </Link>
           </article>
         </div>
       </section>

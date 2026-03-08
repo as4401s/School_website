@@ -1,0 +1,14 @@
+{
+  "id": "tour-1",
+  "order": 10,
+  "published": true,
+  "title": {
+    "en": "Classroom Space",
+    "bn": "শ্রেণিকক্ষের পরিবেশ"
+  },
+  "summary": {
+    "en": "A look inside the school’s learning environment.",
+    "bn": "বিদ্যালয়ের শিক্ষার পরিবেশের একটি ঝলক।"
+  },
+  "imageUrl": "/media/tour-1.jpg"
+}

@@ -1,0 +1,231 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>KM School Staff CMS</title>
+    <style>
+      :root {
+        color-scheme: light;
+        --ink: #152033;
+        --accent: #c84f1d;
+        --surface: #fffaf4;
+        --line: rgba(21, 32, 51, 0.12);
+      }
+
+      body {
+        margin: 0;
+        min-height: 100vh;
+        display: grid;
+        place-items: center;
+        background:
+          radial-gradient(circle at top left, rgba(224, 102, 52, 0.16), transparent 26%),
+          radial-gradient(circle at top right, rgba(58, 111, 99, 0.12), transparent 28%),
+          linear-gradient(180deg, #f7f1e8 0%, #fbf7f1 100%);
+        color: var(--ink);
+        font-family: "Helvetica Neue", Arial, sans-serif;
+      }
+
+      .boot-card {
+        width: min(540px, calc(100% - 32px));
+        padding: 32px;
+        border: 1px solid var(--line);
+        border-radius: 28px;
+        background: rgba(255, 250, 244, 0.94);
+        box-shadow: 0 24px 80px rgba(21, 32, 51, 0.12);
+      }
+
+      .boot-card h1 {
+        margin: 0 0 12px;
+        font-size: clamp(2rem, 5vw, 3.2rem);
+        letter-spacing: -0.05em;
+      }
+
+      .boot-card p {
+        margin: 0;
+        color: rgba(21, 32, 51, 0.74);
+        line-height: 1.7;
+      }
+
+      .boot-card strong {
+        color: var(--accent);
+      }
+    </style>
+    <script>
+      window.CMS_MANUAL_INIT = true;
+    </script>
+  </head>
+  <body>
+    <div class="boot-card">
+      <p><strong>KM School Staff CMS</strong></p>
+      <h1>Loading editor</h1>
+      <p>
+        Sign in with an authorised GitHub account to manage news, results,
+        documents, and gallery images.
+      </p>
+    </div>
+
+    <script src="https://unpkg.com/decap-cms@^3.5.0/dist/decap-cms.js"></script>
+    <script>
+      const bilingualFields = [
+        { label: "English", name: "en", widget: "string" },
+        { label: "Bengali", name: "bn", widget: "string" },
+      ];
+
+      const bilingualTextAreaFields = [
+        { label: "English", name: "en", widget: "text" },
+        { label: "Bengali", name: "bn", widget: "text" },
+      ];
+
+      const config = {
+        site_url: window.location.origin,
+        display_url: window.location.origin,
+        locale: "en",
+        publish_mode: "editorial_workflow",
+        media_folder: "public/uploads",
+        public_folder: "/uploads",
+        backend: {
+          name: "github",
+          repo: "as4401s/School_website",
+          branch: "main",
+          base_url: window.location.origin,
+          auth_endpoint: "api/decap/auth",
+          open_authoring: true,
+          squash_merges: true,
+        },
+        slug: {
+          encoding: "ascii",
+          clean_accents: true,
+          sanitize_replacement: "-",
+        },
+        collections: [
+          {
+            name: "news",
+            label: "News",
+            label_singular: "News Item",
+            folder: "content/news",
+            create: true,
+            extension: "json",
+            format: "json",
+            identifier_field: "title.en",
+            slug: "{{slug}}",
+            summary: "{{fields.title.en}}",
+            fields: [
+              { label: "Published", name: "published", widget: "boolean", default: true },
+              { label: "Featured on home page", name: "featured", widget: "boolean", default: false, required: false },
+              {
+                label: "Published date",
+                name: "publishedAt",
+                widget: "datetime",
+                date_format: "YYYY-MM-DD",
+                time_format: false,
+                format: "YYYY-MM-DD",
+              },
+              { label: "Title", name: "title", widget: "object", fields: bilingualFields },
+              { label: "Excerpt", name: "excerpt", widget: "object", fields: bilingualTextAreaFields },
+              {
+                label: "Body paragraphs",
+                name: "body",
+                widget: "list",
+                summary: "{{fields.en}}",
+                fields: bilingualTextAreaFields,
+              },
+              { label: "Cover image", name: "imageUrl", widget: "image" },
+            ],
+          },
+          {
+            name: "results",
+            label: "Results & Notices",
+            label_singular: "Result Notice",
+            folder: "content/results",
+            create: true,
+            extension: "json",
+            format: "json",
+            identifier_field: "title.en",
+            slug: "{{slug}}",
+            summary: "{{fields.title.en}}",
+            fields: [
+              { label: "Published", name: "published", widget: "boolean", default: true },
+              {
+                label: "Published date",
+                name: "publishedAt",
+                widget: "datetime",
+                date_format: "YYYY-MM-DD",
+                time_format: false,
+                format: "YYYY-MM-DD",
+                required: false,
+              },
+              {
+                label: "Event date",
+                name: "eventDate",
+                widget: "datetime",
+                date_format: "YYYY-MM-DD",
+                time_format: false,
+                format: "YYYY-MM-DD",
+                required: false,
+              },
+              { label: "Title", name: "title", widget: "object", fields: bilingualFields },
+              { label: "Summary", name: "summary", widget: "object", fields: bilingualTextAreaFields },
+              {
+                label: "Details",
+                name: "details",
+                widget: "list",
+                summary: "{{fields.en}}",
+                fields: bilingualTextAreaFields,
+              },
+              { label: "Location", name: "location", widget: "object", fields: bilingualFields },
+              { label: "Status", name: "status", widget: "object", fields: bilingualFields },
+            ],
+          },
+          {
+            name: "documents",
+            label: "Documents",
+            label_singular: "Document",
+            folder: "content/documents",
+            create: true,
+            extension: "json",
+            format: "json",
+            identifier_field: "title.en",
+            slug: "{{slug}}",
+            summary: "{{fields.title.en}}",
+            fields: [
+              { label: "Published", name: "published", widget: "boolean", default: true },
+              { label: "Display order", name: "order", widget: "number", value_type: "int", default: 10, required: false },
+              { label: "Title", name: "title", widget: "object", fields: bilingualFields },
+              { label: "Category", name: "category", widget: "object", fields: bilingualFields },
+              { label: "Description", name: "description", widget: "object", fields: bilingualTextAreaFields },
+              {
+                label: "File or link",
+                name: "href",
+                widget: "file",
+                required: false,
+                hint: "Upload a file or type an internal link such as /events/term-1-results.",
+              },
+            ],
+          },
+          {
+            name: "gallery",
+            label: "Gallery",
+            label_singular: "Gallery Item",
+            folder: "content/gallery",
+            create: true,
+            extension: "json",
+            format: "json",
+            identifier_field: "title.en",
+            slug: "{{slug}}",
+            summary: "{{fields.title.en}}",
+            fields: [
+              { label: "Published", name: "published", widget: "boolean", default: true },
+              { label: "Display order", name: "order", widget: "number", value_type: "int", default: 10, required: false },
+              { label: "Title", name: "title", widget: "object", fields: bilingualFields },
+              { label: "Summary", name: "summary", widget: "object", fields: bilingualTextAreaFields },
+              { label: "Image", name: "imageUrl", widget: "image" },
+            ],
+          },
+        ],
+      };
+
+      window.CMS.init({ config });
+    </script>
+  </body>
+</html>

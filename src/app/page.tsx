@@ -6,12 +6,16 @@ import {
   LocalizedText,
 } from "@/components/language-provider";
 import {
-  documents,
   heroStats,
   homeHeroSlides,
   siteMeta,
 } from "@/data/site-content";
-import { getGalleryItems, getNewsPosts, getResults } from "@/lib/content";
+import {
+  getDocuments,
+  getGalleryItems,
+  getNewsPosts,
+  getResults,
+} from "@/lib/content";
 
 const homeIntro = {
   en: "Welcome",
@@ -84,10 +88,11 @@ const viewNoticeText = {
 };
 
 export default async function HomePage() {
-  const [galleryItems, posts, results] = await Promise.all([
+  const [galleryItems, posts, results, documents] = await Promise.all([
     getGalleryItems(),
     getNewsPosts(),
     getResults(),
+    getDocuments(),
   ]);
 
   const featuredPosts = posts.slice(0, 2);
@@ -247,18 +252,35 @@ export default async function HomePage() {
 
       <section className="section">
         <div className="shell grid-2">
-          <article className="portal-card stack">
-            <LocalizedText as="p" className="eyebrow" text={upcomingNoticeLabel} />
-            <LocalizedText as="h3" text={latestResult.title} />
-            <LocalizedText as="p" text={latestResult.summary} />
-            <div className="chip-row">
-              <LocalizedText as="span" className="chip" text={latestResult.status} />
-              <LocalizedText as="span" className="chip" text={latestResult.location} />
-            </div>
-            <Link className="btn btn--accent" href={`/events/${latestResult.slug}`}>
-              <LocalizedText text={viewNoticeText} />
-            </Link>
-          </article>
+          {latestResult ? (
+            <article className="portal-card stack">
+              <LocalizedText as="p" className="eyebrow" text={upcomingNoticeLabel} />
+              <LocalizedText as="h3" text={latestResult.title} />
+              <LocalizedText as="p" text={latestResult.summary} />
+              <div className="chip-row">
+                <LocalizedText as="span" className="chip" text={latestResult.status} />
+                <LocalizedText as="span" className="chip" text={latestResult.location} />
+              </div>
+              <Link className="btn btn--accent" href={`/events/${latestResult.slug}`}>
+                <LocalizedText text={viewNoticeText} />
+              </Link>
+            </article>
+          ) : (
+            <article className="portal-card stack">
+              <LocalizedText as="p" className="eyebrow" text={upcomingNoticeLabel} />
+              <LocalizedText
+                as="h3"
+                text={{ en: "Notice board updates", bn: "নোটিশ বোর্ডের আপডেট" }}
+              />
+              <LocalizedText
+                as="p"
+                text={{
+                  en: "Important public notices will appear here as soon as they are published.",
+                  bn: "গুরুত্বপূর্ণ জনসাধারণের নোটিশ প্রকাশিত হলে সেগুলি এখানেই দেখা যাবে।",
+                }}
+              />
+            </article>
+          )}
 
           <article className="feature-panel">
             <div className="feature-panel__copy">

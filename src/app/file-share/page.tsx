@@ -54,14 +54,16 @@ export default async function FileSharePage() {
 
       <section className="section">
         <div className="shell">
-          <article className="portal-card stack">
-            <LocalizedText as="p" className="eyebrow" text={{ en: "Results", bn: "ফলাফল" }} />
-            <LocalizedText as="h3" text={latestResult.title} />
-            <LocalizedText as="p" text={latestResult.summary} />
-            <Link className="btn btn--accent" href={`/events/${latestResult.slug}`}>
-              <LocalizedText text={{ en: "View Result Notice", bn: "ফলাফলের নোটিশ দেখুন" }} />
-            </Link>
-          </article>
+          {latestResult ? (
+            <article className="portal-card stack">
+              <LocalizedText as="p" className="eyebrow" text={{ en: "Results", bn: "ফলাফল" }} />
+              <LocalizedText as="h3" text={latestResult.title} />
+              <LocalizedText as="p" text={latestResult.summary} />
+              <Link className="btn btn--accent" href={`/events/${latestResult.slug}`}>
+                <LocalizedText text={{ en: "View Result Notice", bn: "ফলাফলের নোটিশ দেখুন" }} />
+              </Link>
+            </article>
+          ) : null}
         </div>
       </section>
     </>

@@ -1,0 +1,19 @@
+{
+  "id": "school-prospectus",
+  "slug": "school-prospectus",
+  "published": true,
+  "order": 10,
+  "title": {
+    "en": "School Prospectus",
+    "bn": "স্কুল প্রসপেক্টাস"
+  },
+  "category": {
+    "en": "Admissions",
+    "bn": "ভর্তি"
+  },
+  "description": {
+    "en": "Overview of the school and admissions information for parents.",
+    "bn": "অভিভাবকদের জন্য বিদ্যালয় ও ভর্তি-সংক্রান্ত সংক্ষিপ্ত তথ্য।"
+  },
+  "href": ""
+}

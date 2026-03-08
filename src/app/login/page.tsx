@@ -1,32 +1,23 @@
-import { LocalizedText } from "@/components/language-provider";
-import { LoginForm } from "@/components/login-form";
 import { PageIntro } from "@/components/page-intro";
-
-type LoginPageProps = {
-  searchParams: Promise<{
-    next?: string;
-  }>;
-};
+import { StaffAccessCard } from "@/components/staff-access-card";
+import { LocalizedText } from "@/components/language-provider";
 
 const introEyebrow = {
-  en: "Log In",
-  bn: "লগ ইন",
+  en: "Staff Access",
+  bn: "স্টাফ অ্যাক্সেস",
 };
 
 const introTitle = {
-  en: "Members and staff login",
-  bn: "সদস্য ও কর্মীদের লগ ইন",
+  en: "School content management",
+  bn: "বিদ্যালয়ের কনটেন্ট ব্যবস্থাপনা",
 };
 
 const introSummary = {
-  en: "Use this page to sign in to member or staff areas.",
-  bn: "সদস্য বা কর্মীদের অংশে প্রবেশ করতে এই পৃষ্ঠা ব্যবহার করুন।",
+  en: "Authorised staff can use the school CMS to upload images, publish notices, and update documents without touching code.",
+  bn: "অনুমোদিত কর্মীরা কোডে হাত না দিয়েই বিদ্যালয়ের সিএমএস ব্যবহার করে ছবি আপলোড, নোটিশ প্রকাশ এবং নথি আপডেট করতে পারবেন।",
 };
 
-export default async function LoginPage({ searchParams }: LoginPageProps) {
-  const params = await searchParams;
-  const nextPath = params.next || "/portal";
-
+export default function LoginPage() {
   return (
     <>
       <PageIntro eyebrow={introEyebrow} summary={introSummary} title={introTitle} />
@@ -37,22 +28,30 @@ export default async function LoginPage({ searchParams }: LoginPageProps) {
             <LocalizedText
               as="p"
               className="eyebrow"
-              text={{ en: "Members", bn: "সদস্য" }}
+              text={{ en: "How access works", bn: "অ্যাক্সেসের নিয়ম" }}
             />
             <LocalizedText
               as="h3"
-              text={{ en: "Access your account", bn: "আপনার অ্যাকাউন্টে প্রবেশ করুন" }}
+              text={{ en: "GitHub-based staff sign-in", bn: "GitHub-ভিত্তিক স্টাফ সাইন-ইন" }}
             />
             <LocalizedText
               as="p"
               text={{
-                en: "Members, staff, and administrators can sign in here to access their authorised areas.",
-                bn: "সদস্য, কর্মী ও প্রশাসকরা এখান থেকে তাদের অনুমোদিত অংশে প্রবেশ করতে পারেন।",
+                en: "Each authorised editor signs in with a GitHub account. You keep full control of the repository and deployment, while staff only manage school content through the editor.",
+                bn: "প্রত্যেক অনুমোদিত সম্পাদক একটি GitHub অ্যাকাউন্ট দিয়ে সাইন ইন করবেন। রিপোজিটরি ও ডিপ্লয়মেন্ট আপনার নিয়ন্ত্রণে থাকবে, আর কর্মীরা শুধু এডিটরের মাধ্যমে বিদ্যালয়ের কনটেন্ট পরিচালনা করবেন।",
+              }}
+            />
+            <LocalizedText
+              as="p"
+              className="helper-text"
+              text={{
+                en: "Recommended: keep final merge and code access with you, and let other staff submit content updates from the CMS.",
+                bn: "প্রস্তাবিত ব্যবস্থা: চূড়ান্ত মার্জ ও কোড অ্যাক্সেস আপনার কাছে রাখুন, আর অন্য কর্মীরা সিএমএস থেকে কনটেন্ট আপডেট জমা দিন।",
               }}
             />
           </article>
 
-          <LoginForm nextPath={nextPath} />
+          <StaffAccessCard />
         </div>
       </section>
     </>

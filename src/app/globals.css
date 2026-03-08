@@ -106,10 +106,10 @@ select {
 
 .site-header__inner {
   display: grid;
-  grid-template-columns: auto 1fr auto;
+  grid-template-columns: auto minmax(0, 1fr) auto;
   align-items: center;
-  gap: 18px;
-  min-height: 88px;
+  gap: 12px;
+  min-height: 84px;
   position: relative;
 }
 
@@ -147,17 +147,17 @@ select {
   display: flex;
   flex-wrap: nowrap;
   justify-content: center;
-  gap: 6px;
+  gap: 2px;
   min-width: 0;
 }
 
 .site-nav__link {
-  padding: 10px 14px;
+  padding: 10px 11px;
   border-radius: 999px;
   color: var(--muted);
-  font-size: 0.84rem;
+  font-size: 0.78rem;
   font-weight: 700;
-  letter-spacing: 0.04em;
+  letter-spacing: 0.03em;
   white-space: nowrap;
   transition:
     color 160ms ease,
@@ -175,8 +175,14 @@ select {
 .site-header__actions {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 8px;
   justify-self: end;
+}
+
+.site-header__actions .btn {
+  min-height: 42px;
+  padding: 0 14px;
+  white-space: nowrap;
 }
 
 .menu-button {
@@ -338,7 +344,7 @@ select {
 .hero__image,
 .media-card__image,
 .story-card__image,
-.teacher-card__image,
+.tour-card__image,
 .feature-panel__image {
   width: 100%;
   height: 100%;
@@ -402,7 +408,7 @@ select {
 .card,
 .portal-card,
 .portal-pane,
-.teacher-card,
+.tour-card,
 .story-card,
 .doc-card,
 .gallery-card,
@@ -501,7 +507,7 @@ select {
 
 .card,
 .story-card,
-.teacher-card,
+.tour-card,
 .doc-card,
 .gallery-card,
 .subject-card,
@@ -514,14 +520,14 @@ select {
 
 .story-card__image-wrap,
 .gallery-card__image-wrap,
-.teacher-card__image-wrap {
+.tour-card__image-wrap {
   position: relative;
   aspect-ratio: 4 / 3;
   overflow: hidden;
 }
 
 .story-card__body,
-.teacher-card__body,
+.tour-card__body,
 .doc-card__body,
 .gallery-card__body,
 .subject-card__body,
@@ -534,7 +540,7 @@ select {
 }
 
 .story-card__body p,
-.teacher-card__body p,
+.tour-card__body p,
 .doc-card__body p,
 .gallery-card__body p,
 .subject-card__body p,

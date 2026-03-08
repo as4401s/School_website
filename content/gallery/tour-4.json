@@ -1,0 +1,14 @@
+{
+  "id": "tour-4",
+  "order": 40,
+  "published": true,
+  "title": {
+    "en": "Raksha Bandhan",
+    "bn": "রক্ষাবন্ধন"
+  },
+  "summary": {
+    "en": "Children taking part in a cultural celebration.",
+    "bn": "সাংস্কৃতিক উদ্‌যাপনে শিশুদের অংশগ্রহণ।"
+  },
+  "imageUrl": "/media/tour-4.jpeg"
+}

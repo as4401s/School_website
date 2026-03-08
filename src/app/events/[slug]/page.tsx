@@ -1,13 +1,21 @@
 import { notFound } from "next/navigation";
 
 import { LocalizedDate, LocalizedText } from "@/components/language-provider";
-import { getResultBySlug } from "@/lib/content";
+import { getResultBySlug, getResults } from "@/lib/content";
 
 type EventPageProps = {
   params: Promise<{
     slug: string;
   }>;
 };
+
+export async function generateStaticParams() {
+  const results = await getResults();
+
+  return results.map((result) => ({
+    slug: result.slug,
+  }));
+}
 
 export default async function EventPage({ params }: EventPageProps) {
   const { slug } = await params;
