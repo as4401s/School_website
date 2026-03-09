@@ -18,7 +18,7 @@
   --radius-md: 4px;
   --radius-sm: 0px;
   --shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-  --max-width: 1180px;
+  --max-width: 1400px;
   --tone-sand: #e8dcc5;
   --tone-orange: #f0b08b;
   --tone-navy: #c8d5ef;
@@ -99,7 +99,7 @@ select {
   display: grid;
   grid-template-columns: auto minmax(0, 1fr) auto;
   align-items: center;
-  gap: 12px;
+  gap: 16px;
   min-height: 84px;
   position: relative;
 }
@@ -142,10 +142,10 @@ select {
 }
 
 .site-nav__link {
-  padding: 10px 16px;
+  padding: 8px 12px;
   border-radius: 4px;
   color: var(--ink);
-  font-size: 0.95rem;
+  font-size: 0.9rem;
   font-weight: 600;
   white-space: nowrap;
   transition: color 150ms ease;
@@ -159,7 +159,7 @@ select {
 .site-header__actions {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 16px;
   justify-self: end;
 }
 
@@ -188,8 +188,9 @@ select {
   align-items: center;
   padding: 4px;
   border: 1px solid var(--line);
-  border-radius: 999px;
-  background: rgba(255, 255, 255, 0.76);
+  border-radius: 4px;
+  background: white;
+  min-height: 46px;
 }
 
 .language-toggle__button {
@@ -905,17 +906,14 @@ select {
 }
 
 .site-footer {
-  padding: 12px 0 40px;
+  padding: 64px 0 40px;
+  background: var(--navy);
+  color: rgba(255, 255, 255, 0.9);
 }
 
 .site-footer__panel {
   position: relative;
   overflow: hidden;
-  padding: 48px 56px;
-  border-radius: 32px;
-  background: var(--navy);
-  color: rgba(255, 255, 255, 0.9);
-  box-shadow: 0 32px 64px rgba(11, 18, 31, 0.24);
 }
 
 .site-footer__lead {
