@@ -1290,7 +1290,7 @@ body::before {
     padding: 16px;
     border: 1px solid var(--line);
     border-radius: 28px;
-    background: rgba(255, 250, 244, 0.97);
+    background: #fffaf4;
     box-shadow: var(--shadow);
   }
 
@@ -1309,7 +1309,21 @@ body::before {
   }
 
   .hero__content {
-    padding: 28px;
+    padding: 28px 28px 0;
+  }
+
+  .hero__stat-board {
+    position: static;
+    width: 100%;
+    justify-content: stretch;
+    margin: 0;
+  }
+
+  .stat-pill {
+    max-width: none;
+    min-height: 60px;
+    padding: 0 12px;
+    font-size: 0.85rem;
   }
 
   .notice-spotlight,

@@ -23,3 +23,6 @@ yarn-error.log*
 
 # OS
 Thumbs.db
+
+# Local screenshots / dev assets
+screenshots/
