@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { Noto_Sans_Bengali } from "next/font/google";
 import localFont from "next/font/local";
 
 import { LanguageProvider } from "@/components/language-provider";
@@ -40,6 +41,12 @@ const bodyFont = localFont({
   variable: "--font-body",
 });
 
+const bengaliFont = Noto_Sans_Bengali({
+  subsets: ["bengali"],
+  weight: ["400", "500", "600", "700"],
+  variable: "--font-bengali",
+});
+
 export const metadata: Metadata = {
   title: `${siteMeta.shortName} | KM School`,
   description:
@@ -54,7 +61,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        className={`${displayFont.variable} ${bodyFont.variable}`}
+        className={`${displayFont.variable} ${bodyFont.variable} ${bengaliFont.variable}`}
         suppressHydrationWarning
       >
         <LanguageProvider>

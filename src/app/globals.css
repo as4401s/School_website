@@ -45,7 +45,7 @@ body {
   min-height: 100vh;
   background: var(--bg);
   color: var(--ink);
-  font-family: var(--font-body), "Noto Sans Bengali", "Hind Siliguri", sans-serif;
+  font-family: var(--font-body), var(--font-bengali), sans-serif;
   text-rendering: optimizeLegibility;
 }
 
@@ -127,8 +127,9 @@ select {
   font-size: 0.95rem;
 }
 
+h4,
 .brand-mark__copy strong {
-  font-family: var(--font-display), "Noto Serif Bengali", serif;
+  font-family: var(--font-display), var(--font-bengali), var(--font-body), sans-serif;
   font-size: 1.25rem;
   line-height: 1;
 }
@@ -270,7 +271,7 @@ select {
 .page-title,
 .portal-title {
   margin: 0;
-  font-family: var(--font-display), "Noto Serif Bengali", serif;
+  font-family: var(--font-display), var(--font-bengali), var(--font-body), sans-serif;
   letter-spacing: -0.04em;
 }
 
@@ -368,7 +369,7 @@ select {
 .hero__copy h1 {
   font-size: clamp(3.5rem, 8vw, 7rem);
   color: white;
-  font-family: var(--font-display), serif;
+  font-family: var(--font-display), var(--font-bengali), var(--font-body), sans-serif;
   font-weight: 400;
 }
 
@@ -545,7 +546,7 @@ select {
 .notice-spotlight h3 {
   margin: 0;
   max-width: 14ch;
-  font-family: var(--font-display), var(--font-body), sans-serif;
+  font-family: var(--font-display), var(--font-bengali), var(--font-body), sans-serif;
   font-size: clamp(2rem, 3.5vw, 2.8rem);
   line-height: 1.05;
   letter-spacing: -0.02em;
@@ -599,7 +600,7 @@ select {
 .prospectus-panel__copy h2 {
   margin: 0;
   max-width: 12ch;
-  font-family: var(--font-display), var(--font-body), sans-serif;
+  font-family: var(--font-display), var(--font-bengali), var(--font-body), sans-serif;
   font-size: clamp(2.4rem, 4.5vw, 3.8rem);
   line-height: 1.05;
   letter-spacing: -0.02em;
@@ -822,7 +823,7 @@ select {
 
 .subject-card__body h3 {
   margin: 0;
-  font-family: var(--font-display), var(--font-body), sans-serif;
+  font-family: var(--font-display), var(--font-bengali), var(--font-body), sans-serif;
   font-size: 1.6rem;
   letter-spacing: -0.01em;
   color: var(--ink);
@@ -1035,7 +1036,7 @@ select {
 
 .site-footer__brand-copy h2 {
   margin: 0;
-  font-family: var(--font-display), var(--font-body), sans-serif;
+  font-family: var(--font-display), var(--font-bengali), var(--font-body), sans-serif;
   font-size: clamp(1.8rem, 3vw, 2.6rem);
   letter-spacing: -0.03em;
   color: white;
