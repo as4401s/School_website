@@ -18,13 +18,18 @@ import {
 } from "@/lib/content";
 
 const homeIntro = {
-  en: "Welcome",
-  bn: "স্বাগতম",
+  en: "WELCOME ON OUR SITE",
+  bn: "আমাদের সাইটে স্বাগতম",
 };
 
 const schoolTourLabel = {
   en: "School Tour",
   bn: "স্কুল ট্যুর",
+};
+
+const learnMoreLabel = {
+  en: "Learn more >",
+  bn: "আরও জানুন >",
 };
 
 const latestNewsLabel = {
@@ -139,22 +144,22 @@ export default async function HomePage() {
                 <LocalizedText as="h1" text={siteMeta.heroTitle} />
                 <LocalizedText as="p" text={siteMeta.heroSummary} />
                 <div className="hero__actions">
-                  <Link className="btn btn--accent" href="/our-school">
-                    <LocalizedText text={schoolTourLabel} />
-                  </Link>
-                  <Link className="btn btn--ghost" href="/blog">
-                    <LocalizedText text={latestNewsLabel} />
+                  <Link className="btn btn--primary" href="/our-school">
+                    <LocalizedText text={learnMoreLabel} />
                   </Link>
                 </div>
               </div>
 
               <div className="hero__stat-board">
-                {heroStats.map((item) => (
-                  <div className="stat-pill" key={item.label.en}>
-                    <LocalizedText as="strong" text={item.label} />
-                    <LocalizedText as="span" text={item.value} />
-                  </div>
-                ))}
+                <Link href="/groups" className="stat-pill">
+                  <strong><LocalizedText text={{ en: "Our teachers >", bn: "আমাদের শিক্ষক >" }} /></strong>
+                </Link>
+                <Link href="/academics" className="stat-pill">
+                  <strong><LocalizedText text={{ en: "All classes >", bn: "সকল ক্লাস >" }} /></strong>
+                </Link>
+                <Link href="/contact" className="stat-pill">
+                  <strong><LocalizedText text={{ en: "Contact us >", bn: "যোগাযোগ করুন >" }} /></strong>
+                </Link>
               </div>
             </div>
           </div>
