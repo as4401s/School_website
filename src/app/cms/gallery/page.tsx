@@ -38,6 +38,8 @@ export default function CmsGalleryPage() {
     const [uploading, setUploading] = useState(false);
     const [titleEn, setTitleEn] = useState("");
     const [titleBn, setTitleBn] = useState("");
+    const [summaryEn, setSummaryEn] = useState("");
+    const [summaryBn, setSummaryBn] = useState("");
     const [activeTab, setActiveTab] = useState<"images" | "videos">("images");
     const [confirmDelete, setConfirmDelete] = useState<GalleryItem | null>(null);
     const [undoStack, setUndoStack] = useState<{ action: string; data: GalleryItem }[]>([]);
@@ -114,13 +116,13 @@ export default function CmsGalleryPage() {
                 body: JSON.stringify({
                     imageUrl: uploadData.url,
                     title: { en: titleEn || "Untitled", bn: titleBn || "শিরোনামহীন" },
-                    summary: { en: "", bn: "" },
+                    summary: { en: summaryEn, bn: summaryBn },
                     mediaType: isVideo ? "video" : "image",
                 }),
             });
             if (!res.ok) throw new Error("Failed to create entry");
 
-            setTitleEn(""); setTitleBn("");
+            setTitleEn(""); setTitleBn(""); setSummaryEn(""); setSummaryBn("");
             if (fileRef.current) fileRef.current.value = "";
             await loadItems();
             showToast(`✅ ${isVideo ? "Video" : "Image"} uploaded successfully!`);
@@ -192,6 +194,14 @@ export default function CmsGalleryPage() {
                         <div className="cms-field">
                             <label>Title (Bengali)</label>
                             <input value={titleBn} onChange={(e) => setTitleBn(e.target.value)} placeholder="e.g. বিদ্যালয়ের অনুষ্ঠান" />
+                        </div>
+                        <div className="cms-field">
+                            <label>Caption (English) <span className="cms-muted">— optional</span></label>
+                            <input value={summaryEn} onChange={(e) => setSummaryEn(e.target.value)} placeholder="Short description of the photo" />
+                        </div>
+                        <div className="cms-field">
+                            <label>Caption (Bengali) <span className="cms-muted">— optional</span></label>
+                            <input value={summaryBn} onChange={(e) => setSummaryBn(e.target.value)} placeholder="ছবির সংক্ষিপ্ত বিবরণ" />
                         </div>
                     </div>
                     <div className="cms-form-actions">

@@ -19,6 +19,12 @@ const bilingualTextSchema = z.object({
   bn: z.string().trim().min(1),
 });
 
+// Lenient variant — allows empty strings (used for optional bilingual fields like gallery summary)
+const optionalBilingualTextSchema = z.object({
+  en: z.string().trim().default(""),
+  bn: z.string().trim().default(""),
+});
+
 const newsPostSchema = z.object({
   id: z.string().trim().min(1).optional(),
   slug: z.string().trim().min(1).optional(),
@@ -60,8 +66,9 @@ const galleryItemSchema = z.object({
   order: z.number().int().optional(),
   published: z.boolean().default(true),
   title: bilingualTextSchema,
-  summary: bilingualTextSchema,
+  summary: optionalBilingualTextSchema,
   imageUrl: z.string().trim().min(1),
+  mediaType: z.enum(["image", "video"]).optional().default("image"),
 });
 
 type NewsPostFile = z.infer<typeof newsPostSchema>;
@@ -97,18 +104,23 @@ async function readCollection<T extends Record<string, unknown>>(
     .map((entry) => entry.name)
     .sort();
 
-  const records = await Promise.all(
+  const results = await Promise.all(
     files.map(async (fileName) => {
       const filePath = path.join(folder, fileName);
-      const raw = await fs.readFile(filePath, "utf8");
-      return {
-        ...schema.parse(JSON.parse(raw)),
-        _fileSlug: fileName.replace(/\.json$/, ""),
-      } as RecordWithFileSlug<T>;
+      try {
+        const raw = await fs.readFile(filePath, "utf8");
+        return {
+          ...schema.parse(JSON.parse(raw)),
+          _fileSlug: fileName.replace(/\.json$/, ""),
+        } as RecordWithFileSlug<T>;
+      } catch (err) {
+        console.error(`[content] Skipping malformed file ${directory}/${fileName}:`, err);
+        return null;
+      }
     }),
   );
 
-  return records;
+  return results.filter((r): r is RecordWithFileSlug<T> => r !== null);
 }
 
 function normalizeBilingualText(value: BilingualText): BilingualText {
