@@ -1,0 +1,5 @@
+{
+  "css.lint.vendorPrefix": "ignore",
+  "files.exclude": {},
+  "css.validate": true
+}
