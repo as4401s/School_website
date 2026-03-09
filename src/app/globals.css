@@ -5,14 +5,18 @@
   --ink: #333333;
   --muted: #667085;
   --line: rgba(0, 0, 0, 0.08);
-  --accent: #e53935;
-  --accent-strong: #b71c1c;
-  --accent-soft: rgba(229, 57, 53, 0.12);
-  --navy: #546e7a;
-  --slate: #596c78;
-  --yellow: #f5ba4b;
-  --green: #3a6f63;
-  --red: #e53935;
+  --accent: #d96b61;
+  /* Soft Terracotta */
+  --accent-strong: #ba5449;
+  --accent-soft: rgba(217, 107, 97, 0.12);
+  --navy: #2d3e50;
+  /* Deep Soft Navy */
+  --slate: #607d8b;
+  /* Blue Grey */
+  --yellow: #e4b363;
+  /* Soft Gold */
+  --green: #4b8a76;
+  --red: #d96b61;
   --sand: #f0f2f5;
   --radius-lg: 4px;
   --radius-md: 4px;
