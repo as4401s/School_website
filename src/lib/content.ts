@@ -176,6 +176,7 @@ function mapGalleryItem(record: RecordWithFileSlug<GalleryItemFile>): GalleryIte
     title: normalizeBilingualText(record.title),
     summary: normalizeBilingualText(record.summary),
     imageUrl: record.imageUrl,
+    mediaType: record.mediaType ?? "image",
   };
 }
 

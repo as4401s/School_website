@@ -18,6 +18,7 @@ export type GalleryItem = {
   title: BilingualText;
   imageUrl: string;
   summary: BilingualText;
+  mediaType?: "image" | "video";
 };
 
 export type Subject = {

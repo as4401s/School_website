@@ -79,7 +79,8 @@ export async function DELETE(request: NextRequest) {
             return NextResponse.json({ error: check.error }, { status: 400 });
         }
         const raw = await fs.readFile(check.filePath, "utf8");
-        const item = JSON.parse(raw);
+        let item: Record<string, unknown> = {};
+        try { item = JSON.parse(raw); } catch { /* corrupted file — still proceed with deletion */ }
         await fs.unlink(check.filePath);
         return NextResponse.json({ success: true, deleted: item });
     } catch (error) {
