@@ -3,22 +3,19 @@
 import { useState, useEffect, useCallback, useRef } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
+import { validateFileFormat, compressImage, isVideoFile, IMAGE_EXTENSIONS, VIDEO_EXTENSIONS } from "@/lib/cms-utils";
 
-/* ---------- Confirm Dialog ---------- */
-function ConfirmDialog({
-    open,
-    title,
-    message,
-    onConfirm,
-    onCancel,
-    variant = "danger",
-}: {
-    open: boolean;
-    title: string;
-    message: string;
-    onConfirm: () => void;
-    onCancel: () => void;
-    variant?: "danger" | "warning";
+type GalleryItem = {
+    id: string;
+    title: { en: string; bn: string };
+    summary: { en: string; bn: string };
+    imageUrl: string;
+    mediaType?: "image" | "video";
+    _fileName: string;
+};
+
+function ConfirmDialog({ open, title, message, onConfirm, onCancel }: {
+    open: boolean; title: string; message: string; onConfirm: () => void; onCancel: () => void;
 }) {
     if (!open) return null;
     return (
@@ -28,26 +25,12 @@ function ConfirmDialog({
                 <p>{message}</p>
                 <div className="cms-dialog__actions">
                     <button className="cms-btn cms-btn--ghost" onClick={onCancel}>Cancel</button>
-                    <button
-                        className={`cms-btn ${variant === "danger" ? "cms-btn--danger" : "cms-btn--warning"}`}
-                        onClick={onConfirm}
-                    >
-                        Yes, proceed
-                    </button>
+                    <button className="cms-btn cms-btn--danger" onClick={onConfirm}>Yes, delete</button>
                 </div>
             </div>
         </div>
     );
 }
-
-/* ---------- Types ---------- */
-type GalleryItem = {
-    id: string;
-    title: { en: string; bn: string };
-    summary: { en: string; bn: string };
-    imageUrl: string;
-    _fileName: string;
-};
 
 export default function CmsGalleryPage() {
     const [items, setItems] = useState<GalleryItem[]>([]);
@@ -55,6 +38,7 @@ export default function CmsGalleryPage() {
     const [uploading, setUploading] = useState(false);
     const [titleEn, setTitleEn] = useState("");
     const [titleBn, setTitleBn] = useState("");
+    const [activeTab, setActiveTab] = useState<"images" | "videos">("images");
     const [confirmDelete, setConfirmDelete] = useState<GalleryItem | null>(null);
     const [undoStack, setUndoStack] = useState<{ action: string; data: GalleryItem }[]>([]);
     const [toast, setToast] = useState("");
@@ -73,34 +57,55 @@ export default function CmsGalleryPage() {
 
     function showToast(msg: string) {
         setToast(msg);
-        setTimeout(() => setToast(""), 3000);
+        setTimeout(() => setToast(""), 4000);
     }
+
+    const images = items.filter((i) => i.mediaType !== "video");
+    const videos = items.filter((i) => i.mediaType === "video");
 
     async function handleUpload() {
         const file = fileRef.current?.files?.[0];
         if (!file) return;
 
+        // Validate format
+        const isVideo = isVideoFile(file);
+        const validation = validateFileFormat(file, isVideo ? "video" : "image");
+        if (!validation.valid) {
+            showToast(`⚠️ ${validation.message}`);
+            return;
+        }
+
         // Check missing fields
         const missing: string[] = [];
         if (!titleEn) missing.push("Title (English)");
         if (!titleBn) missing.push("Title (Bengali)");
-
         if (missing.length > 0) {
-            const proceed = window.confirm(
-                `The following fields are not filled:\n• ${missing.join("\n• ")}\n\nAre you sure you want to proceed?`
-            );
+            const proceed = window.confirm(`The following fields are not filled:\n• ${missing.join("\n• ")}\n\nAre you sure you want to proceed?`);
             if (!proceed) return;
         }
 
         setUploading(true);
         try {
-            // Upload image
+            // Compress image if needed (skip for videos)
+            let processedFile = file;
+            if (!isVideo) {
+                processedFile = await compressImage(file);
+                if (processedFile !== file) {
+                    showToast("🗜️ Image auto-compressed for better performance");
+                }
+            }
+
+            // Upload file
             const formData = new FormData();
-            formData.append("file", file);
+            formData.append("file", processedFile);
             formData.append("section", "gallery");
             const uploadRes = await fetch("/api/cms/upload", { method: "POST", body: formData });
             const uploadData = await uploadRes.json();
-            if (!uploadRes.ok) throw new Error(uploadData.error);
+            if (!uploadRes.ok) {
+                showToast(`⚠️ ${uploadData.error}`);
+                setUploading(false);
+                return;
+            }
 
             // Create JSON entry
             const res = await fetch("/api/cms/gallery", {
@@ -110,15 +115,15 @@ export default function CmsGalleryPage() {
                     imageUrl: uploadData.url,
                     title: { en: titleEn || "Untitled", bn: titleBn || "শিরোনামহীন" },
                     summary: { en: "", bn: "" },
+                    mediaType: isVideo ? "video" : "image",
                 }),
             });
             if (!res.ok) throw new Error("Failed to create entry");
 
-            setTitleEn("");
-            setTitleBn("");
+            setTitleEn(""); setTitleBn("");
             if (fileRef.current) fileRef.current.value = "";
             await loadItems();
-            showToast("✅ Image uploaded successfully!");
+            showToast(`✅ ${isVideo ? "Video" : "Image"} uploaded successfully!`);
         } catch (err) {
             showToast(`❌ Error: ${err instanceof Error ? err.message : "Upload failed"}`);
         } finally {
@@ -143,7 +148,6 @@ export default function CmsGalleryPage() {
     async function handleUndo() {
         const last = undoStack[undoStack.length - 1];
         if (!last) return;
-
         try {
             await fetch("/api/cms/gallery", {
                 method: "POST",
@@ -158,22 +162,28 @@ export default function CmsGalleryPage() {
         }
     }
 
+    const displayItems = activeTab === "images" ? images : videos;
+
     return (
         <div className="cms-page">
             <div className="cms-container">
                 <div className="cms-page-header">
                     <Link href="/cms/dashboard" className="cms-back">← Dashboard</Link>
                     <h1>🖼️ Gallery Manager</h1>
-                    <p className="cms-subtitle">{items.length} images in gallery</p>
+                    <p className="cms-subtitle">{images.length} images · {videos.length} videos</p>
                 </div>
 
                 {/* Add form */}
                 <div className="cms-card cms-add-form">
-                    <h3>Add New Image</h3>
+                    <h3>Add New Media</h3>
+                    <p className="cms-helper">
+                        📷 Images: {IMAGE_EXTENSIONS} (auto-compressed if over 2MB)<br />
+                        🎥 Videos: {VIDEO_EXTENSIONS}
+                    </p>
                     <div className="cms-form-row">
                         <div className="cms-field">
-                            <label>Image File *</label>
-                            <input type="file" ref={fileRef} accept="image/*" />
+                            <label>Media File *</label>
+                            <input type="file" ref={fileRef} accept="image/*,video/*" />
                         </div>
                         <div className="cms-field">
                             <label>Title (English)</label>
@@ -194,35 +204,56 @@ export default function CmsGalleryPage() {
                     </div>
                 </div>
 
+                {/* Tabs */}
+                <div className="cms-tabs">
+                    <button
+                        className={`cms-tab ${activeTab === "images" ? "cms-tab--active" : ""}`}
+                        onClick={() => setActiveTab("images")}
+                    >
+                        📷 Images ({images.length})
+                    </button>
+                    <button
+                        className={`cms-tab ${activeTab === "videos" ? "cms-tab--active" : ""}`}
+                        onClick={() => setActiveTab("videos")}
+                    >
+                        🎥 Videos ({videos.length})
+                    </button>
+                </div>
+
                 {/* Items grid */}
                 {loading ? (
                     <div className="cms-loading">Loading gallery...</div>
                 ) : (
                     <div className="cms-gallery-grid">
-                        {items.map((item) => (
+                        {displayItems.map((item) => (
                             <div key={item._fileName} className="cms-gallery-item">
-                                <img src={item.imageUrl} alt={item.title.en} />
+                                {item.mediaType === "video" ? (
+                                    <video src={item.imageUrl} style={{ width: '100%', aspectRatio: '1', objectFit: 'cover' }} muted />
+                                ) : (
+                                    <img src={item.imageUrl} alt={item.title.en} />
+                                )}
                                 <div className="cms-gallery-item__info">
                                     <p className="cms-gallery-item__title">{item.title.en}</p>
                                     {item.title.bn && <p className="cms-gallery-item__subtitle">{item.title.bn}</p>}
                                 </div>
-                                <button
-                                    className="cms-btn cms-btn--danger cms-btn--sm"
-                                    onClick={() => setConfirmDelete(item)}
-                                >
+                                <button className="cms-btn cms-btn--danger cms-btn--sm" onClick={() => setConfirmDelete(item)}>
                                     🗑️ Delete
                                 </button>
                             </div>
                         ))}
+                        {displayItems.length === 0 && (
+                            <p className="cms-empty" style={{ gridColumn: '1/-1' }}>
+                                No {activeTab} yet. Upload one above!
+                            </p>
+                        )}
                     </div>
                 )}
 
                 {toast && <div className="cms-toast">{toast}</div>}
-
                 <ConfirmDialog
                     open={!!confirmDelete}
-                    title="Delete Image?"
-                    message={`Are you sure you want to delete "${confirmDelete?.title.en}"? This action cannot be easily undone.`}
+                    title={`Delete ${confirmDelete?.mediaType === "video" ? "Video" : "Image"}?`}
+                    message={`Are you sure you want to delete "${confirmDelete?.title.en}"?`}
                     onConfirm={() => confirmDelete && handleDelete(confirmDelete)}
                     onCancel={() => setConfirmDelete(null)}
                 />

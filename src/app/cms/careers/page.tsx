@@ -3,6 +3,7 @@
 import { useState, useEffect, useCallback, useRef } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
+import { validateFileFormat, compressImage, IMAGE_EXTENSIONS } from "@/lib/cms-utils";
 
 type CareerPost = {
     id: string;
@@ -63,12 +64,20 @@ export default function CmsCareersPage() {
             let imageUrl = null;
             const file = fileRef.current?.files?.[0];
             if (file) {
+                const validation = validateFileFormat(file, "image");
+                if (!validation.valid) {
+                    showToast(`⚠️ ${validation.message}`);
+                    setSaving(false);
+                    return;
+                }
+                const compressed = await compressImage(file);
                 const formData = new FormData();
-                formData.append("file", file);
+                formData.append("file", compressed);
                 formData.append("section", "careers");
                 const uploadRes = await fetch("/api/cms/upload", { method: "POST", body: formData });
                 const uploadData = await uploadRes.json();
-                if (uploadRes.ok) imageUrl = uploadData.url;
+                if (!uploadRes.ok) { showToast(`⚠️ ${uploadData.error}`); setSaving(false); return; }
+                imageUrl = uploadData.url;
             }
 
             const qualLines = qualsEn.split("\n").filter(Boolean);
@@ -144,7 +153,7 @@ export default function CmsCareersPage() {
 
                 <div className="cms-card cms-add-form">
                     <h3>Add New Career Post</h3>
-                    <p className="cms-helper">You can upload just an image, or image + text, or just text. Fill whichever fields you have.</p>
+                    <p className="cms-helper">You can upload just an image, or image + text, or just text. Fill whichever fields you have.<br />📷 Supported images: {IMAGE_EXTENSIONS} (auto-compressed if over 2MB)</p>
                     <div className="cms-form-grid-2">
                         <div className="cms-field">
                             <label>Title (English)</label>
@@ -174,7 +183,7 @@ export default function CmsCareersPage() {
                     <div className="cms-form-row" style={{ marginTop: '1rem' }}>
                         <div className="cms-field">
                             <label>Image (optional)</label>
-                            <input type="file" ref={fileRef} accept="image/*" />
+                            <input type="file" ref={fileRef} accept=".jpg,.jpeg,.png,.webp,.heic,.heif,.gif,.bmp,.svg" />
                         </div>
                         <div className="cms-field">
                             <label>Contact Info (optional)</label>

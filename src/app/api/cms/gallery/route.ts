@@ -38,7 +38,7 @@ export async function POST(request: NextRequest) {
     }
     try {
         const body = await request.json();
-        const { imageUrl, title, summary } = body;
+        const { imageUrl, title, summary, mediaType } = body;
 
         if (!imageUrl) {
             return NextResponse.json({ error: "Image URL is required" }, { status: 400 });
@@ -58,6 +58,7 @@ export async function POST(request: NextRequest) {
                 bn: summary?.bn || "",
             },
             imageUrl,
+            mediaType: mediaType || "image",
         };
 
         await fs.mkdir(contentDir, { recursive: true });

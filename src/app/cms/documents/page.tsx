@@ -3,6 +3,7 @@
 import { useState, useEffect, useCallback, useRef } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
+import { validateFileFormat, DOCUMENT_EXTENSIONS, IMAGE_EXTENSIONS } from "@/lib/cms-utils";
 
 type DocItem = {
     id: string;
@@ -65,12 +66,19 @@ export default function CmsDocumentsPage() {
             let href = "";
             const file = fileRef.current?.files?.[0];
             if (file) {
+                const validation = validateFileFormat(file, "document");
+                if (!validation.valid) {
+                    showToast(`⚠️ ${validation.message}`);
+                    setSaving(false);
+                    return;
+                }
                 const formData = new FormData();
                 formData.append("file", file);
                 formData.append("section", "documents");
                 const uploadRes = await fetch("/api/cms/upload", { method: "POST", body: formData });
                 const uploadData = await uploadRes.json();
-                if (uploadRes.ok) href = uploadData.url;
+                if (!uploadRes.ok) { showToast(`⚠️ ${uploadData.error}`); setSaving(false); return; }
+                href = uploadData.url;
             }
 
             const res = await fetch("/api/cms/documents", {
@@ -164,8 +172,8 @@ export default function CmsDocumentsPage() {
                             </select>
                         </div>
                         <div className="cms-field">
-                            <label>Document File (PDF, image, etc.)</label>
-                            <input type="file" ref={fileRef} accept=".pdf,.doc,.docx,.jpg,.jpeg,.png" />
+                            <label>Document File — Supported: {DOCUMENT_EXTENSIONS}, {IMAGE_EXTENSIONS}</label>
+                            <input type="file" ref={fileRef} accept=".pdf,.doc,.docx,.jpg,.jpeg,.png,.webp" />
                         </div>
                     </div>
                     <div className="cms-form-actions">

@@ -3,6 +3,7 @@
 import { useState, useEffect, useCallback, useRef } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
+import { validateFileFormat, compressImage, IMAGE_EXTENSIONS } from "@/lib/cms-utils";
 
 type NewsItem = {
     id: string;
@@ -60,12 +61,20 @@ export default function CmsNewsPage() {
             let imageUrl = "";
             const file = fileRef.current?.files?.[0];
             if (file) {
+                const validation = validateFileFormat(file, "image");
+                if (!validation.valid) {
+                    showToast(`⚠️ ${validation.message}`);
+                    setSaving(false);
+                    return;
+                }
+                const compressed = await compressImage(file);
                 const formData = new FormData();
-                formData.append("file", file);
+                formData.append("file", compressed);
                 formData.append("section", "news");
                 const uploadRes = await fetch("/api/cms/upload", { method: "POST", body: formData });
                 const uploadData = await uploadRes.json();
-                if (uploadRes.ok) imageUrl = uploadData.url;
+                if (!uploadRes.ok) { showToast(`⚠️ ${uploadData.error}`); setSaving(false); return; }
+                imageUrl = uploadData.url;
             }
 
             const paragraphs = bodyEn.split("\n").filter(Boolean);
@@ -167,8 +176,8 @@ export default function CmsNewsPage() {
                         </div>
                     </div>
                     <div className="cms-field" style={{ marginTop: '1rem' }}>
-                        <label>Cover Image (optional)</label>
-                        <input type="file" ref={fileRef} accept="image/*" />
+                        <label>Cover Image (optional) — Supported: {IMAGE_EXTENSIONS}</label>
+                        <input type="file" ref={fileRef} accept=".jpg,.jpeg,.png,.webp,.heic,.heif,.gif" />
                     </div>
                     <div className="cms-form-actions">
                         <button className="cms-btn cms-btn--primary" onClick={handleAdd} disabled={saving}>

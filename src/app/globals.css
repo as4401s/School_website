@@ -1932,3 +1932,35 @@ h4,
   padding: 3rem 0;
   font-size: 1.1rem;
 }
+
+/* CMS Tabs */
+.cms-tabs {
+  display: flex;
+  gap: 0;
+  margin-bottom: 1.5rem;
+  border-radius: 14px;
+  overflow: hidden;
+  border: 1.5px solid #e5e7eb;
+  background: white;
+}
+
+.cms-tab {
+  flex: 1;
+  padding: 14px 20px;
+  border: none;
+  background: transparent;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  color: var(--muted);
+  transition: all 0.2s;
+}
+
+.cms-tab--active {
+  background: var(--accent-strong);
+  color: white;
+}
+
+.cms-tab:hover:not(.cms-tab--active) {
+  background: rgba(0, 0, 0, 0.03);
+}
