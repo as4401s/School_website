@@ -469,10 +469,156 @@ select {
   grid-template-columns: repeat(4, minmax(0, 1fr));
 }
 
+.home-cta-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 24px;
+  align-items: stretch;
+}
+
 .feature-panel {
   display: grid;
   grid-template-columns: minmax(0, 1.1fr) minmax(240px, 0.9fr);
   overflow: hidden;
+}
+
+.notice-spotlight,
+.prospectus-panel {
+  position: relative;
+  overflow: hidden;
+  min-height: 100%;
+  border: 1px solid var(--line);
+  border-radius: 32px;
+  box-shadow: var(--shadow);
+}
+
+.notice-spotlight {
+  display: grid;
+  gap: 22px;
+  padding: 32px;
+  background:
+    radial-gradient(circle at bottom right, rgba(224, 102, 52, 0.14), transparent 28%),
+    linear-gradient(180deg, rgba(255, 250, 244, 0.98), rgba(255, 255, 255, 0.86));
+}
+
+.notice-spotlight__header {
+  display: grid;
+  gap: 10px;
+}
+
+.notice-spotlight h3 {
+  margin: 0;
+  max-width: 10ch;
+  font-family: var(--font-display), "Noto Serif Bengali", serif;
+  font-size: clamp(2.4rem, 4.4vw, 3.6rem);
+  line-height: 0.95;
+  letter-spacing: -0.05em;
+}
+
+.notice-spotlight__summary {
+  max-width: 34ch;
+  color: var(--muted);
+  font-size: 1.02rem;
+  line-height: 1.8;
+}
+
+.notice-spotlight__chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.notice-spotlight__chips .chip:first-child {
+  background: rgba(224, 102, 52, 0.12);
+  border-color: rgba(200, 79, 29, 0.18);
+  color: var(--accent-strong);
+}
+
+.notice-spotlight__footer {
+  display: grid;
+  gap: 14px;
+  margin-top: auto;
+}
+
+.notice-spotlight .btn {
+  justify-self: start;
+  padding-inline: 28px;
+}
+
+.prospectus-panel {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(280px, 0.72fr);
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, 0.88), rgba(255, 250, 244, 0.96)),
+    rgba(255, 250, 244, 0.92);
+}
+
+.prospectus-panel__copy {
+  display: grid;
+  align-content: start;
+  gap: 18px;
+  padding: 32px;
+}
+
+.prospectus-panel__copy h2 {
+  margin: 0;
+  max-width: 8ch;
+  font-family: var(--font-display), "Noto Serif Bengali", serif;
+  font-size: clamp(2.8rem, 5vw, 4.6rem);
+  line-height: 0.92;
+  letter-spacing: -0.06em;
+}
+
+.prospectus-panel__copy p {
+  max-width: 28ch;
+  color: var(--muted);
+  line-height: 1.8;
+}
+
+.prospectus-panel__copy .btn {
+  justify-self: start;
+  padding-inline: 24px;
+}
+
+.prospectus-panel__image-wrap {
+  position: relative;
+  min-height: 100%;
+}
+
+.prospectus-panel__image-wrap::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(90deg, rgba(21, 32, 51, 0.2), transparent 34%),
+    linear-gradient(180deg, rgba(21, 32, 51, 0.08), transparent 34%);
+  z-index: 1;
+  pointer-events: none;
+}
+
+.prospectus-panel__image-badge {
+  position: absolute;
+  top: 22px;
+  left: 22px;
+  z-index: 2;
+  display: inline-flex;
+  align-items: center;
+  padding: 8px 14px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.86);
+  border: 1px solid rgba(255, 255, 255, 0.42);
+  color: var(--ink);
+  font-size: 0.84rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.prospectus-panel__image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 24%;
 }
 
 .feature-panel__copy {
@@ -584,6 +730,7 @@ select {
 .stack {
   display: grid;
   gap: 16px;
+  align-content: start;
 }
 
 .chip-row {
@@ -602,6 +749,7 @@ select {
   border: 1px solid var(--line);
   color: var(--muted);
   font-size: 0.92rem;
+  max-width: 100%;
 }
 
 .login-layout,
@@ -732,24 +880,90 @@ select {
 }
 
 .site-footer {
-  padding: 0 0 36px;
+  padding: 12px 0 40px;
 }
 
-.site-footer__grid,
-.site-footer__meta {
-  border-top: 1px solid rgba(21, 32, 51, 0.08);
+.site-footer__panel {
+  position: relative;
+  overflow: hidden;
+  padding: 32px;
+  border: 1px solid rgba(21, 32, 51, 0.08);
+  border-radius: 32px;
+  background:
+    radial-gradient(circle at bottom right, rgba(58, 111, 99, 0.12), transparent 30%),
+    linear-gradient(180deg, rgba(255, 250, 244, 0.96), rgba(255, 255, 255, 0.84));
+  box-shadow: var(--shadow);
+}
+
+.site-footer__lead {
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) auto;
+  align-items: end;
+  gap: 24px;
+  padding-bottom: 28px;
+  border-bottom: 1px solid rgba(21, 32, 51, 0.08);
+}
+
+.site-footer__brand {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
+.site-footer__logo {
+  width: 72px;
+  height: 72px;
+  border-radius: 22px;
+  box-shadow: 0 18px 34px rgba(21, 32, 51, 0.14);
+}
+
+.site-footer__brand-copy h2 {
+  margin: 0;
+  font-family: var(--font-display), "Noto Serif Bengali", serif;
+  font-size: clamp(1.9rem, 3vw, 3rem);
+  letter-spacing: -0.05em;
+}
+
+.site-footer__brand-copy p {
+  margin: 10px 0 0;
+  max-width: 40rem;
+  color: var(--muted);
+  line-height: 1.7;
+}
+
+.site-footer__cta {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 12px;
 }
 
 .site-footer__grid {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 20px;
-  padding-top: 36px;
+  grid-template-columns: minmax(0, 1.16fr) minmax(0, 0.9fr) minmax(0, 1fr);
+  gap: 24px;
+  padding-top: 28px;
 }
 
 .site-footer__block a,
 .site-footer__meta a {
   color: inherit;
+}
+
+.site-footer__block a:hover,
+.site-footer__meta a:hover,
+.site-footer__links a:hover {
+  color: var(--accent-strong);
+}
+
+.site-footer__links {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px 20px;
+}
+
+.site-footer__links a {
+  font-weight: 700;
+  letter-spacing: 0.02em;
 }
 
 .site-footer__meta {
@@ -758,6 +972,7 @@ select {
   gap: 16px;
   padding-top: 20px;
   margin-top: 26px;
+  border-top: 1px solid rgba(21, 32, 51, 0.08);
   color: var(--muted);
   font-size: 0.92rem;
 }
@@ -791,6 +1006,9 @@ select {
 @media (max-width: 1120px) {
   .hero__content,
   .feature-panel,
+  .prospectus-panel,
+  .home-cta-grid,
+  .site-footer__lead,
   .login-layout__grid,
   .portal-layout__grid,
   .contact-grid,
@@ -851,8 +1069,25 @@ select {
     padding: 28px;
   }
 
+  .notice-spotlight,
+  .prospectus-panel__copy,
+  .site-footer__panel {
+    padding: 24px;
+  }
+
+  .notice-spotlight h3,
+  .prospectus-panel__copy h2 {
+    max-width: none;
+  }
+
+  .notice-spotlight .btn,
+  .prospectus-panel__copy .btn {
+    width: 100%;
+  }
+
   .login-form__actions,
   .portal-pane__actions,
+  .site-footer__cta,
   .hero__actions,
   .section-header {
     flex-direction: column;

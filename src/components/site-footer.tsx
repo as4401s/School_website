@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 
 import { LocalizedText } from "@/components/language-provider";
@@ -30,45 +31,88 @@ const footerCopyright = {
   bn: `কপিরাইট © ২০২৫ ${siteMeta.foundation}`,
 };
 
+const footerSummary = {
+  en: "Official school information, admissions guidance, and public notices for families.",
+  bn: "পরিবারের জন্য বিদ্যালয়ের অফিসিয়াল তথ্য, ভর্তি-সংক্রান্ত দিকনির্দেশনা এবং জনসাধারণের নোটিশ।",
+};
+
+const footerContactAction = {
+  en: "Write to School",
+  bn: "স্কুলে লিখুন",
+};
+
+const footerContactPage = {
+  en: "Contact Page",
+  bn: "যোগাযোগ পৃষ্ঠা",
+};
+
 export function SiteFooter() {
   return (
     <footer className="site-footer">
-      <div className="shell site-footer__grid">
-        <div className="site-footer__block">
-          <LocalizedText as="p" className="eyebrow" text={footerAddressLabel} />
-          <LocalizedText as="p" text={siteMeta.address} />
-        </div>
+      <div className="shell site-footer__panel">
+        <div className="site-footer__lead">
+          <div className="site-footer__brand">
+            <Image
+              alt={`${siteMeta.shortName} logo`}
+              className="site-footer__logo"
+              height={72}
+              src="/media/logo.png"
+              width={72}
+            />
+            <div className="site-footer__brand-copy">
+              <LocalizedText as="p" className="eyebrow" text={siteMeta.name} />
+              <LocalizedText as="h2" text={siteMeta.name} />
+              <LocalizedText as="p" text={footerSummary} />
+            </div>
+          </div>
 
-        <div className="site-footer__block">
-          <LocalizedText as="p" className="eyebrow" text={footerContactLabel} />
-          <p>
-            <a href={`mailto:${siteMeta.schoolEmail}`}>{siteMeta.schoolEmail}</a>
-          </p>
-          <LocalizedText as="p" className="eyebrow" text={footerFoundationLabel} />
-          <p>
-            <a href={siteMeta.foundationUrl} rel="noreferrer" target="_blank">
-              {siteMeta.foundation}
+          <div className="site-footer__cta">
+            <a className="btn btn--ghost" href={`mailto:${siteMeta.schoolEmail}`}>
+              <LocalizedText text={footerContactAction} />
             </a>
-          </p>
-        </div>
-
-        <div className="site-footer__block">
-          <LocalizedText as="p" className="eyebrow" text={footerLinksLabel} />
-          <div className="site-footer__links">
-            {navigation.map((item) => (
-              <Link href={item.href} key={item.href}>
-                <LocalizedText text={item.label} />
-              </Link>
-            ))}
+            <Link className="btn btn--accent" href="/contact">
+              <LocalizedText text={footerContactPage} />
+            </Link>
           </div>
         </div>
-      </div>
 
-      <div className="shell site-footer__meta">
-        <a href={siteMeta.foundationUrl} rel="noreferrer" target="_blank">
-          <LocalizedText text={footerCopyright} />
-        </a>
-        <span>{siteMeta.schoolEmail}</span>
+        <div className="site-footer__grid">
+          <div className="site-footer__block">
+            <LocalizedText as="p" className="eyebrow" text={footerAddressLabel} />
+            <LocalizedText as="p" text={siteMeta.address} />
+          </div>
+
+          <div className="site-footer__block">
+            <LocalizedText as="p" className="eyebrow" text={footerContactLabel} />
+            <p>
+              <a href={`mailto:${siteMeta.schoolEmail}`}>{siteMeta.schoolEmail}</a>
+            </p>
+            <LocalizedText as="p" className="eyebrow" text={footerFoundationLabel} />
+            <p>
+              <a href={siteMeta.foundationUrl} rel="noreferrer" target="_blank">
+                {siteMeta.foundation}
+              </a>
+            </p>
+          </div>
+
+          <div className="site-footer__block">
+            <LocalizedText as="p" className="eyebrow" text={footerLinksLabel} />
+            <div className="site-footer__links">
+              {navigation.map((item) => (
+                <Link href={item.href} key={item.href}>
+                  <LocalizedText text={item.label} />
+                </Link>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        <div className="site-footer__meta">
+          <a href={siteMeta.foundationUrl} rel="noreferrer" target="_blank">
+            <LocalizedText text={footerCopyright} />
+          </a>
+          <span>{siteMeta.schoolEmail}</span>
+        </div>
       </div>
     </footer>
   );

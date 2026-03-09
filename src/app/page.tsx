@@ -87,6 +87,16 @@ const viewNoticeText = {
   bn: "নোটিশ দেখুন",
 };
 
+const noticeSupportText = {
+  en: "Latest public notices and result updates for families.",
+  bn: "পরিবারের জন্য সর্বশেষ জনসাধারণের নোটিশ ও ফলাফলের আপডেট।",
+};
+
+const prospectusImageBadge = {
+  en: "KM School",
+  bn: "কেএম স্কুল",
+};
+
 export default async function HomePage() {
   const [galleryItems, posts, results, documents] = await Promise.all([
     getGalleryItems(),
@@ -250,30 +260,46 @@ export default async function HomePage() {
         </div>
       </section>
 
-      <section className="section">
-        <div className="shell grid-2">
+      <section className="section section--tight-top">
+        <div className="shell home-cta-grid">
           {latestResult ? (
-            <article className="portal-card stack">
-              <LocalizedText as="p" className="eyebrow" text={upcomingNoticeLabel} />
-              <LocalizedText as="h3" text={latestResult.title} />
-              <LocalizedText as="p" text={latestResult.summary} />
-              <div className="chip-row">
+            <article className="notice-spotlight">
+              <div className="notice-spotlight__header">
+                <LocalizedText as="p" className="eyebrow" text={upcomingNoticeLabel} />
+                <LocalizedText as="h3" text={latestResult.title} />
+              </div>
+              <LocalizedText
+                as="p"
+                className="notice-spotlight__summary"
+                text={latestResult.summary}
+              />
+              <div className="notice-spotlight__chips">
                 <LocalizedText as="span" className="chip" text={latestResult.status} />
                 <LocalizedText as="span" className="chip" text={latestResult.location} />
               </div>
-              <Link className="btn btn--accent" href={`/events/${latestResult.slug}`}>
-                <LocalizedText text={viewNoticeText} />
-              </Link>
+              <div className="notice-spotlight__footer">
+                <Link className="btn btn--accent" href={`/events/${latestResult.slug}`}>
+                  <LocalizedText text={viewNoticeText} />
+                </Link>
+                <LocalizedText
+                  as="p"
+                  className="helper-text"
+                  text={noticeSupportText}
+                />
+              </div>
             </article>
           ) : (
-            <article className="portal-card stack">
-              <LocalizedText as="p" className="eyebrow" text={upcomingNoticeLabel} />
-              <LocalizedText
-                as="h3"
-                text={{ en: "Notice board updates", bn: "নোটিশ বোর্ডের আপডেট" }}
-              />
+            <article className="notice-spotlight">
+              <div className="notice-spotlight__header">
+                <LocalizedText as="p" className="eyebrow" text={upcomingNoticeLabel} />
+                <LocalizedText
+                  as="h3"
+                  text={{ en: "Notice board updates", bn: "নোটিশ বোর্ডের আপডেট" }}
+                />
+              </div>
               <LocalizedText
                 as="p"
+                className="notice-spotlight__summary"
                 text={{
                   en: "Important public notices will appear here as soon as they are published.",
                   bn: "গুরুত্বপূর্ণ জনসাধারণের নোটিশ প্রকাশিত হলে সেগুলি এখানেই দেখা যাবে।",
@@ -282,8 +308,8 @@ export default async function HomePage() {
             </article>
           )}
 
-          <article className="feature-panel">
-            <div className="feature-panel__copy">
+          <article className="prospectus-panel">
+            <div className="prospectus-panel__copy">
               <LocalizedText as="p" className="eyebrow" text={prospectusLabel} />
               <LocalizedText as="h2" text={prospectusTitle} />
               <LocalizedText as="p" text={prospectusText} />
@@ -299,10 +325,15 @@ export default async function HomePage() {
                 <LocalizedText text={requestProspectusText} />
               </a>
             </div>
-            <div className="feature-panel__image-wrap">
+            <div className="prospectus-panel__image-wrap">
+              <LocalizedText
+                as="span"
+                className="prospectus-panel__image-badge"
+                text={prospectusImageBadge}
+              />
               <Image
                 alt="KM School event"
-                className="feature-panel__image"
+                className="prospectus-panel__image"
                 height={650}
                 src="/media/post-independence.jpeg"
                 width={760}
