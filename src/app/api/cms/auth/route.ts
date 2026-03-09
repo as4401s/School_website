@@ -105,7 +105,7 @@ async function handleTOTPStep(request: NextRequest, ip: string) {
     const body = await request.json();
     const { totp } = body;
 
-    if (!totp || !verifyTOTP(String(totp).replace(/\s/g, ""))) {
+    if (!totp || !(await verifyTOTP(String(totp).replace(/\s/g, "")))) {
         recordFailedAttempt(ip);
         const updated = checkRateLimit(ip);
         if (!updated.allowed) {

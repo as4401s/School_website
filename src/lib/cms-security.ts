@@ -1,5 +1,5 @@
 import crypto from "node:crypto";
-import { authenticator } from "otplib";
+import { TOTP } from "otplib";
 
 /**
  * Server-side session + rate limiting utilities for the CMS.
@@ -126,12 +126,13 @@ export function sanitizeBilingual(obj: { en?: string; bn?: string }): { en: stri
  * Verify a 6-digit TOTP code against the CMS_TOTP_SECRET env variable.
  * Uses a ±1 step window (30 seconds either side) to handle clock drift.
  */
-export function verifyTOTP(token: string): boolean {
+export async function verifyTOTP(token: string): Promise<boolean> {
     const secret = process.env.CMS_TOTP_SECRET;
     if (!secret) return false;
     try {
-        authenticator.options = { window: 1 };
-        return authenticator.verify({ token, secret });
+        const totp = new TOTP();
+        const result = await totp.verify(token, { secret, epochTolerance: 30 });
+        return result.valid;
     } catch {
         return false;
     }
