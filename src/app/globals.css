@@ -220,6 +220,23 @@ h4,
   }
 }
 
+.announcement-title {
+  font-size: clamp(2rem, 5vw, 2.8rem);
+  color: var(--accent-strong);
+}
+
+.announcement-salutation {
+  font-weight: 600;
+  margin-top: 1rem;
+}
+
+.announcement-coop {
+  font-size: 1.1rem;
+  color: var(--accent-strong);
+  margin-bottom: 8px;
+  font-weight: 700;
+}
+
 .site-header__actions {
   display: flex;
   align-items: center;

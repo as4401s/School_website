@@ -104,6 +104,7 @@ export const navigation: NavigationItem[] = [
     children: [
       { href: "/blog", label: { en: "EVENTS & NEWS", bn: "অনুষ্ঠান ও সংবাদ" } },
       { href: "/gallery", label: { en: "GALLERY", bn: "গ্যালারি" } },
+      { href: "/announcements", label: { en: "ANNOUNCEMENTS", bn: "বিজ্ঞপ্তি" } },
     ],
   },
   { href: "/file-share", label: { en: "LEARNING TOOLS", bn: "শিক্ষাসামগ্রী" } },
