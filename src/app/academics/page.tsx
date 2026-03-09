@@ -44,6 +44,17 @@ export default function AcademicsPage() {
                   height: 10,
                 }}
               />
+              {subject.imageUrl && (
+                <div className="subject-card__image-wrap">
+                  <Image
+                    alt={subject.title.en}
+                    src={subject.imageUrl}
+                    width={400}
+                    height={300}
+                    className="subject-card__image"
+                  />
+                </div>
+              )}
               <div className="subject-card__body">
                 <LocalizedText as="h3" text={subject.title} />
                 <LocalizedText as="p" text={subject.description} />

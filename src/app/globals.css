@@ -685,7 +685,7 @@ select {
 .tour-card,
 .doc-card,
 .gallery-card,
-.subject-card,
+.gallery-card,
 .portal-card,
 .portal-pane,
 .contact-panel,
@@ -705,7 +705,7 @@ select {
 .tour-card__body,
 .doc-card__body,
 .gallery-card__body,
-.subject-card__body,
+.gallery-card__body,
 .portal-card,
 .portal-pane,
 .contact-panel,
@@ -718,7 +718,7 @@ select {
 .tour-card__body p,
 .doc-card__body p,
 .gallery-card__body p,
-.subject-card__body p,
+.gallery-card__body p,
 .portal-card p,
 .portal-pane p,
 .contact-panel p,
@@ -744,6 +744,60 @@ select {
   height: 100%;
   min-height: 360px;
   border: 0;
+}
+
+.subject-card {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 28px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.subject-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 14px 40px rgba(0, 0, 0, 0.08);
+}
+
+.subject-card__image-wrap {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  padding: 24px 24px 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.subject-card__image {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  border-radius: 16px;
+}
+
+.subject-card__body {
+  padding: 32px;
+  display: grid;
+  gap: 12px;
+  text-align: center;
+}
+
+.subject-card__body h3 {
+  margin: 0;
+  font-family: var(--font-display), var(--font-body), sans-serif;
+  font-size: 1.6rem;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+}
+
+.subject-card__body p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 1.05rem;
+  line-height: 1.7;
 }
 
 .story-card__meta,
