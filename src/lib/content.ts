@@ -120,7 +120,7 @@ async function readCollection<T extends Record<string, unknown>>(
     }),
   );
 
-  return results.filter((r): r is RecordWithFileSlug<T> => r !== null);
+  return results.filter((r) => r !== null) as RecordWithFileSlug<T>[];
 }
 
 function normalizeBilingualText(value: BilingualText): BilingualText {
