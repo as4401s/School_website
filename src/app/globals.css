@@ -517,8 +517,15 @@ select {
   overflow: hidden;
   min-height: 100%;
   border: 1px solid var(--line);
-  border-radius: 32px;
-  box-shadow: var(--shadow);
+  border-radius: 28px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04);
+  background: var(--surface);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.notice-spotlight:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 14px 40px rgba(0, 0, 0, 0.08);
 }
 
 .notice-spotlight {
@@ -539,7 +546,7 @@ select {
   margin: 0;
   max-width: 14ch;
   font-family: var(--font-display), var(--font-body), sans-serif;
-  font-size: clamp(2.2rem, 4vw, 3.2rem);
+  font-size: clamp(2rem, 3.5vw, 2.8rem);
   line-height: 1.05;
   letter-spacing: -0.02em;
 }
@@ -547,7 +554,7 @@ select {
 .notice-spotlight__summary {
   max-width: 34ch;
   color: var(--muted);
-  font-size: 1.02rem;
+  font-size: 1.05rem;
   line-height: 1.8;
 }
 
@@ -685,12 +692,27 @@ select {
 .tour-card,
 .doc-card,
 .gallery-card,
-.gallery-card,
 .portal-card,
 .portal-pane,
 .contact-panel,
 .contact-form-card {
+  display: flex;
+  flex-direction: column;
   overflow: hidden;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 28px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.story-card:hover,
+.tour-card:hover,
+.doc-card:hover,
+.gallery-card:hover,
+.portal-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 14px 40px rgba(0, 0, 0, 0.08);
 }
 
 .story-card__image-wrap,
@@ -705,25 +727,38 @@ select {
 .tour-card__body,
 .doc-card__body,
 .gallery-card__body,
-.gallery-card__body,
 .portal-card,
 .portal-pane,
 .contact-panel,
 .contact-form-card,
 .login-card {
-  padding: 24px;
+  padding: 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
 }
 
 .story-card__body p,
 .tour-card__body p,
 .doc-card__body p,
 .gallery-card__body p,
-.gallery-card__body p,
 .portal-card p,
 .portal-pane p,
 .contact-panel p,
 .contact-form-card p {
   margin: 0;
+  color: var(--muted);
+  font-size: 1.05rem;
+  line-height: 1.7;
+}
+
+.portal-card h3,
+.doc-card__body h3,
+.story-card__body h3 {
+  margin: 0;
+  font-size: 1.6rem;
+  letter-spacing: -0.01em;
+  color: var(--ink);
 }
 
 .contact-grid {
@@ -734,7 +769,7 @@ select {
 
 .map-frame {
   overflow: hidden;
-  border-radius: 24px;
+  border-radius: 28px;
   min-height: 360px;
   border: 1px solid rgba(21, 32, 51, 0.1);
 }
