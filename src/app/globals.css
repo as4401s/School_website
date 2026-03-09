@@ -1262,6 +1262,27 @@ body::before {
     grid-template-columns: 1fr;
   }
 
+  /* Hero: single-column layout — left-align copy */
+  .hero__panel {
+    min-height: 76vh;
+    border-radius: 20px;
+  }
+
+  .hero__copy {
+    text-align: left;
+    justify-self: start;
+    max-width: none;
+  }
+
+  .hero__copy p {
+    margin-left: 0;
+    max-width: none;
+  }
+
+  .hero__actions {
+    justify-content: flex-start;
+  }
+
   .menu-button {
     display: inline-flex;
   }
@@ -1269,7 +1290,8 @@ body::before {
   .site-header__inner {
     grid-template-columns: auto auto;
     justify-content: space-between;
-    padding: 16px 0;
+    padding: 14px 0;
+    min-height: 72px;
   }
 
   .site-header__actions {
@@ -1280,18 +1302,19 @@ body::before {
 
   .site-nav {
     position: absolute;
-    top: calc(100% + 12px);
+    top: calc(100% + 10px);
     left: 0;
     right: 0;
     display: none;
     flex-direction: column;
     align-items: stretch;
-    gap: 8px;
-    padding: 16px;
+    gap: 4px;
+    padding: 14px;
     border: 1px solid var(--line);
-    border-radius: 28px;
+    border-radius: 20px;
     background: #fffaf4;
     box-shadow: var(--shadow);
+    z-index: 50;
   }
 
   .site-nav--open {
@@ -1300,16 +1323,59 @@ body::before {
 
   .site-nav__link {
     text-align: center;
+    padding: 10px 12px;
   }
 }
 
 @media (max-width: 720px) {
+
+  /* ── Layout & Shell ─────────────────────── */
   .shell {
-    width: min(calc(100% - 20px), var(--max-width));
+    width: min(calc(100% - 36px), var(--max-width));
+  }
+
+  .page-intro,
+  .section,
+  .hero,
+  .login-layout,
+  .portal-layout {
+    padding: 40px 0;
+  }
+
+  .stack {
+    gap: 14px;
+  }
+
+  .grid-2,
+  .grid-3,
+  .grid-4 {
+    gap: 14px;
+  }
+
+  /* ── Hero ───────────────────────────────── */
+  .hero__panel {
+    min-height: 66vh;
+    border-radius: 16px;
   }
 
   .hero__content {
-    padding: 28px 28px 0;
+    padding: 24px 0 0;
+    gap: 0;
+  }
+
+  .hero__copy h1 {
+    font-size: clamp(2.2rem, 9vw, 3.6rem);
+  }
+
+  .hero__copy p {
+    font-size: 1rem;
+    margin-top: 12px;
+    line-height: 1.55;
+  }
+
+  .hero__actions {
+    margin-top: 20px;
+    gap: 10px;
   }
 
   .hero__stat-board {
@@ -1321,48 +1387,137 @@ body::before {
 
   .stat-pill {
     max-width: none;
-    min-height: 60px;
+    min-height: 56px;
     padding: 0 12px;
-    font-size: 0.85rem;
+    font-size: 0.82rem;
   }
 
-  .notice-spotlight,
-  .prospectus-panel__copy,
-  .site-footer__panel {
-    padding: 24px;
+  .stat-pill strong {
+    font-size: 0.82rem;
   }
 
-  .notice-spotlight h3,
-  .prospectus-panel__copy h2 {
+  /* ── Section headers ────────────────────── */
+  .section-header {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+    margin-bottom: 18px;
+  }
+
+  .section-header p {
+    margin-top: 6px;
+  }
+
+  /* ── Typography ─────────────────────────── */
+  .lede {
+    font-size: 0.97rem;
+  }
+
+  .feature-panel__copy h2,
+  .section h2 {
+    font-size: clamp(1.7rem, 6vw, 2.6rem);
+  }
+
+  /* ── Cards ──────────────────────────────── */
+  .story-card__body,
+  .tour-card__body,
+  .doc-card__body,
+  .gallery-card__body,
+  .portal-card,
+  .portal-pane,
+  .contact-panel,
+  .contact-form-card,
+  .login-card {
+    padding: 20px;
+    gap: 10px;
+  }
+
+  .story-card__body h3,
+  .doc-card__body h3,
+  .portal-card h3 {
+    font-size: 1.3rem;
+  }
+
+  .subject-card__body {
+    padding: 20px;
+  }
+
+  .subject-card__body h3 {
+    font-size: 1.3rem;
+  }
+
+  /* ── Notice & Prospectus ────────────────── */
+  .notice-strip {
+    padding: 18px 20px;
+  }
+
+  .notice-spotlight {
+    padding: 22px;
+    gap: 16px;
+  }
+
+  .notice-spotlight h3 {
     max-width: none;
+    font-size: clamp(1.6rem, 6vw, 2.2rem);
+  }
+
+  .notice-spotlight__summary {
+    font-size: 0.96rem;
+    max-width: none;
+    line-height: 1.6;
   }
 
   .notice-spotlight .btn,
   .prospectus-panel__copy .btn {
     width: 100%;
+    text-align: center;
+    justify-content: center;
   }
 
+  .prospectus-panel__copy {
+    padding: 22px;
+    gap: 14px;
+  }
+
+  .prospectus-panel__copy h2 {
+    max-width: none;
+    font-size: clamp(1.6rem, 6vw, 2.4rem);
+  }
+
+  .prospectus-panel__copy p {
+    max-width: none;
+    font-size: 0.96rem;
+  }
+
+  .prospectus-panel__image-wrap {
+    aspect-ratio: 16 / 9;
+    min-height: unset;
+  }
+
+  /* ── Feature panel ──────────────────────── */
+  .feature-panel__copy {
+    padding: 22px;
+  }
+
+  .feature-panel__image-wrap {
+    aspect-ratio: 16 / 9;
+    min-height: unset;
+  }
+
+  /* ── Forms / Login ──────────────────────── */
   .login-form__actions,
   .portal-pane__actions,
   .site-footer__cta,
-  .hero__actions,
-  .section-header {
+  .hero__actions {
     flex-direction: column;
     align-items: stretch;
   }
 
-  .page-intro,
-  .section,
-  .hero,
-  .login-layout,
-  .portal-layout {
-    padding: 56px 0;
-  }
-
   .page-intro__inner {
-    padding: 28px;
+    padding: 22px;
   }
 
+  /* ── Header ─────────────────────────────── */
   .brand-mark__copy span {
     display: none;
   }
@@ -1375,8 +1530,78 @@ body::before {
     padding: 0 10px;
   }
 
+  /* ── Footer ─────────────────────────────── */
   .site-footer__meta {
     flex-direction: column;
+  }
+}
+
+/* ── Small phones (iPhone SE, etc.) ─────────────────── */
+@media (max-width: 430px) {
+
+  .shell {
+    width: min(calc(100% - 28px), var(--max-width));
+  }
+
+  .hero__panel {
+    min-height: 62vh;
+    border-radius: 14px;
+  }
+
+  .hero__copy h1 {
+    font-size: clamp(2rem, 10vw, 3rem);
+  }
+
+  .hero__copy p {
+    font-size: 0.95rem;
+  }
+
+  .page-intro,
+  .section,
+  .hero,
+  .login-layout,
+  .portal-layout {
+    padding: 32px 0;
+  }
+
+  .story-card__body,
+  .tour-card__body,
+  .doc-card__body,
+  .gallery-card__body,
+  .portal-card,
+  .portal-pane,
+  .contact-panel,
+  .contact-form-card,
+  .login-card {
+    padding: 16px;
+  }
+
+  .notice-spotlight,
+  .prospectus-panel__copy {
+    padding: 18px;
+  }
+
+  .stat-pill {
+    min-height: 50px;
+    font-size: 0.78rem;
+  }
+
+  .stat-pill strong {
+    font-size: 0.78rem;
+  }
+
+  .btn {
+    font-size: 0.88rem;
+    padding-inline: 18px;
+    min-height: 42px;
+  }
+
+  .eyebrow {
+    font-size: 0.74rem;
+  }
+
+  .site-header__inner {
+    min-height: 64px;
   }
 }
 
