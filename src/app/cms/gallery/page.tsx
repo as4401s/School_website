@@ -118,6 +118,8 @@ export default function CmsGalleryPage() {
                     title: { en: titleEn || "Untitled", bn: titleBn || "শিরোনামহীন" },
                     summary: { en: summaryEn, bn: summaryBn },
                     mediaType: isVideo ? "video" : "image",
+                    publicId: uploadData.publicId,
+                    resourceType: uploadData.resourceType,
                 }),
             });
             if (!res.ok) throw new Error("Failed to create entry");

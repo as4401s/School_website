@@ -11,6 +11,7 @@ import type {
   NewsPost,
   ResultNotice,
 } from "@/data/site-content";
+import { getItems } from "@/lib/cms-store";
 
 const contentRoot = path.join(process.cwd(), "content");
 
@@ -180,20 +181,57 @@ function mapGalleryItem(record: RecordWithFileSlug<GalleryItemFile>): GalleryIte
   };
 }
 
+/**
+ * Parses raw Redis items through a Zod schema, attaching a synthetic _fileSlug.
+ * Unknown internal fields (like _cloudinaryId) are stripped by Zod automatically.
+ */
+function parseRedisItems<T extends Record<string, unknown>>(
+  items: Record<string, unknown>[],
+  schema: z.ZodType<T>,
+): RecordWithFileSlug<T>[] {
+  return items.flatMap((item) => {
+    try {
+      const id = typeof item.id === "string" ? item.id : String(Date.now());
+      return [{ ...schema.parse(item), _fileSlug: id } as RecordWithFileSlug<T>];
+    } catch {
+      return [];
+    }
+  });
+}
+
 const loadCmsCollections = cache(async (): Promise<CmsCollections> => {
-  const [newsFiles, resultFiles, documentFiles, galleryFiles] = await Promise.all([
-    readCollection("news", newsPostSchema),
-    readCollection("results", resultNoticeSchema),
-    readCollection("documents", documentSchema),
-    readCollection("gallery", galleryItemSchema),
+  const [
+    staticNewsFiles, staticResultFiles, staticDocumentFiles, staticGalleryFiles,
+    dynamicNews, dynamicDocuments, dynamicGallery,
+  ] = await Promise.all([
+    readCollection("news", newsPostSchema).catch(() => [] as RecordWithFileSlug<NewsPostFile>[]),
+    readCollection("results", resultNoticeSchema).catch(() => [] as RecordWithFileSlug<ResultNoticeFile>[]),
+    readCollection("documents", documentSchema).catch(() => [] as RecordWithFileSlug<DocumentFile>[]),
+    readCollection("gallery", galleryItemSchema).catch(() => [] as RecordWithFileSlug<GalleryItemFile>[]),
+    getItems("news").catch(() => [] as Record<string, unknown>[]),
+    getItems("documents").catch(() => [] as Record<string, unknown>[]),
+    getItems("gallery").catch(() => [] as Record<string, unknown>[]),
   ]);
 
+  const allNewsFiles = [
+    ...staticNewsFiles,
+    ...parseRedisItems(dynamicNews, newsPostSchema),
+  ];
+  const allDocumentFiles = [
+    ...staticDocumentFiles,
+    ...parseRedisItems(dynamicDocuments, documentSchema),
+  ];
+  const allGalleryFiles = [
+    ...staticGalleryFiles,
+    ...parseRedisItems(dynamicGallery, galleryItemSchema),
+  ];
+
   return {
-    news: newsFiles
+    news: allNewsFiles
       .filter((record) => record.published)
       .sort((left, right) => compareDatesDescending(left.publishedAt, right.publishedAt))
       .map(mapNewsPost),
-    results: resultFiles
+    results: staticResultFiles
       .filter((record) => record.published)
       .sort((left, right) => {
         const eventSort = compareDatesDescending(left.eventDate, right.eventDate);
@@ -202,11 +240,11 @@ const loadCmsCollections = cache(async (): Promise<CmsCollections> => {
           : compareDatesDescending(left.publishedAt, right.publishedAt);
       })
       .map(mapResultNotice),
-    documents: documentFiles
+    documents: allDocumentFiles
       .filter((record) => record.published)
       .sort((left, right) => (left.order ?? 999) - (right.order ?? 999))
       .map(mapDocument),
-    gallery: galleryFiles
+    gallery: allGalleryFiles
       .filter((record) => record.published)
       .sort((left, right) => (left.order ?? 999) - (right.order ?? 999))
       .map(mapGalleryItem),

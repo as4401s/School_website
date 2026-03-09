@@ -59,6 +59,8 @@ export default function CmsNewsPage() {
         setSaving(true);
         try {
             let imageUrl = "";
+            let uploadPublicId: string | undefined;
+            let uploadResourceType: string | undefined;
             const file = fileRef.current?.files?.[0];
             if (file) {
                 const validation = validateFileFormat(file, "image");
@@ -75,6 +77,8 @@ export default function CmsNewsPage() {
                 const uploadData = await uploadRes.json();
                 if (!uploadRes.ok) { showToast(`⚠️ ${uploadData.error}`); setSaving(false); return; }
                 imageUrl = uploadData.url;
+                uploadPublicId = uploadData.publicId;
+                uploadResourceType = uploadData.resourceType;
             }
 
             const paragraphs = bodyEn.split("\n").filter(Boolean);
@@ -93,6 +97,8 @@ export default function CmsNewsPage() {
                     excerpt: { en: excerptEn, bn: excerptBn },
                     body,
                     imageUrl,
+                    publicId: uploadPublicId,
+                    resourceType: uploadResourceType,
                 }),
             });
             if (!res.ok) throw new Error("Failed");

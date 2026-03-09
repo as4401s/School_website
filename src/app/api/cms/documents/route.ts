@@ -1,35 +1,33 @@
 import { NextRequest, NextResponse } from "next/server";
-import { promises as fs } from "node:fs";
-import path from "node:path";
-import { checkCmsAuth, safeFilePath } from "@/lib/cms-auth";
+import { v2 as cloudinary } from "cloudinary";
+import { checkCmsAuth } from "@/lib/cms-auth";
 import { sanitizeText, sanitizeBilingual } from "@/lib/cms-security";
+import { getItems, addItem, deleteItem } from "@/lib/cms-store";
 
-const contentDir = path.join(process.cwd(), "content", "documents");
-const mediaBase = path.join(process.cwd(), "public");
+function isAllowedMediaUrl(url: unknown): url is string {
+    if (typeof url !== "string" || !url) return false;
+    return url.startsWith("/media/cms/") || url.startsWith("https://res.cloudinary.com/");
+}
+
+function configureCloudinary() {
+    if (!process.env.CLOUDINARY_CLOUD_NAME) return null;
+    cloudinary.config({
+        cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+        api_key: process.env.CLOUDINARY_API_KEY,
+        api_secret: process.env.CLOUDINARY_API_SECRET,
+    });
+    return cloudinary;
+}
 
 export async function GET() {
     if (!(await checkCmsAuth())) {
         return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
     try {
-        await fs.mkdir(contentDir, { recursive: true });
-        const files = await fs.readdir(contentDir);
-        const items = (
-            await Promise.all(
-                files
-                    .filter((f) => f.endsWith(".json"))
-                    .map(async (f) => {
-                        try {
-                            const raw = await fs.readFile(path.join(contentDir, f), "utf8");
-                            return { ...JSON.parse(raw), _fileName: f };
-                        } catch {
-                            console.error(`Skipping malformed file: ${f}`);
-                            return null;
-                        }
-                    })
-            )
-        ).filter(Boolean);
-        return NextResponse.json(items);
+        const items = await getItems("documents");
+        return NextResponse.json(
+            items.map((item) => ({ ...item, _fileName: `${item.id}.json` }))
+        );
     } catch (error) {
         console.error("Documents GET error:", error);
         return NextResponse.json({ error: "Failed to load" }, { status: 500 });
@@ -42,10 +40,10 @@ export async function POST(request: NextRequest) {
     }
     try {
         const body = await request.json();
-        const { title, category, description, href } = body;
+        const { title, category, description, href, publicId, resourceType } = body;
 
         const id = `doc-${Date.now()}`;
-        const item = {
+        const item: Record<string, unknown> = {
             id,
             slug: id,
             published: true,
@@ -53,16 +51,12 @@ export async function POST(request: NextRequest) {
             title: sanitizeBilingual(title || {}),
             category: sanitizeBilingual(category || { en: "General", bn: "" }),
             description: sanitizeBilingual(description || {}),
-            // Only allow internal CMS-managed URLs
-            href: typeof href === "string" && href.startsWith("/media/cms/") ? href : sanitizeText(href || ""),
+            href: isAllowedMediaUrl(href) ? href : sanitizeText(href || ""),
+            _cloudinaryId: publicId || null,
+            _cloudinaryResourceType: resourceType || "raw",
         };
 
-        await fs.mkdir(contentDir, { recursive: true });
-        await fs.writeFile(
-            path.join(contentDir, `${id}.json`),
-            JSON.stringify(item, null, 2)
-        );
-
+        await addItem("documents", item);
         return NextResponse.json({ success: true, item });
     } catch (error) {
         console.error("Documents POST error:", error);
@@ -76,22 +70,23 @@ export async function DELETE(request: NextRequest) {
     }
     try {
         const { searchParams } = new URL(request.url);
-        const check = safeFilePath(searchParams.get("file"), contentDir);
-        if (!check.ok) {
-            return NextResponse.json({ error: check.error }, { status: 400 });
-        }
-        const raw = await fs.readFile(check.filePath, "utf8");
-        let item: Record<string, unknown> = {};
-        try { item = JSON.parse(raw); } catch { /* corrupted file — still proceed with deletion */ }
-        await fs.unlink(check.filePath);
+        const id = (searchParams.get("file") || "").replace(/\.json$/, "");
 
-        // Best-effort: also remove the uploaded document file
-        if (item.href && typeof item.href === "string" && item.href.startsWith("/media/cms/")) {
-            const mediaPath = path.join(mediaBase, item.href);
-            fs.unlink(mediaPath).catch(() => { /* ignore if already gone */ });
+        const deleted = await deleteItem("documents", id);
+        if (!deleted) {
+            return NextResponse.json({ error: "Item not found" }, { status: 404 });
         }
 
-        return NextResponse.json({ success: true, deleted: item });
+        // Best-effort: delete from Cloudinary
+        if (deleted._cloudinaryId && typeof deleted._cloudinaryId === "string") {
+            const cld = configureCloudinary();
+            if (cld) {
+                const resType = (deleted._cloudinaryResourceType as string) || "raw";
+                cld.uploader.destroy(deleted._cloudinaryId, { resource_type: resType }).catch(() => {});
+            }
+        }
+
+        return NextResponse.json({ success: true, deleted });
     } catch (error) {
         console.error("Documents DELETE error:", error);
         return NextResponse.json({ error: "Failed to delete" }, { status: 500 });

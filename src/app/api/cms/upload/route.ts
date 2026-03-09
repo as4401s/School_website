@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
-import { promises as fs } from "node:fs";
 import path from "node:path";
+import { v2 as cloudinary } from "cloudinary";
 import { checkCmsAuth } from "@/lib/cms-auth";
 import { checkFileSize } from "@/lib/cms-security";
 
@@ -25,11 +25,35 @@ const SECTION_CATEGORY: Record<string, "image" | "video" | "document"> = {
 };
 
 const VIDEO_EXTS = new Set(ALLOWED_VIDEO_EXTS);
+const DOCUMENT_EXTS = new Set(ALLOWED_DOCUMENT_EXTS);
+
+function getCloudinaryResourceType(ext: string): "image" | "video" | "raw" {
+    if (VIDEO_EXTS.has(ext)) return "video";
+    if (DOCUMENT_EXTS.has(ext)) return "raw";
+    return "image";
+}
 
 export async function POST(request: NextRequest) {
     if (!(await checkCmsAuth())) {
         return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
+
+    if (
+        !process.env.CLOUDINARY_CLOUD_NAME ||
+        !process.env.CLOUDINARY_API_KEY ||
+        !process.env.CLOUDINARY_API_SECRET
+    ) {
+        return NextResponse.json(
+            { error: "Cloudinary is not configured on the server." },
+            { status: 500 }
+        );
+    }
+
+    cloudinary.config({
+        cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+        api_key: process.env.CLOUDINARY_API_KEY,
+        api_secret: process.env.CLOUDINARY_API_SECRET,
+    });
 
     try {
         const formData = await request.formData();
@@ -68,23 +92,27 @@ export async function POST(request: NextRequest) {
             return NextResponse.json({ error: sizeCheck.message }, { status: 413 });
         }
 
-        const uploadDir = path.join(process.cwd(), "public", "media", "cms", section);
-        await fs.mkdir(uploadDir, { recursive: true });
-
-        // Sanitize filename
-        const timestamp = Date.now();
-        const baseName = file.name
-            .replace(ext, "")
-            .replace(/[^a-zA-Z0-9_-]/g, "_")
-            .substring(0, 50);
-        const fileName = `${baseName}_${timestamp}${ext}`;
-        const filePath = path.join(uploadDir, fileName);
-
+        // Convert to base64 data URI for Cloudinary
         const buffer = Buffer.from(await file.arrayBuffer());
-        await fs.writeFile(filePath, buffer);
+        const base64 = buffer.toString("base64");
+        const mimeType = file.type || "application/octet-stream";
+        const dataUri = `data:${mimeType};base64,${base64}`;
 
-        const publicUrl = `/media/cms/${section}/${fileName}`;
-        return NextResponse.json({ success: true, url: publicUrl, fileName });
+        const resourceType = getCloudinaryResourceType(ext);
+
+        const result = await cloudinary.uploader.upload(dataUri, {
+            folder: `kms/${section}`,
+            resource_type: resourceType,
+            use_filename: true,
+            unique_filename: true,
+        });
+
+        return NextResponse.json({
+            success: true,
+            url: result.secure_url,
+            publicId: result.public_id,
+            resourceType,
+        });
     } catch (error) {
         console.error("Upload error:", error);
         return NextResponse.json({ error: "Upload failed" }, { status: 500 });

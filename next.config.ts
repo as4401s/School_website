@@ -55,8 +55,8 @@ const securityHeaders = [
             "default-src 'self'",
             "script-src 'self' 'unsafe-inline' 'unsafe-eval'",
             "style-src 'self' 'unsafe-inline'",
-            "img-src 'self' data: blob:",
-            "media-src 'self' blob:",
+            "img-src 'self' data: blob: https://res.cloudinary.com",
+            "media-src 'self' blob: https://res.cloudinary.com",
             "font-src 'self'",
             "connect-src 'self'",
             "frame-src https://maps.google.com https://www.google.com",
@@ -107,6 +107,11 @@ const securityHeaders = [
 
 const nextConfig: NextConfig = {
     typedRoutes: true,
+    images: {
+        remotePatterns: [
+            { protocol: "https", hostname: "res.cloudinary.com" },
+        ],
+    },
     async headers() {
         return [
             {
