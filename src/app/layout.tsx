@@ -48,9 +48,9 @@ const bengaliFont = Noto_Sans_Bengali({
 });
 
 export const metadata: Metadata = {
-  title: `${siteMeta.shortName} | KM School`,
+  title: `${siteMeta.shortName} | Krishnarati Montessori School`,
   description:
-    "KM School official website with school information, events, admissions, learning tools, and contact details.",
+    "KMS official website with school information, events, admissions, learning tools, and contact details.",
 };
 
 export default function RootLayout({

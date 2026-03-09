@@ -43,13 +43,13 @@ const latestNewsDescription = {
 };
 
 const aboutSchoolTitle = {
-  en: "About KM School",
-  bn: "কেএম স্কুল সম্পর্কে",
+  en: "About KMS",
+  bn: "কেএমএস সম্পর্কে",
 };
 
 const aboutSchoolText = {
-  en: "KM School offers a warm learning environment shaped by classroom life, school celebrations, parent meetings, and steady daily progress.",
-  bn: "শ্রেণিকক্ষের জীবন, বিদ্যালয়ের উদ্‌যাপন, অভিভাবক বৈঠক এবং প্রতিদিনের অগ্রগতির মাধ্যমে কেএম স্কুল একটি স্নেহময় শিক্ষার পরিবেশ গড়ে তোলে।",
+  en: "KMS offers a warm learning environment shaped by classroom life, school celebrations, parent meetings, and steady daily progress.",
+  bn: "শ্রেণিকক্ষের জীবন, বিদ্যালয়ের উদ্‌যাপন, অভিভাবক বৈঠক এবং প্রতিদিনের অগ্রগতির মাধ্যমে কেএমএস একটি স্নেহময় শিক্ষার পরিবেশ গড়ে তোলে।",
 };
 
 const upcomingNoticeLabel = {
@@ -98,8 +98,8 @@ const noticeSupportText = {
 };
 
 const prospectusImageBadge = {
-  en: "KM School",
-  bn: "কেএম স্কুল",
+  en: "KMS",
+  bn: "কেএমএস",
 };
 
 export default async function HomePage() {
@@ -181,7 +181,7 @@ export default async function HomePage() {
             </div>
             <div className="feature-panel__image-wrap">
               <Image
-                alt="KM School classroom"
+                alt="KMS classroom"
                 className="feature-panel__image"
                 height={700}
                 src="/media/tour-1.jpg"
@@ -337,7 +337,7 @@ export default async function HomePage() {
                 text={prospectusImageBadge}
               />
               <Image
-                alt="KM School event"
+                alt="KMS event"
                 className="prospectus-panel__image"
                 height={650}
                 src="/media/post-independence.jpeg"

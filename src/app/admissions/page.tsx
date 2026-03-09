@@ -15,8 +15,8 @@ const introTitle = {
 };
 
 const introSummary = {
-  en: "Admissions information for families seeking to begin their journey with KM School.",
-  bn: "যেসব পরিবার কেএম স্কুলে ভর্তি প্রক্রিয়া শুরু করতে চান, তাদের জন্য এই ভর্তি-সংক্রান্ত তথ্য।",
+  en: "Admissions information for families seeking to begin their journey with KMS.",
+  bn: "যেসব পরিবার কেএমএস-এ ভর্তি প্রক্রিয়া শুরু করতে চান, তাদের জন্য এই ভর্তি-সংক্রান্ত তথ্য।",
 };
 
 const requestDetails = {
@@ -75,7 +75,7 @@ export default function AdmissionsPage() {
             </div>
             <div className="feature-panel__image-wrap">
               <Image
-                alt="KM School classroom"
+                alt="KMS classroom"
                 className="feature-panel__image"
                 height={650}
                 src="/media/hero-home.jpg"

@@ -73,7 +73,7 @@ export default function AcademicsPage() {
           </div>
           <div className="feature-panel__image-wrap">
             <Image
-              alt="KM School classroom"
+              alt="KMS classroom"
               className="feature-panel__image"
               height={820}
               src="/media/tour-1.jpg"

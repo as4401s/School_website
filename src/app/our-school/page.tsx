@@ -24,8 +24,8 @@ const welcomeTitle = {
 };
 
 const welcomeText = {
-  en: "KM School welcomes families into a caring, child-focused environment where learning, participation, and school life grow together.",
-  bn: "কেএম স্কুল পরিবারগুলিকে একটি স্নেহময়, শিশুকেন্দ্রিক পরিবেশে স্বাগত জানায়, যেখানে শিক্ষা, অংশগ্রহণ এবং বিদ্যালয়জীবন একসঙ্গে বিকশিত হয়।",
+  en: "KMS welcomes families into a caring, child-focused environment where learning, participation, and school life grow together.",
+  bn: "কেএমএস পরিবারগুলিকে একটি স্নেহময়, শিশুকেন্দ্রিক পরিবেশে স্বাগত জানায়, যেখানে শিক্ষা, অংশগ্রহণ এবং বিদ্যালয়জীবন একসঙ্গে বিকশিত হয়।",
 };
 
 const spaceCards = [
@@ -69,7 +69,7 @@ export default function OurSchoolPage() {
           </div>
           <div className="feature-panel__image-wrap">
             <Image
-              alt="KM School students"
+              alt="KMS students"
               className="feature-panel__image"
               height={700}
               src="/media/hero-home.jpg"

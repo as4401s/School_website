@@ -47,7 +47,7 @@ export default function ContactPage() {
                 loading="lazy"
                 referrerPolicy="no-referrer-when-downgrade"
                 src={`https://maps.google.com/maps?q=${mapQuery}&z=15&output=embed`}
-                title="KM School location"
+                title="KMS location"
               />
             </div>
           </article>

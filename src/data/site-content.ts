@@ -58,15 +58,15 @@ export type DocumentItem = {
 
 export const siteMeta = {
   name: {
-    en: "KM School",
-    bn: "কেএম স্কুল",
+    en: "Krishnarati Montessori School (KMS)",
+    bn: "কৃষ্ণরাতি মন্টেসরি স্কুল (কেএমএস)",
   },
   shortName: "KMS",
   foundation: "NGBM Foundation",
   foundationUrl: "https://ngbmfoundation.com/",
   heroTitle: {
-    en: "Welcome to KM School",
-    bn: "কেএম স্কুলে স্বাগতম",
+    en: "Welcome to KMS",
+    bn: "কেএমএস-এ স্বাগতম",
   },
   heroSummary: {
     en: "A warm learning environment focused on safety, joyful classroom life, and everyday growth.",
@@ -77,12 +77,12 @@ export const siteMeta = {
     bn: "সুরক্ষা সবার আগে: আপনার সন্তানের নিরাপত্তা নিশ্চিত করতে আমাদের বিদ্যালয়ে অতিরিক্ত ব্যবস্থা নেওয়া হয়েছে।",
   },
   address: {
-    en: "Humaniapota, Thakurbari, PS - Gangnapur, Ranaghat - II, Nadia, Pin - 741238",
-    bn: "হুমানিয়াপোতা, ঠাকুরবাড়ি, পি.এস - গাংনাপুর, রানাঘাট - ২, নদিয়া, পিন - ৭৪১২৩৮",
+    en: "4MPP+5XP, Humania Pota, West Bengal 741238, India",
+    bn: "4MPP+5XP, হুমানিয়া পোতা, পশ্চিমবঙ্গ ৭৪১২৩৮, ভারত",
   },
   eventLocation: {
-    en: "Humania Pota, West Bengal 741238, India",
-    bn: "হুমানিয়া পোতা, পশ্চিমবঙ্গ ৭৪১২৩৮, ভারত",
+    en: "4MPP+5XP, Humania Pota, West Bengal 741238, India",
+    bn: "4MPP+5XP, হুমানিয়া পোতা, পশ্চিমবঙ্গ ৭৪১২৩৮, ভারত",
   },
   schoolEmail: "info@kmschool.co.in",
   foundationEmail: "contact@ngbmfoundation.com",
