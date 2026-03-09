@@ -1,5 +1,6 @@
 import crypto from "node:crypto";
-import { TOTP } from "otplib";
+import { TOTP, NobleCryptoPlugin, ScureBase32Plugin } from "otplib";
+import { createGuardrails } from "@otplib/core";
 
 /**
  * Server-side session + rate limiting utilities for the CMS.
@@ -130,7 +131,11 @@ export async function verifyTOTP(token: string): Promise<boolean> {
     const secret = process.env.CMS_TOTP_SECRET;
     if (!secret) return false;
     try {
-        const totp = new TOTP();
+        const totp = new TOTP({
+            crypto: new NobleCryptoPlugin(),
+            base32: new ScureBase32Plugin(),
+            guardrails: createGuardrails({ MIN_SECRET_BYTES: 1 }),
+        });
         const result = await totp.verify(token, { secret, epochTolerance: 30 });
         return result.valid;
     } catch {
