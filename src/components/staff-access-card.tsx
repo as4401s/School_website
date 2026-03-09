@@ -7,7 +7,7 @@ type StaffAccessCardProps = {
 };
 
 export function StaffAccessCard({
-  nextHref = "/admin/",
+  nextHref = "/cms",
 }: StaffAccessCardProps) {
   return (
     <div className="login-card stack">
@@ -32,7 +32,7 @@ export function StaffAccessCard({
 
       <div className="chip-row">
         <LocalizedText as="span" className="chip" text={{ en: "News", bn: "সংবাদ" }} />
-        <LocalizedText as="span" className="chip" text={{ en: "Results", bn: "ফলাফল" }} />
+        <LocalizedText as="span" className="chip" text={{ en: "Announcements", bn: "ঘোষণা" }} />
         <LocalizedText as="span" className="chip" text={{ en: "Documents", bn: "নথি" }} />
         <LocalizedText as="span" className="chip" text={{ en: "Gallery", bn: "গ্যালারি" }} />
       </div>
@@ -40,9 +40,6 @@ export function StaffAccessCard({
       <div className="login-form__actions">
         <a className="btn btn--accent" href={nextHref}>
           <LocalizedText text={{ en: "Open Staff CMS", bn: "স্টাফ সিএমএস খুলুন" }} />
-        </a>
-        <a className="btn btn--ghost" href="https://github.com/signup" rel="noreferrer" target="_blank">
-          <LocalizedText text={{ en: "Create GitHub Account", bn: "GitHub অ্যাকাউন্ট তৈরি করুন" }} />
         </a>
       </div>
 
