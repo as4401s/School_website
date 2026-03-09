@@ -24,8 +24,8 @@ export function StaffAccessCard({
         <LocalizedText
           as="p"
           text={{
-            en: "Authorised staff can sign in with GitHub and update news, notices, documents, and gallery images without editing code.",
-            bn: "অনুমোদিত কর্মীরা GitHub দিয়ে সাইন ইন করে কোড ছাড়াই সংবাদ, নোটিশ, নথি ও গ্যালারির ছবি আপডেট করতে পারবেন।",
+            en: "Authorised staff can update news, notices, documents, and gallery images through the content editor.",
+            bn: "অনুমোদিত কর্মীরা কনটেন্ট এডিটরের মাধ্যমে সংবাদ, নোটিশ, নথি ও গ্যালারির ছবি আপডেট করতে পারবেন।",
           }}
         />
       </div>
@@ -50,8 +50,8 @@ export function StaffAccessCard({
         as="p"
         className="helper-text"
         text={{
-          en: "You control the repository and deployment. Other staff only need GitHub access to the content editor.",
-          bn: "রিপোজিটরি ও ডিপ্লয়মেন্ট আপনার নিয়ন্ত্রণে থাকবে। অন্য কর্মীদের জন্য শুধু কনটেন্ট এডিটরে GitHub প্রবেশাধিকারই যথেষ্ট।",
+          en: "Contact the school administrator if you need access.",
+          bn: "অ্যাক্সেস প্রয়োজন হলে বিদ্যালয়ের প্রশাসকের সাথে যোগাযোগ করুন।",
         }}
       />
     </div>
