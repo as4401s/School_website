@@ -1,100 +1,84 @@
-# KM School Website
+# Krishnarati Montessori School (KMS) — Website
 
-This project is the KM School public website rebuilt in Next.js, with a free GitHub-backed staff CMS for managing public content.
+Official website for Krishnarati Montessori School (KMS), Humania Pota, West Bengal, India. Built and maintained by the NGBM Foundation.
 
-## What is included
+## Tech Stack
 
-- Public school website pages:
-  - `/`
-  - `/our-school`
-  - `/academics`
-  - `/admissions`
-  - `/blog`
-  - `/file-share`
-  - `/contact`
-  - `/post/[slug]`
-  - `/events/[slug]`
-- Staff access pages:
-  - `/login`
-  - `/portal`
-  - `/admin/`
-- Git-backed content collections for:
-  - news
-  - results and notices
-  - public documents
-  - gallery images
+- **Framework:** Next.js 16 (App Router)
+- **Language:** TypeScript
+- **Styling:** CSS (custom properties)
+- **Content:** File-based JSON in `/content/`
 
-## Stack
+## Features
 
-- Next.js 16
-- React 19
-- Decap CMS
-- GitHub OAuth
-- Vercel deployment
+- Bilingual (English & Bengali) throughout
+- Custom staff CMS with password + TOTP 2-factor authentication
+- Gallery, announcements, news, documents, careers, and results sections
+- Mobile-responsive design
 
-## Content model
+## Project Structure
 
-- Editable content is stored in:
-  - `content/news`
-  - `content/results`
-  - `content/documents`
-  - `content/gallery`
-- Uploaded images and files go to:
-  - `public/uploads`
-- Extracted school media used by the public site lives in:
-  - `public/media`
+```
+src/
+  app/          # Pages and API routes (Next.js App Router)
+  components/   # Shared UI components
+  data/         # Static site content (bilingual)
+  lib/          # Auth, security, and utility helpers
+content/        # CMS-managed JSON content files
+public/
+  media/        # School photos and uploaded media
+```
 
-## Local development
+## Public Pages
+
+| Route | Description |
+|---|---|
+| `/` | Home |
+| `/our-school` | About the school |
+| `/academics` | Curriculum and subjects |
+| `/admissions` | Admissions information |
+| `/blog` | Events and news |
+| `/gallery` | Photo and video gallery |
+| `/announcements` | Notices and announcements |
+| `/file-share` | Documents and learning tools |
+| `/contact` | Contact information |
+| `/post/[slug]` | Individual news post |
+| `/events/[slug]` | Individual event/result page |
+
+## Staff CMS
+
+Staff can log in at `/cms` to manage content without touching code.
+
+**Login flow:** staff password → 6-digit TOTP code from an authenticator app (e.g. Google Authenticator)
+
+**What staff can manage:**
+- Gallery photos and videos
+- Announcements
+- News and events
+- Documents and circulars
+- Career postings
+
+## Local Development
 
 ```bash
 npm install
 npm run dev
 ```
 
-Validation:
+Create a `.env.local` file with:
 
-```bash
-npm run lint
-npm run build
+```
+CMS_PASSWORD=your_staff_password
+CMS_TOTP_SECRET=your_base32_totp_secret
 ```
 
-## Staff CMS setup
+`CMS_TOTP_SECRET` is optional — if omitted, 2FA is skipped and only the password is required.
 
-1. Copy `.env.example` to `.env.local`.
-2. Create a GitHub OAuth App.
-3. Put these values in `.env.local`:
-   - `GITHUB_OAUTH_CLIENT_ID`
-   - `GITHUB_OAUTH_CLIENT_SECRET`
-4. For local development, use:
-   - Homepage URL: `http://localhost:3000`
-   - Authorization callback URL: `http://localhost:3000/api/decap/callback`
-5. Start the app and open `/admin/`.
+## Scripts
 
-## Production setup
-
-1. Push the repo to GitHub.
-2. Import the repo into Vercel.
-3. Add the same GitHub OAuth env vars in Vercel.
-4. Create or update the GitHub OAuth App with:
-   - Homepage URL: your production site URL
-   - Authorization callback URL: `https://your-domain/api/decap/callback`
-5. Open `/admin/` on the live site and sign in with an authorised GitHub account.
-
-## How staff access works
-
-- You remain the main repository and deployment admin.
-- Other staff use `/admin/` as a no-code editor.
-- With the current CMS configuration, staff can submit content updates through GitHub-backed editorial workflow.
-- For a private repo, invited editors should be GitHub collaborators so they can access the CMS safely.
-
-## What staff can upload without code
-
-- gallery images
-- PDF and document links
-- school news updates
-- result notices
-
-## Notes
-
-- No public video pack was available in the downloaded Wix pages, so this repo currently contains images only.
-- The public site uses KM School photos; unused foreign placeholder portraits from the earlier rebuild were removed.
+| Command | Description |
+|---|---|
+| `npm run dev` | Start development server |
+| `npm run build` | Build for production |
+| `npm run start` | Start production server |
+| `npm run lint` | Run ESLint |
