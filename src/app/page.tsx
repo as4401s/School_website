@@ -151,9 +151,6 @@ export default async function HomePage() {
               </div>
 
               <div className="hero__stat-board">
-                <Link href="/groups" className="stat-pill">
-                  <strong><LocalizedText text={{ en: "Our teachers >", bn: "আমাদের শিক্ষক >" }} /></strong>
-                </Link>
                 <Link href="/academics" className="stat-pill">
                   <strong><LocalizedText text={{ en: "All classes >", bn: "সকল ক্লাস >" }} /></strong>
                 </Link>
