@@ -3,6 +3,7 @@ node_modules
 out
 coverage
 .DS_Store
+*.tsbuildinfo
 
 # All environment variable files — never commit secrets
 .env
