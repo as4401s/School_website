@@ -1465,3 +1465,470 @@ h4,
 .gallery-lightbox__close:hover {
   background: white;
 }
+
+/* ===== STAFF CMS ===== */
+
+.cms-page {
+  min-height: 100vh;
+  background: linear-gradient(180deg, #f0f2f5 0%, #e8eaf0 100%);
+  padding: 40px 20px;
+}
+
+.cms-container {
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+/* Login */
+.cms-login-page {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, var(--navy) 0%, #2a3f5f 100%);
+  padding: 20px;
+}
+
+.cms-login-card {
+  background: white;
+  border-radius: 28px;
+  padding: clamp(2rem, 5vw, 3rem);
+  max-width: 420px;
+  width: 100%;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.25);
+}
+
+.cms-login-header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.cms-login-icon {
+  font-size: 3rem;
+  margin-bottom: 0.5rem;
+}
+
+.cms-login-header h1 {
+  font-size: 1.8rem;
+  margin: 0 0 0.5rem;
+}
+
+.cms-login-header p {
+  color: var(--muted);
+  margin: 0;
+}
+
+.cms-login-form {
+  display: grid;
+  gap: 1rem;
+}
+
+/* Common CMS components */
+.cms-field {
+  display: grid;
+  gap: 6px;
+}
+
+.cms-field label {
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--ink);
+}
+
+.cms-field input,
+.cms-field textarea,
+.cms-field select {
+  width: 100%;
+  padding: 12px 16px;
+  border: 1.5px solid #d1d5db;
+  border-radius: 12px;
+  background: white;
+  font-size: 0.95rem;
+  color: var(--ink);
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.cms-field input:focus,
+.cms-field textarea:focus,
+.cms-field select:focus {
+  outline: none;
+  border-color: var(--accent-strong);
+  box-shadow: 0 0 0 3px rgba(224, 102, 52, 0.15);
+}
+
+.cms-field textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+
+.cms-btn {
+  padding: 12px 24px;
+  border-radius: 12px;
+  border: 1.5px solid transparent;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.cms-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.cms-btn--primary {
+  background: var(--accent-strong);
+  color: white;
+  border-color: var(--accent-strong);
+}
+
+.cms-btn--primary:hover:not(:disabled) {
+  background: #c44520;
+  transform: translateY(-1px);
+}
+
+.cms-btn--danger {
+  background: #ef4444;
+  color: white;
+  border-color: #ef4444;
+}
+
+.cms-btn--danger:hover:not(:disabled) {
+  background: #dc2626;
+}
+
+.cms-btn--warning {
+  background: #f59e0b;
+  color: white;
+  border-color: #f59e0b;
+}
+
+.cms-btn--ghost {
+  background: transparent;
+  color: var(--ink);
+  border-color: #d1d5db;
+}
+
+.cms-btn--ghost:hover {
+  background: rgba(0, 0, 0, 0.04);
+}
+
+.cms-btn--sm {
+  padding: 8px 16px;
+  font-size: 0.85rem;
+}
+
+.cms-error {
+  color: #ef4444;
+  font-size: 0.9rem;
+  font-weight: 500;
+  margin: 0;
+}
+
+/* Dashboard */
+.cms-dashboard-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+.cms-dashboard-header h1 {
+  font-size: 2rem;
+  margin: 0;
+}
+
+.cms-subtitle {
+  color: var(--muted);
+  margin: 4px 0 0;
+}
+
+.cms-section-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 16px;
+}
+
+.cms-section-card {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 24px;
+  background: white;
+  border-radius: 20px;
+  border: 1.5px solid #e5e7eb;
+  text-decoration: none;
+  color: var(--ink);
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+}
+
+.cms-section-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+  border-color: var(--accent-strong);
+}
+
+.cms-section-card__icon {
+  font-size: 2.4rem;
+  flex-shrink: 0;
+}
+
+.cms-section-card__info h3 {
+  margin: 0 0 4px;
+  font-size: 1.1rem;
+}
+
+.cms-section-card__info p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.88rem;
+}
+
+.cms-section-card__count {
+  margin-left: auto;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--accent-strong);
+  white-space: nowrap;
+}
+
+/* Content pages */
+.cms-page-header {
+  margin-bottom: 2rem;
+}
+
+.cms-page-header h1 {
+  font-size: 1.8rem;
+  margin: 8px 0 0;
+}
+
+.cms-back {
+  font-size: 0.9rem;
+  color: var(--accent-strong);
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.cms-back:hover {
+  text-decoration: underline;
+}
+
+.cms-card {
+  background: white;
+  border-radius: 20px;
+  padding: clamp(1.5rem, 4vw, 2rem);
+  border: 1.5px solid #e5e7eb;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+  margin-bottom: 1.5rem;
+}
+
+.cms-card h3 {
+  margin: 0 0 1rem;
+  font-size: 1.2rem;
+}
+
+.cms-form-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1rem;
+}
+
+.cms-form-grid-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+@media (max-width: 680px) {
+  .cms-form-grid-2 {
+    grid-template-columns: 1fr;
+  }
+}
+
+.cms-form-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 1.5rem;
+}
+
+.cms-helper {
+  color: var(--muted);
+  font-size: 0.88rem;
+  margin: 0 0 1rem;
+}
+
+/* List items */
+.cms-list {
+  display: grid;
+  gap: 12px;
+}
+
+.cms-list-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 16px 20px;
+  background: white;
+  border-radius: 16px;
+  border: 1.5px solid #e5e7eb;
+  transition: box-shadow 0.2s;
+}
+
+.cms-list-item:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+}
+
+.cms-list-item h4 {
+  margin: 0;
+  font-size: 1rem;
+}
+
+.cms-muted {
+  color: var(--muted);
+  font-size: 0.88rem;
+  margin: 4px 0 0;
+}
+
+.cms-badge {
+  display: inline-block;
+  padding: 3px 10px;
+  border-radius: 6px;
+  background: rgba(224, 102, 52, 0.1);
+  color: var(--accent-strong);
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+.cms-empty {
+  text-align: center;
+  color: var(--muted);
+  padding: 3rem 0;
+  font-size: 1rem;
+}
+
+/* Gallery grid */
+.cms-gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 16px;
+}
+
+.cms-gallery-item {
+  background: white;
+  border-radius: 16px;
+  border: 1.5px solid #e5e7eb;
+  overflow: hidden;
+  transition: box-shadow 0.2s;
+}
+
+.cms-gallery-item:hover {
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+}
+
+.cms-gallery-item img {
+  width: 100%;
+  aspect-ratio: 1;
+  object-fit: cover;
+}
+
+.cms-gallery-item__info {
+  padding: 12px;
+}
+
+.cms-gallery-item__title {
+  margin: 0;
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+.cms-gallery-item__subtitle {
+  margin: 2px 0 0;
+  color: var(--muted);
+  font-size: 0.82rem;
+}
+
+.cms-gallery-item .cms-btn {
+  width: 100%;
+  border-radius: 0 0 14px 14px;
+  justify-content: center;
+}
+
+/* Overlay & dialog */
+.cms-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  padding: 20px;
+}
+
+.cms-dialog {
+  background: white;
+  border-radius: 24px;
+  padding: clamp(1.5rem, 4vw, 2.5rem);
+  max-width: 420px;
+  width: 100%;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.2);
+}
+
+.cms-dialog h3 {
+  margin: 0 0 0.75rem;
+  font-size: 1.3rem;
+}
+
+.cms-dialog p {
+  margin: 0 0 1.5rem;
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+.cms-dialog__actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+/* Toast */
+.cms-toast {
+  position: fixed;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--ink);
+  color: white;
+  padding: 14px 28px;
+  border-radius: 16px;
+  font-weight: 600;
+  font-size: 0.95rem;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+  z-index: 10000;
+  animation: toastSlide 0.3s ease;
+}
+
+@keyframes toastSlide {
+  from {
+    transform: translateX(-50%) translateY(20px);
+    opacity: 0;
+  }
+
+  to {
+    transform: translateX(-50%) translateY(0);
+    opacity: 1;
+  }
+}
+
+.cms-loading {
+  text-align: center;
+  color: var(--muted);
+  padding: 3rem 0;
+  font-size: 1.1rem;
+}
