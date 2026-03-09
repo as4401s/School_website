@@ -133,6 +133,14 @@ export default async function HomePage() {
               ))}
             </div>
             <div className="hero__overlay" />
+            <Image
+              alt=""
+              aria-hidden="true"
+              className="hero__logo-watermark"
+              height={520}
+              src="/media/logo.jpg"
+              width={520}
+            />
 
             <div className="hero__content">
               <div className="hero__copy">

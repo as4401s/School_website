@@ -425,6 +425,19 @@ h4,
   background: rgba(89, 108, 120, 0.6);
 }
 
+.hero__logo-watermark {
+  position: absolute;
+  right: -60px;
+  bottom: -60px;
+  width: 520px;
+  height: 520px;
+  object-fit: contain;
+  opacity: 0.12;
+  pointer-events: none;
+  user-select: none;
+  filter: grayscale(30%);
+}
+
 .hero__content {
   position: relative;
   z-index: 1;
