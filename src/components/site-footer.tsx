@@ -55,9 +55,9 @@ export function SiteFooter() {
             <Image
               alt={`${siteMeta.shortName} logo`}
               className="site-footer__logo"
-              height={72}
+              height={120}
               src="/media/logo.png"
-              width={72}
+              width={120}
             />
             <div className="site-footer__brand-copy">
               <LocalizedText as="p" className="eyebrow" text={siteMeta.name} />
