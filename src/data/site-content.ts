@@ -93,7 +93,7 @@ export const siteMeta = {
 export const navigation: NavigationItem[] = [
   { href: "/", label: { en: "HOME", bn: "হোম" } },
   {
-    label: { en: "ABOUT", bn: "আমাদের সম্পর্কিত" },
+    label: { en: "ABOUT", bn: "আমাদের সম্পর্কে" },
     children: [
       { href: "/our-school", label: { en: "OUR SCHOOL", bn: "বিদ্যালয় সম্পর্কে" } },
       { href: "/academics", label: { en: "ACADEMICS", bn: "পাঠক্রম" } },
@@ -194,7 +194,7 @@ export const academicSubjects: Subject[] = [
     title: { en: "Physical Education", bn: "শারীরিক শিক্ষা" },
     description: {
       en: "Movement, discipline, and healthy activity.",
-      bn: "চলাফেরা, শৃঙ্খলা ও সুস্থ জীবনযাপনের অনুশীলন।",
+      bn: "চলাফেরা, শৃঙ্খলা ও স্বাস্থ্যকর কার্যকলাপ।",
     },
     accent: "var(--tone-ink)",
     imageUrl: "/media/nano_banana_pe.png",
@@ -215,7 +215,7 @@ export const admissionsSteps = [
     title: { en: "Submit the application", bn: "আবেদন জমা দিন" },
     description: {
       en: "Fill in the required details carefully and share the necessary documents.",
-      bn: "প্রয়োজনীয় তথ্য সঠিকভাবে পূরণ করে প্রয়োজনীয় নথি জমা দিন।",
+      bn: "প্রয়োজনীয় তথ্য সঠিকভাবে পূরণ করে সংশ্লিষ্ট নথিপত্র জমা দিন।",
     },
   },
   {
