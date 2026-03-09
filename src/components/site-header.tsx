@@ -56,15 +56,49 @@ export function SiteHeader() {
           className={cn("site-nav", open && "site-nav--open")}
         >
           {navigation.map((item) => {
+            if (item.children) {
+              return (
+                <div key={item.label.en} className="site-nav__dropdown">
+                  <button className="site-nav__link site-nav__dropdown-toggle">
+                    <LocalizedText text={item.label} />
+                    <svg
+                      width="12"
+                      height="12"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    >
+                      <polyline points="6 9 12 15 18 9"></polyline>
+                    </svg>
+                  </button>
+                  <div className="site-nav__dropdown-menu">
+                    {item.children.map((child) => (
+                      <Link
+                        className="site-nav__link"
+                        href={child.href as NonNullable<typeof child.href>}
+                        key={child.href}
+                        onClick={() => setOpen(false)}
+                      >
+                        <LocalizedText text={child.label} />
+                      </Link>
+                    ))}
+                  </div>
+                </div>
+              );
+            }
+
             const active =
               item.href === "/"
                 ? pathname === item.href
-                : pathname?.startsWith(item.href);
+                : pathname?.startsWith(item.href as string);
 
             return (
               <Link
                 className={cn("site-nav__link", active && "site-nav__link--active")}
-                href={item.href}
+                href={item.href as NonNullable<typeof item.href>}
                 key={item.href}
                 onClick={() => setOpen(false)}
               >

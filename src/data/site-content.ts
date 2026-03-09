@@ -8,8 +8,9 @@ export type BilingualText = {
 };
 
 export type NavigationItem = {
-  href: Route;
+  href?: Route;
   label: BilingualText;
+  children?: { href: Route; label: BilingualText }[];
 };
 
 export type GalleryItem = {
@@ -90,12 +91,23 @@ export const siteMeta = {
 
 export const navigation: NavigationItem[] = [
   { href: "/", label: { en: "HOME", bn: "হোম" } },
-  { href: "/our-school", label: { en: "OUR SCHOOL", bn: "আমাদের বিদ্যালয়" } },
-  { href: "/academics", label: { en: "ACADEMICS", bn: "পাঠক্রম" } },
+  {
+    label: { en: "ABOUT", bn: "আমাদের সম্পর্কিত" },
+    children: [
+      { href: "/our-school", label: { en: "OUR SCHOOL", bn: "বিদ্যালয় সম্পর্কে" } },
+      { href: "/academics", label: { en: "ACADEMICS", bn: "পাঠক্রম" } },
+    ],
+  },
   { href: "/admissions", label: { en: "ADMISSIONS", bn: "ভর্তি" } },
-  { href: "/blog", label: { en: "EVENTS & NEWS", bn: "অনুষ্ঠান ও সংবাদ" } },
-  { href: "/gallery", label: { en: "GALLERY", bn: "গ্যালারি" } },
+  {
+    label: { en: "MEDIA", bn: "মিডিয়া" },
+    children: [
+      { href: "/blog", label: { en: "EVENTS & NEWS", bn: "অনুষ্ঠান ও সংবাদ" } },
+      { href: "/gallery", label: { en: "GALLERY", bn: "গ্যালারি" } },
+    ],
+  },
   { href: "/file-share", label: { en: "LEARNING TOOLS", bn: "শিক্ষাসামগ্রী" } },
+  { href: "/careers", label: { en: "CAREERS", bn: "ক্যারিয়ার" } },
   { href: "/contact", label: { en: "CONTACT", bn: "যোগাযোগ" } },
 ];
 

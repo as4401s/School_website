@@ -84,22 +84,26 @@ export function SiteFooter() {
 
           <div className="site-footer__block">
             <LocalizedText as="p" className="eyebrow" text={footerContactLabel} />
-            <p>
+            <p style={{ marginBottom: "1.5rem" }}>
               <a href={`mailto:${siteMeta.schoolEmail}`}>{siteMeta.schoolEmail}</a>
             </p>
             <LocalizedText as="p" className="eyebrow" text={footerFoundationLabel} />
-            <p>
+            <p className="stack" style={{ gap: "0.5rem" }}>
               <a href={siteMeta.foundationUrl} rel="noreferrer" target="_blank">
                 {siteMeta.foundation}
               </a>
+              <a href="tel:+918756339237">+91-8756339237</a>
+              <a href="mailto:contact@ngbmfoundation.com">contact@ngbmfoundation.com</a>
             </p>
           </div>
 
           <div className="site-footer__block">
             <LocalizedText as="p" className="eyebrow" text={footerLinksLabel} />
             <div className="site-footer__links">
-              {navigation.map((item) => (
-                <Link href={item.href} key={item.href}>
+              {(navigation.flatMap((item) =>
+                item.children ? item.children : item.href ? [{ href: item.href, label: item.label }] : []
+              ) as { href: string; label: { en: string; bn: string } }[]).map((item) => (
+                <Link href={item.href as never} key={item.label.en}>
                   <LocalizedText text={item.label} />
                 </Link>
               ))}
