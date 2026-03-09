@@ -56,7 +56,7 @@ export function SiteFooter() {
               alt={`${siteMeta.shortName} logo`}
               className="site-footer__logo"
               height={120}
-              src="/media/logo.png"
+              src="/media/logo.jpg"
               width={120}
             />
             <div className="site-footer__brand-copy">

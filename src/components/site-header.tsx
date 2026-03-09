@@ -26,7 +26,7 @@ export function SiteHeader() {
             alt={`${siteMeta.shortName} logo`}
             className="brand-mark__logo"
             height={64}
-            src="/media/logo.png"
+            src="/media/logo.jpg"
             width={64}
           />
           <span className="brand-mark__copy">
