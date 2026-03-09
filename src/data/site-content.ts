@@ -94,6 +94,7 @@ export const navigation: NavigationItem[] = [
   { href: "/academics", label: { en: "ACADEMICS", bn: "পাঠক্রম" } },
   { href: "/admissions", label: { en: "ADMISSIONS", bn: "ভর্তি" } },
   { href: "/blog", label: { en: "EVENTS & NEWS", bn: "অনুষ্ঠান ও সংবাদ" } },
+  { href: "/gallery", label: { en: "GALLERY", bn: "গ্যালারি" } },
   { href: "/file-share", label: { en: "LEARNING TOOLS", bn: "শিক্ষাসামগ্রী" } },
   { href: "/contact", label: { en: "CONTACT", bn: "যোগাযোগ" } },
 ];
