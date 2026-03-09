@@ -1628,6 +1628,19 @@ h4,
   margin: 0;
 }
 
+.cms-error--lockout {
+  color: #b91c1c;
+  background: #fef2f2;
+  border: 1px solid #fecaca;
+  border-radius: 8px;
+  padding: 0.6rem 0.9rem;
+}
+
+.cms-lockout-timer {
+  font-variant-numeric: tabular-nums;
+  font-weight: 600;
+}
+
 /* Dashboard */
 .cms-dashboard-header {
   display: flex;

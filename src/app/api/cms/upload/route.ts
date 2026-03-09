@@ -1,7 +1,8 @@
-import { cookies } from "next/headers";
 import { NextRequest, NextResponse } from "next/server";
 import { promises as fs } from "node:fs";
 import path from "node:path";
+import { checkCmsAuth } from "@/lib/cms-auth";
+import { checkFileSize } from "@/lib/cms-security";
 
 const ALLOWED_IMAGE_EXTS = [".jpg", ".jpeg", ".png", ".webp", ".heic", ".heif", ".gif", ".bmp", ".svg"];
 const ALLOWED_VIDEO_EXTS = [".mp4", ".mpeg", ".mpg", ".avi", ".mov", ".webm", ".mkv", ".3gp", ".m4v"];
@@ -15,13 +16,18 @@ const SECTION_FORMATS: Record<string, string[]> = {
     announcements: [...ALLOWED_IMAGE_EXTS],
 };
 
-async function checkAuth() {
-    const cookieStore = await cookies();
-    return !!cookieStore.get("cms_session")?.value;
-}
+const SECTION_CATEGORY: Record<string, "image" | "video" | "document"> = {
+    gallery: "image",   // checked per file below
+    careers: "image",
+    news: "image",
+    documents: "document",
+    announcements: "image",
+};
+
+const VIDEO_EXTS = new Set(ALLOWED_VIDEO_EXTS);
 
 export async function POST(request: NextRequest) {
-    if (!(await checkAuth())) {
+    if (!(await checkCmsAuth())) {
         return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
 
@@ -42,16 +48,24 @@ export async function POST(request: NextRequest) {
             return NextResponse.json({ error: "Invalid section" }, { status: 400 });
         }
 
-        // Validate file format
+        // Validate file extension
         const ext = path.extname(file.name).toLowerCase();
         const allowed = SECTION_FORMATS[section] || [];
         if (!allowed.includes(ext)) {
             return NextResponse.json(
                 {
-                    error: `Unsupported file format "${ext}" for ${section}. Supported formats: ${allowed.join(", ")}`,
+                    error: `Unsupported file format "${ext}" for ${section}. Supported: ${allowed.join(", ")}`,
                 },
                 { status: 400 }
             );
+        }
+
+        // Server-side file size check
+        const isVideo = section === "gallery" && VIDEO_EXTS.has(ext);
+        const category = isVideo ? "video" : SECTION_CATEGORY[section];
+        const sizeCheck = checkFileSize({ size: file.size, name: file.name }, category);
+        if (!sizeCheck.allowed) {
+            return NextResponse.json({ error: sizeCheck.message }, { status: 413 });
         }
 
         const uploadDir = path.join(process.cwd(), "public", "media", "cms", section);

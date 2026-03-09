@@ -1,30 +1,33 @@
-import { cookies } from "next/headers";
 import { NextRequest, NextResponse } from "next/server";
 import { promises as fs } from "node:fs";
 import path from "node:path";
+import { checkCmsAuth, safeFilePath } from "@/lib/cms-auth";
+import { sanitizeText, sanitizeBilingual } from "@/lib/cms-security";
 
 const contentDir = path.join(process.cwd(), "content", "announcements");
 
-async function checkAuth() {
-    const cookieStore = await cookies();
-    return !!cookieStore.get("cms_session")?.value;
-}
-
 export async function GET() {
-    if (!(await checkAuth())) {
+    if (!(await checkCmsAuth())) {
         return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
     try {
         await fs.mkdir(contentDir, { recursive: true });
         const files = await fs.readdir(contentDir);
-        const items = await Promise.all(
-            files
-                .filter((f) => f.endsWith(".json"))
-                .map(async (f) => {
-                    const raw = await fs.readFile(path.join(contentDir, f), "utf8");
-                    return { ...JSON.parse(raw), _fileName: f };
-                })
-        );
+        const items = (
+            await Promise.all(
+                files
+                    .filter((f) => f.endsWith(".json"))
+                    .map(async (f) => {
+                        try {
+                            const raw = await fs.readFile(path.join(contentDir, f), "utf8");
+                            return { ...JSON.parse(raw), _fileName: f };
+                        } catch {
+                            console.error(`Skipping malformed file: ${f}`);
+                            return null;
+                        }
+                    })
+            )
+        ).filter(Boolean);
         return NextResponse.json(items);
     } catch (error) {
         console.error("Announcements GET error:", error);
@@ -33,7 +36,7 @@ export async function GET() {
 }
 
 export async function POST(request: NextRequest) {
-    if (!(await checkAuth())) {
+    if (!(await checkCmsAuth())) {
         return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
     try {
@@ -45,15 +48,11 @@ export async function POST(request: NextRequest) {
             id,
             published: true,
             publishedAt: new Date().toISOString().split("T")[0],
-            title: {
-                en: title?.en || "Untitled",
-                bn: title?.bn || "",
-            },
-            content: (content || []).map((c: { en?: string; bn?: string }) => ({
-                en: c.en || "",
-                bn: c.bn || "",
-            })),
-            contactInfo: contactInfo || null,
+            title: sanitizeBilingual(title || {}),
+            content: (content || []).map((c: { en?: string; bn?: string }) =>
+                sanitizeBilingual(c)
+            ),
+            contactInfo: contactInfo ? sanitizeText(String(contactInfo)) : null,
         };
 
         await fs.mkdir(contentDir, { recursive: true });
@@ -70,19 +69,18 @@ export async function POST(request: NextRequest) {
 }
 
 export async function DELETE(request: NextRequest) {
-    if (!(await checkAuth())) {
+    if (!(await checkCmsAuth())) {
         return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
     try {
         const { searchParams } = new URL(request.url);
-        const fileName = searchParams.get("file");
-        if (!fileName) {
-            return NextResponse.json({ error: "File name required" }, { status: 400 });
+        const check = safeFilePath(searchParams.get("file"), contentDir);
+        if (!check.ok) {
+            return NextResponse.json({ error: check.error }, { status: 400 });
         }
-        const filePath = path.join(contentDir, fileName);
-        const raw = await fs.readFile(filePath, "utf8");
+        const raw = await fs.readFile(check.filePath, "utf8");
         const item = JSON.parse(raw);
-        await fs.unlink(filePath);
+        await fs.unlink(check.filePath);
         return NextResponse.json({ success: true, deleted: item });
     } catch (error) {
         console.error("Announcements DELETE error:", error);
