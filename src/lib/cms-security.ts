@@ -1,4 +1,5 @@
 import crypto from "node:crypto";
+import { authenticator } from "otplib";
 
 /**
  * Server-side session + rate limiting utilities for the CMS.
@@ -117,6 +118,68 @@ export function sanitizeBilingual(obj: { en?: string; bn?: string }): { en: stri
         en: sanitizeText(obj.en || ""),
         bn: sanitizeText(obj.bn || ""),
     };
+}
+
+// ── TOTP (Two-Factor Authentication) ──
+
+/**
+ * Verify a 6-digit TOTP code against the CMS_TOTP_SECRET env variable.
+ * Uses a ±1 step window (30 seconds either side) to handle clock drift.
+ */
+export function verifyTOTP(token: string): boolean {
+    const secret = process.env.CMS_TOTP_SECRET;
+    if (!secret) return false;
+    try {
+        authenticator.options = { window: 1 };
+        return authenticator.verify({ token, secret });
+    } catch {
+        return false;
+    }
+}
+
+/** Returns true if CMS_TOTP_SECRET is configured on the server. */
+export function isTOTPEnabled(): boolean {
+    return !!process.env.CMS_TOTP_SECRET;
+}
+
+// ── Pending Token (bridges password step → TOTP step) ──
+// After the password is verified we issue a short-lived signed cookie so the
+// TOTP endpoint can confirm the user actually passed step 1.
+
+const PENDING_TTL_MS = 5 * 60 * 1000; // 5 minutes
+
+export function createPendingToken(): string {
+    const payload = `pending_${Date.now()}_${crypto.randomBytes(12).toString("hex")}`;
+    const hmac = crypto.createHmac("sha256", SECRET).update(payload).digest("hex");
+    return `${payload}.${hmac}`;
+}
+
+export function validatePendingToken(token: string): boolean {
+    const dotIndex = token.lastIndexOf(".");
+    if (dotIndex === -1) return false;
+
+    const payload = token.substring(0, dotIndex);
+    const signature = token.substring(dotIndex + 1);
+
+    // Verify HMAC
+    const expected = crypto.createHmac("sha256", SECRET).update(payload).digest("hex");
+    if (signature.length !== expected.length) return false;
+    try {
+        const valid = crypto.timingSafeEqual(
+            Buffer.from(signature, "hex"),
+            Buffer.from(expected, "hex")
+        );
+        if (!valid) return false;
+    } catch {
+        return false;
+    }
+
+    // Check it hasn't expired
+    const parts = payload.split("_");
+    const timestamp = parseInt(parts[1], 10);
+    if (isNaN(timestamp) || Date.now() - timestamp > PENDING_TTL_MS) return false;
+
+    return true;
 }
 
 // ── File Size Limits ──

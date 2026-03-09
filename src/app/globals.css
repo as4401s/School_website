@@ -1641,6 +1641,20 @@ h4,
   font-weight: 600;
 }
 
+.cms-totp-input {
+  font-size: 2rem !important;
+  letter-spacing: 0.5rem;
+  text-align: center;
+  font-variant-numeric: tabular-nums;
+  font-weight: 600;
+}
+
+.cms-field-hint {
+  font-size: 0.8rem;
+  color: var(--muted);
+  margin: 0.25rem 0 0;
+}
+
 /* Dashboard */
 .cms-dashboard-header {
   display: flex;
