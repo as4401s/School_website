@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useState, useEffect, useCallback, useRef } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
@@ -200,7 +201,15 @@ export default function CmsNewsPage() {
                         {items.map((item) => (
                             <div key={item._fileName} className="cms-list-item">
                                 <div className="cms-list-item__content" style={{ display: 'flex', gap: '1rem', alignItems: 'center' }}>
-                                    {item.imageUrl && <img src={item.imageUrl} alt="" style={{ width: 80, height: 80, objectFit: 'cover', borderRadius: 12 }} />}
+                                    {item.imageUrl && (
+                                        <Image
+                                            src={item.imageUrl}
+                                            alt=""
+                                            width={80}
+                                            height={80}
+                                            style={{ width: 80, height: 80, objectFit: 'cover', borderRadius: 12 }}
+                                        />
+                                    )}
                                     <div>
                                         <h4>{item.title.en || item.title.bn}</h4>
                                         {item.publishedAt && <span className="cms-badge">{item.publishedAt}</span>}

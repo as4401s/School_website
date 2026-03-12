@@ -1,59 +1,170 @@
 import Image from "next/image";
 
 import { LocalizedText } from "@/components/language-provider";
+import type { BilingualText } from "@/data/site-content";
 import { PageIntro } from "@/components/page-intro";
 
+type AboutCard = {
+  title: BilingualText;
+  intro: BilingualText;
+  listIntro: BilingualText;
+  bullets: BilingualText[];
+  imageUrl: string;
+};
+
 const introEyebrow = {
-  en: "Our School",
-  bn: "আমাদের বিদ্যালয়",
+  en: "About",
+  bn: "আমাদের সম্পর্কে",
 };
 
 const introTitle = {
-  en: "A closer look at school life",
-  bn: "বিদ্যালয় জীবনের আরও কাছের পরিচয়",
+  en: "A closer look at life and learning at KMS",
+  bn: "কেএমএস-এর শেখা ও বিদ্যালয়জীবনের আরও কাছের পরিচয়",
 };
 
 const introSummary = {
-  en: "Discover the school environment, daily learning spaces, and important moments from campus life.",
-  bn: "বিদ্যালয়ের পরিবেশ, প্রতিদিনের শিক্ষার পরিসর এবং ক্যাম্পাস জীবনের গুরুত্বপূর্ণ কিছু মুহূর্ত দেখুন।",
+  en: "Explore the environment, early-learning approach, and values that shape everyday life at Krishnarati Montessori School.",
+  bn: "কৃষ্ণরাতি মন্টেসরি স্কুলের প্রতিদিনের শেখা, যত্নের পরিবেশ এবং মূল্যবোধের পরিচয় এখানে তুলে ধরা হয়েছে।",
 };
 
-const welcomeTitle = {
-  en: "Headteacher's Welcome",
-  bn: "প্রধান শিক্ষকের শুভেচ্ছা",
+const learningEnvironmentTitle = {
+  en: "Our Learning Environment",
+  bn: "আমাদের শিক্ষার পরিবেশ",
 };
 
-const welcomeText = {
-  en: "KMS welcomes families into a caring, child-focused environment where learning, participation, and school life grow together.",
-  bn: "কেএমএস পরিবারগুলিকে একটি স্নেহময়, শিশুকেন্দ্রিক পরিবেশে স্বাগত জানায়, যেখানে শিক্ষা, অংশগ্রহণ এবং বিদ্যালয়জীবন একসঙ্গে বিকশিত হয়।",
-};
-
-const spaceCards = [
+const learningEnvironmentParagraphs: BilingualText[] = [
   {
-    title: { en: "Classrooms", bn: "শ্রেণিকক্ষ" },
-    text: {
-      en: "Learning spaces for children’s everyday classroom activities.",
-      bn: "শিশুদের প্রতিদিনের পাঠদানের জন্য শ্রেণিকক্ষের পরিবেশ।",
-    },
-    imageUrl: "/media/tour-1.jpg",
+    en: "At KMS, we believe that children learn best in an environment where they feel safe, happy, and encouraged to explore.",
+    bn: "কেএমএস-এ আমাদের বিশ্বাস, শিশুরা সবচেয়ে ভালো শেখে এমন পরিবেশে যেখানে তারা নিরাপদ বোধ করে, আনন্দে থাকে এবং নতুন কিছু জানতে উৎসাহ পায়।",
   },
   {
-    title: { en: "Parent Meetings", bn: "অভিভাবক বৈঠক" },
-    text: {
-      en: "School meetings and communication with families.",
-      bn: "অভিভাবকদের সঙ্গে বৈঠক ও বিদ্যালয়ের যোগাযোগ।",
-    },
-    imageUrl: "/media/tour-3.jpg",
-  },
-  {
-    title: { en: "School Celebrations", bn: "বিদ্যালয়ের উদ্‌যাপন" },
-    text: {
-      en: "Celebrations and public moments from school life.",
-      bn: "বিদ্যালয়ের বিভিন্ন অনুষ্ঠান ও স্মরণীয় মুহূর্ত।",
-    },
-    imageUrl: "/media/post-independence.jpeg",
+    en: "Our classrooms are designed to support curiosity, creativity, and active learning through daily routines that are warm, engaging, and age-appropriate.",
+    bn: "আমাদের শ্রেণিকক্ষ এমনভাবে গড়ে তোলা হয়, যাতে উষ্ণ, অংশগ্রহণমূলক এবং বয়সোপযোগী কার্যক্রমের মধ্য দিয়ে কৌতূহল, সৃজনশীলতা ও সক্রিয় শেখা বিকশিত হয়।",
   },
 ];
+
+const learningEnvironmentListIntro = {
+  en: "In our school, children experience:",
+  bn: "আমাদের বিদ্যালয়ে শিশুরা পায়:",
+};
+
+const learningEnvironmentBullets: BilingualText[] = [
+  {
+    en: "Bright and welcoming classrooms that encourage exploration",
+    bn: "অনুসন্ধিৎসু মনকে উৎসাহিত করে এমন উজ্জ্বল ও আন্তরিক শ্রেণিকক্ষ",
+  },
+  {
+    en: "Learning through play, stories, songs, and creative activities",
+    bn: "খেলা, গল্প, গান ও সৃজনশীল কাজের মধ্য দিয়ে শেখার সুযোগ",
+  },
+  {
+    en: "Teachers who guide children with patience and care",
+    bn: "ধৈর্য ও স্নেহের সঙ্গে শিশুদের পথ দেখান এমন শিক্ষক",
+  },
+  {
+    en: "Activities that support both individual learning and group interaction",
+    bn: "ব্যক্তিগত শেখা ও দলগত অংশগ্রহণ দুটোকেই গুরুত্ব দেয় এমন কার্যক্রম",
+  },
+  {
+    en: "A positive atmosphere where children feel confident to express themselves",
+    bn: "এমন ইতিবাচক পরিবেশ, যেখানে শিশুরা আত্মবিশ্বাসের সঙ্গে নিজেদের প্রকাশ করতে পারে",
+  },
+  {
+    en: "Opportunities to develop social skills, creativity, and early communication",
+    bn: "সামাজিক দক্ষতা, সৃজনশীলতা এবং প্রাথমিক যোগাযোগক্ষমতা গড়ে তোলার সুযোগ",
+  },
+];
+
+const aboutCards: AboutCard[] = [
+  {
+    title: {
+      en: "Our Approach to Early Education",
+      bn: "প্রারম্ভিক শিক্ষায় আমাদের দৃষ্টিভঙ্গি",
+    },
+    intro: {
+      en: "At KMS, early education focuses on building a strong foundation for lifelong learning. We believe that young children learn best when learning is engaging, meaningful, and enjoyable.",
+      bn: "কেএমএস-এ প্রারম্ভিক শিক্ষার মূল লক্ষ্য হল এমন এক দৃঢ় ভিত্তি গড়ে তোলা, যা শিশুর আজীবন শিক্ষাযাত্রাকে শক্তপোক্ত করে। আমাদের বিশ্বাস, ছোটরা সবচেয়ে ভালো শেখে যখন শেখা আনন্দময়, অর্থপূর্ণ এবং মনোযোগ টানে।",
+    },
+    listIntro: {
+      en: "Our approach includes:",
+      bn: "আমাদের এই দৃষ্টিভঙ্গির প্রধান দিকগুলি হল:",
+    },
+    bullets: [
+      {
+        en: "Encouraging curiosity and natural exploration",
+        bn: "কৌতূহল ও স্বাভাবিক অনুসন্ধিৎসু মনকে উৎসাহ দেওয়া",
+      },
+      {
+        en: "Developing early language and communication skills",
+        bn: "ভাষা ও যোগাযোগের প্রাথমিক দক্ষতা গড়ে তোলা",
+      },
+      {
+        en: "Introducing numbers and basic problem-solving through activities",
+        bn: "কার্যক্রমের মাধ্যমে সংখ্যা-জ্ঞান ও প্রাথমিক সমস্যা সমাধানের চর্চা শুরু করা",
+      },
+      {
+        en: "Promoting creativity through drawing, storytelling, and play",
+        bn: "আঁকা, গল্প বলা ও খেলার মাধ্যমে সৃজনশীলতা লালন করা",
+      },
+      {
+        en: "Helping children build confidence and independence",
+        bn: "শিশুদের আত্মবিশ্বাস ও স্বনির্ভরতা গড়ে তুলতে সাহায্য করা",
+      },
+      {
+        en: "Supporting emotional and social development through group interaction",
+        bn: "দলগত মেলামেশার মাধ্যমে মানসিক ও সামাজিক বিকাশে সহায়তা করা",
+      },
+    ],
+    imageUrl: "/media/tour-2.jpg",
+  },
+  {
+    title: {
+      en: "Our Commitment",
+      bn: "আমাদের অঙ্গীকার",
+    },
+    intro: {
+      en: "At KMS, we are committed to creating a supportive and inspiring place where children can begin their educational journey with confidence.",
+      bn: "কেএমএস-এ আমরা এমন একটি সহায়ক ও অনুপ্রেরণাময় পরিবেশ গড়ে তুলতে প্রতিশ্রুতিবদ্ধ, যেখানে শিশুরা আত্মবিশ্বাসের সঙ্গে তাদের শিক্ষাযাত্রা শুরু করতে পারে।",
+    },
+    listIntro: {
+      en: "Our commitment includes:",
+      bn: "আমাদের অঙ্গীকারের প্রধান দিকগুলি হল:",
+    },
+    bullets: [
+      {
+        en: "Providing a safe and caring learning environment",
+        bn: "নিরাপদ ও স্নেহময় শিক্ষার পরিবেশ তৈরি করা",
+      },
+      {
+        en: "Giving personal attention to every child",
+        bn: "প্রতিটি শিশুকে ব্যক্তিগত যত্ন ও মনোযোগ দেওয়া",
+      },
+      {
+        en: "Supporting each child’s individual pace of learning",
+        bn: "প্রতিটি শিশুর নিজস্ব গতিতে শেখার পথকে সম্মান করা",
+      },
+      {
+        en: "Encouraging positive values such as kindness and respect",
+        bn: "সহমর্মিতা, সৌজন্য ও পারস্পরিক সম্মানের মতো ইতিবাচক মূল্যবোধ গড়ে তোলা",
+      },
+      {
+        en: "Building a strong foundation for future academic success",
+        bn: "ভবিষ্যতের শিক্ষাজীবনের জন্য একটি শক্ত ভিত্তি তৈরি করা",
+      },
+    ],
+    imageUrl: "/media/tour-3.jpg",
+  },
+];
+
+const communityEyebrow = {
+  en: "Our Community",
+  bn: "আমাদের বিদ্যালয় পরিবার",
+};
+
+const communityTitle = {
+  en: "Our Community",
+  bn: "আমাদের বিদ্যালয় পরিবার",
+};
 
 export default function OurSchoolPage() {
   return (
@@ -63,13 +174,23 @@ export default function OurSchoolPage() {
       <section className="section">
         <div className="shell feature-panel">
           <div className="feature-panel__copy">
-            <LocalizedText as="p" className="eyebrow" text={welcomeTitle} />
-            <LocalizedText as="h2" text={welcomeTitle} />
-            <LocalizedText as="p" text={welcomeText} />
+            <LocalizedText as="p" className="eyebrow" text={learningEnvironmentTitle} />
+            <LocalizedText as="h2" text={learningEnvironmentTitle} />
+            {learningEnvironmentParagraphs.map((paragraph) => (
+              <LocalizedText as="p" key={paragraph.en} text={paragraph} />
+            ))}
+            <LocalizedText as="p" text={learningEnvironmentListIntro} />
+            <ul className="about-list">
+              {learningEnvironmentBullets.map((item) => (
+                <li key={item.en}>
+                  <LocalizedText text={item} />
+                </li>
+              ))}
+            </ul>
           </div>
           <div className="feature-panel__image-wrap">
             <Image
-              alt="KMS students"
+              alt="KMS classroom"
               className="feature-panel__image"
               height={700}
               src="/media/hero-home.jpg"
@@ -79,38 +200,50 @@ export default function OurSchoolPage() {
         </div>
       </section>
 
-      <section className="section">
+      <section className="section section--tight-top">
+        <div className="shell grid-2">
+          {aboutCards.map((card) => (
+            <article className="tour-card" key={card.title.en}>
+              <div className="tour-card__image-wrap">
+                <Image
+                  alt={card.title.en}
+                  className="tour-card__image"
+                  fill
+                  sizes="(max-width: 1080px) 100vw, 50vw"
+                  src={card.imageUrl}
+                />
+              </div>
+              <div className="tour-card__body stack">
+                <LocalizedText as="h3" text={card.title} />
+                <LocalizedText as="p" text={card.intro} />
+                <LocalizedText as="p" text={card.listIntro} />
+                <ul className="about-list">
+                  {card.bullets.map((item) => (
+                    <li key={item.en}>
+                      <LocalizedText text={item} />
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      <section className="section section--tight-top">
         <div className="shell">
           <div className="section-header">
             <div>
-              <LocalizedText
-                as="p"
-                className="eyebrow"
-                text={{ en: "School Tour", bn: "স্কুল ট্যুর" }}
-              />
-              <LocalizedText
-                as="h2"
-                text={{ en: "Explore the school environment", bn: "বিদ্যালয়ের পরিবেশ দেখুন" }}
-              />
+              <LocalizedText as="p" className="eyebrow" text={communityEyebrow} />
+              <LocalizedText as="h2" text={communityTitle} />
             </div>
           </div>
 
-          <div className="grid-3">
-            {spaceCards.map((card) => (
-              <article className="tour-card" key={card.title.en}>
-                <div className="tour-card__image-wrap">
-                  <Image
-                    alt={card.title.en}
-                    className="tour-card__image"
-                    fill
-                    sizes="(max-width: 1080px) 100vw, 33vw"
-                    src={card.imageUrl}
-                  />
-                </div>
-                <div className="tour-card__body">
-                  <LocalizedText as="h3" text={card.title} />
-                  <LocalizedText as="p" text={card.text} />
-                </div>
+          <div className="grid-4" aria-hidden="true">
+            {Array.from({ length: 4 }).map((_, index) => (
+              <article className="portal-card staff-placeholder" key={index}>
+                <div className="staff-placeholder__avatar" />
+                <div className="staff-placeholder__body" />
               </article>
             ))}
           </div>

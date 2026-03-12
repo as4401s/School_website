@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useState, useEffect, useCallback, useRef } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
@@ -242,7 +243,14 @@ export default function CmsGalleryPage() {
                                 {item.mediaType === "video" ? (
                                     <video src={item.imageUrl} style={{ width: '100%', aspectRatio: '1', objectFit: 'cover' }} muted />
                                 ) : (
-                                    <img src={item.imageUrl} alt={item.title.en} />
+                                    <Image
+                                        src={item.imageUrl}
+                                        alt={item.title.en}
+                                        width={400}
+                                        height={400}
+                                        sizes="(max-width: 768px) 100vw, 25vw"
+                                        style={{ width: '100%', aspectRatio: '1', height: 'auto', objectFit: 'cover' }}
+                                    />
                                 )}
                                 <div className="cms-gallery-item__info">
                                     <p className="cms-gallery-item__title">{item.title.en}</p>
