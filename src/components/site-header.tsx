@@ -228,6 +228,9 @@ export function SiteHeader() {
           </div>
 
           <div className="site-nav__mobile-actions">
+            <div className="site-nav__mobile-language">
+              <LanguageToggle />
+            </div>
             <Link className="btn btn--accent" href="/login" onClick={() => setOpen(false)}>
               <LocalizedText text={{ en: "Staff CMS", bn: "স্টাফ সিএমএস" }} />
             </Link>

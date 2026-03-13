@@ -8,6 +8,7 @@ import {
 } from "@/components/language-provider";
 import {
   type BilingualText,
+  type GalleryItem,
   homeHeroSlides,
 } from "@/data/site-content";
 import {
@@ -112,32 +113,113 @@ const headTeacherParagraphs: BilingualText[] = [
   },
 ];
 
-const sectionPlaceholderLabel = {
-  en: "Image Placeholder",
-  bn: "ছবির স্থান",
+const headTeacherCardLabel = {
+  en: "School Leadership",
+  bn: "বিদ্যালয়ের নেতৃত্ব",
 };
 
-const sectionPlaceholderSummary = {
-  en: "A section image can be placed here later.",
-  bn: "এই অংশে পরে একটি ছবি যোগ করা যাবে।",
+const headTeacherCardTitle = {
+  en: "Formal portrait to be added soon",
+  bn: "আনুষ্ঠানিক ছবি শিগগিরই যুক্ত হবে",
 };
 
-const learningHighlights = [
+const headTeacherCardSummary = {
+  en: "Until then, this section carries the school's identity while the head teacher's message remains available here for families.",
+  bn: "ততদিন এই অংশে বিদ্যালয়ের নিজস্ব পরিচয় থাকবে, আর পরিবারের জন্য প্রধান শিক্ষকের বার্তাটি এখানেই পড়া যাবে।",
+};
+
+const admissionFormEyebrow = {
+  en: "Admission Form",
+  bn: "ভর্তি ফর্ম",
+};
+
+const admissionFormTitle = {
+  en: "Start your application from the home page",
+  bn: "হোম পেজ থেকেই ভর্তি প্রক্রিয়া শুরু করুন",
+};
+
+const admissionFormDescription = {
+  en: "Families can download the printable admission form, fill in the child and parent details at home, sign it after printing, and submit it at the school office with the required documents.",
+  bn: "অভিভাবকেরা এখান থেকেই ভর্তি ফর্ম ডাউনলোড করে বাড়িতে বসে শিক্ষার্থী ও পরিবারের তথ্য পূরণ করতে পারবেন, প্রিন্ট নেওয়ার পর স্বাক্ষর করে প্রয়োজনীয় নথিসহ স্কুল অফিসে জমা দিতে পারবেন।",
+};
+
+const admissionFormSteps: BilingualText[] = [
+  {
+    en: "Complete the student, parent, and guardian details clearly.",
+    bn: "শিক্ষার্থী, অভিভাবক ও প্রয়োজনে স্থানীয় অভিভাবকের তথ্য স্পষ্টভাবে পূরণ করুন।",
+  },
+  {
+    en: "Print the form, attach a recent passport-size photograph, and sign it by hand.",
+    bn: "ফর্মটি প্রিন্ট করে সাম্প্রতিক পাসপোর্ট সাইজ ছবি সংযুক্ত করুন এবং হাতে স্বাক্ষর করুন।",
+  },
+  {
+    en: "Submit it to the school office along with the listed supporting documents.",
+    bn: "উল্লিখিত প্রয়োজনীয় কাগজপত্রসহ স্কুল অফিসে ফর্মটি জমা দিন।",
+  },
+];
+
+const admissionFormDownloadText = {
+  en: "Download Form (PDF)",
+  bn: "ফর্ম ডাউনলোড করুন (PDF)",
+};
+
+const admissionFormLinkText = {
+  en: "View Admission Details",
+  bn: "ভর্তির বিস্তারিত দেখুন",
+};
+
+const admissionFormSupportText = {
+  en: "The form is fillable on screen, but the signature should be added after printing before submission.",
+  bn: "ফর্মটি স্ক্রিনে পূরণ করা যাবে, তবে জমা দেওয়ার আগে প্রিন্ট নিয়ে স্বাক্ষর করতে হবে।",
+};
+
+const admissionPreviewLabel = {
+  en: "Application Preview",
+  bn: "ফর্মের প্রিভিউ",
+};
+
+const admissionPreviewChip = {
+  en: "PDF Download",
+  bn: "PDF ডাউনলোড",
+};
+
+type HomeHighlight = {
+  eyebrow: BilingualText;
+  title: BilingualText;
+  lead?: BilingualText;
+  paragraphs: BilingualText[];
+  image?: {
+    src: string;
+    alt: string;
+  };
+  variant?: "brand";
+};
+
+const learningHighlights: HomeHighlight[] = [
   {
     eyebrow: montessoriTitle,
     title: montessoriTitle,
     paragraphs: montessoriParagraphs,
+    image: {
+      src: "/media/Humaniapota%20School/IMG_3345.jpg",
+      alt: "Children working at classroom tables with a teacher nearby",
+    },
   },
   {
     eyebrow: visionTitle,
     title: visionTitle,
     paragraphs: visionParagraphs,
+    image: {
+      src: "/media/Humaniapota%20School/IMG_3254.jpg",
+      alt: "A teacher and children gathered together in the courtyard",
+    },
   },
   {
     eyebrow: headTeacherTitle,
     title: headTeacherTitle,
     lead: headTeacherGreeting,
     paragraphs: headTeacherParagraphs,
+    variant: "brand",
   },
 ];
 
@@ -171,6 +253,24 @@ const noticeSupportText = {
   bn: "অভিভাবকদের জন্য সর্বশেষ বিজ্ঞপ্তি, নোটিশ এবং ফলাফলের আপডেট।",
 };
 
+const featuredCampusGalleryIds = [
+  "humaniapota-11",
+  "humaniapota-12",
+  "humaniapota-3",
+  "humaniapota-20",
+];
+
+function pickFeaturedGalleryItems(items: GalleryItem[]) {
+  const itemMap = new Map(items.map((item) => [item.id, item]));
+  const curatedItems = featuredCampusGalleryIds
+    .map((id) => itemMap.get(id))
+    .filter((item): item is GalleryItem => Boolean(item));
+
+  return curatedItems.length === featuredCampusGalleryIds.length
+    ? curatedItems
+    : items.slice(0, 4);
+}
+
 export default async function HomePage() {
   const [galleryItems, posts, results] = await Promise.all([
     getGalleryItems(),
@@ -180,6 +280,7 @@ export default async function HomePage() {
 
   const featuredPosts = posts.slice(0, 2);
   const latestResult = results[0];
+  const featuredGalleryItems = pickFeaturedGalleryItems(galleryItems);
 
   return (
     <>
@@ -201,10 +302,10 @@ export default async function HomePage() {
             </div>
             <div className="feature-panel__image-wrap">
               <Image
-                alt="KMS classroom"
+                alt="Front entrance of the school campus"
                 className="feature-panel__image"
                 height={700}
-                src="/media/tour-1.jpg"
+                src="/media/Humaniapota%20School/IMG_3386.jpg"
                 width={900}
               />
             </div>
@@ -224,17 +325,40 @@ export default async function HomePage() {
                   <LocalizedText as="p" key={paragraph.en} text={paragraph} />
                 ))}
               </div>
-              <div className="feature-panel__image-wrap feature-panel__image-wrap--placeholder">
-                <div className="feature-panel__placeholder">
-                  <LocalizedText
-                    as="span"
-                    className="feature-panel__placeholder-badge"
-                    text={sectionPlaceholderLabel}
+              {item.image ? (
+                <div className="feature-panel__image-wrap">
+                  <Image
+                    alt={item.image.alt}
+                    className="feature-panel__image"
+                    height={700}
+                    src={item.image.src}
+                    width={900}
                   />
-                  <LocalizedText as="h3" text={item.title} />
-                  <LocalizedText as="p" text={sectionPlaceholderSummary} />
                 </div>
-              </div>
+              ) : (
+                <div className="feature-panel__image-wrap feature-panel__image-wrap--brand">
+                  <div className="feature-panel__brand-card">
+                    <Image
+                      alt="KMS logo"
+                      className="feature-panel__brand-logo"
+                      height={144}
+                      src="/media/logo.jpg"
+                      width={144}
+                    />
+                    <LocalizedText
+                      as="span"
+                      className="feature-panel__placeholder-badge"
+                      text={headTeacherCardLabel}
+                    />
+                    <LocalizedText as="h3" text={headTeacherCardTitle} />
+                    <LocalizedText
+                      as="p"
+                      className="feature-panel__brand-note"
+                      text={headTeacherCardSummary}
+                    />
+                  </div>
+                </div>
+              )}
             </article>
           ))}
         </div>
@@ -250,7 +374,7 @@ export default async function HomePage() {
           </div>
 
           <div className="grid-4">
-            {galleryItems.slice(0, 4).map((item) => (
+            {featuredGalleryItems.map((item) => (
               <article className="gallery-card" key={item.id}>
                 <div className="gallery-card__image-wrap">
                   <Image
@@ -357,6 +481,57 @@ export default async function HomePage() {
               />
             </article>
           )}
+        </div>
+      </section>
+
+      <section className="section section--tight-top">
+        <div className="shell">
+          <article className="feature-panel feature-panel--admissions">
+            <div className="feature-panel__copy">
+              <LocalizedText as="p" className="eyebrow" text={admissionFormEyebrow} />
+              <LocalizedText as="h2" text={admissionFormTitle} />
+              <LocalizedText as="p" text={admissionFormDescription} />
+              <ul className="feature-panel__list">
+                {admissionFormSteps.map((item) => (
+                  <li key={item.en}>
+                    <LocalizedText text={item} />
+                  </li>
+                ))}
+              </ul>
+              <div className="feature-panel__actions">
+                <a className="btn btn--accent" download href="/forms/kms-admission-form.pdf">
+                  <LocalizedText text={admissionFormDownloadText} />
+                </a>
+                <Link className="btn btn--ghost" href="/admissions">
+                  <LocalizedText text={admissionFormLinkText} />
+                </Link>
+              </div>
+              <LocalizedText
+                as="p"
+                className="helper-text"
+                text={admissionFormSupportText}
+              />
+            </div>
+            <div className="feature-panel__image-wrap feature-panel__image-wrap--form">
+              <div className="form-preview-card">
+                <div className="form-preview-card__header">
+                  <LocalizedText
+                    as="span"
+                    className="feature-panel__placeholder-badge"
+                    text={admissionPreviewLabel}
+                  />
+                  <LocalizedText as="span" className="chip" text={admissionPreviewChip} />
+                </div>
+                <Image
+                  alt="Preview of the KMS admission form"
+                  className="form-preview-card__image"
+                  height={800}
+                  src="/media/admission-form-preview.png"
+                  width={543}
+                />
+              </div>
+            </div>
+          </article>
         </div>
       </section>
     </>
