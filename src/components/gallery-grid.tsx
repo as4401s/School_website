@@ -34,6 +34,10 @@ export function GalleryGrid({ items }: GalleryGridProps) {
                                 src={item.imageUrl}
                             />
                         </div>
+                        <div className="gallery-grid-card__body">
+                            <LocalizedText as="h3" text={item.title} />
+                            <LocalizedText as="p" text={item.summary} />
+                        </div>
                     </article>
                 ))}
             </div>

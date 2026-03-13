@@ -1,6 +1,12 @@
 import { getGalleryItems } from "@/lib/content";
 import { LocalizedText } from "@/components/language-provider";
 import { GalleryGrid } from "@/components/gallery-grid";
+import { PageIntro } from "@/components/page-intro";
+
+const introEyebrow = {
+    en: "Gallery",
+    bn: "গ্যালারি",
+};
 
 const pageTitle = {
     en: "Gallery",
@@ -16,23 +22,14 @@ export default async function GalleryPage() {
     const items = await getGalleryItems();
 
     return (
-        <div className="page-layout">
-            <header className="page-header">
-                <div className="shell stack">
-                    <LocalizedText as="h1" className="page-title" text={pageTitle} />
-                    <div className="page-intro">
-                        <div className="page-intro__inner">
-                            <LocalizedText as="p" className="lede" text={pageIntro} />
-                        </div>
-                    </div>
-                </div>
-            </header>
+        <>
+            <PageIntro eyebrow={introEyebrow} summary={pageIntro} title={pageTitle} />
 
-            <section className="page-content bg-surface">
+            <section className="section">
                 <div className="shell">
                     <GalleryGrid items={items} />
                 </div>
             </section>
-        </div>
+        </>
     );
 }
