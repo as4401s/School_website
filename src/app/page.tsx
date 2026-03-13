@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 
+import { HeroCarousel } from "@/components/hero-carousel";
 import {
   LocalizedDate,
   LocalizedText,
@@ -155,25 +156,7 @@ export default async function HomePage() {
     <>
       <section className="hero">
         <div className="shell">
-          <div
-            className="hero-slider"
-            aria-label="KMS campus image slider"
-          >
-            <div className="hero-slider__track">
-              {homeHeroSlides.map((src, index) => (
-                <div className="hero-slider__slide" key={src}>
-                  <Image
-                    alt={`KMS campus view ${index + 1}`}
-                    className="hero-slider__image"
-                    fill
-                    priority={index === 0}
-                    sizes="(max-width: 1120px) calc(100vw - 32px), 1400px"
-                    src={src}
-                  />
-                </div>
-              ))}
-            </div>
-          </div>
+          <HeroCarousel slides={homeHeroSlides} />
         </div>
       </section>
 

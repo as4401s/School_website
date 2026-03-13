@@ -79,35 +79,6 @@ export function SiteHeader() {
           </span>
         </Link>
 
-        <div className="site-header__actions">
-          <LanguageToggle />
-          <Link className="btn btn--accent site-header__staff-link" href="/login">
-            <LocalizedText text={{ en: "Staff CMS", bn: "স্টাফ সিএমএস" }} />
-          </Link>
-          <button
-            aria-expanded={open}
-            aria-label={language === "bn" ? "মেনু খুলুন" : "Toggle menu"}
-            className={cn("menu-button", open && "menu-button--open")}
-            onClick={() => setOpen((value) => !value)}
-            type="button"
-          >
-            <span className="menu-button__label">
-              <LocalizedText
-                text={
-                  open
-                    ? { en: "Close", bn: "বন্ধ করুন" }
-                    : { en: "Menu", bn: "মেনু" }
-                }
-              />
-            </span>
-            <span aria-hidden="true" className="menu-button__icon">
-              <span />
-              <span />
-              <span />
-            </span>
-          </button>
-        </div>
-
         <nav
           aria-label="Primary"
           className={cn("site-nav", open && "site-nav--open")}
@@ -267,6 +238,35 @@ export function SiteHeader() {
             </Link>
           </div>
         </nav>
+
+        <div className="site-header__actions">
+          <LanguageToggle />
+          <Link className="btn btn--accent site-header__staff-link" href="/login">
+            <LocalizedText text={{ en: "Staff CMS", bn: "স্টাফ সিএমএস" }} />
+          </Link>
+          <button
+            aria-expanded={open}
+            aria-label={language === "bn" ? "মেনু খুলুন" : "Toggle menu"}
+            className={cn("menu-button", open && "menu-button--open")}
+            onClick={() => setOpen((value) => !value)}
+            type="button"
+          >
+            <span className="menu-button__label">
+              <LocalizedText
+                text={
+                  open
+                    ? { en: "Close", bn: "বন্ধ করুন" }
+                    : { en: "Menu", bn: "মেনু" }
+                }
+              />
+            </span>
+            <span aria-hidden="true" className="menu-button__icon">
+              <span />
+              <span />
+              <span />
+            </span>
+          </button>
+        </div>
       </div>
     </header>
   );

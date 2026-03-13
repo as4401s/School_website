@@ -102,6 +102,7 @@ select {
   top: 0;
   z-index: 40;
   background: rgba(255, 255, 255, 0.86);
+  -webkit-backdrop-filter: saturate(180%) blur(18px);
   backdrop-filter: saturate(180%) blur(18px);
   border-bottom: 1px solid rgba(21, 32, 51, 0.08);
   box-shadow: 0 10px 24px rgba(36, 48, 68, 0.05);
@@ -129,6 +130,7 @@ select {
   align-items: center;
   gap: 12px;
   min-width: 0;
+  grid-column: 1;
 }
 
 .brand-mark__logo {
@@ -160,24 +162,26 @@ h4,
 .site-nav {
   display: flex;
   flex-wrap: nowrap;
-  justify-content: center;
+  justify-content: flex-start;
   gap: 4px;
   min-width: 0;
+  grid-column: 2;
 }
 
 .site-nav__list {
   display: flex;
   align-items: center;
-  gap: 4px;
+  gap: 2px;
 }
 
 .site-nav__link {
-  padding: 10px 14px;
+  padding: 10px 12px;
   border-radius: 999px;
   color: var(--ink);
-  font-size: 0.9rem;
+  font-size: 0.86rem;
   font-weight: 600;
   white-space: nowrap;
+  letter-spacing: -0.01em;
   transition:
     color 150ms ease,
     background 150ms ease,
@@ -273,14 +277,18 @@ h4,
 .site-header__actions {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 10px;
   justify-self: end;
+  grid-column: 3;
+  flex-shrink: 0;
 }
 
 .site-header__actions .btn {
-  min-height: 42px;
-  padding: 0 14px;
+  min-height: 40px;
+  padding: 0 16px;
   white-space: nowrap;
+  box-shadow: none;
+  font-size: 0.92rem;
 }
 
 .menu-button {
@@ -342,6 +350,14 @@ h4,
   box-shadow: 0 12px 24px rgba(36, 48, 68, 0.06);
 }
 
+.site-header__actions .language-toggle {
+  min-height: 38px;
+  padding: 3px;
+  background: rgba(247, 240, 232, 0.9);
+  border-color: rgba(21, 32, 51, 0.07);
+  box-shadow: none;
+}
+
 .language-toggle__button {
   border: 0;
   background: transparent;
@@ -354,9 +370,24 @@ h4,
   font-weight: 700;
 }
 
+.site-header__actions .language-toggle__button {
+  min-height: 30px;
+  padding: 0 10px;
+  font-size: 0.76rem;
+}
+
 .language-toggle__button--active {
   background: var(--navy);
   color: white;
+}
+
+.site-header__actions .language-toggle__button--active {
+  background: rgba(45, 62, 80, 0.12);
+  color: var(--ink);
+}
+
+.site-header__staff-link {
+  border-radius: 16px;
 }
 
 .btn {
@@ -471,28 +502,29 @@ h4,
 }
 
 .hero-slider {
-  overflow-x: auto;
+  position: relative;
+  overflow: hidden;
   border: 1px solid var(--line);
   border-radius: 32px;
   background: var(--surface);
   box-shadow: 0 24px 54px rgba(36, 48, 68, 0.12);
-  scroll-snap-type: x mandatory;
-  -webkit-overflow-scrolling: touch;
-  scroll-padding-inline: 16px;
+}
+
+.hero-slider__viewport {
+  overflow: hidden;
 }
 
 .hero-slider__track {
-  display: grid;
-  grid-auto-flow: column;
-  grid-auto-columns: 100%;
-  gap: 18px;
+  display: flex;
+  transition: transform 700ms cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: transform;
 }
 
 .hero-slider__slide {
   position: relative;
+  flex: 0 0 100%;
   aspect-ratio: 16 / 9;
   overflow: hidden;
-  scroll-snap-align: start;
 }
 
 .hero-slider__image {
@@ -501,13 +533,43 @@ h4,
   object-fit: cover;
 }
 
-.hero-slider::-webkit-scrollbar {
-  height: 10px;
+.hero-slider__controls {
+  position: absolute;
+  left: 50%;
+  bottom: 18px;
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 9px 12px;
+  border-radius: 999px;
+  background: rgba(255, 252, 247, 0.78);
+  border: 1px solid rgba(255, 255, 255, 0.58);
+  box-shadow: 0 16px 34px rgba(24, 34, 49, 0.18);
+  transform: translateX(-50%);
 }
 
-.hero-slider::-webkit-scrollbar-thumb {
-  background: rgba(21, 32, 51, 0.22);
+.hero-slider__dot {
+  width: 10px;
+  height: 10px;
+  padding: 0;
+  border: 0;
   border-radius: 999px;
+  background: rgba(45, 62, 80, 0.26);
+  cursor: pointer;
+  transition:
+    transform 180ms ease,
+    background 180ms ease,
+    width 180ms ease;
+}
+
+.hero-slider__dot:hover {
+  transform: scale(1.08);
+}
+
+.hero-slider__dot--active {
+  width: 28px;
+  background: var(--accent);
 }
 
 .hero__panel {
@@ -570,7 +632,7 @@ body::before {
   inset: 0;
   background-image: url("/media/logo.jpg");
   background-repeat: no-repeat;
-  background-position: right -40px center;
+  background-position: center center;
   background-size: min(48vmin, 420px);
   opacity: 0.07;
   pointer-events: none;
@@ -1443,6 +1505,12 @@ body::before {
 
 @media (max-width: 1120px) {
 
+  .site-header {
+    background: rgba(255, 255, 255, 0.96);
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+  }
+
   .hero__content,
   .feature-panel,
   .prospectus-panel,
@@ -1495,9 +1563,21 @@ body::before {
   }
 
   .site-header__actions {
+    grid-column: 2;
     justify-self: end;
     justify-content: flex-end;
     gap: 10px;
+  }
+
+  .site-header__actions .language-toggle {
+    min-height: 42px;
+    padding: 4px;
+  }
+
+  .site-header__actions .language-toggle__button {
+    min-height: 34px;
+    padding: 0 11px;
+    font-size: 0.8rem;
   }
 
   .site-header__staff-link {
@@ -1523,6 +1603,7 @@ body::before {
   }
 
   .site-nav {
+    grid-column: 1 / -1;
     position: fixed;
     top: 0;
     right: 0;
@@ -1700,11 +1781,25 @@ body::before {
   }
 
   .hero-slider__track {
-    gap: 14px;
+    gap: 0;
   }
 
   .hero-slider__slide {
     aspect-ratio: 5 / 4;
+  }
+
+  .hero-slider__controls {
+    bottom: 14px;
+    padding: 8px 10px;
+  }
+
+  .hero-slider__dot {
+    width: 9px;
+    height: 9px;
+  }
+
+  .hero-slider__dot--active {
+    width: 24px;
   }
 
   .hero__content {
@@ -1890,11 +1985,11 @@ body::before {
     gap: 8px;
   }
 
-  .language-toggle {
+  .site-header__actions .language-toggle {
     min-height: 42px;
   }
 
-  .language-toggle__button {
+  .site-header__actions .language-toggle__button {
     min-height: 34px;
     padding: 0 11px;
     font-size: 0.8rem;
@@ -2064,7 +2159,7 @@ body::before {
   }
 
   body::before {
-    background-position: right -32px top 180px;
+    background-position: center center;
     background-size: min(46vmin, 260px);
     opacity: 0.045;
   }
@@ -2115,6 +2210,12 @@ body::before {
 
   .hero-slider {
     border-radius: 16px;
+  }
+
+  .hero-slider__controls {
+    bottom: 12px;
+    gap: 7px;
+    padding: 7px 9px;
   }
 
   .hero__copy h1 {
@@ -2180,7 +2281,7 @@ body::before {
     border-radius: 12px;
   }
 
-  .language-toggle__button {
+  .site-header__actions .language-toggle__button {
     padding: 0 9px;
     font-size: 0.76rem;
   }
