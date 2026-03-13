@@ -8,28 +8,16 @@ import {
 import {
   type BilingualText,
   homeHeroSlides,
-  siteMeta,
 } from "@/data/site-content";
 import {
-  getDocuments,
   getGalleryItems,
   getNewsPosts,
   getResults,
 } from "@/lib/content";
 
-const homeIntro = {
-  en: "WELCOME ON OUR SITE",
-  bn: "আমাদের সাইটে স্বাগতম",
-};
-
 const schoolTourLabel = {
   en: "School Tour",
   bn: "স্কুল ট্যুর",
-};
-
-const learnMoreLabel = {
-  en: "Learn more >",
-  bn: "আরও জানুন >",
 };
 
 const latestNewsLabel = {
@@ -133,26 +121,6 @@ const upcomingNoticeLabel = {
   bn: "সাম্প্রতিক বিজ্ঞপ্তি",
 };
 
-const prospectusLabel = {
-  en: "Download Prospectus",
-  bn: "প্রসপেক্টাস",
-};
-
-const prospectusTitle = {
-  en: "School information for parents",
-  bn: "অভিভাবকদের জন্য বিদ্যালয়ের তথ্য",
-};
-
-const prospectusText = {
-  en: "For admissions guidance and school information, families can request the current prospectus from the school office.",
-  bn: "ভর্তি-সংক্রান্ত দিকনির্দেশনা ও বিদ্যালয়ের তথ্যের জন্য পরিবারগুলি স্কুল অফিস থেকে বর্তমান প্রসপেক্টাসের অনুরোধ করতে পারেন।",
-};
-
-const requestProspectusText = {
-  en: "Request Prospectus",
-  bn: "প্রসপেক্টাসের অনুরোধ করুন",
-};
-
 const viewAllUpdatesText = {
   en: "View all updates",
   bn: "সব আপডেট দেখুন",
@@ -173,17 +141,11 @@ const noticeSupportText = {
   bn: "অভিভাবকদের জন্য সর্বশেষ বিজ্ঞপ্তি, নোটিশ এবং ফলাফলের আপডেট।",
 };
 
-const prospectusImageBadge = {
-  en: "KMS",
-  bn: "কেএমএস",
-};
-
 export default async function HomePage() {
-  const [galleryItems, posts, results, documents] = await Promise.all([
+  const [galleryItems, posts, results] = await Promise.all([
     getGalleryItems(),
     getNewsPosts(),
     getResults(),
-    getDocuments(),
   ]);
 
   const featuredPosts = posts.slice(0, 2);
@@ -193,59 +155,30 @@ export default async function HomePage() {
     <>
       <section className="hero">
         <div className="shell">
-          <div className="hero__panel">
-            <div className="hero__slides" aria-hidden="true">
+          <div
+            className="hero-slider"
+            aria-label="KMS campus image slider"
+          >
+            <div className="hero-slider__track">
               {homeHeroSlides.map((src, index) => (
-                <Image
-                  alt=""
-                  className="hero__slide"
-                  data-index={index}
-                  fill
-                  key={src}
-                  priority={index === 0}
-                  sizes="100vw"
-                  src={src}
-                />
-              ))}
-            </div>
-            <div className="hero__overlay" />
-
-            <div className="hero__content">
-              <div className="hero__copy">
-                <LocalizedText
-                  as="p"
-                  className="eyebrow hero__eyebrow"
-                  text={homeIntro}
-                />
-                <LocalizedText as="h1" text={siteMeta.heroTitle} />
-                <LocalizedText as="p" text={siteMeta.heroSummary} />
-                <div className="hero__actions">
-                  <Link className="btn btn--primary" href="/our-school">
-                    <LocalizedText text={learnMoreLabel} />
-                  </Link>
+                <div className="hero-slider__slide" key={src}>
+                  <Image
+                    alt={`KMS campus view ${index + 1}`}
+                    className="hero-slider__image"
+                    fill
+                    priority={index === 0}
+                    sizes="(max-width: 1120px) calc(100vw - 32px), 1400px"
+                    src={src}
+                  />
                 </div>
-              </div>
-
-              <div className="hero__stat-board">
-                <Link href="/academics" className="stat-pill">
-                  <strong><LocalizedText text={{ en: "All classes >", bn: "সকল ক্লাস >" }} /></strong>
-                </Link>
-                <Link href="/contact" className="stat-pill">
-                  <strong><LocalizedText text={{ en: "Contact us >", bn: "যোগাযোগ করুন >" }} /></strong>
-                </Link>
-              </div>
+              ))}
             </div>
           </div>
         </div>
       </section>
 
       <section className="section">
-        <div className="shell stack">
-          <div className="notice-strip">
-            <LocalizedText as="p" className="eyebrow" text={{ en: "Safety First", bn: "সুরক্ষা সবার আগে" }} />
-            <LocalizedText as="p" className="lede" text={siteMeta.safetyMessage} />
-          </div>
-
+        <div className="shell">
           <div className="feature-panel">
             <div className="feature-panel__copy">
               <LocalizedText as="p" className="eyebrow" text={whoWeAreTitle} />
@@ -371,7 +304,7 @@ export default async function HomePage() {
       </section>
 
       <section className="section section--tight-top">
-        <div className="shell home-cta-grid">
+        <div className="shell">
           {latestResult ? (
             <article className="notice-spotlight">
               <div className="notice-spotlight__header">
@@ -417,39 +350,6 @@ export default async function HomePage() {
               />
             </article>
           )}
-
-          <article className="prospectus-panel">
-            <div className="prospectus-panel__copy">
-              <LocalizedText as="p" className="eyebrow" text={prospectusLabel} />
-              <LocalizedText as="h2" text={prospectusTitle} />
-              <LocalizedText as="p" text={prospectusText} />
-              <div className="chip-row">
-                {documents.map((item) => (
-                  <LocalizedText as="span" className="chip" key={item.id} text={item.category} />
-                ))}
-              </div>
-              <a
-                className="btn btn--accent"
-                href={`mailto:${siteMeta.schoolEmail}?subject=School%20Prospectus%20Request`}
-              >
-                <LocalizedText text={requestProspectusText} />
-              </a>
-            </div>
-            <div className="prospectus-panel__image-wrap">
-              <LocalizedText
-                as="span"
-                className="prospectus-panel__image-badge"
-                text={prospectusImageBadge}
-              />
-              <Image
-                alt="KMS event"
-                className="prospectus-panel__image"
-                height={650}
-                src="/media/post-independence.jpeg"
-                width={760}
-              />
-            </div>
-          </article>
         </div>
       </section>
     </>

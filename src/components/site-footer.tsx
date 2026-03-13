@@ -92,7 +92,7 @@ export function SiteFooter() {
               <a href={siteMeta.foundationUrl} rel="noreferrer" target="_blank">
                 {siteMeta.foundation}
               </a>
-              <a href="tel:+918756339237">+91-8756339237</a>
+              <a href={`tel:${siteMeta.schoolPhone.replace(/-/g, "")}`}>{siteMeta.schoolPhone}</a>
               <a href="mailto:contact@ngbmfoundation.com">contact@ngbmfoundation.com</a>
             </p>
           </div>

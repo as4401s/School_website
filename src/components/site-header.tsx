@@ -56,24 +56,65 @@ export function SiteHeader() {
           className={cn("site-nav", open && "site-nav--open")}
         >
           {navigation.map((item) => {
+            const itemActive =
+              item.href &&
+              (item.href === "/"
+                ? pathname === item.href
+                : pathname?.startsWith(item.href as string));
+            const childActive = item.children?.some((child) =>
+              pathname?.startsWith(child.href),
+            );
+            const active = Boolean(itemActive || childActive);
+
             if (item.children) {
               return (
                 <div key={item.label.en} className="site-nav__dropdown">
-                  <button className="site-nav__link site-nav__dropdown-toggle">
-                    <LocalizedText text={item.label} />
-                    <svg
-                      width="12"
-                      height="12"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth="2"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
+                  {item.href ? (
+                    <Link
+                      className={cn(
+                        "site-nav__link site-nav__dropdown-toggle",
+                        active && "site-nav__link--active",
+                      )}
+                      href={item.href as NonNullable<typeof item.href>}
+                      onClick={() => setOpen(false)}
                     >
-                      <polyline points="6 9 12 15 18 9"></polyline>
-                    </svg>
-                  </button>
+                      <LocalizedText text={item.label} />
+                      <svg
+                        width="12"
+                        height="12"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="2"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      >
+                        <polyline points="6 9 12 15 18 9"></polyline>
+                      </svg>
+                    </Link>
+                  ) : (
+                    <button
+                      className={cn(
+                        "site-nav__link site-nav__dropdown-toggle",
+                        active && "site-nav__link--active",
+                      )}
+                      type="button"
+                    >
+                      <LocalizedText text={item.label} />
+                      <svg
+                        width="12"
+                        height="12"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="2"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      >
+                        <polyline points="6 9 12 15 18 9"></polyline>
+                      </svg>
+                    </button>
+                  )}
                   <div className="site-nav__dropdown-menu">
                     {item.children.map((child) => (
                       <Link
@@ -89,11 +130,6 @@ export function SiteHeader() {
                 </div>
               );
             }
-
-            const active =
-              item.href === "/"
-                ? pathname === item.href
-                : pathname?.startsWith(item.href as string);
 
             return (
               <Link

@@ -86,21 +86,18 @@ export const siteMeta = {
     en: "4MPP+5XP, Humania Pota, West Bengal 741238, India",
     bn: "4MPP+5XP, হুমানিয়া পোতা, পশ্চিমবঙ্গ ৭৪১২৩৮, ভারত",
   },
+  schoolPhone: "+91-8756339237",
   schoolEmail: "info@kmschool.co.in",
   foundationEmail: "contact@ngbmfoundation.com",
 };
 
 export const navigation: NavigationItem[] = [
   { href: "/", label: { en: "HOME", bn: "হোম" } },
-  {
-    label: { en: "ABOUT", bn: "আমাদের সম্পর্কে" },
-    children: [
-      { href: "/our-school", label: { en: "OUR SCHOOL", bn: "বিদ্যালয় সম্পর্কে" } },
-      { href: "/academics", label: { en: "LEARNING AT KMS", bn: "কেএমএস-এ শেখা" } },
-    ],
-  },
+  { href: "/our-school", label: { en: "ABOUT", bn: "আমাদের সম্পর্কে" } },
+  { href: "/academics", label: { en: "LEARNING AT KMS", bn: "কেএমএস-এ শেখা" } },
   { href: "/admissions", label: { en: "ADMISSIONS", bn: "ভর্তি" } },
   {
+    href: "/media",
     label: { en: "MEDIA", bn: "মিডিয়া" },
     children: [
       { href: "/blog", label: { en: "EVENTS & NEWS", bn: "অনুষ্ঠান ও সংবাদ" } },
@@ -198,32 +195,5 @@ export const academicSubjects: Subject[] = [
     },
     accent: "var(--tone-ink)",
     imageUrl: "/media/nano_banana_pe.png",
-  },
-];
-
-export const admissionsSteps = [
-  {
-    step: "01",
-    title: { en: "Request the prospectus", bn: "প্রসপেক্টাস সংগ্রহ করুন" },
-    description: {
-      en: "Start with the prospectus and admissions information.",
-      bn: "প্রথমে প্রসপেক্টাস ও ভর্তি-সংক্রান্ত তথ্য সংগ্রহ করুন।",
-    },
-  },
-  {
-    step: "02",
-    title: { en: "Submit the application", bn: "আবেদন জমা দিন" },
-    description: {
-      en: "Fill in the required details carefully and share the necessary documents.",
-      bn: "প্রয়োজনীয় তথ্য সঠিকভাবে পূরণ করে সংশ্লিষ্ট নথিপত্র জমা দিন।",
-    },
-  },
-  {
-    step: "03",
-    title: { en: "Review and confirmation", bn: "পর্যালোচনা ও নিশ্চিতকরণ" },
-    description: {
-      en: "The school will review the application and update you with the decision.",
-      bn: "বিদ্যালয় আবেদন পর্যালোচনা করে সিদ্ধান্ত জানাবে।",
-    },
   },
 ];

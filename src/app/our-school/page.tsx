@@ -23,8 +23,8 @@ const introTitle = {
 };
 
 const introSummary = {
-  en: "Explore the environment, early-learning approach, and values that shape everyday life at Krishnarati Montessori School.",
-  bn: "কৃষ্ণরাতি মন্টেসরি স্কুলের প্রতিদিনের শেখা, যত্নের পরিবেশ এবং মূল্যবোধের পরিচয় এখানে তুলে ধরা হয়েছে।",
+  en: "This page brings together the environment, values, and learning culture that shape everyday life at Krishnarati Montessori School.",
+  bn: "কৃষ্ণরাতি মন্টেসরি স্কুলের প্রতিদিনের পরিবেশ, মূল্যবোধ এবং শেখার সংস্কৃতির একটি সমন্বিত পরিচয় এই পৃষ্ঠায় তুলে ধরা হয়েছে।",
 };
 
 const learningEnvironmentTitle = {
@@ -156,14 +156,19 @@ const aboutCards: AboutCard[] = [
   },
 ];
 
-const communityEyebrow = {
-  en: "Our Community",
-  bn: "আমাদের বিদ্যালয় পরিবার",
+const futureUpdateLabel = {
+  en: "More Updates",
+  bn: "পরবর্তী সংযোজন",
 };
 
-const communityTitle = {
-  en: "Our Community",
-  bn: "আমাদের বিদ্যালয় পরিবার",
+const futureUpdateTitle = {
+  en: "Teacher information will be added later",
+  bn: "শিক্ষক-শিক্ষিকাদের তথ্য পরে যুক্ত করা হবে",
+};
+
+const futureUpdateText = {
+  en: "Additional teacher details and other school information will be added to this page once the material is received.",
+  bn: "শিক্ষক-শিক্ষিকাদের বিস্তারিত পরিচিতি এবং বিদ্যালয়ের আরও কিছু তথ্য প্রয়োজনীয় উপকরণ পাওয়া গেলে পরে এই পৃষ্ঠাতেই যুক্ত করা হবে।",
 };
 
 export default function OurSchoolPage() {
@@ -231,22 +236,12 @@ export default function OurSchoolPage() {
       </section>
 
       <section className="section section--tight-top">
-        <div className="shell">
-          <div className="section-header">
-            <div>
-              <LocalizedText as="p" className="eyebrow" text={communityEyebrow} />
-              <LocalizedText as="h2" text={communityTitle} />
-            </div>
-          </div>
-
-          <div className="grid-4" aria-hidden="true">
-            {Array.from({ length: 4 }).map((_, index) => (
-              <article className="portal-card staff-placeholder" key={index}>
-                <div className="staff-placeholder__avatar" />
-                <div className="staff-placeholder__body" />
-              </article>
-            ))}
-          </div>
+        <div className="shell" style={{ maxWidth: "980px" }}>
+          <article className="portal-card stack">
+            <LocalizedText as="p" className="eyebrow" text={futureUpdateLabel} />
+            <LocalizedText as="h2" className="portal-title" text={futureUpdateTitle} />
+            <LocalizedText as="p" text={futureUpdateText} />
+          </article>
         </div>
       </section>
     </>

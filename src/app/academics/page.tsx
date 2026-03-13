@@ -14,8 +14,8 @@ type LearningCard = {
 };
 
 const introEyebrow = {
-  en: "Academics",
-  bn: "পাঠক্রম",
+  en: "Learning at KMS",
+  bn: "কেএমএস-এ শেখা",
 };
 
 const introTitle = {
