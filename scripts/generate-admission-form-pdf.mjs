@@ -15,15 +15,15 @@ const PAGE = {
 const LAYOUT = {
   gutter: 14,
   panelGap: 12,
-  panelHeaderHeight: 24,
+  panelHeaderHeight: 22,
   panelPaddingX: 14,
-  fieldHeight: 24,
-  fieldGap: 7,
-  labelGap: 4,
-  labelLineHeight: 9.4,
+  fieldHeight: 21,
+  fieldGap: 5,
+  labelGap: 3,
+  labelLineHeight: 9.2,
   checkboxSize: 13,
   checkboxGap: 8,
-  headerHeight: 150,
+  headerHeight: 142,
 };
 
 const COLORS = {
@@ -183,7 +183,7 @@ function drawTopColorBand(page) {
   });
 }
 
-function drawHeader(page, fonts, logoImage, pageNumber, pageCount) {
+function drawHeader(page, fonts, logoImage) {
   drawTopColorBand(page);
 
   const titleY = PAGE.height - 52;
@@ -266,43 +266,15 @@ function drawHeader(page, fonts, logoImage, pageNumber, pageCount) {
     color: COLORS.muted,
   });
 
-  const metaX = PAGE.width - PAGE.marginX - 150;
-  const metaTop = headerBottom + 90;
-
-  page.drawText("Form No.:", {
-    x: metaX,
-    y: metaTop,
-    size: TYPE.body,
-    font: fonts.bold,
-    color: COLORS.ink,
-  });
-  page.drawLine({
-    start: { x: metaX + 58, y: metaTop + 2 },
-    end: { x: PAGE.width - PAGE.marginX - 8, y: metaTop + 2 },
-    thickness: 1,
-    color: COLORS.line,
-  });
-
-  page.drawText("Date:", {
-    x: metaX,
-    y: metaTop - 22,
-    size: TYPE.body,
-    font: fonts.bold,
-    color: COLORS.ink,
-  });
-  page.drawLine({
-    start: { x: metaX + 36, y: metaTop - 20 },
-    end: { x: PAGE.width - PAGE.marginX - 8, y: metaTop - 20 },
-    thickness: 1,
-    color: COLORS.line,
-  });
-
+  const photoWidth = 98;
+  const photoHeight = 116;
+  const photoX = PAGE.width - PAGE.marginX - photoWidth - 14;
   const photoY = headerBottom + 8;
   page.drawRectangle({
-    x: metaX,
+    x: photoX,
     y: photoY,
-    width: 136,
-    height: 88,
+    width: photoWidth,
+    height: photoHeight,
     color: COLORS.fieldBg,
     borderColor: COLORS.line,
     borderWidth: 1,
@@ -312,31 +284,21 @@ function drawHeader(page, fonts, logoImage, pageNumber, pageCount) {
     "Attach a recent passport-size photograph",
     fonts.regular,
     TYPE.body,
-    96,
+    photoWidth - 20,
   );
   drawLines(page, photoText, {
-    x: metaX + 20,
-    y: photoY + 52,
+    x: photoX + 12,
+    y: photoY + 72,
     size: TYPE.body,
     lineHeight: 13,
     font: fonts.regular,
     color: COLORS.muted,
   });
 
-  const pageText = `Page ${pageNumber} of ${pageCount}`;
-  const pageWidth = fonts.bold.widthOfTextAtSize(pageText, TYPE.small);
-  page.drawText(pageText, {
-    x: PAGE.width - PAGE.marginX - pageWidth,
-    y: headerBottom + 2,
-    size: TYPE.small,
-    font: fonts.bold,
-    color: COLORS.muted,
-  });
-
-  return headerBottom - 26;
+  return headerBottom - 18;
 }
 
-function drawFooter(page, fonts) {
+function drawFooter(page, fonts, pageNumber, pageCount) {
   const lineY = PAGE.footerInset + 16;
 
   page.drawLine({
@@ -346,16 +308,36 @@ function drawFooter(page, fonts) {
     color: COLORS.line,
   });
 
-  page.drawText(
-    "Please fill the form clearly in CAPITAL LETTERS and submit it with the required documents.",
-    {
-      x: PAGE.marginX,
-      y: PAGE.footerInset,
-      size: TYPE.small,
-      font: fonts.regular,
-      color: COLORS.muted,
-    },
-  );
+  page.drawText("KMS Admission Application Form", {
+    x: PAGE.marginX,
+    y: PAGE.footerInset,
+    size: TYPE.small,
+    font: fonts.regular,
+    color: COLORS.muted,
+  });
+
+  const pageText = `Page ${pageNumber} of ${pageCount}`;
+  const pageWidth = fonts.bold.widthOfTextAtSize(pageText, TYPE.small);
+  page.drawText(pageText, {
+    x: PAGE.width - PAGE.marginX - pageWidth,
+    y: PAGE.footerInset,
+    size: TYPE.small,
+    font: fonts.bold,
+    color: COLORS.muted,
+  });
+}
+
+function drawContinuationTop(page) {
+  drawTopColorBand(page);
+
+  page.drawLine({
+    start: { x: PAGE.marginX, y: PAGE.height - 22 },
+    end: { x: PAGE.width - PAGE.marginX, y: PAGE.height - 22 },
+    thickness: 1,
+    color: COLORS.line,
+  });
+
+  return PAGE.height - 34;
 }
 
 function drawPanel(page, fonts, options) {
@@ -398,7 +380,7 @@ function drawPanel(page, fonts, options) {
   });
 
   return {
-    innerTop: yTop - LAYOUT.panelHeaderHeight - 12,
+    innerTop: yTop - LAYOUT.panelHeaderHeight - 10,
     x: x + LAYOUT.panelPaddingX,
     width: width - LAYOUT.panelPaddingX * 2,
   };
@@ -446,6 +428,37 @@ function createTextField(form, page, fonts, options) {
   field.setFontSize(fontSize);
 
   return fieldY - LAYOUT.fieldGap;
+}
+
+function drawWritingLine(page, fonts, options) {
+  const {
+    label,
+    topY,
+    width,
+    x,
+  } = options;
+
+  const labelLines = wrapText(label, fonts.bold, TYPE.label, width);
+  drawLines(page, labelLines, {
+    x,
+    y: topY,
+    size: TYPE.label,
+    lineHeight: LAYOUT.labelLineHeight,
+    font: fonts.bold,
+    color: COLORS.muted,
+  });
+
+  const labelHeight = Math.max(labelLines.length, 1) * LAYOUT.labelLineHeight;
+  const lineY = topY - labelHeight - 10;
+
+  page.drawLine({
+    start: { x, y: lineY },
+    end: { x: x + width, y: lineY },
+    thickness: 1,
+    color: COLORS.line,
+  });
+
+  return lineY - 12;
 }
 
 function addFieldRow(form, page, fonts, options) {
@@ -512,7 +525,7 @@ function drawProgramChooser(page, form, fonts, yTop) {
     x += 92;
   }
 
-  return yTop - 24;
+  return yTop - 20;
 }
 
 function addCheckboxList(form, page, fonts, options) {
@@ -559,25 +572,25 @@ async function main() {
   const pageOne = pdfDoc.addPage([PAGE.width, PAGE.height]);
   preparePage(pageOne);
   drawWatermark(pageOne, logoImage);
-  let y = drawHeader(pageOne, fonts, logoImage, 1, totalPages);
-  drawFooter(pageOne, fonts);
+  let y = drawHeader(pageOne, fonts, logoImage);
+  drawFooter(pageOne, fonts, 1, totalPages);
 
   y = drawProgramChooser(pageOne, form, fonts, y);
-  y -= 10;
+  y -= 6;
 
-  pageOne.drawText("To be completed by Parent / Guardian. Please use CAPITAL LETTERS.", {
-    x: PAGE.marginX + 96,
+  pageOne.drawText("To be completed by Parent / Guardian.", {
+    x: PAGE.marginX + 160,
     y,
-    size: 10.2,
+    size: 9.8,
     font: fonts.bold,
     color: COLORS.pink,
   });
 
-  y -= 28;
+  y -= 18;
 
   const candidatePanel = drawPanel(pageOne, fonts, {
     fill: COLORS.blueSoft,
-    height: 172,
+    height: 198,
     title: "Candidate's Personal Details",
     titleColor: COLORS.blue,
     x: PAGE.marginX,
@@ -622,12 +635,12 @@ async function main() {
     x: candidatePanel.x,
   });
 
-  y -= 172 + LAYOUT.panelGap;
+  y -= 198 + LAYOUT.panelGap;
 
   const addressPanel = drawPanel(pageOne, fonts, {
     fill: COLORS.greenSoft,
-    height: 116,
-    title: "Residential Address & Family Information",
+    height: 140,
+    title: "Residential Address",
     titleColor: COLORS.green,
     x: PAGE.marginX,
     yTop: y,
@@ -637,7 +650,7 @@ async function main() {
   panelY = addressPanel.innerTop;
   panelY = createTextField(form, pageOne, fonts, {
     fontSize: 9.8,
-    height: 42,
+    height: 38,
     label: "Address",
     multiline: true,
     name: "residential_address",
@@ -658,11 +671,11 @@ async function main() {
     gap: 10,
   });
 
-  y -= 116 + LAYOUT.panelGap;
+  y -= 140 + LAYOUT.panelGap;
 
   const fatherPanel = drawPanel(pageOne, fonts, {
     fill: COLORS.orangeSoft,
-    height: 174,
+    height: 198,
     title: "Father's Details",
     titleColor: COLORS.orange,
     x: PAGE.marginX,
@@ -696,8 +709,7 @@ async function main() {
   });
   addFieldRow(form, pageOne, fonts, {
     fields: [
-      { label: "Profession", name: "father_profession", ratio: 0.9 },
-      { label: "Designation", name: "father_designation", ratio: 1 },
+      { label: "Profession", name: "father_profession", ratio: 1.1 },
       { label: "Phone", name: "father_phone", ratio: 0.9 },
     ],
     topY: panelY,
@@ -709,12 +721,12 @@ async function main() {
   const pageTwo = pdfDoc.addPage([PAGE.width, PAGE.height]);
   preparePage(pageTwo);
   drawWatermark(pageTwo, logoImage);
-  y = drawHeader(pageTwo, fonts, logoImage, 2, totalPages);
-  drawFooter(pageTwo, fonts);
+  y = drawContinuationTop(pageTwo);
+  drawFooter(pageTwo, fonts, 2, totalPages);
 
   const motherPanel = drawPanel(pageTwo, fonts, {
     fill: COLORS.pinkSoft,
-    height: 174,
+    height: 198,
     title: "Mother's Details",
     titleColor: COLORS.pink,
     x: PAGE.marginX,
@@ -748,8 +760,7 @@ async function main() {
   });
   addFieldRow(form, pageTwo, fonts, {
     fields: [
-      { label: "Profession", name: "mother_profession", ratio: 0.9 },
-      { label: "Designation", name: "mother_designation", ratio: 1 },
+      { label: "Profession", name: "mother_profession", ratio: 1.1 },
       { label: "Phone", name: "mother_phone", ratio: 0.9 },
     ],
     topY: panelY,
@@ -758,11 +769,11 @@ async function main() {
     gap: 10,
   });
 
-  y -= 174 + LAYOUT.panelGap;
+  y -= 198 + LAYOUT.panelGap;
 
   const guardianPanel = drawPanel(pageTwo, fonts, {
     fill: COLORS.yellowSoft,
-    height: 146,
+    height: 158,
     title: "Local Guardian (If Applicable)",
     titleColor: COLORS.orange,
     x: PAGE.marginX,
@@ -797,11 +808,11 @@ async function main() {
     gap: 10,
   });
 
-  y -= 146 + LAYOUT.panelGap;
+  y -= 158 + LAYOUT.panelGap;
 
   const documentsPanel = drawPanel(pageTwo, fonts, {
     fill: COLORS.blueSoft,
-    height: 126,
+    height: 118,
     title: "Documents Checklist",
     titleColor: COLORS.blue,
     x: PAGE.marginX,
@@ -834,12 +845,12 @@ async function main() {
     x: docsColumns[1].x,
   });
 
-  y -= 126 + LAYOUT.panelGap;
+  y -= 118 + LAYOUT.panelGap;
 
-  const bottomColumns = getColumns(PAGE.marginX, CONTENT_WIDTH, [1.35, 0.85]);
+  const bottomColumns = getColumns(PAGE.marginX, CONTENT_WIDTH, [1.28, 0.72]);
   const declarationPanel = drawPanel(pageTwo, fonts, {
     fill: COLORS.pinkSoft,
-    height: 122,
+    height: 170,
     title: "Declaration",
     titleColor: COLORS.pink,
     x: bottomColumns[0].x,
@@ -849,7 +860,7 @@ async function main() {
 
   const officePanel = drawPanel(pageTwo, fonts, {
     fill: COLORS.graySoft,
-    height: 122,
+    height: 170,
     title: "For School Office Use Only",
     titleColor: COLORS.ink,
     x: bottomColumns[1].x,
@@ -870,14 +881,23 @@ async function main() {
       lineHeight: 13,
     },
   ) - 8;
-  addFieldRow(form, pageTwo, fonts, {
-    fields: [
-      { label: "Date", name: "declaration_date", ratio: 0.75 },
-      { label: "Signature (Parent / Guardian)", name: "declaration_signature", ratio: 1.25 },
-    ],
+  const declarationColumns = getColumns(
+    declarationPanel.x,
+    declarationPanel.width,
+    [0.7, 1.3],
+    16,
+  );
+  drawWritingLine(pageTwo, fonts, {
+    label: "Date",
     topY: panelY,
-    width: declarationPanel.width,
-    x: declarationPanel.x,
+    width: declarationColumns[0].width,
+    x: declarationColumns[0].x,
+  });
+  drawWritingLine(pageTwo, fonts, {
+    label: "Signature (Parent / Guardian)",
+    topY: panelY,
+    width: declarationColumns[1].width,
+    x: declarationColumns[1].x,
   });
 
   panelY = officePanel.innerTop;
@@ -897,7 +917,7 @@ async function main() {
   });
   createTextField(form, pageTwo, fonts, {
     fontSize: 9.8,
-    height: 32,
+    height: 28,
     label: "Remarks",
     multiline: true,
     name: "office_remarks",
