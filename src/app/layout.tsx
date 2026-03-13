@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import { Noto_Sans_Bengali } from "next/font/google";
 import localFont from "next/font/local";
 
 import { Analytics } from "@vercel/analytics/next";
@@ -43,9 +42,24 @@ const bodyFont = localFont({
   variable: "--font-body",
 });
 
-const bengaliFont = Noto_Sans_Bengali({
-  subsets: ["bengali"],
-  weight: ["400", "500", "600", "700"],
+const bengaliFont = localFont({
+  src: [
+    {
+      path: "./fonts/noto-sans-bengali-regular.ttf",
+      weight: "400",
+      style: "normal",
+    },
+    {
+      path: "./fonts/noto-sans-bengali-semibold.ttf",
+      weight: "600",
+      style: "normal",
+    },
+    {
+      path: "./fonts/noto-sans-bengali-bold.ttf",
+      weight: "700",
+      style: "normal",
+    },
+  ],
   variable: "--font-bengali",
 });
 

@@ -146,7 +146,7 @@ export function SiteHeader() {
                       ) : (
                         <span
                           className={cn(
-                            "site-nav__link site-nav__dropdown-link",
+                            "site-nav__link site-nav__dropdown-link site-nav__dropdown-label",
                             active && "site-nav__link--active",
                           )}
                         >

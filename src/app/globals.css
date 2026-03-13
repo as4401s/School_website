@@ -964,6 +964,66 @@ body::before {
   min-height: 100%;
 }
 
+.feature-panel__image-wrap--placeholder {
+  position: relative;
+  display: grid;
+  place-items: center;
+  min-height: 100%;
+  padding: 24px;
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, 0.72), rgba(255, 245, 236, 0.92)),
+    radial-gradient(circle at center, rgba(224, 102, 52, 0.08), transparent 52%);
+}
+
+.feature-panel__image-wrap--placeholder::before {
+  content: "";
+  position: absolute;
+  inset: 18px;
+  border-radius: 28px;
+  border: 1.5px dashed rgba(21, 32, 51, 0.14);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.76), rgba(255, 248, 241, 0.7)),
+    url("/media/logo.jpg") center / min(58%, 240px) no-repeat;
+  opacity: 0.68;
+}
+
+.feature-panel__placeholder {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  gap: 10px;
+  width: min(100%, 280px);
+  text-align: center;
+}
+
+.feature-panel__placeholder-badge {
+  justify-self: center;
+  display: inline-flex;
+  align-items: center;
+  padding: 8px 14px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.92);
+  border: 1px solid rgba(21, 32, 51, 0.08);
+  color: var(--accent-strong);
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.feature-panel__placeholder h3 {
+  margin: 0;
+  font-family: var(--font-display), var(--font-bengali), var(--font-body), sans-serif;
+  font-size: clamp(1.8rem, 3vw, 2.6rem);
+  line-height: 1.05;
+}
+
+.feature-panel__placeholder p {
+  margin: 0;
+  color: var(--muted);
+  line-height: 1.65;
+}
+
 .feature-panel__copy h2,
 .section h2 {
   font-size: clamp(2rem, 4vw, 3.2rem);
@@ -1070,6 +1130,10 @@ body::before {
   color: var(--ink);
 }
 
+.site-nav__dropdown-label {
+  cursor: default;
+}
+
 .contact-grid {
   display: grid;
   grid-template-columns: minmax(0, 0.78fr) minmax(0, 1.22fr);
@@ -1171,6 +1235,10 @@ body::before {
   display: grid;
   gap: 16px;
   align-content: start;
+}
+
+.stack--spacious {
+  gap: 24px;
 }
 
 .about-list {

@@ -252,8 +252,8 @@ export default function AdmissionsPage() {
             <LocalizedText as="p" text={formSummary} />
             <a
               className="btn btn--accent"
-              download="kms-admission-form.html"
-              href="/forms/kms-admission-form.html"
+              download="kms-admission-form.pdf"
+              href="/forms/kms-admission-form.pdf"
             >
               <LocalizedText text={formButton} />
             </a>

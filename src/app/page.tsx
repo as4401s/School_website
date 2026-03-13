@@ -112,6 +112,35 @@ const headTeacherParagraphs: BilingualText[] = [
   },
 ];
 
+const sectionPlaceholderLabel = {
+  en: "Image Placeholder",
+  bn: "ছবির স্থান",
+};
+
+const sectionPlaceholderSummary = {
+  en: "A section image can be placed here later.",
+  bn: "এই অংশে পরে একটি ছবি যোগ করা যাবে।",
+};
+
+const learningHighlights = [
+  {
+    eyebrow: montessoriTitle,
+    title: montessoriTitle,
+    paragraphs: montessoriParagraphs,
+  },
+  {
+    eyebrow: visionTitle,
+    title: visionTitle,
+    paragraphs: visionParagraphs,
+  },
+  {
+    eyebrow: headTeacherTitle,
+    title: headTeacherTitle,
+    lead: headTeacherGreeting,
+    paragraphs: headTeacherParagraphs,
+  },
+];
+
 const campusLifeTitle = {
   en: "Moments from Campus Life",
   bn: "ক্যাম্পাস জীবনের কিছু মুহূর্ত",
@@ -184,35 +213,30 @@ export default async function HomePage() {
       </section>
 
       <section className="section section--tight-top">
-        <div className="shell grid-2">
-          <article className="portal-card stack">
-            <LocalizedText as="p" className="eyebrow" text={montessoriTitle} />
-            <LocalizedText as="h2" className="portal-title" text={montessoriTitle} />
-            {montessoriParagraphs.map((paragraph) => (
-              <LocalizedText as="p" key={paragraph.en} text={paragraph} />
-            ))}
-          </article>
-
-          <article className="portal-card stack">
-            <LocalizedText as="p" className="eyebrow" text={visionTitle} />
-            <LocalizedText as="h2" className="portal-title" text={visionTitle} />
-            {visionParagraphs.map((paragraph) => (
-              <LocalizedText as="p" key={paragraph.en} text={paragraph} />
-            ))}
-          </article>
-        </div>
-      </section>
-
-      <section className="section section--tight-top">
-        <div className="shell">
-          <article className="portal-card stack">
-            <LocalizedText as="p" className="eyebrow" text={headTeacherTitle} />
-            <LocalizedText as="h2" className="portal-title" text={headTeacherTitle} />
-            <LocalizedText as="p" text={headTeacherGreeting} />
-            {headTeacherParagraphs.map((paragraph) => (
-              <LocalizedText as="p" key={paragraph.en} text={paragraph} />
-            ))}
-          </article>
+        <div className="shell stack stack--spacious">
+          {learningHighlights.map((item) => (
+            <article className="feature-panel" key={item.title.en}>
+              <div className="feature-panel__copy">
+                <LocalizedText as="p" className="eyebrow" text={item.eyebrow} />
+                <LocalizedText as="h2" text={item.title} />
+                {item.lead ? <LocalizedText as="p" text={item.lead} /> : null}
+                {item.paragraphs.map((paragraph) => (
+                  <LocalizedText as="p" key={paragraph.en} text={paragraph} />
+                ))}
+              </div>
+              <div className="feature-panel__image-wrap feature-panel__image-wrap--placeholder">
+                <div className="feature-panel__placeholder">
+                  <LocalizedText
+                    as="span"
+                    className="feature-panel__placeholder-badge"
+                    text={sectionPlaceholderLabel}
+                  />
+                  <LocalizedText as="h3" text={item.title} />
+                  <LocalizedText as="p" text={sectionPlaceholderSummary} />
+                </div>
+              </div>
+            </article>
+          ))}
         </div>
       </section>
 
