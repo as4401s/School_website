@@ -96,7 +96,7 @@ export const navigation: NavigationItem[] = [
     label: { en: "ABOUT", bn: "আমাদের সম্পর্কে" },
     children: [
       { href: "/our-school", label: { en: "OUR SCHOOL", bn: "বিদ্যালয় সম্পর্কে" } },
-      { href: "/academics", label: { en: "ACADEMICS", bn: "পাঠক্রম" } },
+      { href: "/academics", label: { en: "LEARNING AT KMS", bn: "কেএমএস-এ শেখা" } },
     ],
   },
   { href: "/admissions", label: { en: "ADMISSIONS", bn: "ভর্তি" } },
