@@ -124,8 +124,8 @@ const headTeacherCardSummary = {
 };
 
 const admissionFormTitle = {
-  en: "Start your application from the home page",
-  bn: "হোম পেজ থেকেই ভর্তি প্রক্রিয়া শুরু করুন",
+  en: "Application Form",
+  bn: "ভর্তি ফর্ম",
 };
 
 const admissionFormDescription = {
