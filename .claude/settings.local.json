@@ -1,0 +1,23 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm run build)",
+      "Bash(npm install otplib)",
+      "Bash(node -e \":*)",
+      "Bash(ls \"/Users/arjunsarkar/school website/public/favicon\"* \"/Users/arjunsarkar/school website/public/apple-touch-icon.png\" \"/Users/arjunsarkar/school website/public/android-chrome-192x192.png\")",
+      "Bash(npx tsc --noEmit)",
+      "Bash(npm install @upstash/redis cloudinary)",
+      "Bash(for f in gallery news announcements documents careers)",
+      "Bash(do echo \"=== $f ===\")",
+      "Read(//Users/arjunsarkar/school website/src/app/api/cms/$f/**)",
+      "Bash(done)",
+      "Bash(npm i @vercel/analytics)",
+      "Bash(npm i otplib@latest)",
+      "Bash(node -e \"const o = require\\(''otplib''\\); console.log\\(Object.keys\\(o\\)\\)\")",
+      "Bash(node -e \"const { verify } = require\\(''otplib''\\); console.log\\(typeof verify\\)\")",
+      "Bash(node -e \"const { verify } = require\\(''otplib''\\); console.log\\(verify.toString\\(\\).slice\\(0, 200\\)\\)\")",
+      "Bash(node --env-file=.env.local -e \":*)",
+      "Bash(npm i @vercel/speed-insights)"
+    ]
+  }
+}

@@ -522,6 +522,15 @@ h4,
   padding: 0;
 }
 
+.home-page .section-header > div,
+.home-page .feature-panel__copy,
+.home-page .gallery-card__body,
+.home-page .story-card__body,
+.home-page .notice-spotlight {
+  text-align: justify;
+  text-justify: inter-word;
+}
+
 .hero-slider {
   position: relative;
   overflow: hidden;
@@ -852,6 +861,7 @@ body::before {
   display: grid;
   gap: 22px;
   padding: 32px;
+  align-content: start;
   background:
     radial-gradient(circle at bottom right, rgba(224, 102, 52, 0.14), transparent 28%),
     linear-gradient(180deg, rgba(255, 250, 244, 0.98), rgba(255, 255, 255, 0.86));
@@ -864,7 +874,7 @@ body::before {
 
 .notice-spotlight h3 {
   margin: 0;
-  max-width: 14ch;
+  max-width: none;
   font-family: var(--font-display), var(--font-bengali), var(--font-body), sans-serif;
   font-size: clamp(2rem, 3.5vw, 2.8rem);
   line-height: 1.05;
@@ -872,7 +882,7 @@ body::before {
 }
 
 .notice-spotlight__summary {
-  max-width: 34ch;
+  max-width: 60ch;
   color: var(--muted);
   font-size: 1.05rem;
   line-height: 1.8;
@@ -1151,7 +1161,11 @@ body::before {
 }
 
 .feature-panel--admissions {
-  grid-template-columns: minmax(0, 1fr) minmax(280px, 0.9fr);
+  grid-template-columns: minmax(0, 1fr);
+}
+
+.feature-panel--admissions .feature-panel__copy {
+  max-width: 72ch;
 }
 
 .form-preview-card {

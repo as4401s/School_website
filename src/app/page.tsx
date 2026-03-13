@@ -17,11 +17,6 @@ import {
   getResults,
 } from "@/lib/content";
 
-const schoolTourLabel = {
-  en: "School Tour",
-  bn: "স্কুল ট্যুর",
-};
-
 const latestNewsLabel = {
   en: "Latest News & Announcements",
   bn: "সাম্প্রতিক সংবাদ ও বিজ্ঞপ্তি",
@@ -128,11 +123,6 @@ const headTeacherCardSummary = {
   bn: "ততদিন এই অংশে বিদ্যালয়ের নিজস্ব পরিচয় থাকবে, আর পরিবারের জন্য প্রধান শিক্ষকের বার্তাটি এখানেই পড়া যাবে।",
 };
 
-const admissionFormEyebrow = {
-  en: "Admission Form",
-  bn: "ভর্তি ফর্ম",
-};
-
 const admissionFormTitle = {
   en: "Start your application from the home page",
   bn: "হোম পেজ থেকেই ভর্তি প্রক্রিয়া শুরু করুন",
@@ -173,18 +163,7 @@ const admissionFormSupportText = {
   bn: "ফর্মটি স্ক্রিনে পূরণ করা যাবে, তবে জমা দেওয়ার আগে প্রিন্ট নিয়ে স্বাক্ষর করতে হবে।",
 };
 
-const admissionPreviewLabel = {
-  en: "Application Preview",
-  bn: "ফর্মের প্রিভিউ",
-};
-
-const admissionPreviewChip = {
-  en: "PDF Download",
-  bn: "PDF ডাউনলোড",
-};
-
 type HomeHighlight = {
-  eyebrow: BilingualText;
   title: BilingualText;
   lead?: BilingualText;
   paragraphs: BilingualText[];
@@ -197,7 +176,6 @@ type HomeHighlight = {
 
 const learningHighlights: HomeHighlight[] = [
   {
-    eyebrow: montessoriTitle,
     title: montessoriTitle,
     paragraphs: montessoriParagraphs,
     image: {
@@ -206,7 +184,6 @@ const learningHighlights: HomeHighlight[] = [
     },
   },
   {
-    eyebrow: visionTitle,
     title: visionTitle,
     paragraphs: visionParagraphs,
     image: {
@@ -215,7 +192,6 @@ const learningHighlights: HomeHighlight[] = [
     },
   },
   {
-    eyebrow: headTeacherTitle,
     title: headTeacherTitle,
     lead: headTeacherGreeting,
     paragraphs: headTeacherParagraphs,
@@ -226,11 +202,6 @@ const learningHighlights: HomeHighlight[] = [
 const campusLifeTitle = {
   en: "Moments from Campus Life",
   bn: "ক্যাম্পাস জীবনের কিছু মুহূর্ত",
-};
-
-const upcomingNoticeLabel = {
-  en: "Latest Announcements",
-  bn: "সাম্প্রতিক বিজ্ঞপ্তি",
 };
 
 const viewAllUpdatesText = {
@@ -283,7 +254,7 @@ export default async function HomePage() {
   const featuredGalleryItems = pickFeaturedGalleryItems(galleryItems);
 
   return (
-    <>
+    <main className="home-page">
       <section className="hero">
         <div className="shell">
           <HeroCarousel slides={homeHeroSlides} />
@@ -294,7 +265,6 @@ export default async function HomePage() {
         <div className="shell">
           <div className="feature-panel">
             <div className="feature-panel__copy">
-              <LocalizedText as="p" className="eyebrow" text={whoWeAreTitle} />
               <LocalizedText as="h2" text={whoWeAreTitle} />
               {whoWeAreParagraphs.map((paragraph) => (
                 <LocalizedText as="p" key={paragraph.en} text={paragraph} />
@@ -318,7 +288,6 @@ export default async function HomePage() {
           {learningHighlights.map((item) => (
             <article className="feature-panel" key={item.title.en}>
               <div className="feature-panel__copy">
-                <LocalizedText as="p" className="eyebrow" text={item.eyebrow} />
                 <LocalizedText as="h2" text={item.title} />
                 {item.lead ? <LocalizedText as="p" text={item.lead} /> : null}
                 {item.paragraphs.map((paragraph) => (
@@ -368,7 +337,6 @@ export default async function HomePage() {
         <div className="shell">
           <div className="section-header">
             <div>
-              <LocalizedText as="p" className="eyebrow" text={schoolTourLabel} />
               <LocalizedText as="h2" text={campusLifeTitle} />
             </div>
           </div>
@@ -399,7 +367,6 @@ export default async function HomePage() {
         <div className="shell">
           <div className="section-header">
             <div>
-              <LocalizedText as="p" className="eyebrow" text={latestNewsLabel} />
               <LocalizedText as="h2" text={latestNewsLabel} />
               <LocalizedText as="p" className="lede" text={latestNewsDescription} />
             </div>
@@ -436,10 +403,17 @@ export default async function HomePage() {
 
       <section className="section section--tight-top">
         <div className="shell">
+          <div className="section-header">
+            <div>
+              <LocalizedText
+                as="h2"
+                text={{ en: "Latest Results & Notices", bn: "সর্বশেষ ফলাফল ও নোটিশ" }}
+              />
+            </div>
+          </div>
           {latestResult ? (
             <article className="notice-spotlight">
               <div className="notice-spotlight__header">
-                <LocalizedText as="p" className="eyebrow" text={upcomingNoticeLabel} />
                 <LocalizedText as="h3" text={latestResult.title} />
               </div>
               <LocalizedText
@@ -465,7 +439,6 @@ export default async function HomePage() {
           ) : (
             <article className="notice-spotlight">
               <div className="notice-spotlight__header">
-                <LocalizedText as="p" className="eyebrow" text={upcomingNoticeLabel} />
                 <LocalizedText
                   as="h3"
                   text={{ en: "Notice board updates", bn: "নোটিশ বোর্ডের আপডেট" }}
@@ -488,7 +461,6 @@ export default async function HomePage() {
         <div className="shell">
           <article className="feature-panel feature-panel--admissions">
             <div className="feature-panel__copy">
-              <LocalizedText as="p" className="eyebrow" text={admissionFormEyebrow} />
               <LocalizedText as="h2" text={admissionFormTitle} />
               <LocalizedText as="p" text={admissionFormDescription} />
               <ul className="feature-panel__list">
@@ -512,28 +484,9 @@ export default async function HomePage() {
                 text={admissionFormSupportText}
               />
             </div>
-            <div className="feature-panel__image-wrap feature-panel__image-wrap--form">
-              <div className="form-preview-card">
-                <div className="form-preview-card__header">
-                  <LocalizedText
-                    as="span"
-                    className="feature-panel__placeholder-badge"
-                    text={admissionPreviewLabel}
-                  />
-                  <LocalizedText as="span" className="chip" text={admissionPreviewChip} />
-                </div>
-                <Image
-                  alt="Preview of the KMS admission form"
-                  className="form-preview-card__image"
-                  height={800}
-                  src="/media/admission-form-preview.png"
-                  width={543}
-                />
-              </div>
-            </div>
           </article>
         </div>
       </section>
-    </>
+    </main>
   );
 }
