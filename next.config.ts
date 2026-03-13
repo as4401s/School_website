@@ -8,9 +8,9 @@ const isProd = process.env.NODE_ENV === "production";
  * Content-Security-Policy
  *   Tells browsers which origins are allowed for scripts, styles, images, etc.
  *   - default-src 'self'      → block anything not listed below
- *   - script-src 'self' 'unsafe-inline' 'unsafe-eval'
- *                             → Next.js needs these for hydration/RSC;
- *                               scripts from any external domain are still blocked
+ *   - script-src 'self' 'unsafe-inline'
+ *                             → production keeps eval disabled; development adds
+ *                               'unsafe-eval' so the local toolchain still works
  *   - style-src 'self' 'unsafe-inline'
  *                             → inline style props used throughout the site
  *   - img-src 'self' data: blob:
@@ -53,7 +53,7 @@ const securityHeaders = [
         key: "Content-Security-Policy",
         value: [
             "default-src 'self'",
-            "script-src 'self' 'unsafe-inline' 'unsafe-eval'",
+            `script-src 'self' 'unsafe-inline'${isProd ? "" : " 'unsafe-eval'"}`,
             "style-src 'self' 'unsafe-inline'",
             "img-src 'self' data: blob: https://res.cloudinary.com",
             "media-src 'self' blob: https://res.cloudinary.com",

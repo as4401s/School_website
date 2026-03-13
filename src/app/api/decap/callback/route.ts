@@ -19,6 +19,7 @@ function getGithubCredentials() {
 function renderPopupResponse(
   type: "success" | "error",
   payload: Record<string, unknown> | string,
+  targetOrigin: string,
 ) {
   const message =
     type === "success"
@@ -74,26 +75,21 @@ function renderPopupResponse(
     <script>
       (function () {
         var message = ${JSON.stringify(message)};
+        var targetOrigin = ${JSON.stringify(targetOrigin)};
 
         function finish(targetOrigin) {
           if (!window.opener) {
             return;
           }
 
-          window.opener.postMessage(message, targetOrigin || "*");
+          window.opener.postMessage(message, targetOrigin);
           window.close();
         }
 
-        function receiveMessage(event) {
-          finish(event.origin);
-        }
-
-        window.addEventListener("message", receiveMessage, false);
-
         if (window.opener) {
-          window.opener.postMessage("authorizing:github", "*");
+          window.opener.postMessage("authorizing:github", targetOrigin);
           setTimeout(function () {
-            finish("*");
+            finish(targetOrigin);
           }, 800);
         }
       })();
@@ -117,15 +113,18 @@ export async function GET(request: Request) {
     const error = requestUrl.searchParams.get("error");
 
     if (error) {
-      return new NextResponse(renderPopupResponse("error", error), {
+      return new NextResponse(renderPopupResponse("error", error, requestUrl.origin), {
         headers: responseHeaders,
       });
     }
 
     if (!code || !returnedState) {
-      return new NextResponse(renderPopupResponse("error", "Missing GitHub response parameters."), {
-        headers: responseHeaders,
-      });
+      return new NextResponse(
+        renderPopupResponse("error", "Missing GitHub response parameters.", requestUrl.origin),
+        {
+          headers: responseHeaders,
+        },
+      );
     }
 
     const cookieHeader = request.headers.get("cookie") || "";
@@ -138,7 +137,7 @@ export async function GET(request: Request) {
       .join("=");
 
     if (!cookieStateValue || cookieStateValue !== returnedState) {
-      return new NextResponse(renderPopupResponse("error", "State validation failed."), {
+      return new NextResponse(renderPopupResponse("error", "State validation failed.", requestUrl.origin), {
         headers: responseHeaders,
       });
     }
@@ -177,7 +176,7 @@ export async function GET(request: Request) {
       renderPopupResponse("success", {
         token: tokenPayload.access_token,
         provider: "github",
-      }),
+      }, requestUrl.origin),
       {
         headers: responseHeaders,
       },
@@ -196,6 +195,7 @@ export async function GET(request: Request) {
       renderPopupResponse(
         "error",
         error instanceof Error ? error.message : "GitHub authorization failed.",
+        requestUrl.origin,
       ),
       {
         headers: responseHeaders,

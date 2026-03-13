@@ -69,10 +69,13 @@ Create a `.env.local` file with:
 
 ```
 CMS_PASSWORD=your_staff_password
+CMS_SESSION_SECRET=your_long_random_session_secret
 CMS_TOTP_SECRET=your_base32_totp_secret
 ```
 
-`CMS_TOTP_SECRET` is optional — if omitted, 2FA is skipped and only the password is required.
+`CMS_SESSION_SECRET` should be a long random value and is required in production.
+
+`CMS_TOTP_SECRET` is optional. If omitted, 2FA is skipped and only the password is required.
 
 ## Scripts
 

@@ -7,6 +7,7 @@ import {
     validatePendingToken,
     verifyTOTP,
     isTOTPEnabled,
+    isSessionSecretConfigured,
     checkRateLimit,
     recordFailedAttempt,
     clearRateLimit,
@@ -32,9 +33,9 @@ async function handlePasswordStep(request: NextRequest, ip: string) {
     const { password } = body;
 
     const cmsPassword = process.env.CMS_PASSWORD;
-    if (!cmsPassword) {
+    if (!cmsPassword || !isSessionSecretConfigured()) {
         return NextResponse.json(
-            { error: "CMS_PASSWORD not configured on server" },
+            { error: "CMS auth secrets are not configured on the server" },
             { status: 500 }
         );
     }
@@ -66,7 +67,7 @@ async function handlePasswordStep(request: NextRequest, ip: string) {
         cookieStore.set(SESSION_COOKIE, token, {
             httpOnly: true,
             secure: process.env.NODE_ENV === "production",
-            sameSite: "lax",
+            sameSite: "strict",
             maxAge: SESSION_MAX_AGE,
             path: "/",
         });
@@ -79,7 +80,7 @@ async function handlePasswordStep(request: NextRequest, ip: string) {
     cookieStore.set(PENDING_COOKIE, pendingToken, {
         httpOnly: true,
         secure: process.env.NODE_ENV === "production",
-        sameSite: "lax",
+        sameSite: "strict",
         maxAge: 5 * 60, // 5 minutes
         path: "/",
     });
@@ -131,7 +132,7 @@ async function handleTOTPStep(request: NextRequest, ip: string) {
     cookieStore.set(SESSION_COOKIE, token, {
         httpOnly: true,
         secure: process.env.NODE_ENV === "production",
-        sameSite: "lax",
+        sameSite: "strict",
         maxAge: SESSION_MAX_AGE,
         path: "/",
     });

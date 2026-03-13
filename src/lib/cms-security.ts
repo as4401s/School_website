@@ -7,24 +7,51 @@ import { createGuardrails } from "@otplib/core";
  * Tokens are HMAC-signed so they can be validated without a database.
  */
 
-const SECRET = process.env.CMS_PASSWORD || "fallback-secret-do-not-use";
+const SESSION_TTL_MS = 7 * 24 * 60 * 60 * 1000;
+
+function getSigningSecret(): string | null {
+    if (process.env.CMS_SESSION_SECRET) {
+        return process.env.CMS_SESSION_SECRET;
+    }
+
+    // Keep local development usable without an extra secret, but fail closed in production.
+    if (process.env.NODE_ENV !== "production" && process.env.CMS_PASSWORD) {
+        return process.env.CMS_PASSWORD;
+    }
+
+    return null;
+}
 
 // ── HMAC-Signed Session Tokens ──
 
 export function createSessionToken(): string {
+    const secret = getSigningSecret();
+    if (!secret) {
+        throw new Error("CMS_SESSION_SECRET is not configured on the server.");
+    }
+
     const payload = `cms_${Date.now()}_${crypto.randomBytes(16).toString("hex")}`;
-    const hmac = crypto.createHmac("sha256", SECRET).update(payload).digest("hex");
+    const hmac = crypto.createHmac("sha256", secret).update(payload).digest("hex");
     return `${payload}.${hmac}`;
 }
 
 export function validateSessionToken(token: string): boolean {
+    const secret = getSigningSecret();
+    if (!secret) return false;
+
     const dotIndex = token.lastIndexOf(".");
     if (dotIndex === -1) return false;
 
     const payload = token.substring(0, dotIndex);
     const signature = token.substring(dotIndex + 1);
 
-    const expected = crypto.createHmac("sha256", SECRET).update(payload).digest("hex");
+    const parts = payload.split("_");
+    const timestamp = parseInt(parts[1], 10);
+    if (isNaN(timestamp) || Date.now() - timestamp > SESSION_TTL_MS) {
+        return false;
+    }
+
+    const expected = crypto.createHmac("sha256", secret).update(payload).digest("hex");
 
     // Timing-safe comparison to prevent timing attacks
     if (signature.length !== expected.length) return false;
@@ -148,6 +175,10 @@ export function isTOTPEnabled(): boolean {
     return !!process.env.CMS_TOTP_SECRET;
 }
 
+export function isSessionSecretConfigured(): boolean {
+    return !!getSigningSecret();
+}
+
 // ── Pending Token (bridges password step → TOTP step) ──
 // After the password is verified we issue a short-lived signed cookie so the
 // TOTP endpoint can confirm the user actually passed step 1.
@@ -155,12 +186,20 @@ export function isTOTPEnabled(): boolean {
 const PENDING_TTL_MS = 5 * 60 * 1000; // 5 minutes
 
 export function createPendingToken(): string {
+    const secret = getSigningSecret();
+    if (!secret) {
+        throw new Error("CMS_SESSION_SECRET is not configured on the server.");
+    }
+
     const payload = `pending_${Date.now()}_${crypto.randomBytes(12).toString("hex")}`;
-    const hmac = crypto.createHmac("sha256", SECRET).update(payload).digest("hex");
+    const hmac = crypto.createHmac("sha256", secret).update(payload).digest("hex");
     return `${payload}.${hmac}`;
 }
 
 export function validatePendingToken(token: string): boolean {
+    const secret = getSigningSecret();
+    if (!secret) return false;
+
     const dotIndex = token.lastIndexOf(".");
     if (dotIndex === -1) return false;
 
@@ -168,7 +207,7 @@ export function validatePendingToken(token: string): boolean {
     const signature = token.substring(dotIndex + 1);
 
     // Verify HMAC
-    const expected = crypto.createHmac("sha256", SECRET).update(payload).digest("hex");
+    const expected = crypto.createHmac("sha256", secret).update(payload).digest("hex");
     if (signature.length !== expected.length) return false;
     try {
         const valid = crypto.timingSafeEqual(

@@ -1,13 +1,9 @@
 import { NextRequest, NextResponse } from "next/server";
 import { v2 as cloudinary } from "cloudinary";
 import { checkCmsAuth } from "@/lib/cms-auth";
+import { isAllowedMediaUrl, normalizeCloudinaryAsset } from "@/lib/cms-media";
 import { sanitizeText, sanitizeBilingual } from "@/lib/cms-security";
 import { getItems, addItem, deleteItem } from "@/lib/cms-store";
-
-function isAllowedMediaUrl(url: unknown): url is string {
-    if (typeof url !== "string" || !url) return false;
-    return url.startsWith("/media/cms/") || url.startsWith("https://res.cloudinary.com/");
-}
 
 function configureCloudinary() {
     if (!process.env.CLOUDINARY_CLOUD_NAME) return null;
@@ -41,6 +37,7 @@ export async function POST(request: NextRequest) {
     try {
         const body = await request.json();
         const { title, category, description, href, publicId, resourceType } = body;
+        const asset = normalizeCloudinaryAsset("documents", publicId, resourceType);
 
         const id = `doc-${Date.now()}`;
         const item: Record<string, unknown> = {
@@ -52,8 +49,8 @@ export async function POST(request: NextRequest) {
             category: sanitizeBilingual(category || { en: "General", bn: "" }),
             description: sanitizeBilingual(description || {}),
             href: isAllowedMediaUrl(href) ? href : sanitizeText(href || ""),
-            _cloudinaryId: publicId || null,
-            _cloudinaryResourceType: resourceType || "raw",
+            _cloudinaryId: asset.publicId,
+            _cloudinaryResourceType: asset.resourceType,
         };
 
         await addItem("documents", item);
@@ -78,11 +75,11 @@ export async function DELETE(request: NextRequest) {
         }
 
         // Best-effort: delete from Cloudinary
-        if (deleted._cloudinaryId && typeof deleted._cloudinaryId === "string") {
+        const asset = normalizeCloudinaryAsset("documents", deleted._cloudinaryId, deleted._cloudinaryResourceType);
+        if (asset.publicId && asset.resourceType) {
             const cld = configureCloudinary();
             if (cld) {
-                const resType = (deleted._cloudinaryResourceType as string) || "raw";
-                cld.uploader.destroy(deleted._cloudinaryId, { resource_type: resType }).catch(() => {});
+                cld.uploader.destroy(asset.publicId, { resource_type: asset.resourceType }).catch(() => {});
             }
         }
 
