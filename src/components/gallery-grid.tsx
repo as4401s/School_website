@@ -34,10 +34,6 @@ export function GalleryGrid({ items }: GalleryGridProps) {
                                 src={item.imageUrl}
                             />
                         </div>
-                        <div className="gallery-grid-card__body">
-                            <LocalizedText as="h3" text={item.title} />
-                            <LocalizedText as="p" text={item.summary} />
-                        </div>
                     </article>
                 ))}
             </div>
@@ -64,10 +60,6 @@ export function GalleryGrid({ items }: GalleryGridProps) {
                                 src={selectedImage.imageUrl}
                                 priority
                             />
-                        </div>
-                        <div className="gallery-lightbox__caption">
-                            <LocalizedText as="h3" text={selectedImage.title} />
-                            <LocalizedText as="p" text={selectedImage.summary} />
                         </div>
                     </div>
                 </div>
