@@ -1,6 +1,6 @@
-# Krishnarati Montessori School (KMS) — Website
+# Bilingual School Website
 
-Official website for Krishnarati Montessori School (KMS), Humania Pota, West Bengal, India. Built and maintained by the NGBM Foundation.
+Private website project for a school, with bilingual public pages and a staff CMS.
 
 ## Tech Stack
 
@@ -26,7 +26,7 @@ src/
   lib/          # Auth, security, and utility helpers
 content/        # CMS-managed JSON content files
 public/
-  media/        # School photos and uploaded media
+  media/        # Site photos and uploaded media
 ```
 
 ## Public Pages
@@ -34,8 +34,8 @@ public/
 | Route | Description |
 |---|---|
 | `/` | Home |
-| `/our-school` | About the school |
-| `/academics` | Curriculum and subjects |
+| `/our-school` | About page |
+| `/academics` | Learning and subjects |
 | `/admissions` | Admissions information |
 | `/blog` | Events and news |
 | `/gallery` | Photo and video gallery |
