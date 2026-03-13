@@ -254,7 +254,7 @@ export default async function HomePage() {
   const featuredGalleryItems = pickFeaturedGalleryItems(galleryItems);
 
   return (
-    <main className="home-page">
+    <>
       <section className="hero">
         <div className="shell">
           <HeroCarousel slides={homeHeroSlides} />
@@ -487,6 +487,6 @@ export default async function HomePage() {
           </article>
         </div>
       </section>
-    </main>
+    </>
   );
 }

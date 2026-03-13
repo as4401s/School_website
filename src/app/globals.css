@@ -522,15 +522,6 @@ h4,
   padding: 0;
 }
 
-.home-page .section-header > div,
-.home-page .feature-panel__copy,
-.home-page .gallery-card__body,
-.home-page .story-card__body,
-.home-page .notice-spotlight {
-  text-align: justify;
-  text-justify: inter-word;
-}
-
 .hero-slider {
   position: relative;
   overflow: hidden;
