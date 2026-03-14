@@ -421,18 +421,14 @@ export default async function HomePage() {
                 className="notice-spotlight__summary"
                 text={latestResult.summary}
               />
-              <div className="notice-spotlight__chips">
-                <LocalizedText as="span" className="chip" text={latestResult.status} />
-                <LocalizedText as="span" className="chip" text={latestResult.location} />
-              </div>
               <div className="notice-spotlight__footer">
                 <Link className="btn btn--accent" href={`/events/${latestResult.slug}`}>
                   <LocalizedText text={viewNoticeText} />
                 </Link>
                 <LocalizedText
                   as="p"
-                  className="helper-text"
-                  text={noticeSupportText}
+                  className="notice-spotlight__status"
+                  text={latestResult.status}
                 />
               </div>
             </article>

@@ -914,14 +914,22 @@ body::before {
 }
 
 .notice-spotlight__footer {
-  display: grid;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
   gap: 14px;
   margin-top: auto;
 }
 
 .notice-spotlight .btn {
-  justify-self: start;
   padding-inline: 28px;
+}
+
+.notice-spotlight__status {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.98rem;
+  line-height: 1.5;
 }
 
 .prospectus-panel {
