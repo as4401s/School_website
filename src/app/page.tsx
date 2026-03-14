@@ -377,7 +377,7 @@ export default async function HomePage() {
 
           <div className="grid-2">
             {featuredPosts.map((post) => (
-              <article className="story-card" key={post.id}>
+              <article className="story-card story-card--home" key={post.id}>
                 <div className="story-card__image-wrap">
                   <Image
                     alt={post.title.en}

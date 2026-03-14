@@ -1229,6 +1229,10 @@ body::before {
   overflow: hidden;
 }
 
+.story-card--home .story-card__image-wrap {
+  aspect-ratio: 16 / 9;
+}
+
 .story-card__body,
 .tour-card__body,
 .doc-card__body,
