@@ -518,6 +518,28 @@ h4,
   font-size: clamp(2.6rem, 6vw, 4.8rem);
 }
 
+.home-page {
+  --home-gap: clamp(22px, 2.8vw, 34px);
+  display: grid;
+  gap: var(--home-gap);
+  padding-bottom: 72px;
+}
+
+.home-page > .hero,
+.home-page > .section {
+  padding: 0;
+}
+
+.home-page .stack--spacious,
+.home-page .grid-2,
+.home-page .grid-4 {
+  gap: var(--home-gap);
+}
+
+.home-page .section-header {
+  margin-bottom: var(--home-gap);
+}
+
 .hero {
   padding: 0;
 }
@@ -1972,6 +1994,11 @@ body::before {
 
 @media (max-width: 720px) {
 
+  .home-page {
+    --home-gap: 20px;
+    padding-bottom: 40px;
+  }
+
   .shell {
     width: min(calc(100% - 32px), var(--max-width));
   }
@@ -2009,6 +2036,13 @@ body::before {
 
   .hero-slider__slide {
     aspect-ratio: 5 / 4;
+  }
+
+  .home-page .feature-panel,
+  .home-page .story-card,
+  .home-page .gallery-card,
+  .home-page .notice-spotlight {
+    border-radius: 22px;
   }
 
   .hero-slider__controls {
@@ -2461,6 +2495,11 @@ body::before {
 }
 
 @media (max-width: 430px) {
+
+  .home-page {
+    --home-gap: 16px;
+    padding-bottom: 32px;
+  }
 
   .shell {
     width: min(calc(100% - 24px), var(--max-width));

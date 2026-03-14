@@ -19,7 +19,7 @@ const LAYOUT = {
   panelPaddingX: 14,
   fieldHeight: 18,
   fieldGap: 10,
-  labelGap: 4,
+  labelGap: 2,
   labelLineHeight: 9.2,
   checkboxSize: 13,
   checkboxGap: 8,
@@ -450,7 +450,7 @@ function drawWritingLine(page, fonts, options) {
   });
 
   const labelHeight = Math.max(labelLines.length, 1) * LAYOUT.labelLineHeight;
-  const lineY = topY - labelHeight - 10;
+  const lineY = topY - labelHeight - 6;
 
   page.drawLine({
     start: { x, y: lineY },

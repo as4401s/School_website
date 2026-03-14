@@ -134,10 +134,11 @@ export const heroStats = [
 ];
 
 export const homeHeroSlides = [
-  "/media/Humaniapota%20School/IMG_3333.jpg",
-  "/media/Humaniapota%20School/IMG_3340.jpg",
   "/media/Humaniapota%20School/IMG_3260.jpg",
+  "/media/Humaniapota%20School/IMG_3340.jpg",
   "/media/Humaniapota%20School/IMG_3280.jpg",
+  "/media/Humaniapota%20School/IMG_3345.jpg",
+  "/media/Humaniapota%20School/IMG_3319.jpg",
 ];
 
 export const academicSubjects: Subject[] = [
