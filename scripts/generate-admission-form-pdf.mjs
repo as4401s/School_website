@@ -16,10 +16,11 @@ const LAYOUT = {
   gutter: 14,
   panelGap: 12,
   panelHeaderHeight: 22,
+  panelBodyTopGap: 12,
   panelPaddingX: 14,
   fieldHeight: 18,
-  fieldGap: 10,
-  labelGap: 2,
+  fieldGap: 8,
+  labelGap: 2.5,
   labelLineHeight: 9.2,
   checkboxSize: 13,
   checkboxGap: 8,
@@ -381,7 +382,7 @@ function drawPanel(page, fonts, options) {
   });
 
   return {
-    innerTop: yTop - LAYOUT.panelHeaderHeight - 10,
+    innerTop: yTop - LAYOUT.panelHeaderHeight - LAYOUT.panelBodyTopGap,
     x: x + LAYOUT.panelPaddingX,
     width: width - LAYOUT.panelPaddingX * 2,
   };
