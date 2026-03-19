@@ -29,6 +29,17 @@
   --tone-green: #d4e8de;
   --tone-red: #f2d1c8;
   --tone-ink: #d8dbe2;
+
+  /* ✦ Playful kid-friendly palette ✦ */
+  --teal: #3cb9b0;
+  --teal-soft: rgba(60, 185, 176, 0.14);
+  --purple: #8b6fd4;
+  --purple-soft: rgba(139, 111, 212, 0.12);
+  --sky: #4db6e8;
+  --sky-soft: rgba(77, 182, 232, 0.12);
+  --coral: #f07870;
+  --lime: #72b84e;
+  --kid-rainbow: linear-gradient(90deg, #f05a7e 0%, #f0b033 25%, #72b84e 50%, #4db6e8 75%, #9b79e0 100%);
 }
 
 * {
@@ -44,8 +55,10 @@ body {
   margin: 0;
   min-height: 100vh;
   background:
-    radial-gradient(circle at top left, rgba(240, 176, 139, 0.18), transparent 28%),
-    linear-gradient(180deg, #fffaf4 0%, #ffffff 22%, #f7f0e8 100%);
+    radial-gradient(ellipse at top left, rgba(240, 176, 139, 0.22), transparent 30%),
+    radial-gradient(ellipse at top right, rgba(139, 111, 212, 0.09), transparent 28%),
+    radial-gradient(ellipse at bottom right, rgba(60, 185, 176, 0.11), transparent 32%),
+    linear-gradient(180deg, #fffcf5 0%, #ffffff 28%, #f7f1ea 100%);
   color: var(--ink);
   font-family: var(--font-body), var(--font-bengali), sans-serif;
   overflow-x: hidden;
@@ -106,6 +119,8 @@ select {
   backdrop-filter: saturate(180%) blur(18px);
   border-bottom: 1px solid rgba(21, 32, 51, 0.08);
   box-shadow: 0 10px 24px rgba(36, 48, 68, 0.05);
+  border-top: 4px solid transparent;
+  border-image: var(--kid-rainbow) 1;
 }
 
 .site-header__inner {
@@ -417,21 +432,22 @@ h4,
   justify-content: center;
   gap: 8px;
   min-height: 46px;
-  padding: 0 24px;
-  border-radius: 18px;
+  padding: 0 28px;
+  border-radius: 999px;
   border: 1px solid transparent;
   cursor: pointer;
-  font-weight: 600;
-  box-shadow: 0 12px 26px rgba(36, 48, 68, 0.08);
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  box-shadow: 0 8px 22px rgba(36, 48, 68, 0.1);
   transition:
-    transform 180ms ease,
+    transform 200ms cubic-bezier(0.34, 1.56, 0.64, 1),
     background 180ms ease,
     box-shadow 180ms ease;
 }
 
 .btn:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 18px 30px rgba(36, 48, 68, 0.1);
+  transform: translateY(-3px) scale(1.03);
+  box-shadow: 0 18px 32px rgba(36, 48, 68, 0.13);
 }
 
 .btn:disabled {
@@ -455,6 +471,154 @@ h4,
   border-color: rgba(21, 32, 51, 0.08);
   color: var(--ink);
 }
+
+/* ============================================================
+   ★  Kid-Friendly Design Enhancements  ★
+   Inspired by playful school aesthetic (plutokids.in style)
+   ============================================================ */
+
+/* Colorful squiggle underline on home page section headings */
+.home-page .section-header h2 {
+  position: relative;
+  display: inline-block;
+}
+
+.home-page .section-header h2::after {
+  content: "";
+  position: absolute;
+  bottom: -10px;
+  left: 0;
+  width: 56%;
+  height: 5px;
+  border-radius: 999px;
+  background: var(--kid-rainbow);
+  opacity: 0.85;
+}
+
+/* Campus Life section — cheerful teal-tinted backdrop */
+/* Use 3-class specificity to override .home-page > .section { padding: 0 } */
+.home-page .section.campus-life-section {
+  background:
+    radial-gradient(ellipse at top right, rgba(60, 185, 176, 0.12), transparent 44%),
+    radial-gradient(ellipse at bottom left, rgba(240, 176, 139, 0.14), transparent 44%),
+    linear-gradient(160deg, rgba(255, 253, 250, 0.98), rgba(236, 252, 250, 0.82));
+  border-radius: 36px;
+  padding: 48px 0;
+  overflow: visible;
+}
+
+/* Mascot float element */
+.mascot-float {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.mascot-float .nano-banana {
+  flex-shrink: 0;
+  width: 90px;
+  height: auto;
+  filter: drop-shadow(0 8px 18px rgba(228, 179, 99, 0.4));
+  animation: banana-wave 3.6s ease-in-out infinite;
+  transform-origin: bottom center;
+}
+
+@keyframes banana-wave {
+  0%, 100% { transform: rotate(-4deg) translateY(0); }
+  30%       { transform: rotate(5deg)  translateY(-5px); }
+  60%       { transform: rotate(-2deg) translateY(2px); }
+}
+
+/* Feature panel heading — colorful left bar accent */
+.home-page .feature-panel .feature-panel__copy h2,
+.home-page .feature-panel .feature-panel__copy h3 {
+  padding-left: 18px;
+  border-left: 5px solid;
+  border-image: var(--kid-rainbow) 1;
+  border-top: 0;
+  border-right: 0;
+  border-bottom: 0;
+}
+
+/* Eyebrow text – sprinkle a bit more color */
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.eyebrow::before {
+  content: "★";
+  font-size: 0.7em;
+  color: var(--yellow);
+}
+
+/* Colorful stat strip: hero stats on campus life section */
+.campus-life-stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin-top: 28px;
+}
+
+.campus-life-stats__chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 20px;
+  border-radius: 999px;
+  font-weight: 700;
+  font-size: 0.95rem;
+  box-shadow: 0 6px 18px rgba(36, 48, 68, 0.1);
+}
+
+.campus-life-stats__chip:nth-child(1) { background: rgba(60, 185, 176, 0.18);  color: #27857e; }
+.campus-life-stats__chip:nth-child(2) { background: rgba(240, 176, 139, 0.28);  color: #c46b30; }
+.campus-life-stats__chip:nth-child(3) { background: rgba(139, 111, 212, 0.16); color: #6a50b5; }
+.campus-life-stats__chip:nth-child(4) { background: rgba(77, 182, 232, 0.18);  color: #2489b5; }
+
+/* Notice spotlight — give it a pop of color on the left border */
+.notice-spotlight {
+  border-left: 6px solid var(--teal);
+}
+
+/* Wavy rainbow divider for use between some sections */
+.rainbow-divider {
+  width: 64px;
+  height: 5px;
+  border-radius: 999px;
+  background: var(--kid-rainbow);
+  margin: 0 0 20px;
+}
+
+/* Story cards (news feed) — add a subtle colorful hover border */
+.story-card:hover {
+  border-color: rgba(60, 185, 176, 0.3);
+  box-shadow: 0 18px 40px rgba(60, 185, 176, 0.12);
+}
+
+/* Gallery slider arrows — slightly more colorful */
+.gallery-slider__arrow {
+  background: rgba(255, 252, 247, 0.96);
+  color: var(--teal);
+  border-color: rgba(60, 185, 176, 0.2);
+}
+
+.gallery-slider__arrow:hover {
+  background: var(--teal);
+  color: white;
+  border-color: var(--teal);
+}
+
+.gallery-slider__dots .gallery-slider__dot--active {
+  background: var(--teal);
+}
+
+/* ============================================================
+   End Kid-Friendly Design Enhancements
+   ============================================================ */
+
 
 .page-intro,
 .section {
@@ -614,6 +778,115 @@ h4,
   width: 28px;
   background: var(--accent);
 }
+
+/* ---------------------------------------------------------- *
+ *  Gallery Slider (campus life home section)
+ * ---------------------------------------------------------- */
+
+.gallery-slider {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 0;
+  padding-bottom: 52px; /* space for the dots */
+}
+
+.gallery-slider__track {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  flex: 1;
+  min-width: 0;
+}
+
+.gallery-slider__slide {
+  position: relative;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  border-radius: 22px;
+  background: rgba(21, 32, 51, 0.06);
+  animation: gs-fade-in 0.4s ease both;
+}
+
+@keyframes gs-fade-in {
+  from { opacity: 0; transform: scale(1.03); }
+  to   { opacity: 1; transform: scale(1); }
+}
+
+.gallery-slider__image {
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.gallery-slider__slide:hover .gallery-slider__image {
+  transform: scale(1.05);
+}
+
+.gallery-slider__arrow {
+  flex-shrink: 0;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  border: 1px solid rgba(21, 32, 51, 0.12);
+  background: rgba(255, 252, 247, 0.9);
+  color: var(--ink);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 8px 24px rgba(36, 48, 68, 0.12);
+  transition: transform 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
+  z-index: 1;
+}
+
+.gallery-slider__arrow--prev { margin-right: 14px; }
+.gallery-slider__arrow--next { margin-left: 14px; }
+
+.gallery-slider__arrow:hover {
+  background: white;
+  transform: scale(1.1);
+  box-shadow: 0 12px 32px rgba(36, 48, 68, 0.18);
+}
+
+.gallery-slider__arrow:disabled {
+  opacity: 0.45;
+  cursor: default;
+  transform: none;
+}
+
+.gallery-slider__dots {
+  position: absolute;
+  bottom: -36px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 7px 12px;
+  border-radius: 999px;
+  background: rgba(255, 252, 247, 0.82);
+  border: 1px solid rgba(21, 32, 51, 0.08);
+  box-shadow: 0 8px 20px rgba(36, 48, 68, 0.08);
+}
+
+.gallery-slider__dots .gallery-slider__dot {
+  width: 8px;
+  height: 8px;
+  padding: 0;
+  border: 0;
+  border-radius: 999px;
+  background: rgba(45, 62, 80, 0.22);
+  cursor: pointer;
+  transition:
+    width 200ms ease,
+    background 200ms ease;
+}
+
+.gallery-slider__dots .gallery-slider__dot--active {
+  width: 22px;
+  background: var(--accent);
+}
+
 
 .hero__panel {
   position: relative;
@@ -2067,6 +2340,18 @@ body::before {
     width: 24px;
   }
 
+  .gallery-slider__track {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .gallery-slider__arrow {
+    width: 40px;
+    height: 40px;
+  }
+
+  .gallery-slider__arrow--prev { margin-right: 10px; }
+  .gallery-slider__arrow--next { margin-left: 10px; }
+
   .hero__content {
     padding: 24px 0 0;
     gap: 0;
@@ -2508,6 +2793,24 @@ body::before {
     --home-gap: 16px;
     padding-bottom: 32px;
   }
+
+  .gallery-slider__track {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+  }
+
+  .gallery-slider__arrow {
+    width: 34px;
+    height: 34px;
+  }
+
+  .gallery-slider__arrow svg {
+    width: 18px;
+    height: 18px;
+  }
+
+  .gallery-slider__arrow--prev { margin-right: 8px; }
+  .gallery-slider__arrow--next { margin-left: 8px; }
 
   .shell {
     width: min(calc(100% - 24px), var(--max-width));

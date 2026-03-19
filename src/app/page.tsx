@@ -8,9 +8,9 @@ import {
 } from "@/components/language-provider";
 import {
   type BilingualText,
-  type GalleryItem,
   homeHeroSlides,
 } from "@/data/site-content";
+import { GallerySlider } from "@/components/gallery-slider";
 import {
   getGalleryItems,
   getNewsPosts,
@@ -224,23 +224,21 @@ const noticeSupportText = {
   bn: "অভিভাবকদের জন্য সর্বশেষ বিজ্ঞপ্তি, নোটিশ এবং ফলাফলের আপডেট।",
 };
 
-const featuredCampusGalleryIds = [
+// IDs of gallery photos to show in the campus-life slider (in display order)
+const campusSliderIds = [
   "humaniapota-11",
+  "humaniapota-5",
+  "humaniapota-13",
+  "humaniapota-10",
   "humaniapota-12",
+  "humaniapota-6",
   "humaniapota-3",
+  "humaniapota-8",
+  "humaniapota-15",
   "humaniapota-20",
+  "humaniapota-17",
+  "humaniapota-4",
 ];
-
-function pickFeaturedGalleryItems(items: GalleryItem[]) {
-  const itemMap = new Map(items.map((item) => [item.id, item]));
-  const curatedItems = featuredCampusGalleryIds
-    .map((id) => itemMap.get(id))
-    .filter((item): item is GalleryItem => Boolean(item));
-
-  return curatedItems.length === featuredCampusGalleryIds.length
-    ? curatedItems
-    : items.slice(0, 4);
-}
 
 export default async function HomePage() {
   const [galleryItems, posts, results] = await Promise.all([
@@ -251,7 +249,12 @@ export default async function HomePage() {
 
   const featuredPosts = posts.slice(0, 2);
   const latestResult = results[0];
-  const featuredGalleryItems = pickFeaturedGalleryItems(galleryItems);
+
+  // Build the ordered, deduped slider items from the full gallery
+  const galleryMap = new Map(galleryItems.map((item) => [item.id, item]));
+  const sliderItems = campusSliderIds
+    .map((id) => galleryMap.get(id))
+    .filter(Boolean) as typeof galleryItems;
 
   return (
     <main className="home-page">
@@ -333,33 +336,25 @@ export default async function HomePage() {
         </div>
       </section>
 
-      <section className="section">
+      <section className="section campus-life-section">
         <div className="shell">
           <div className="section-header">
-            <div>
-              <LocalizedText as="h2" text={campusLifeTitle} />
+            <div className="mascot-float">
+              <Image
+                alt="Nano banana mascot waving"
+                className="nano-banana"
+                height={120}
+                src="/media/nano-banana.png"
+                width={120}
+              />
+              <div>
+                <div className="rainbow-divider" />
+                <LocalizedText as="h2" text={campusLifeTitle} />
+              </div>
             </div>
           </div>
 
-          <div className="grid-4">
-            {featuredGalleryItems.map((item) => (
-              <article className="gallery-card" key={item.id}>
-                <div className="gallery-card__image-wrap">
-                  <Image
-                    alt={item.title.en}
-                    className="media-card__image"
-                    fill
-                    sizes="(max-width: 1080px) 100vw, 25vw"
-                    src={item.imageUrl}
-                  />
-                </div>
-                <div className="gallery-card__body">
-                  <LocalizedText as="h3" text={item.title} />
-                  <LocalizedText as="p" text={item.summary} />
-                </div>
-              </article>
-            ))}
-          </div>
+          <GallerySlider items={sliderItems} />
         </div>
       </section>
 
