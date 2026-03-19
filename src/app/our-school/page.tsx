@@ -1,5 +1,9 @@
 import Image from "next/image";
 
+import {
+  AnimatedCharacter,
+  type AnimatedCharacterKind,
+} from "@/components/animated-character";
 import { LocalizedText } from "@/components/language-provider";
 import type { BilingualText } from "@/data/site-content";
 import { PageIntro } from "@/components/page-intro";
@@ -10,6 +14,7 @@ type AboutCard = {
   listIntro: BilingualText;
   bullets: BilingualText[];
   imageUrl: string;
+  character: AnimatedCharacterKind;
 };
 
 const introEyebrow = {
@@ -116,6 +121,7 @@ const aboutCards: AboutCard[] = [
       },
     ],
     imageUrl: "/media/Humaniapota%20School/IMG_3343.jpg",
+    character: "book",
   },
   {
     title: {
@@ -153,8 +159,14 @@ const aboutCards: AboutCard[] = [
       },
     ],
     imageUrl: "/media/tour-3.jpg",
+    character: "rocket",
   },
 ];
+
+const environmentTiles = learningEnvironmentBullets.map((item, index) => ({
+  text: item,
+  character: (["cloud", "star", "book", "pencil", "rocket", "globe"] as AnimatedCharacterKind[])[index],
+}));
 
 const futureUpdateLabel = {
   en: "More Updates",
@@ -179,19 +191,25 @@ export default function OurSchoolPage() {
       <section className="section">
         <div className="shell feature-panel">
           <div className="feature-panel__copy">
+            <div className="feature-panel__character-row">
+              <AnimatedCharacter kind="cloud" size="sm" />
+              <AnimatedCharacter kind="book" size="sm" />
+              <AnimatedCharacter kind="star" size="sm" />
+            </div>
             <LocalizedText as="p" className="eyebrow" text={learningEnvironmentTitle} />
             <LocalizedText as="h2" text={learningEnvironmentTitle} />
             {learningEnvironmentParagraphs.map((paragraph) => (
               <LocalizedText as="p" key={paragraph.en} text={paragraph} />
             ))}
             <LocalizedText as="p" text={learningEnvironmentListIntro} />
-            <ul className="about-list">
-              {learningEnvironmentBullets.map((item) => (
-                <li key={item.en}>
-                  <LocalizedText text={item} />
-                </li>
+            <div className="mini-tile-grid">
+              {environmentTiles.map((item) => (
+                <article className="mini-tile" key={item.text.en}>
+                  <AnimatedCharacter kind={item.character} size="sm" />
+                  <LocalizedText as="p" text={item.text} />
+                </article>
               ))}
-            </ul>
+            </div>
           </div>
           <div className="feature-panel__image-wrap">
             <Image
@@ -219,6 +237,7 @@ export default function OurSchoolPage() {
                 />
               </div>
               <div className="tour-card__body stack">
+                <AnimatedCharacter kind={card.character} size="sm" />
                 <LocalizedText as="h3" text={card.title} />
                 <LocalizedText as="p" text={card.intro} />
                 <LocalizedText as="p" text={card.listIntro} />

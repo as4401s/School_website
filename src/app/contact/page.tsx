@@ -1,3 +1,4 @@
+import { AnimatedCharacter } from "@/components/animated-character";
 import { ContactForm } from "@/components/contact-form";
 import { LocalizedText } from "@/components/language-provider";
 import { PageIntro } from "@/components/page-intro";
@@ -20,12 +21,37 @@ const introSummary = {
 
 export default function ContactPage() {
   const mapQuery = encodeURIComponent(siteMeta.eventLocation.en);
+  const schoolPhoneHref = siteMeta.schoolPhone.replace(/-/g, "");
 
   return (
     <>
       <PageIntro eyebrow={introEyebrow} summary={introSummary} title={introTitle} />
 
       <section className="section">
+        <div className="shell contact-mini-grid">
+          <article className="contact-mini-card">
+            <AnimatedCharacter kind="cloud" size="sm" />
+            <LocalizedText as="h2" text={{ en: "Visit the campus", bn: "স্কুলে আসুন" }} />
+            <LocalizedText as="p" text={siteMeta.address} />
+          </article>
+          <article className="contact-mini-card">
+            <AnimatedCharacter kind="book" size="sm" />
+            <LocalizedText as="h2" text={{ en: "Email the office", bn: "ইমেল করুন" }} />
+            <p>
+              <a href={`mailto:${siteMeta.schoolEmail}`}>{siteMeta.schoolEmail}</a>
+            </p>
+          </article>
+          <article className="contact-mini-card">
+            <AnimatedCharacter kind="rocket" size="sm" />
+            <LocalizedText as="h2" text={{ en: "Call for help", bn: "ফোনে যোগাযোগ" }} />
+            <p>
+              <a href={`tel:${schoolPhoneHref}`}>{siteMeta.schoolPhone}</a>
+            </p>
+          </article>
+        </div>
+      </section>
+
+      <section className="section section--tight-top">
         <div className="shell contact-grid">
           <article className="contact-panel stack">
             <LocalizedText as="p" className="eyebrow" text={{ en: "Address", bn: "ঠিকানা" }} />

@@ -1,6 +1,8 @@
 import Image from "next/image";
+import type { Route } from "next";
 import Link from "next/link";
 
+import { AnimatedCharacter } from "@/components/animated-character";
 import { HeroCarousel } from "@/components/hero-carousel";
 import {
   LocalizedDate,
@@ -9,6 +11,7 @@ import {
 import {
   type BilingualText,
   homeHeroSlides,
+  siteMeta,
 } from "@/data/site-content";
 import { GallerySlider } from "@/components/gallery-slider";
 import {
@@ -31,6 +34,105 @@ const whoWeAreTitle = {
   en: "Who We Are",
   bn: "আমাদের পরিচয়",
 };
+
+const heroLabel = {
+  en: "Joyful Early Learning",
+  bn: "আনন্দময় প্রারম্ভিক শিক্ষা",
+};
+
+const heroChips: BilingualText[] = [
+  {
+    en: "Warm classrooms",
+    bn: "আন্তরিক শ্রেণিকক্ষ",
+  },
+  {
+    en: "Play, stories, songs",
+    bn: "খেলা, গল্প, গান",
+  },
+  {
+    en: "Caring teachers",
+    bn: "স্নেহময় শিক্ষক",
+  },
+];
+
+const heroPrimaryAction = {
+  en: "Explore Admissions",
+  bn: "ভর্তির তথ্য দেখুন",
+};
+
+const heroSecondaryAction = {
+  en: "See Campus Life",
+  bn: "ক্যাম্পাস জীবন দেখুন",
+};
+
+const heroFloatTitle = {
+  en: "A little world made for little learners",
+  bn: "ছোট্ট শিক্ষার্থীদের জন্য ছোট্ট সুন্দর জগৎ",
+};
+
+const heroFloatSummary = {
+  en: "Bright, playful, and calm spaces help children settle in like a second home.",
+  bn: "উজ্জ্বল, খেলাধুলাভিত্তিক ও শান্ত পরিবেশ শিশুদের দ্বিতীয় ঘরের মতো স্বস্তি দেয়।",
+};
+
+type HomeMiniCard = {
+  title: BilingualText;
+  summary: BilingualText;
+  href: Route;
+  action: BilingualText;
+  character: Parameters<typeof AnimatedCharacter>[0]["kind"];
+};
+
+const homeMiniCards: HomeMiniCard[] = [
+  {
+    title: {
+      en: "About Our School",
+      bn: "আমাদের স্কুল সম্পর্কে",
+    },
+    summary: {
+      en: "See the environment, values, and happy routines that shape each school day.",
+      bn: "বিদ্যালয়ের পরিবেশ, মূল্যবোধ ও প্রতিদিনের আনন্দময় রুটিন সম্পর্কে জানুন।",
+    },
+    href: "/our-school",
+    action: {
+      en: "Meet KMS",
+      bn: "কেএমএস চিনুন",
+    },
+    character: "cloud",
+  },
+  {
+    title: {
+      en: "Learning Adventures",
+      bn: "শেখার রোমাঞ্চ",
+    },
+    summary: {
+      en: "Discover hands-on materials, songs, stories, art, and playful classroom moments.",
+      bn: "হাতে-কলমে কাজ, গান, গল্প, শিল্পচর্চা ও শ্রেণিকক্ষের মজার শেখার মুহূর্ত দেখুন।",
+    },
+    href: "/academics",
+    action: {
+      en: "See Learning",
+      bn: "শেখার ধরন দেখুন",
+    },
+    character: "book",
+  },
+  {
+    title: {
+      en: "Start Your Journey",
+      bn: "শুরু হোক যাত্রা",
+    },
+    summary: {
+      en: "Check classes, age groups, documents, and the admission form in one place.",
+      bn: "শ্রেণি, বয়স, নথিপত্র ও ভর্তি ফর্ম একসঙ্গে দেখে নিন।",
+    },
+    href: "/admissions",
+    action: {
+      en: "Apply Now",
+      bn: "এখনই দেখুন",
+    },
+    character: "rocket",
+  },
+];
 
 const whoWeAreParagraphs: BilingualText[] = [
   {
@@ -204,6 +306,57 @@ const campusLifeTitle = {
   bn: "ক্যাম্পাস জীবনের কিছু মুহূর্ত",
 };
 
+const whoWeAreMoments: HomeMiniCard[] = [
+  {
+    title: {
+      en: "Safe Start",
+      bn: "নিরাপদ শুরু",
+    },
+    summary: {
+      en: "Children step into a warm routine built around comfort, trust, and gentle guidance.",
+      bn: "শিশুরা আরাম, আস্থা ও কোমল দিকনির্দেশনায় গড়া নিরাপদ রুটিনে অভ্যস্ত হয়।",
+    },
+    href: "/our-school",
+    action: {
+      en: "Learn More",
+      bn: "আরও জানুন",
+    },
+    character: "cloud",
+  },
+  {
+    title: {
+      en: "Joyful Discovery",
+      bn: "আনন্দময় আবিষ্কার",
+    },
+    summary: {
+      en: "Songs, stories, movement, and play turn everyday lessons into happy discoveries.",
+      bn: "গান, গল্প, নড়াচড়া ও খেলার মাধ্যমে প্রতিদিনের শেখা আনন্দময় আবিষ্কারে পরিণত হয়।",
+    },
+    href: "/academics",
+    action: {
+      en: "See Activities",
+      bn: "কার্যক্রম দেখুন",
+    },
+    character: "star",
+  },
+  {
+    title: {
+      en: "Belonging First",
+      bn: "একাত্মতার অনুভূতি",
+    },
+    summary: {
+      en: "Teachers and families work together so children feel seen, valued, and ready to grow.",
+      bn: "শিক্ষক ও পরিবার একসঙ্গে কাজ করেন যাতে শিশুরা গুরুত্ব পায়, ভালোবাসা পায় এবং বড় হতে পারে।",
+    },
+    href: "/contact",
+    action: {
+      en: "Talk to Us",
+      bn: "যোগাযোগ করুন",
+    },
+    character: "pencil",
+  },
+];
+
 const viewAllUpdatesText = {
   en: "View all updates",
   bn: "সব আপডেট দেখুন",
@@ -258,9 +411,53 @@ export default async function HomePage() {
 
   return (
     <main className="home-page">
-      <section className="hero">
+      <section className="hero hero--home">
         <div className="shell">
-          <HeroCarousel slides={homeHeroSlides} />
+          <div className="hero-showcase">
+            <HeroCarousel slides={homeHeroSlides} />
+            <div className="hero-showcase__overlay">
+              <div className="hero-app-card">
+                <LocalizedText as="p" className="eyebrow" text={heroLabel} />
+                <LocalizedText as="h1" className="hero-app-card__title" text={siteMeta.heroTitle} />
+                <LocalizedText as="p" className="lede" text={siteMeta.heroSummary} />
+                <div className="hero-app-card__chip-row">
+                  {heroChips.map((item) => (
+                    <LocalizedText as="span" className="hero-chip" key={item.en} text={item} />
+                  ))}
+                </div>
+                <div className="hero__actions hero-app-card__actions">
+                  <Link className="btn btn--accent" href="/admissions">
+                    <LocalizedText text={heroPrimaryAction} />
+                  </Link>
+                  <Link className="btn btn--ghost" href="/gallery">
+                    <LocalizedText text={heroSecondaryAction} />
+                  </Link>
+                </div>
+              </div>
+
+              <div className="hero-float-card">
+                <div className="hero-float-card__characters">
+                  <AnimatedCharacter kind="rocket" size="md" />
+                  <AnimatedCharacter kind="star" size="sm" />
+                </div>
+                <LocalizedText as="h2" text={heroFloatTitle} />
+                <LocalizedText as="p" text={heroFloatSummary} />
+              </div>
+            </div>
+          </div>
+
+          <div className="home-glance-grid">
+            {homeMiniCards.map((card) => (
+              <article className="glance-card" key={card.title.en}>
+                <AnimatedCharacter kind={card.character} size="sm" />
+                <LocalizedText as="h2" text={card.title} />
+                <LocalizedText as="p" text={card.summary} />
+                <Link className="btn btn--ghost" href={card.href}>
+                  <LocalizedText text={card.action} />
+                </Link>
+              </article>
+            ))}
+          </div>
         </div>
       </section>
 
@@ -268,10 +465,23 @@ export default async function HomePage() {
         <div className="shell">
           <div className="feature-panel">
             <div className="feature-panel__copy">
+              <div className="feature-panel__character-row">
+                <AnimatedCharacter kind="cloud" size="sm" />
+                <AnimatedCharacter kind="star" size="sm" />
+              </div>
               <LocalizedText as="h2" text={whoWeAreTitle} />
               {whoWeAreParagraphs.map((paragraph) => (
                 <LocalizedText as="p" key={paragraph.en} text={paragraph} />
               ))}
+              <div className="mini-tile-grid">
+                {whoWeAreMoments.map((card) => (
+                  <article className="mini-tile" key={card.title.en}>
+                    <AnimatedCharacter kind={card.character} size="sm" />
+                    <LocalizedText as="h3" text={card.title} />
+                    <LocalizedText as="p" text={card.summary} />
+                  </article>
+                ))}
+              </div>
             </div>
             <div className="feature-panel__image-wrap">
               <Image
@@ -339,14 +549,11 @@ export default async function HomePage() {
       <section className="section campus-life-section">
         <div className="shell">
           <div className="section-header">
-            <div className="mascot-float">
-              <Image
-                alt="Nano banana mascot waving"
-                className="nano-banana"
-                height={120}
-                src="/media/nano-banana.png"
-                width={120}
-              />
+            <div className="mascot-float mascot-float--ensemble">
+              <div className="mascot-float__characters">
+                <AnimatedCharacter kind="rocket" size="md" className="mascot-float__character" />
+                <AnimatedCharacter kind="star" size="sm" className="mascot-float__character" />
+              </div>
               <div>
                 <div className="rainbow-divider" />
                 <LocalizedText as="h2" text={campusLifeTitle} />
@@ -452,6 +659,11 @@ export default async function HomePage() {
         <div className="shell">
           <article className="feature-panel feature-panel--admissions">
             <div className="feature-panel__copy">
+              <div className="feature-panel__character-row">
+                <AnimatedCharacter kind="book" size="sm" />
+                <AnimatedCharacter kind="pencil" size="sm" />
+                <AnimatedCharacter kind="cloud" size="sm" />
+              </div>
               <LocalizedText as="h2" text={admissionFormTitle} />
               <LocalizedText as="p" text={admissionFormDescription} />
               <ul className="feature-panel__list">

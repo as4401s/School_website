@@ -1,5 +1,7 @@
-import Image from "next/image";
-
+import {
+  AnimatedCharacter,
+  type AnimatedCharacterKind,
+} from "@/components/animated-character";
 import { LocalizedText } from "@/components/language-provider";
 import type { BilingualText } from "@/data/site-content";
 import { PageIntro } from "@/components/page-intro";
@@ -9,7 +11,7 @@ type LearningCard = {
   intro: BilingualText[];
   listIntro?: BilingualText;
   bullets?: BilingualText[];
-  imageUrl: string;
+  character: AnimatedCharacterKind;
   accent: string;
 };
 
@@ -73,7 +75,7 @@ const learningCards: LearningCard[] = [
         bn: "গঠনমূলক ব্লক ও ধাঁধা",
       },
     ],
-    imageUrl: "/media/nano_banana_mathematics.png",
+    character: "star",
     accent: "var(--tone-orange)",
   },
   {
@@ -113,7 +115,7 @@ const learningCards: LearningCard[] = [
         bn: "সৃজনশীল গল্প বলা",
       },
     ],
-    imageUrl: "/media/nano_banana_writing.png",
+    character: "pencil",
     accent: "var(--tone-red)",
   },
   {
@@ -153,7 +155,7 @@ const learningCards: LearningCard[] = [
         bn: "সহজ বলা ও শোনার অনুশীলন",
       },
     ],
-    imageUrl: "/media/nano_banana_literacy.png",
+    character: "book",
     accent: "var(--tone-navy)",
   },
   {
@@ -193,7 +195,7 @@ const learningCards: LearningCard[] = [
         bn: "রোল-প্লে ও কল্পনাভিত্তিক খেলা",
       },
     ],
-    imageUrl: "/media/nano_banana_pe.png",
+    character: "rocket",
     accent: "var(--tone-green)",
   },
   {
@@ -229,7 +231,7 @@ const learningCards: LearningCard[] = [
         bn: "ইন্দ্রিয়নির্ভর অনুশীলন",
       },
     ],
-    imageUrl: "/media/nano_banana_science.png",
+    character: "globe",
     accent: "var(--tone-sand)",
   },
 ];
@@ -263,12 +265,10 @@ export default function AcademicsPage() {
                 }}
               />
               <div className="subject-card__image-wrap">
-                <Image
-                  alt={card.title.en}
-                  src={card.imageUrl}
-                  width={400}
-                  height={300}
-                  className="subject-card__image"
+                <AnimatedCharacter
+                  className="subject-card__character"
+                  kind={card.character}
+                  size="lg"
                 />
               </div>
               <div className="subject-card__body">
@@ -303,12 +303,10 @@ export default function AcademicsPage() {
                 }}
               />
               <div className="subject-card__image-wrap">
-                <Image
-                  alt={card.title.en}
-                  src={card.imageUrl}
-                  width={400}
-                  height={300}
-                  className="subject-card__image"
+                <AnimatedCharacter
+                  className="subject-card__character"
+                  kind={card.character}
+                  size="lg"
                 />
               </div>
               <div className="subject-card__body">
