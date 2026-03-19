@@ -619,6 +619,106 @@ h4,
    End Kid-Friendly Design Enhancements
    ============================================================ */
 
+.has-motion .reveal-on-scroll {
+  opacity: 0;
+  transform: translate3d(0, 34px, 0) scale(0.985);
+  transition:
+    opacity 720ms cubic-bezier(0.22, 1, 0.36, 1),
+    transform 720ms cubic-bezier(0.22, 1, 0.36, 1);
+  transition-delay: var(--reveal-delay, 0ms);
+  will-change: opacity, transform;
+}
+
+.has-motion .reveal-on-scroll[data-reveal="hero"] {
+  transform: translate3d(0, 26px, 0) scale(0.97);
+}
+
+.has-motion .reveal-on-scroll[data-reveal="intro"] {
+  transform: translate3d(0, 24px, 0) scale(0.99);
+}
+
+.has-motion .reveal-on-scroll[data-reveal="soft"] {
+  transform: translate3d(0, 20px, 0);
+}
+
+.has-motion .reveal-on-scroll[data-reveal="wide"] {
+  transform: translate3d(0, 30px, 0) scale(0.992);
+}
+
+.has-motion .reveal-on-scroll.is-visible {
+  opacity: 1;
+  transform: translate3d(0, 0, 0) scale(1);
+}
+
+.has-motion .page-intro__inner.reveal-on-scroll > *,
+.has-motion .feature-panel.reveal-on-scroll .feature-panel__copy > *,
+.has-motion .story-card.reveal-on-scroll .story-card__body > *,
+.has-motion .portal-card.reveal-on-scroll > * {
+  opacity: 0;
+  transform: translate3d(0, 18px, 0);
+  transition:
+    opacity 520ms cubic-bezier(0.22, 1, 0.36, 1),
+    transform 520ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.has-motion .page-intro__inner.reveal-on-scroll.is-visible > *,
+.has-motion .feature-panel.reveal-on-scroll.is-visible .feature-panel__copy > *,
+.has-motion .story-card.reveal-on-scroll.is-visible .story-card__body > *,
+.has-motion .portal-card.reveal-on-scroll.is-visible > * {
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+}
+
+.has-motion .page-intro__inner.reveal-on-scroll.is-visible > *:nth-child(1),
+.has-motion .feature-panel.reveal-on-scroll.is-visible .feature-panel__copy > *:nth-child(1),
+.has-motion .story-card.reveal-on-scroll.is-visible .story-card__body > *:nth-child(1),
+.has-motion .portal-card.reveal-on-scroll.is-visible > *:nth-child(1) {
+  transition-delay: calc(var(--reveal-delay, 0ms) + 70ms);
+}
+
+.has-motion .page-intro__inner.reveal-on-scroll.is-visible > *:nth-child(2),
+.has-motion .feature-panel.reveal-on-scroll.is-visible .feature-panel__copy > *:nth-child(2),
+.has-motion .story-card.reveal-on-scroll.is-visible .story-card__body > *:nth-child(2),
+.has-motion .portal-card.reveal-on-scroll.is-visible > *:nth-child(2) {
+  transition-delay: calc(var(--reveal-delay, 0ms) + 140ms);
+}
+
+.has-motion .page-intro__inner.reveal-on-scroll.is-visible > *:nth-child(3),
+.has-motion .feature-panel.reveal-on-scroll.is-visible .feature-panel__copy > *:nth-child(3),
+.has-motion .story-card.reveal-on-scroll.is-visible .story-card__body > *:nth-child(3),
+.has-motion .portal-card.reveal-on-scroll.is-visible > *:nth-child(3) {
+  transition-delay: calc(var(--reveal-delay, 0ms) + 210ms);
+}
+
+.has-motion .page-intro__inner.reveal-on-scroll.is-visible > *:nth-child(4),
+.has-motion .feature-panel.reveal-on-scroll.is-visible .feature-panel__copy > *:nth-child(4),
+.has-motion .story-card.reveal-on-scroll.is-visible .story-card__body > *:nth-child(4),
+.has-motion .portal-card.reveal-on-scroll.is-visible > *:nth-child(4) {
+  transition-delay: calc(var(--reveal-delay, 0ms) + 280ms);
+}
+
+.has-motion .page-intro__inner.reveal-on-scroll.is-visible > *:nth-child(5),
+.has-motion .feature-panel.reveal-on-scroll.is-visible .feature-panel__copy > *:nth-child(5),
+.has-motion .story-card.reveal-on-scroll.is-visible .story-card__body > *:nth-child(5),
+.has-motion .portal-card.reveal-on-scroll.is-visible > *:nth-child(5) {
+  transition-delay: calc(var(--reveal-delay, 0ms) + 350ms);
+}
+
+.has-motion .feature-panel.reveal-on-scroll .feature-panel__image,
+.has-motion .story-card.reveal-on-scroll .story-card__image,
+.has-motion .tour-card.reveal-on-scroll .tour-card__image,
+.has-motion .hero-slider.reveal-on-scroll .hero-slider__image {
+  transform: scale(1.06);
+  transition: transform 1100ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.has-motion .feature-panel.reveal-on-scroll.is-visible .feature-panel__image,
+.has-motion .story-card.reveal-on-scroll.is-visible .story-card__image,
+.has-motion .tour-card.reveal-on-scroll.is-visible .tour-card__image,
+.has-motion .hero-slider.reveal-on-scroll.is-visible .hero-slider__image {
+  transform: scale(1);
+}
+
 
 .page-intro,
 .section {
@@ -2022,6 +2122,20 @@ body::before {
 
   .hero__slide:first-child {
     opacity: 1;
+  }
+
+  .has-motion .reveal-on-scroll,
+  .has-motion .page-intro__inner.reveal-on-scroll > *,
+  .has-motion .feature-panel.reveal-on-scroll .feature-panel__copy > *,
+  .has-motion .story-card.reveal-on-scroll .story-card__body > *,
+  .has-motion .portal-card.reveal-on-scroll > *,
+  .has-motion .feature-panel.reveal-on-scroll .feature-panel__image,
+  .has-motion .story-card.reveal-on-scroll .story-card__image,
+  .has-motion .tour-card.reveal-on-scroll .tour-card__image,
+  .has-motion .hero-slider.reveal-on-scroll .hero-slider__image {
+    opacity: 1;
+    transform: none;
+    transition: none;
   }
 }
 

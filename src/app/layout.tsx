@@ -4,6 +4,7 @@ import localFont from "next/font/local";
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { LanguageProvider } from "@/components/language-provider";
+import { PageMotion } from "@/components/page-motion";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
 import { siteMeta } from "@/data/site-content";
@@ -89,6 +90,7 @@ export default function RootLayout({
         suppressHydrationWarning
       >
         <LanguageProvider>
+          <PageMotion />
           <div className="site-backdrop" />
           <SiteHeader />
           <main>{children}</main>
