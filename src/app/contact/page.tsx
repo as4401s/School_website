@@ -1,7 +1,6 @@
 import { ContactForm } from "@/components/contact-form";
 import { LocalizedText } from "@/components/language-provider";
 import { PageIntro } from "@/components/page-intro";
-import { TopicIllustration } from "@/components/topic-illustration";
 import { siteMeta } from "@/data/site-content";
 
 const introEyebrow = {
@@ -21,44 +20,16 @@ const introSummary = {
 
 export default function ContactPage() {
   const mapQuery = encodeURIComponent(siteMeta.eventLocation.en);
-  const schoolPhoneHref = siteMeta.schoolPhone.replace(/-/g, "");
 
   return (
     <>
       <PageIntro eyebrow={introEyebrow} summary={introSummary} title={introTitle} />
 
       <section className="section">
-        <div className="shell contact-mini-grid">
-          <article className="contact-mini-card">
-            <TopicIllustration kind="school" />
-            <LocalizedText as="h2" text={{ en: "Visit the campus", bn: "স্কুলে আসুন" }} />
-            <LocalizedText as="p" text={siteMeta.address} />
-          </article>
-          <article className="contact-mini-card">
-            <TopicIllustration kind="media" />
-            <LocalizedText as="h2" text={{ en: "Email the office", bn: "ইমেল করুন" }} />
-            <p>
-              <a href={`mailto:${siteMeta.schoolEmail}`}>{siteMeta.schoolEmail}</a>
-            </p>
-          </article>
-          <article className="contact-mini-card">
-            <TopicIllustration kind="contact" />
-            <LocalizedText as="h2" text={{ en: "Call for help", bn: "ফোনে যোগাযোগ" }} />
-            <p>
-              <a href={`tel:${schoolPhoneHref}`}>{siteMeta.schoolPhone}</a>
-            </p>
-          </article>
-        </div>
-      </section>
-
-      <section className="section section--tight-top">
         <div className="shell contact-grid">
           <article className="contact-panel stack">
             <LocalizedText as="p" className="eyebrow" text={{ en: "Address", bn: "ঠিকানা" }} />
-            <div className="section-heading">
-              <TopicIllustration kind="contact" />
-              <LocalizedText as="h3" text={{ en: "Visit or write to us", bn: "আমাদের সঙ্গে যোগাযোগ করুন" }} />
-            </div>
+            <LocalizedText as="h3" text={{ en: "Visit or write to us", bn: "আমাদের সঙ্গে যোগাযোগ করুন" }} />
             <LocalizedText as="p" text={siteMeta.address} />
             <div className="chip-row">
               <a className="chip" href={`mailto:${siteMeta.schoolEmail}`}>
@@ -69,10 +40,7 @@ export default function ContactPage() {
 
           <article className="contact-panel stack">
             <LocalizedText as="p" className="eyebrow" text={{ en: "Map", bn: "মানচিত্র" }} />
-            <div className="section-heading">
-              <TopicIllustration kind="school" />
-              <LocalizedText as="h3" text={{ en: "School location", bn: "বিদ্যালয়ের অবস্থান" }} />
-            </div>
+            <LocalizedText as="h3" text={{ en: "School location", bn: "বিদ্যালয়ের অবস্থান" }} />
             <div className="map-frame">
               <iframe
                 allowFullScreen
@@ -96,13 +64,10 @@ export default function ContactPage() {
               className="eyebrow"
               text={{ en: "School Office", bn: "স্কুল অফিস" }}
             />
-            <div className="section-heading">
-              <TopicIllustration kind="contact" />
-              <LocalizedText
-                as="h3"
-                text={{ en: "Public contact and support", bn: "পাবলিক যোগাযোগ ও সহায়তা" }}
-              />
-            </div>
+            <LocalizedText
+              as="h3"
+              text={{ en: "Public contact and support", bn: "পাবলিক যোগাযোগ ও সহায়তা" }}
+            />
             <LocalizedText
               as="p"
               text={{

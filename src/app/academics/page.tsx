@@ -265,10 +265,10 @@ export default function AcademicsPage() {
               <div className="subject-card__image-wrap">
                 <Image
                   alt={card.title.en}
-                  className="subject-card__image"
-                  height={300}
                   src={card.imageUrl}
                   width={400}
+                  height={300}
+                  className="subject-card__image"
                 />
               </div>
               <div className="subject-card__body">
@@ -305,10 +305,10 @@ export default function AcademicsPage() {
               <div className="subject-card__image-wrap">
                 <Image
                   alt={card.title.en}
-                  className="subject-card__image"
-                  height={300}
                   src={card.imageUrl}
                   width={400}
+                  height={300}
+                  className="subject-card__image"
                 />
               </div>
               <div className="subject-card__body">

@@ -143,6 +143,7 @@ export const academicSubjects: Subject[] = [
       bn: "ভিত্তিমূলক শিক্ষার জন্য পড়া, বলা ও অনুধাবনের কার্যক্রম।",
     },
     accent: "var(--tone-sand)",
+    imageUrl: "/media/nano_banana_literacy.png",
   },
   {
     title: { en: "Writing", bn: "লেখা" },
@@ -151,6 +152,7 @@ export const academicSubjects: Subject[] = [
       bn: "নির্দেশিত লিখনচর্চা ও শ্রেণিকক্ষভিত্তিক অনুশীলন।",
     },
     accent: "var(--tone-orange)",
+    imageUrl: "/media/nano_banana_writing.png",
   },
   {
     title: { en: "Mathematics", bn: "গণিত" },
@@ -159,6 +161,7 @@ export const academicSubjects: Subject[] = [
       bn: "সংখ্যা জ্ঞান, সমস্যা সমাধান ও ভিত্তিমূলক গণিতচর্চা।",
     },
     accent: "var(--tone-navy)",
+    imageUrl: "/media/nano_banana_mathematics.png",
   },
   {
     title: { en: "Science", bn: "বিজ্ঞান" },
@@ -167,6 +170,7 @@ export const academicSubjects: Subject[] = [
       bn: "পর্যবেক্ষণ, অনুসন্ধান ও প্রাথমিক বৈজ্ঞানিক শিক্ষা।",
     },
     accent: "var(--tone-green)",
+    imageUrl: "/media/nano_banana_science.png",
   },
   {
     title: { en: "Geography", bn: "ভূগোল" },
@@ -175,6 +179,7 @@ export const academicSubjects: Subject[] = [
       bn: "পরিবেশ, স্থান ও সমাজ সম্পর্কে শিক্ষা।",
     },
     accent: "var(--tone-red)",
+    imageUrl: "/media/nano_banana_geography.png",
   },
   {
     title: { en: "Physical Education", bn: "শারীরিক শিক্ষা" },
@@ -183,5 +188,6 @@ export const academicSubjects: Subject[] = [
       bn: "চলাফেরা, শৃঙ্খলা ও স্বাস্থ্যকর কার্যকলাপ।",
     },
     accent: "var(--tone-ink)",
+    imageUrl: "/media/nano_banana_pe.png",
   },
 ];

@@ -1,21 +1,11 @@
 import { LocalizedText } from "@/components/language-provider";
 import { PageIntro } from "@/components/page-intro";
-import {
-  TopicIllustration,
-  type TopicIllustrationKind,
-} from "@/components/topic-illustration";
 import type { BilingualText } from "@/data/site-content";
 import { siteMeta } from "@/data/site-content";
 
 type DetailBlock = {
   title: BilingualText;
   body: BilingualText;
-};
-
-type AdmissionsQuickCard = {
-  title: BilingualText;
-  summary: BilingualText;
-  character: TopicIllustrationKind;
 };
 
 const introEyebrow = {
@@ -184,41 +174,6 @@ const contactSummary = {
   bn: "ফর্ম সংগ্রহ, নথিপত্র সম্পর্কে স্পষ্ট ধারণা বা ভর্তি-সংক্রান্ত অন্য কোনো প্রয়োজনে পরিবারগুলি সরাসরি স্কুল অফিসের সঙ্গে যোগাযোগ করতে পারেন।",
 };
 
-const admissionsQuickCards: AdmissionsQuickCard[] = [
-  {
-    title: { en: "3 entry levels", bn: "৩টি শ্রেণি" },
-    summary: {
-      en: "Montessori, Nursery, and UKG admissions are currently open.",
-      bn: "মন্টেসরি, নার্সারি ও ইউকেজিতে ভর্তি চলছে।",
-    },
-    character: "application",
-  },
-  {
-    title: { en: "Simple age guide", bn: "সহজ বয়স নির্দেশিকা" },
-    summary: {
-      en: "Families can quickly match age bands before visiting the office.",
-      bn: "অফিসে আসার আগে বয়সভিত্তিক যোগ্যতা সহজে দেখে নেওয়া যাবে।",
-    },
-    character: "results",
-  },
-  {
-    title: { en: "Offline process", bn: "অফলাইন প্রক্রিয়া" },
-    summary: {
-      en: "Download, print, sign, and submit the form directly at school.",
-      bn: "ফর্ম ডাউনলোড, প্রিন্ট, স্বাক্ষর ও স্কুলে সরাসরি জমা দিতে হবে।",
-    },
-    character: "application",
-  },
-  {
-    title: { en: "Documents ready", bn: "নথিপত্র প্রস্তুত রাখুন" },
-    summary: {
-      en: "Keep child, parent, and photo documents ready for a smoother visit.",
-      bn: "শিক্ষার্থী, অভিভাবক ও ছবিসহ প্রয়োজনীয় নথি প্রস্তুত রাখুন।",
-    },
-    character: "media",
-  },
-];
-
 export default function AdmissionsPage() {
   const schoolPhoneHref = siteMeta.schoolPhone.replace(/-/g, "");
 
@@ -227,86 +182,13 @@ export default function AdmissionsPage() {
       <PageIntro eyebrow={introEyebrow} summary={introSummary} title={introTitle} />
 
       <section className="section">
-        <div className="shell grid-4">
-          {admissionsQuickCards.map((card) => (
-            <article className="glance-card glance-card--compact" key={card.title.en}>
-              <TopicIllustration kind={card.character} />
-              <LocalizedText as="h2" text={card.title} />
-              <LocalizedText as="p" text={card.summary} />
-            </article>
-          ))}
-        </div>
-      </section>
-
-      <section className="section section--tight-top">
         <div className="shell grid-2">
           <article className="portal-card stack">
             <LocalizedText as="p" className="eyebrow" text={classesOfferedTitle} />
-            <div className="section-heading">
-              <TopicIllustration kind="school" />
-              <LocalizedText as="h2" className="portal-title" text={classesOfferedTitle} />
-            </div>
+            <LocalizedText as="h2" className="portal-title" text={classesOfferedTitle} />
             <LocalizedText as="p" text={classesOfferedIntro} />
-            <div className="chip-row">
-              {classesOffered.map((item) => (
-                <LocalizedText as="span" className="chip chip--playful" key={item.en} text={item} />
-              ))}
-            </div>
-          </article>
-
-          <article className="portal-card stack">
-            <LocalizedText as="p" className="eyebrow" text={ageCriteriaTitle} />
-            <div className="section-heading">
-              <TopicIllustration kind="results" />
-              <LocalizedText as="h2" className="portal-title" text={ageCriteriaTitle} />
-            </div>
-            <div className="mini-tile-grid">
-              {ageCriteria.map((item) => (
-                <article className="mini-tile" key={item.title.en}>
-                  <TopicIllustration kind="results" />
-                  <LocalizedText as="h3" text={item.title} />
-                  <LocalizedText as="p" text={item.body} />
-                </article>
-              ))}
-            </div>
-          </article>
-        </div>
-      </section>
-
-      <section className="section section--tight-top">
-        <div className="shell stack">
-          <div className="section-header">
-            <div>
-              <LocalizedText as="p" className="eyebrow" text={admissionProcessTitle} />
-              <div className="section-heading">
-                <TopicIllustration kind="application" />
-                <LocalizedText as="h2" text={admissionProcessTitle} />
-              </div>
-            </div>
-          </div>
-          <div className="process-grid">
-            {admissionProcess.map((item, index) => (
-              <article className="process-card" key={item.title.en}>
-                <span className="process-card__number">{index + 1}</span>
-                <TopicIllustration kind={index % 2 === 0 ? "application" : "school"} />
-                <LocalizedText as="h3" text={item.title} />
-                <LocalizedText as="p" text={item.body} />
-              </article>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="section section--tight-top">
-        <div className="shell grid-2">
-          <article className="portal-card stack">
-            <LocalizedText as="p" className="eyebrow" text={documentsTitle} />
-            <div className="section-heading">
-              <TopicIllustration kind="media" />
-              <LocalizedText as="h2" className="portal-title" text={documentsTitle} />
-            </div>
             <ul className="about-list">
-              {requiredDocuments.map((item) => (
+              {classesOffered.map((item) => (
                 <li key={item.en}>
                   <LocalizedText text={item} />
                 </li>
@@ -315,11 +197,58 @@ export default function AdmissionsPage() {
           </article>
 
           <article className="portal-card stack">
+            <LocalizedText as="p" className="eyebrow" text={ageCriteriaTitle} />
+            <LocalizedText as="h2" className="portal-title" text={ageCriteriaTitle} />
+            <ul className="about-list">
+              {ageCriteria.map((item) => (
+                <li key={item.title.en}>
+                  <strong>
+                    <LocalizedText text={item.title} />
+                  </strong>
+                  <span>{": "}</span>
+                  <LocalizedText text={item.body} />
+                </li>
+              ))}
+            </ul>
+          </article>
+
+          <article className="portal-card stack">
+            <LocalizedText as="p" className="eyebrow" text={admissionProcessTitle} />
+            <LocalizedText as="h2" className="portal-title" text={admissionProcessTitle} />
+            <ol
+              className="about-list"
+              style={{ listStyleType: "lower-alpha", paddingLeft: "1.4rem" }}
+            >
+              {admissionProcess.map((item) => (
+                <li key={item.title.en}>
+                  <strong>
+                    <LocalizedText text={item.title} />
+                  </strong>
+                  <LocalizedText as="p" text={item.body} />
+                </li>
+              ))}
+            </ol>
+          </article>
+
+          <article className="portal-card stack">
+            <LocalizedText as="p" className="eyebrow" text={documentsTitle} />
+            <LocalizedText as="h2" className="portal-title" text={documentsTitle} />
+            <ul className="about-list">
+              {requiredDocuments.map((item) => (
+                <li key={item.en}>
+                  <LocalizedText text={item} />
+                </li>
+              ))}
+            </ul>
+          </article>
+        </div>
+      </section>
+
+      <section className="section section--tight-top">
+        <div className="shell grid-2">
+          <article className="portal-card stack">
             <LocalizedText as="p" className="eyebrow" text={formLabel} />
-            <div className="section-heading">
-              <TopicIllustration kind="application" />
-              <LocalizedText as="h2" className="portal-title" text={formTitle} />
-            </div>
+            <LocalizedText as="h2" className="portal-title" text={formTitle} />
             <LocalizedText as="p" text={formSummary} />
             <a
               className="btn btn--accent"
@@ -332,10 +261,7 @@ export default function AdmissionsPage() {
 
           <article className="contact-panel stack">
             <LocalizedText as="p" className="eyebrow" text={contactLabel} />
-            <div className="section-heading">
-              <TopicIllustration kind="contact" />
-              <LocalizedText as="h3" text={contactTitle} />
-            </div>
+            <LocalizedText as="h3" text={contactTitle} />
             <LocalizedText as="p" text={contactSummary} />
             <div className="stack" style={{ gap: "0.75rem" }}>
               <div>

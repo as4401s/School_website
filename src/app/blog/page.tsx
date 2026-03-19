@@ -6,7 +6,6 @@ import {
   LocalizedText,
 } from "@/components/language-provider";
 import { PageIntro } from "@/components/page-intro";
-import { TopicIllustration } from "@/components/topic-illustration";
 import { getNewsPosts, getResults } from "@/lib/content";
 
 const introEyebrow = {
@@ -44,9 +43,9 @@ export default async function BlogPage() {
 
       <section className="section">
         <div className="shell grid-2">
-            {posts.map((post) => (
-              <article className="story-card" key={post.id}>
-                <div className="story-card__image-wrap">
+          {posts.map((post) => (
+            <article className="story-card" key={post.id}>
+              <div className="story-card__image-wrap">
                 <Image
                   alt={post.title.en}
                   className="story-card__image"
@@ -54,14 +53,11 @@ export default async function BlogPage() {
                   sizes="(max-width: 1080px) 100vw, 50vw"
                   src={post.imageUrl}
                 />
-                </div>
-                <div className="story-card__body stack">
-                  <div className="story-card__visual">
-                    <TopicIllustration kind="news" />
-                  </div>
-                  <LocalizedDate className="story-card__meta" value={post.publishedAt} />
-                  <LocalizedText as="h3" text={post.title} />
-                  <LocalizedText as="p" text={post.excerpt} />
+              </div>
+              <div className="story-card__body stack">
+                <LocalizedDate className="story-card__meta" value={post.publishedAt} />
+                <LocalizedText as="h3" text={post.title} />
+                <LocalizedText as="p" text={post.excerpt} />
                 <Link className="btn btn--ghost" href={`/post/${post.slug}`}>
                   <LocalizedText text={readArticle} />
                 </Link>
@@ -76,10 +72,7 @@ export default async function BlogPage() {
           {latestResult ? (
             <article className="portal-card stack">
               <LocalizedText as="p" className="eyebrow" text={upcomingNotice} />
-              <div className="section-heading">
-                <TopicIllustration kind="results" />
-                <LocalizedText as="h3" text={latestResult.title} />
-              </div>
+              <LocalizedText as="h3" text={latestResult.title} />
               <LocalizedText as="p" text={latestResult.summary} />
               <div className="chip-row">
                 <LocalizedText as="span" className="chip" text={latestResult.status} />
