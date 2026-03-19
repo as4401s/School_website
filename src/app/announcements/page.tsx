@@ -1,9 +1,9 @@
-import {
-  AnimatedCharacter,
-  type AnimatedCharacterKind,
-} from "@/components/animated-character";
 import { LocalizedText } from "@/components/language-provider";
 import { PageIntro } from "@/components/page-intro";
+import {
+  TopicIllustration,
+  type TopicIllustrationKind,
+} from "@/components/topic-illustration";
 import type { BilingualText } from "@/data/site-content";
 
 const introEyebrow = {
@@ -23,7 +23,7 @@ const introSummary = {
 
 type AnnouncementPoint = {
   body: BilingualText;
-  character: AnimatedCharacterKind;
+  character: TopicIllustrationKind;
 };
 
 const tuitionTitle = {
@@ -42,28 +42,28 @@ const announcementPoints: AnnouncementPoint[] = [
       en: "New teachers have been appointed. Classes will run 4 days a week for 2.5 hours per session and cover all subjects.",
       bn: "নতুন শিক্ষক নিযুক্ত করা হয়েছে। সপ্তাহে ৪ দিন, প্রতিদিন ২.৫ ঘণ্টা করে সমস্ত বিষয়ে ক্লাস হবে।",
     },
-    character: "book",
+    character: "school",
   },
   {
     body: {
       en: "Each class will have a maximum of 6 students so children can receive closer attention.",
       bn: "প্রতি ক্লাসে সর্বোচ্চ ৬ জন ছাত্র-ছাত্রী থাকবে যাতে প্রত্যেকে বেশি মনোযোগ পায়।",
     },
-    character: "star",
+    character: "results",
   },
   {
     body: {
       en: "A minimal donation will be collected during registration to support responsibility and dignity in the program.",
       bn: "নিবন্ধনের সময় ন্যূনতম অনুদান নেওয়া হবে যাতে অংশগ্রহণে দায়িত্ববোধ ও মর্যাদাবোধ তৈরি হয়।",
     },
-    character: "pencil",
+    character: "application",
   },
   {
     body: {
       en: "Registration will take place in the 3rd and 4th weeks of December and in January. First interested students will get priority.",
       bn: "ডিসেম্বরের ৩য় ও ৪র্থ সপ্তাহে এবং জানুয়ারিতে নাম নিবন্ধন হবে। আগ্রহী ছাত্র-ছাত্রীদের অগ্রাধিকার দেওয়া হবে।",
     },
-    character: "rocket",
+    character: "news",
   },
 ];
 
@@ -81,13 +81,11 @@ export default function AnnouncementsPage() {
         <div className="shell stack">
           <article className="feature-panel feature-panel--admissions">
             <div className="feature-panel__copy">
-              <div className="feature-panel__character-row">
-                <AnimatedCharacter kind="book" size="sm" />
-                <AnimatedCharacter kind="rocket" size="sm" />
-                <AnimatedCharacter kind="star" size="sm" />
-              </div>
               <LocalizedText as="p" className="eyebrow" text={{ en: "Public Notice", bn: "জনসাধারণের নোটিশ" }} />
-              <LocalizedText as="h2" text={tuitionTitle} />
+              <div className="section-heading">
+                <TopicIllustration kind="media" />
+                <LocalizedText as="h2" text={tuitionTitle} />
+              </div>
               <LocalizedText as="p" text={tuitionLead} />
               <div className="chip-row">
                 <LocalizedText
@@ -112,7 +110,7 @@ export default function AnnouncementsPage() {
           <div className="grid-2">
             {announcementPoints.map((item) => (
               <article className="glance-card glance-card--compact" key={item.body.en}>
-                <AnimatedCharacter kind={item.character} size="sm" />
+                <TopicIllustration kind={item.character} />
                 <LocalizedText as="p" text={item.body} />
               </article>
             ))}
@@ -120,10 +118,13 @@ export default function AnnouncementsPage() {
 
           <article className="portal-card stack">
             <LocalizedText as="p" className="eyebrow" text={contactTitle} />
-            <LocalizedText as="h2" className="portal-title" text={contactTitle} />
+            <div className="section-heading">
+              <TopicIllustration kind="contact" />
+              <LocalizedText as="h2" className="portal-title" text={contactTitle} />
+            </div>
             <div className="contact-mini-grid">
               <article className="contact-mini-card">
-                <AnimatedCharacter kind="cloud" size="sm" />
+                <TopicIllustration kind="contact" />
                 <p>
                   <strong>Bandana Mukherjee</strong>
                 </p>
@@ -132,7 +133,7 @@ export default function AnnouncementsPage() {
                 </p>
               </article>
               <article className="contact-mini-card">
-                <AnimatedCharacter kind="globe" size="sm" />
+                <TopicIllustration kind="contact" />
                 <p>
                   <strong>Manisha Roy</strong>
                 </p>

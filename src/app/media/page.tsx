@@ -2,6 +2,10 @@ import Link from "next/link";
 
 import { LocalizedText } from "@/components/language-provider";
 import { PageIntro } from "@/components/page-intro";
+import {
+  TopicIllustration,
+  type TopicIllustrationKind,
+} from "@/components/topic-illustration";
 import type { BilingualText } from "@/data/site-content";
 
 type MediaSection = {
@@ -9,6 +13,7 @@ type MediaSection = {
   title: BilingualText;
   summary: BilingualText;
   action: BilingualText;
+  illustration: TopicIllustrationKind;
 };
 
 const introEyebrow = {
@@ -56,6 +61,7 @@ const mediaSections: MediaSection[] = [
       en: "Open Events & News",
       bn: "অনুষ্ঠান ও সংবাদ দেখুন",
     },
+    illustration: "news",
   },
   {
     href: "/gallery",
@@ -71,6 +77,7 @@ const mediaSections: MediaSection[] = [
       en: "Open Gallery",
       bn: "গ্যালারি দেখুন",
     },
+    illustration: "gallery",
   },
   {
     href: "/announcements",
@@ -86,6 +93,7 @@ const mediaSections: MediaSection[] = [
       en: "Open Announcements",
       bn: "বিজ্ঞপ্তি দেখুন",
     },
+    illustration: "media",
   },
 ];
 
@@ -98,13 +106,17 @@ export default function MediaPage() {
         <div className="shell stack">
           <article className="portal-card stack">
             <LocalizedText as="p" className="eyebrow" text={mediaOverviewLabel} />
-            <LocalizedText as="h2" className="portal-title" text={mediaOverviewTitle} />
+            <div className="section-heading">
+              <TopicIllustration kind="media" />
+              <LocalizedText as="h2" className="portal-title" text={mediaOverviewTitle} />
+            </div>
             <LocalizedText as="p" text={mediaOverviewSummary} />
           </article>
 
           <div className="grid-3">
             {mediaSections.map((section) => (
               <article className="portal-card stack" key={section.href}>
+                <TopicIllustration kind={section.illustration} />
                 <LocalizedText as="p" className="eyebrow" text={introEyebrow} />
                 <LocalizedText as="h3" text={section.title} />
                 <LocalizedText as="p" text={section.summary} />

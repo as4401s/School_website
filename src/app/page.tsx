@@ -2,8 +2,11 @@ import Image from "next/image";
 import type { Route } from "next";
 import Link from "next/link";
 
-import { AnimatedCharacter } from "@/components/animated-character";
 import { HeroCarousel } from "@/components/hero-carousel";
+import {
+  TopicIllustration,
+  type TopicIllustrationKind,
+} from "@/components/topic-illustration";
 import {
   LocalizedDate,
   LocalizedText,
@@ -80,7 +83,7 @@ type HomeMiniCard = {
   summary: BilingualText;
   href: Route;
   action: BilingualText;
-  character: Parameters<typeof AnimatedCharacter>[0]["kind"];
+  character: TopicIllustrationKind;
 };
 
 const homeMiniCards: HomeMiniCard[] = [
@@ -98,7 +101,7 @@ const homeMiniCards: HomeMiniCard[] = [
       en: "Meet KMS",
       bn: "কেএমএস চিনুন",
     },
-    character: "cloud",
+    character: "school",
   },
   {
     title: {
@@ -114,7 +117,7 @@ const homeMiniCards: HomeMiniCard[] = [
       en: "See Learning",
       bn: "শেখার ধরন দেখুন",
     },
-    character: "book",
+    character: "montessori",
   },
   {
     title: {
@@ -130,7 +133,7 @@ const homeMiniCards: HomeMiniCard[] = [
       en: "Apply Now",
       bn: "এখনই দেখুন",
     },
-    character: "rocket",
+    character: "application",
   },
 ];
 
@@ -321,7 +324,7 @@ const whoWeAreMoments: HomeMiniCard[] = [
       en: "Learn More",
       bn: "আরও জানুন",
     },
-    character: "cloud",
+    character: "school",
   },
   {
     title: {
@@ -337,7 +340,7 @@ const whoWeAreMoments: HomeMiniCard[] = [
       en: "See Activities",
       bn: "কার্যক্রম দেখুন",
     },
-    character: "star",
+    character: "montessori",
   },
   {
     title: {
@@ -353,7 +356,7 @@ const whoWeAreMoments: HomeMiniCard[] = [
       en: "Talk to Us",
       bn: "যোগাযোগ করুন",
     },
-    character: "pencil",
+    character: "contact",
   },
 ];
 
@@ -437,8 +440,8 @@ export default async function HomePage() {
 
               <div className="hero-float-card">
                 <div className="hero-float-card__characters">
-                  <AnimatedCharacter kind="rocket" size="md" />
-                  <AnimatedCharacter kind="star" size="sm" />
+                  <TopicIllustration kind="application" size="md" />
+                  <TopicIllustration kind="vision" />
                 </div>
                 <LocalizedText as="h2" text={heroFloatTitle} />
                 <LocalizedText as="p" text={heroFloatSummary} />
@@ -449,7 +452,7 @@ export default async function HomePage() {
           <div className="home-glance-grid">
             {homeMiniCards.map((card) => (
               <article className="glance-card" key={card.title.en}>
-                <AnimatedCharacter kind={card.character} size="sm" />
+                <TopicIllustration kind={card.character} />
                 <LocalizedText as="h2" text={card.title} />
                 <LocalizedText as="p" text={card.summary} />
                 <Link className="btn btn--ghost" href={card.href}>
@@ -465,18 +468,17 @@ export default async function HomePage() {
         <div className="shell">
           <div className="feature-panel">
             <div className="feature-panel__copy">
-              <div className="feature-panel__character-row">
-                <AnimatedCharacter kind="cloud" size="sm" />
-                <AnimatedCharacter kind="star" size="sm" />
+              <div className="section-heading">
+                <TopicIllustration kind="school" />
+                <LocalizedText as="h2" text={whoWeAreTitle} />
               </div>
-              <LocalizedText as="h2" text={whoWeAreTitle} />
               {whoWeAreParagraphs.map((paragraph) => (
                 <LocalizedText as="p" key={paragraph.en} text={paragraph} />
               ))}
               <div className="mini-tile-grid">
                 {whoWeAreMoments.map((card) => (
                   <article className="mini-tile" key={card.title.en}>
-                    <AnimatedCharacter kind={card.character} size="sm" />
+                    <TopicIllustration kind={card.character} />
                     <LocalizedText as="h3" text={card.title} />
                     <LocalizedText as="p" text={card.summary} />
                   </article>
@@ -501,7 +503,18 @@ export default async function HomePage() {
           {learningHighlights.map((item) => (
             <article className="feature-panel" key={item.title.en}>
               <div className="feature-panel__copy">
-                <LocalizedText as="h2" text={item.title} />
+                <div className="section-heading">
+                  <TopicIllustration
+                    kind={
+                      item.title.en === montessoriTitle.en
+                        ? "montessori"
+                        : item.title.en === visionTitle.en
+                          ? "vision"
+                          : "school"
+                    }
+                  />
+                  <LocalizedText as="h2" text={item.title} />
+                </div>
                 {item.lead ? <LocalizedText as="p" text={item.lead} /> : null}
                 {item.paragraphs.map((paragraph) => (
                   <LocalizedText as="p" key={paragraph.en} text={paragraph} />
@@ -549,11 +562,8 @@ export default async function HomePage() {
       <section className="section campus-life-section">
         <div className="shell">
           <div className="section-header">
-            <div className="mascot-float mascot-float--ensemble">
-              <div className="mascot-float__characters">
-                <AnimatedCharacter kind="rocket" size="md" className="mascot-float__character" />
-                <AnimatedCharacter kind="star" size="sm" className="mascot-float__character" />
-              </div>
+            <div className="section-heading">
+              <TopicIllustration kind="gallery" />
               <div>
                 <div className="rainbow-divider" />
                 <LocalizedText as="h2" text={campusLifeTitle} />
@@ -605,8 +615,9 @@ export default async function HomePage() {
 
       <section className="section section--tight-top">
         <div className="shell">
-          <div className="section-header">
-            <div>
+            <div className="section-header">
+            <div className="section-heading">
+              <TopicIllustration kind="results" />
               <LocalizedText
                 as="h2"
                 text={{ en: "Latest Results & Notices", bn: "সর্বশেষ ফলাফল ও নোটিশ" }}
@@ -616,7 +627,10 @@ export default async function HomePage() {
           {latestResult ? (
             <article className="notice-spotlight">
               <div className="notice-spotlight__header">
-                <LocalizedText as="h3" text={latestResult.title} />
+                <div className="section-heading">
+                  <TopicIllustration kind="results" />
+                  <LocalizedText as="h3" text={latestResult.title} />
+                </div>
               </div>
               <LocalizedText
                 as="p"
@@ -659,12 +673,13 @@ export default async function HomePage() {
         <div className="shell">
           <article className="feature-panel feature-panel--admissions">
             <div className="feature-panel__copy">
-              <div className="feature-panel__character-row">
-                <AnimatedCharacter kind="book" size="sm" />
-                <AnimatedCharacter kind="pencil" size="sm" />
-                <AnimatedCharacter kind="cloud" size="sm" />
+              <div className="feature-panel__hero-visual">
+                <div className="section-heading">
+                  <TopicIllustration kind="application" />
+                  <LocalizedText as="h2" text={admissionFormTitle} />
+                </div>
+                <TopicIllustration kind="application" size="md" />
               </div>
-              <LocalizedText as="h2" text={admissionFormTitle} />
               <LocalizedText as="p" text={admissionFormDescription} />
               <ul className="feature-panel__list">
                 {admissionFormSteps.map((item) => (

@@ -1,6 +1,7 @@
 import { notFound } from "next/navigation";
 
 import { LocalizedDate, LocalizedText } from "@/components/language-provider";
+import { TopicIllustration } from "@/components/topic-illustration";
 import { getResultBySlug, getResults } from "@/lib/content";
 
 type EventPageProps = {
@@ -33,7 +34,10 @@ export default async function EventPage({ params }: EventPageProps) {
           className="eyebrow"
           text={{ en: "Results & Notices", bn: "ফলাফল ও নোটিশ" }}
         />
-        <LocalizedText as="h1" className="page-title" text={result.title} />
+        <div className="section-heading">
+          <TopicIllustration kind="results" size="md" />
+          <LocalizedText as="h1" className="page-title" text={result.title} />
+        </div>
         <div className="chip-row">
           <LocalizedText as="span" className="chip" text={result.status} />
           <LocalizedText as="span" className="chip" text={result.location} />

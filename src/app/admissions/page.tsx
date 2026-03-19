@@ -1,9 +1,9 @@
-import {
-  AnimatedCharacter,
-  type AnimatedCharacterKind,
-} from "@/components/animated-character";
 import { LocalizedText } from "@/components/language-provider";
 import { PageIntro } from "@/components/page-intro";
+import {
+  TopicIllustration,
+  type TopicIllustrationKind,
+} from "@/components/topic-illustration";
 import type { BilingualText } from "@/data/site-content";
 import { siteMeta } from "@/data/site-content";
 
@@ -15,7 +15,7 @@ type DetailBlock = {
 type AdmissionsQuickCard = {
   title: BilingualText;
   summary: BilingualText;
-  character: AnimatedCharacterKind;
+  character: TopicIllustrationKind;
 };
 
 const introEyebrow = {
@@ -191,7 +191,7 @@ const admissionsQuickCards: AdmissionsQuickCard[] = [
       en: "Montessori, Nursery, and UKG admissions are currently open.",
       bn: "মন্টেসরি, নার্সারি ও ইউকেজিতে ভর্তি চলছে।",
     },
-    character: "rocket",
+    character: "application",
   },
   {
     title: { en: "Simple age guide", bn: "সহজ বয়স নির্দেশিকা" },
@@ -199,7 +199,7 @@ const admissionsQuickCards: AdmissionsQuickCard[] = [
       en: "Families can quickly match age bands before visiting the office.",
       bn: "অফিসে আসার আগে বয়সভিত্তিক যোগ্যতা সহজে দেখে নেওয়া যাবে।",
     },
-    character: "star",
+    character: "results",
   },
   {
     title: { en: "Offline process", bn: "অফলাইন প্রক্রিয়া" },
@@ -207,7 +207,7 @@ const admissionsQuickCards: AdmissionsQuickCard[] = [
       en: "Download, print, sign, and submit the form directly at school.",
       bn: "ফর্ম ডাউনলোড, প্রিন্ট, স্বাক্ষর ও স্কুলে সরাসরি জমা দিতে হবে।",
     },
-    character: "book",
+    character: "application",
   },
   {
     title: { en: "Documents ready", bn: "নথিপত্র প্রস্তুত রাখুন" },
@@ -215,7 +215,7 @@ const admissionsQuickCards: AdmissionsQuickCard[] = [
       en: "Keep child, parent, and photo documents ready for a smoother visit.",
       bn: "শিক্ষার্থী, অভিভাবক ও ছবিসহ প্রয়োজনীয় নথি প্রস্তুত রাখুন।",
     },
-    character: "pencil",
+    character: "media",
   },
 ];
 
@@ -230,7 +230,7 @@ export default function AdmissionsPage() {
         <div className="shell grid-4">
           {admissionsQuickCards.map((card) => (
             <article className="glance-card glance-card--compact" key={card.title.en}>
-              <AnimatedCharacter kind={card.character} size="sm" />
+              <TopicIllustration kind={card.character} />
               <LocalizedText as="h2" text={card.title} />
               <LocalizedText as="p" text={card.summary} />
             </article>
@@ -242,7 +242,10 @@ export default function AdmissionsPage() {
         <div className="shell grid-2">
           <article className="portal-card stack">
             <LocalizedText as="p" className="eyebrow" text={classesOfferedTitle} />
-            <LocalizedText as="h2" className="portal-title" text={classesOfferedTitle} />
+            <div className="section-heading">
+              <TopicIllustration kind="school" />
+              <LocalizedText as="h2" className="portal-title" text={classesOfferedTitle} />
+            </div>
             <LocalizedText as="p" text={classesOfferedIntro} />
             <div className="chip-row">
               {classesOffered.map((item) => (
@@ -253,11 +256,14 @@ export default function AdmissionsPage() {
 
           <article className="portal-card stack">
             <LocalizedText as="p" className="eyebrow" text={ageCriteriaTitle} />
-            <LocalizedText as="h2" className="portal-title" text={ageCriteriaTitle} />
+            <div className="section-heading">
+              <TopicIllustration kind="results" />
+              <LocalizedText as="h2" className="portal-title" text={ageCriteriaTitle} />
+            </div>
             <div className="mini-tile-grid">
               {ageCriteria.map((item) => (
                 <article className="mini-tile" key={item.title.en}>
-                  <AnimatedCharacter kind="star" size="sm" />
+                  <TopicIllustration kind="results" />
                   <LocalizedText as="h3" text={item.title} />
                   <LocalizedText as="p" text={item.body} />
                 </article>
@@ -272,14 +278,17 @@ export default function AdmissionsPage() {
           <div className="section-header">
             <div>
               <LocalizedText as="p" className="eyebrow" text={admissionProcessTitle} />
-              <LocalizedText as="h2" text={admissionProcessTitle} />
+              <div className="section-heading">
+                <TopicIllustration kind="application" />
+                <LocalizedText as="h2" text={admissionProcessTitle} />
+              </div>
             </div>
           </div>
           <div className="process-grid">
             {admissionProcess.map((item, index) => (
               <article className="process-card" key={item.title.en}>
                 <span className="process-card__number">{index + 1}</span>
-                <AnimatedCharacter kind={index % 2 === 0 ? "book" : "rocket"} size="sm" />
+                <TopicIllustration kind={index % 2 === 0 ? "application" : "school"} />
                 <LocalizedText as="h3" text={item.title} />
                 <LocalizedText as="p" text={item.body} />
               </article>
@@ -292,7 +301,10 @@ export default function AdmissionsPage() {
         <div className="shell grid-2">
           <article className="portal-card stack">
             <LocalizedText as="p" className="eyebrow" text={documentsTitle} />
-            <LocalizedText as="h2" className="portal-title" text={documentsTitle} />
+            <div className="section-heading">
+              <TopicIllustration kind="media" />
+              <LocalizedText as="h2" className="portal-title" text={documentsTitle} />
+            </div>
             <ul className="about-list">
               {requiredDocuments.map((item) => (
                 <li key={item.en}>
@@ -304,7 +316,10 @@ export default function AdmissionsPage() {
 
           <article className="portal-card stack">
             <LocalizedText as="p" className="eyebrow" text={formLabel} />
-            <LocalizedText as="h2" className="portal-title" text={formTitle} />
+            <div className="section-heading">
+              <TopicIllustration kind="application" />
+              <LocalizedText as="h2" className="portal-title" text={formTitle} />
+            </div>
             <LocalizedText as="p" text={formSummary} />
             <a
               className="btn btn--accent"
@@ -317,7 +332,10 @@ export default function AdmissionsPage() {
 
           <article className="contact-panel stack">
             <LocalizedText as="p" className="eyebrow" text={contactLabel} />
-            <LocalizedText as="h3" text={contactTitle} />
+            <div className="section-heading">
+              <TopicIllustration kind="contact" />
+              <LocalizedText as="h3" text={contactTitle} />
+            </div>
             <LocalizedText as="p" text={contactSummary} />
             <div className="stack" style={{ gap: "0.75rem" }}>
               <div>

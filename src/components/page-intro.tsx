@@ -1,4 +1,3 @@
-import { AnimatedCharacter } from "@/components/animated-character";
 import type { BilingualText } from "@/data/site-content";
 import { LocalizedText } from "@/components/language-provider";
 
@@ -16,11 +15,6 @@ export function PageIntro({ eyebrow, title, summary }: PageIntroProps) {
           <LocalizedText as="p" className="eyebrow" text={eyebrow} />
           <LocalizedText as="h1" text={title} />
           <LocalizedText as="p" className="lede" text={summary} />
-        </div>
-        <div className="page-intro__scene">
-          <AnimatedCharacter kind="star" size="sm" />
-          <AnimatedCharacter kind="book" size="md" />
-          <AnimatedCharacter kind="cloud" size="sm" />
         </div>
       </div>
     </section>
