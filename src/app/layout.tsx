@@ -66,7 +66,7 @@ const bengaliFont = localFont({
 export const metadata: Metadata = {
   title: `${siteMeta.shortName} | Krishnarati Montessori School`,
   description:
-    "KMS official website with school information, events, admissions, learning tools, and contact details.",
+    "KMS official website with school information, events, admissions, and contact details.",
   icons: {
     icon: [
       { url: "/favicon-16x16.png", sizes: "16x16", type: "image/png" },

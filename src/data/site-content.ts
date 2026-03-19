@@ -104,7 +104,7 @@ export const navigation: NavigationItem[] = [
       { href: "/announcements", label: { en: "ANNOUNCEMENTS", bn: "বিজ্ঞপ্তি" } },
     ],
   },
-  { href: "/file-share", label: { en: "LEARNING TOOLS", bn: "শিক্ষাসামগ্রী" } },
+
   { href: "/careers", label: { en: "CAREERS", bn: "ক্যারিয়ার" } },
   { href: "/contact", label: { en: "CONTACT", bn: "যোগাযোগ" } },
 ];
@@ -124,13 +124,7 @@ export const heroStats = [
       bn: "উৎসব ও বিদ্যালয়ের আপডেট",
     },
   },
-  {
-    label: { en: "Learning Tools", bn: "শিক্ষাসামগ্রী" },
-    value: {
-      en: "Notices, resources, and results",
-      bn: "নোটিশ, রিসোর্স ও ফলাফলের তথ্য",
-    },
-  },
+
 ];
 
 export const homeHeroSlides = [
