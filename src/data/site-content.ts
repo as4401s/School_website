@@ -96,12 +96,12 @@ export const navigation: NavigationItem[] = [
   { href: "/our-school", label: { en: "ABOUT", bn: "আমাদের সম্পর্কে" } },
   { href: "/academics", label: { en: "LEARNING AT KMS", bn: "কেএমএস-এ শেখা" } },
   { href: "/admissions", label: { en: "ADMISSIONS", bn: "ভর্তি" } },
+  { href: "/announcements", label: { en: "ANNOUNCEMENTS", bn: "বিজ্ঞপ্তি" } },
   {
     label: { en: "MEDIA", bn: "মিডিয়া" },
     children: [
       { href: "/blog", label: { en: "EVENTS & NEWS", bn: "অনুষ্ঠান ও সংবাদ" } },
       { href: "/gallery", label: { en: "GALLERY", bn: "গ্যালারি" } },
-      { href: "/announcements", label: { en: "ANNOUNCEMENTS", bn: "বিজ্ঞপ্তি" } },
     ],
   },
 

@@ -115,7 +115,7 @@ const aboutCards: AboutCard[] = [
         bn: "দলগত মেলামেশার মাধ্যমে মানসিক ও সামাজিক বিকাশে সহায়তা করা",
       },
     ],
-    imageUrl: "/media/tour-2.jpg",
+    imageUrl: "/media/Humaniapota%20School/IMG_3343.jpg",
   },
   {
     title: {
