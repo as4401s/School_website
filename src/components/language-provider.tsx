@@ -59,8 +59,19 @@ export function LocalizedText<TTag extends ElementType = "span">({
 }) {
   const { language } = useLanguage();
   const Component = (as || "span") as ElementType;
+  const content = text[language];
+  const parts = content.split(/(\*\*.*?\*\*)/g);
 
-  return <Component className={className}>{text[language]}</Component>;
+  return (
+    <Component className={className}>
+      {parts.map((part, i) => {
+        if (part.startsWith("**") && part.endsWith("**")) {
+          return <strong key={part + i}>{part.slice(2, -2)}</strong>;
+        }
+        return part;
+      })}
+    </Component>
+  );
 }
 
 export function LocalizedDate({

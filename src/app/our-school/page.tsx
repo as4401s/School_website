@@ -83,7 +83,7 @@ const aboutCards: AboutCard[] = [
     },
     intro: {
       en: "At KMS, early education focuses on building a strong foundation for lifelong learning. We believe that young children learn best when learning is engaging, meaningful, and enjoyable.",
-      bn: "কেএমএস-এ প্রারম্ভিক শিক্ষার মূল লক্ষ্য হল এমন এক দৃঢ় ভিত্তি গড়ে তোলা, যা শিশুর আজীবন শিক্ষাযাত্রাকে শক্তপোক্ত করে। আমাদের বিশ্বাস, ছোটরা সবচেয়ে ভালো শেখে যখন শেখা আনন্দময়, অর্থপূর্ণ এবং মনোযোগ টানে।",
+      bn: "কেএমএস-এ প্রারম্ভিক শিক্ষার মূল লক্ষ্য হল এমন এক দৃঢ় ভিত্তি গড়ে তোলা, যা শিশুর আজীবন শিক্ষাযাত্রাকে শক্তপোক্ত করে। আমাদের বিশ্বাস, ছোটরা সবচেয়ে ভালো শেখে যখন শেখা আনন্দময়, অর্থপূর্ণ এবং মনোযোগ টানে।",
     },
     listIntro: {
       en: "Our approach includes:",

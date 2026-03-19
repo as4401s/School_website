@@ -30,12 +30,12 @@ const introSummary = {
 
 const learningIntroParagraphs: BilingualText[] = [
   {
-    en: "We believe that young children learn best when they are curious and actively involved in the learning process.",
-    bn: "আমাদের বিশ্বাস, ছোট শিশুরা সবচেয়ে ভালো শেখে যখন তাদের মনে কৌতূহল জাগে এবং তারা নিজে সক্রিয়ভাবে শেখার কাজে অংশ নেয়।",
+    en: "**We believe that young children learn best when they are curious and actively involved in the learning process.**",
+    bn: "**আমাদের বিশ্বাস, ছোট শিশুরা সবচেয়ে ভালো শেখে যখন তাদের মনে কৌতূহল জাগে এবং তারা নিজে সক্রিয়ভাবে শেখার কাজে অংশ নেয়।**",
   },
   {
-    en: "Through a variety of carefully designed tools and activities, children experience learning in ways that are engaging, meaningful, and enjoyable.",
-    bn: "যত্নসহকারে পরিকল্পিত নানা উপকরণ ও কার্যক্রমের মাধ্যমে শেখাকে আমরা এমনভাবে উপস্থাপন করি, যা শিশুদের কাছে আনন্দদায়ক, অর্থপূর্ণ এবং অংশগ্রহণমূলক হয়ে ওঠে।",
+    en: "**Through a variety of carefully designed tools and activities, children experience learning in ways that are engaging, meaningful, and enjoyable.**",
+    bn: "**যত্নসহকারে পরিকল্পিত নানা উপকরণ ও কার্যক্রমের মাধ্যমে শেখাকে আমরা এমনভাবে উপস্থাপন করি, যা শিশুদের কাছে আনন্দদায়ক, অর্থপূর্ণ এবং অংশগ্রহণমূলক হয়ে ওঠে।**",
   },
 ];
 

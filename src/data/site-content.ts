@@ -79,12 +79,12 @@ export const siteMeta = {
     bn: "সুরক্ষা সবার আগে: আপনার সন্তানের নিরাপত্তা নিশ্চিত করতে আমাদের বিদ্যালয়ে অতিরিক্ত ব্যবস্থা নেওয়া হয়েছে।",
   },
   address: {
-    en: "4MPP+5XP, Humania Pota, West Bengal 741238, India",
-    bn: "4MPP+5XP, হুমানিয়া পোতা, পশ্চিমবঙ্গ ৭৪১২৩৮, ভারত",
+    en: "Post & Village - Humaniapota, Thakurbari, PS - Gangnapur, Ranaghat - II, Nadia, Pin - 741238",
+    bn: "ডাকঘর ও গ্রাম - হুমানিয়া পোতা, ঠাকুরবাড়ি, থানা - গাংনাপুর, রাণাঘাট - ২, নদীয়া, পিন - ৭৪১২৩৮",
   },
   eventLocation: {
-    en: "4MPP+5XP, Humania Pota, West Bengal 741238, India",
-    bn: "4MPP+5XP, হুমানিয়া পোতা, পশ্চিমবঙ্গ ৭৪১২৩৮, ভারত",
+    en: "Post & Village - Humaniapota, Thakurbari, PS - Gangnapur, Ranaghat - II, Nadia, Pin - 741238",
+    bn: "ডাকঘর ও গ্রাম - হুমানিয়া পোতা, ঠাকুরবাড়ি, থানা - গাংনাপুর, রাণাঘাট - ২, নদীয়া, পিন - ৭৪১২৩৮",
   },
   schoolPhone: "+91-8756339237",
   schoolEmail: "info@kmschool.co.in",
