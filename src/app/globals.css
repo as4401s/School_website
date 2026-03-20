@@ -637,48 +637,99 @@ h4,
 
 .academic-cat-mascot__book-stack {
   position: absolute;
-  right: clamp(10px, 6%, 24px);
-  bottom: clamp(34px, 10%, 48px);
+  right: clamp(-26px, -2vw, 10px);
+  bottom: clamp(18px, 6%, 32px);
   z-index: 3;
   display: flex;
   flex-direction: column-reverse;
   align-items: flex-end;
-  gap: 8px;
-  width: min(42%, 140px);
-  transform: rotate(-4deg);
-  filter: drop-shadow(0 16px 24px rgba(31, 41, 55, 0.18));
+  gap: 12px;
+  width: min(52%, 182px);
+  transform: rotate(-5deg);
+  filter: drop-shadow(0 18px 24px rgba(31, 41, 55, 0.18));
 }
 
 .academic-cat-mascot__book-volume {
   position: relative;
-  height: clamp(24px, 2.6vw, 32px);
+  overflow: hidden;
+  height: clamp(30px, 3.2vw, 40px);
+  padding-right: 18%;
   border-radius: 10px 12px 12px 10px;
-  box-shadow: 0 10px 18px rgba(31, 41, 55, 0.14);
+  border: 1px solid rgba(44, 55, 76, 0.14);
+  box-shadow:
+    0 12px 18px rgba(31, 41, 55, 0.16),
+    inset 0 -4px 0 rgba(31, 41, 55, 0.14),
+    inset 0 3px 0 rgba(255, 255, 255, 0.18);
+}
+
+.academic-cat-mascot__book-volume::before {
+  content: "";
+  position: absolute;
+  top: 3px;
+  left: 8px;
+  bottom: 3px;
+  width: 14%;
+  border-radius: 7px 3px 3px 7px;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.3), rgba(31, 41, 55, 0.08));
+  box-shadow:
+    inset -2px 0 0 rgba(31, 41, 55, 0.12),
+    inset 1px 0 0 rgba(255, 255, 255, 0.3);
+}
+
+.academic-cat-mascot__book-volume::after {
+  content: "";
+  position: absolute;
+  top: 4px;
+  right: 6px;
+  bottom: 4px;
+  width: 18%;
+  border-radius: 4px 8px 8px 4px;
+  background:
+    repeating-linear-gradient(
+      180deg,
+      rgba(216, 199, 168, 0.95) 0 2px,
+      rgba(246, 239, 226, 0.98) 2px 5px
+    );
+  box-shadow:
+    inset 0 0 0 1px rgba(145, 118, 78, 0.08),
+    inset 6px 0 10px rgba(255, 255, 255, 0.26);
 }
 
 .academic-cat-mascot__book-volume span {
   position: absolute;
-  inset: 5px auto 5px 10px;
-  width: 14px;
-  border-radius: 999px;
-  background: rgba(255, 255, 255, 0.78);
+  inset: 7px auto 7px 30px;
+  width: 22px;
+  border-radius: 999px 6px 6px 999px;
+  background: rgba(255, 255, 255, 0.88);
+  box-shadow:
+    30px 0 0 rgba(255, 255, 255, 0.24),
+    58px 0 0 rgba(255, 255, 255, 0.16);
 }
 
 .academic-cat-mascot__book-volume--teal {
   width: 100%;
-  background: linear-gradient(180deg, #59c2bd 0%, #249792 100%);
+  transform: rotate(2deg);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.18), transparent 30%),
+    linear-gradient(180deg, #66d2cc 0%, #238d89 100%);
 }
 
 .academic-cat-mascot__book-volume--gold {
-  width: 84%;
-  margin-right: 6px;
-  background: linear-gradient(180deg, #f0c24e 0%, #cf9828 100%);
+  width: 85%;
+  margin-right: 14px;
+  transform: rotate(-4deg);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.18), transparent 30%),
+    linear-gradient(180deg, #f3c85b 0%, #ca8c1c 100%);
 }
 
 .academic-cat-mascot__book-volume--coral {
-  width: 92%;
-  margin-right: 3px;
-  background: linear-gradient(180deg, #ef8a78 0%, #d55d4b 100%);
+  width: 93%;
+  margin-right: 6px;
+  transform: rotate(1deg);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.18), transparent 30%),
+    linear-gradient(180deg, #ef947f 0%, #d25748 100%);
 }
 
 /* Feature panel heading — colorful left bar accent */
@@ -2383,7 +2434,7 @@ body::before {
 .learning-grid-secondary__mascot {
   position: absolute;
   top: 50%;
-  right: clamp(0px, 1vw, 18px);
+  right: clamp(-104px, -7vw, -44px);
   transform: translateY(-50%);
   display: grid;
   place-items: center;
