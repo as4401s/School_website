@@ -236,6 +236,9 @@ const learningCards: LearningCard[] = [
 ];
 
 export default function AcademicsPage() {
+  const primaryCards = learningCards.slice(0, 3);
+  const secondaryCards = learningCards.slice(3);
+
   return (
     <>
       <PageIntro eyebrow={introEyebrow} summary={introSummary} title={introTitle} />
@@ -252,7 +255,7 @@ export default function AcademicsPage() {
 
       <section className="section section--tight-top">
         <div className="shell grid-3 learning-grid" style={{ alignItems: "stretch" }}>
-          {learningCards.map((card) => (
+          {primaryCards.map((card) => (
             <article className="subject-card subject-card--detail" key={card.title.en}>
               <div
                 style={{
@@ -287,7 +290,50 @@ export default function AcademicsPage() {
               </div>
             </article>
           ))}
-          <div aria-hidden="true" className="learning-grid__mascot">
+        </div>
+      </section>
+
+      <section className="section section--tight-top">
+        <div className="shell learning-grid-secondary-shell">
+          <div className="learning-grid-secondary">
+            {secondaryCards.map((card) => (
+              <article className="subject-card subject-card--detail" key={card.title.en}>
+                <div
+                  style={{
+                    background: card.accent,
+                    height: 10,
+                  }}
+                />
+                <div className="subject-card__image-wrap">
+                  <Image
+                    alt={card.title.en}
+                    src={card.imageUrl}
+                    width={400}
+                    height={300}
+                    className="subject-card__image"
+                  />
+                </div>
+                <div className="subject-card__body">
+                  <LocalizedText as="h3" text={card.title} />
+                  {card.intro.map((paragraph) => (
+                    <LocalizedText as="p" key={paragraph.en} text={paragraph} />
+                  ))}
+                  {card.listIntro ? <LocalizedText as="p" text={card.listIntro} /> : null}
+                  {card.bullets ? (
+                    <ul className="about-list">
+                      {card.bullets.map((item) => (
+                        <li key={item.en}>
+                          <LocalizedText text={item} />
+                        </li>
+                      ))}
+                    </ul>
+                  ) : null}
+                </div>
+              </article>
+            ))}
+          </div>
+
+          <div aria-hidden="true" className="learning-grid-secondary__mascot">
             <AcademicCatMascot variant="reader" />
           </div>
         </div>

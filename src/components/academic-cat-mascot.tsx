@@ -665,10 +665,16 @@ export function AcademicCatMascot({
       ref={rootRef}
     >
       {variant === "reader" ? (
-        <div className="academic-cat-mascot__book" aria-hidden="true">
-          <div className="academic-cat-mascot__book-page academic-cat-mascot__book-page--left" />
-          <div className="academic-cat-mascot__book-spine" />
-          <div className="academic-cat-mascot__book-page academic-cat-mascot__book-page--right" />
+        <div className="academic-cat-mascot__book-stack" aria-hidden="true">
+          <div className="academic-cat-mascot__book-volume academic-cat-mascot__book-volume--teal">
+            <span />
+          </div>
+          <div className="academic-cat-mascot__book-volume academic-cat-mascot__book-volume--gold">
+            <span />
+          </div>
+          <div className="academic-cat-mascot__book-volume academic-cat-mascot__book-volume--coral">
+            <span />
+          </div>
         </div>
       ) : null}
     </div>
