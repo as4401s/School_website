@@ -312,6 +312,14 @@ export default async function HomePage() {
         </div>
       </section>
 
+      <section className="section section--tight-top home-mascot-section">
+        <div className="shell">
+          <div className="home-mascot-stage">
+            <AcademicCatMascot />
+          </div>
+        </div>
+      </section>
+
       <section className="section">
         <div className="shell">
           <HomeTopicShowcase items={homeTopics} />
@@ -336,10 +344,7 @@ export default async function HomePage() {
             </div>
           </div>
 
-          <div className="campus-life-stage">
-            <GallerySlider items={sliderItems} />
-            <AcademicCatMascot />
-          </div>
+          <GallerySlider items={sliderItems} />
         </div>
       </section>
 
