@@ -222,6 +222,7 @@ const homeTopics: HomeTopicItem[] = [
     paragraphs: headTeacherParagraphs,
     teaser: headTeacherGreeting,
     image: {
+      src: "/media/Humaniapota%20School/pricipal.jpg",
       alt: "Placeholder for the head teacher message image",
     },
   },
