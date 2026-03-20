@@ -1361,7 +1361,7 @@ h4,
 
 .home-topic-card__mascot {
   position: absolute;
-  left: clamp(-132px, -8vw, -56px);
+  right: clamp(-140px, -9vw, -72px);
   top: 50%;
   z-index: 2;
   overflow: visible;

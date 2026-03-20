@@ -454,17 +454,6 @@ function createAcademicCatScene(
 
   scene.add(mascot);
 
-  const shadowGeo = new THREE.PlaneGeometry(12, 12);
-  const shadowMat = new THREE.MeshBasicMaterial({
-    color: 0x000000,
-    transparent: true,
-    opacity: 0.1,
-  });
-  const shadow = new THREE.Mesh(shadowGeo, shadowMat);
-  shadow.rotation.x = -Math.PI / 2;
-  shadow.position.y = -2.8;
-  scene.add(shadow);
-
   let mouseX = 0;
   let mouseY = 0;
   let targetX = 0;
@@ -585,9 +574,6 @@ function createAcademicCatScene(
     const activeTailX = -Math.PI / 6 + Math.cos(time * 3) * 0.05;
     const idleTailX = Math.sin(time * 5) * 0.05;
     mascotParts.tail.rotation.x = lerp(activeTailX, idleTailX, idleWeight);
-
-    shadow.scale.setScalar(1 - mascot.position.y * 0.05);
-    shadowMat.opacity = 0.1 - mascot.position.y * 0.02;
 
     renderer.render(scene, camera);
   };
