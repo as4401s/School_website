@@ -4,10 +4,6 @@ import type { Route } from "next";
 import {
   BookOpen,
   FileText,
-  ImageIcon,
-  Mail,
-  MapPin,
-  Newspaper,
   Users,
 } from "lucide-react";
 
@@ -193,41 +189,6 @@ const homeLaunchpadTiles = [
   },
 ];
 
-const homeShortcutLinks = [
-  {
-    href: "/contact" as Route,
-    icon: Mail,
-    label: {
-      en: "Connect",
-      bn: "যোগাযোগ",
-    },
-  },
-  {
-    href: "/gallery" as Route,
-    icon: ImageIcon,
-    label: {
-      en: "Gallery",
-      bn: "গ্যালারি",
-    },
-  },
-  {
-    href: "/our-school" as Route,
-    icon: MapPin,
-    label: {
-      en: "Explore",
-      bn: "চেনা যাক",
-    },
-  },
-  {
-    href: "/announcements" as Route,
-    icon: Newspaper,
-    label: {
-      en: "Notices",
-      bn: "বিজ্ঞপ্তি",
-    },
-  },
-];
-
 const homeTopics: HomeTopicItem[] = [
   {
     title: whoWeAreTitle,
@@ -366,21 +327,6 @@ export default async function HomePage() {
                   >
                     <Icon aria-hidden="true" size={24} strokeWidth={2.2} />
                     <LocalizedText as="span" text={item.label} />
-                  </Link>
-                );
-              })}
-            </div>
-
-            <div className="home-launchpad__shortcuts">
-              {homeShortcutLinks.map((item) => {
-                const Icon = item.icon;
-
-                return (
-                  <Link className="home-shortcut" href={item.href} key={item.label.en}>
-                    <span className="home-shortcut__icon">
-                      <Icon aria-hidden="true" size={24} strokeWidth={2} />
-                    </span>
-                    <LocalizedText as="span" className="home-shortcut__label" text={item.label} />
                   </Link>
                 );
               })}

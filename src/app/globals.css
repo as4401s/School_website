@@ -943,8 +943,7 @@ h4,
 }
 
 .home-launchpad {
-  display: grid;
-  gap: 22px;
+  display: block;
 }
 
 .home-launchpad__band-grid {
@@ -985,49 +984,6 @@ h4,
 
 .home-launchpad__tile--yellow {
   background: #f3bc32;
-}
-
-.home-launchpad__shortcuts {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 22px;
-}
-
-.home-shortcut {
-  display: grid;
-  justify-items: center;
-  gap: 10px;
-  min-width: 122px;
-  color: #7d5b52;
-  text-align: center;
-}
-
-.home-shortcut__icon {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 90px;
-  height: 90px;
-  border-radius: 999px;
-  background:
-    radial-gradient(circle at top left, rgba(255, 255, 255, 0.96), rgba(255, 255, 255, 0.88)),
-    white;
-  border: 1px solid rgba(255, 255, 255, 0.9);
-  box-shadow: 0 18px 34px rgba(224, 166, 132, 0.18);
-  color: #8b6a63;
-  transition: transform 180ms ease, box-shadow 180ms ease;
-}
-
-.home-shortcut:hover .home-shortcut__icon {
-  transform: translateY(-4px);
-  box-shadow: 0 22px 38px rgba(224, 166, 132, 0.24);
-}
-
-.home-shortcut__label {
-  font-family: var(--font-display), var(--font-bengali), var(--font-body), sans-serif;
-  font-size: 0.96rem;
-  letter-spacing: -0.01em;
 }
 
 .hero-slider__dot {
@@ -2940,7 +2896,7 @@ body::before {
   }
 
   .home-launchpad {
-    gap: 16px;
+    display: block;
   }
 
   .home-launchpad__band-grid {
@@ -2951,19 +2907,6 @@ body::before {
   .home-launchpad__tile {
     min-height: 84px;
     font-size: 1.25rem;
-  }
-
-  .home-launchpad__shortcuts {
-    gap: 16px 12px;
-  }
-
-  .home-shortcut {
-    min-width: 104px;
-  }
-
-  .home-shortcut__icon {
-    width: 76px;
-    height: 76px;
   }
 
   .video-reel {
@@ -3512,20 +3455,6 @@ body::before {
     min-height: 76px;
     padding: 14px 16px;
     font-size: 1.05rem;
-  }
-
-  .home-shortcut {
-    min-width: 88px;
-    gap: 8px;
-  }
-
-  .home-shortcut__icon {
-    width: 66px;
-    height: 66px;
-  }
-
-  .home-shortcut__label {
-    font-size: 0.84rem;
   }
 
   .gallery-slider__track {
