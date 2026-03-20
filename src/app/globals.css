@@ -1249,10 +1249,12 @@ h4,
 
 .home-topic-card {
   display: grid;
-  grid-template-columns: minmax(280px, 540px) minmax(280px, 430px);
+  width: min(100%, 1180px);
+  margin: 0 auto;
+  grid-template-columns: minmax(280px, 500px) minmax(360px, 540px);
   justify-content: center;
   align-items: center;
-  gap: clamp(28px, 4vw, 72px);
+  gap: clamp(24px, 3vw, 48px);
   min-height: 0;
 }
 
@@ -1267,12 +1269,12 @@ h4,
 .home-topic-card__media {
   position: relative;
   width: 100%;
-  aspect-ratio: 5 / 4;
+  aspect-ratio: 4 / 3;
   overflow: hidden;
   border-radius: 28px;
   background: rgba(21, 32, 51, 0.06);
   box-shadow: 0 18px 38px rgba(36, 48, 68, 0.1);
-  justify-self: end;
+  justify-self: stretch;
 }
 
 .home-topic-card__image {
@@ -1299,10 +1301,11 @@ h4,
 .home-topic-card__content {
   display: grid;
   justify-items: start;
-  width: min(100%, 420px);
-  gap: 18px;
+  width: 100%;
+  max-width: 540px;
+  gap: 16px;
   padding: 0;
-  justify-self: start;
+  justify-self: stretch;
   border-radius: 28px;
   background: transparent;
   box-shadow: none;
@@ -1310,11 +1313,11 @@ h4,
 }
 
 .home-topic-card--reverse .home-topic-card__content {
-  justify-self: end;
+  justify-self: stretch;
 }
 
 .home-topic-card--reverse .home-topic-card__media {
-  justify-self: start;
+  justify-self: stretch;
 }
 
 .home-topic-card__content h3 {
@@ -1328,15 +1331,11 @@ h4,
 
 .home-topic-card__teaser {
   margin: 0;
-  max-width: 32ch;
+  max-width: 38ch;
   color: var(--ink);
   font-size: 1.04rem;
   font-weight: 400;
-  line-height: 1.82;
-  display: -webkit-box;
-  -webkit-line-clamp: 4;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
+  line-height: 1.78;
 }
 
 .home-topic-card__button {
@@ -2955,7 +2954,7 @@ body::before {
   }
 
   .home-topic-card__media {
-    aspect-ratio: 5 / 4;
+    aspect-ratio: 4 / 3;
   }
 
   .home-topic-card__content {

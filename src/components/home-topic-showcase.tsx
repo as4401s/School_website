@@ -30,6 +30,17 @@ const closeText = {
   bn: "বন্ধ করুন",
 };
 
+function getPreviewSentence(text: string) {
+  const normalized = text.trim().replace(/\s+/g, " ");
+  const sentenceMatch = normalized.match(/^.*?[.!?।](?=\s|$|["')\]])/);
+
+  if (sentenceMatch?.[0]) {
+    return sentenceMatch[0].trim();
+  }
+
+  return normalized;
+}
+
 export function HomeTopicShowcase({ items }: HomeTopicShowcaseProps) {
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
   const { language } = useLanguage();
@@ -51,18 +62,24 @@ export function HomeTopicShowcase({ items }: HomeTopicShowcaseProps) {
   return (
     <>
       <div className="home-topics">
-        {items.map((item, index) => (
-          <article
-            className={`home-topic-card${index % 2 === 1 ? " home-topic-card--reverse" : ""}`}
-            key={item.title.en}
-          >
+        {items.map((item, index) => {
+          const previewText = getPreviewSentence(
+            item.paragraphs[0]?.[language] ?? item.teaser[language],
+          );
+
+          return (
+            <article
+              className={`home-topic-card${index % 2 === 1 ? " home-topic-card--reverse" : ""}`}
+              key={item.title.en}
+            >
+              {/* Keep the preview to one complete sentence before the CTA. */}
             <div className="home-topic-card__media">
               {item.image.src ? (
                 <Image
                   alt={item.image.alt}
                   className="home-topic-card__image"
                   fill
-                  sizes="(max-width: 720px) 100vw, 50vw"
+                  sizes="(max-width: 720px) 100vw, 500px"
                   src={item.image.src}
                 />
               ) : (
@@ -76,7 +93,7 @@ export function HomeTopicShowcase({ items }: HomeTopicShowcaseProps) {
 
             <div className="home-topic-card__content">
               <LocalizedText as="h3" text={item.title} />
-              <p className="home-topic-card__teaser">{item.teaser[language]}</p>
+              <p className="home-topic-card__teaser">{previewText}</p>
               <button
                 className="btn btn--accent home-topic-card__button"
                 onClick={() => setActiveIndex(index)}
@@ -85,8 +102,9 @@ export function HomeTopicShowcase({ items }: HomeTopicShowcaseProps) {
                 <LocalizedText text={moreText} />
               </button>
             </div>
-          </article>
-        ))}
+            </article>
+          );
+        })}
       </div>
 
       {activeItem ? (
@@ -115,7 +133,7 @@ export function HomeTopicShowcase({ items }: HomeTopicShowcaseProps) {
                   alt={activeItem.image.alt}
                   className="home-topic-modal__image"
                   fill
-                  sizes="(max-width: 720px) 100vw, 50vw"
+                  sizes="(max-width: 720px) 100vw, 500px"
                   src={activeItem.image.src}
                 />
               ) : (
