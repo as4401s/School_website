@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 
 import { LocalizedText } from "@/components/language-provider";
@@ -9,6 +10,7 @@ type MediaSection = {
   title: BilingualText;
   summary: BilingualText;
   action: BilingualText;
+  imageSrc: string;
 };
 
 const introEyebrow = {
@@ -56,6 +58,7 @@ const mediaSections: MediaSection[] = [
       en: "Open Events & News",
       bn: "অনুষ্ঠান ও সংবাদ দেখুন",
     },
+    imageSrc: "/media/illustrations/media-events.svg",
   },
   {
     href: "/gallery",
@@ -71,6 +74,7 @@ const mediaSections: MediaSection[] = [
       en: "Open Gallery",
       bn: "গ্যালারি দেখুন",
     },
+    imageSrc: "/media/illustrations/media-gallery.svg",
   },
   {
     href: "/announcements",
@@ -86,6 +90,7 @@ const mediaSections: MediaSection[] = [
       en: "Open Announcements",
       bn: "বিজ্ঞপ্তি দেখুন",
     },
+    imageSrc: "/media/illustrations/media-announcements.svg",
   },
 ];
 
@@ -104,7 +109,16 @@ export default function MediaPage() {
 
           <div className="grid-3">
             {mediaSections.map((section) => (
-              <article className="portal-card stack" key={section.href}>
+              <article className="portal-card stack media-portal-card" key={section.href}>
+                <div className="media-portal-card__art">
+                  <Image
+                    alt={section.title.en}
+                    className="media-card__image"
+                    fill
+                    sizes="(max-width: 1120px) 100vw, 33vw"
+                    src={section.imageSrc}
+                  />
+                </div>
                 <LocalizedText as="p" className="eyebrow" text={introEyebrow} />
                 <LocalizedText as="h3" text={section.title} />
                 <LocalizedText as="p" text={section.summary} />

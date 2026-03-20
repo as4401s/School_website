@@ -291,11 +291,23 @@ export default function OurSchoolPage() {
       </section>
 
       <section className="section section--tight-top">
-        <div className="shell">
-          <div className="section-header">
-            <div>
-              <LocalizedText as="p" className="eyebrow" text={staffLabel} />
-              <LocalizedText as="h2" text={staffTitle} />
+        <div className="shell staff-showcase">
+          <div className="staff-showcase__header">
+            <div className="section-header">
+              <div>
+                <LocalizedText as="p" className="eyebrow" text={staffLabel} />
+                <LocalizedText as="h2" text={staffTitle} />
+              </div>
+            </div>
+
+            <div aria-hidden="true" className="staff-showcase__art">
+              <Image
+                alt=""
+                className="staff-showcase__art-image"
+                height={620}
+                src="/media/illustrations/staff-collage.svg"
+                width={920}
+              />
             </div>
           </div>
 

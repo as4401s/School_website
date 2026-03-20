@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 import { LocalizedText } from "@/components/language-provider";
 import { PageIntro } from "@/components/page-intro";
 import type { BilingualText } from "@/data/site-content";
@@ -182,65 +184,77 @@ export default function AdmissionsPage() {
       <PageIntro eyebrow={introEyebrow} summary={introSummary} title={introTitle} />
 
       <section className="section">
-        <div className="shell grid-2">
-          <article className="portal-card stack">
-            <LocalizedText as="p" className="eyebrow" text={classesOfferedTitle} />
-            <LocalizedText as="h2" className="portal-title" text={classesOfferedTitle} />
-            <LocalizedText as="p" text={classesOfferedIntro} />
-            <ul className="about-list">
-              {classesOffered.map((item) => (
-                <li key={item.en}>
-                  <LocalizedText text={item} />
-                </li>
-              ))}
-            </ul>
-          </article>
+        <div className="shell admissions-overview">
+          <div className="admissions-overview__grid">
+            <article className="portal-card stack">
+              <LocalizedText as="p" className="eyebrow" text={classesOfferedTitle} />
+              <LocalizedText as="h2" className="portal-title" text={classesOfferedTitle} />
+              <LocalizedText as="p" text={classesOfferedIntro} />
+              <ul className="about-list">
+                {classesOffered.map((item) => (
+                  <li key={item.en}>
+                    <LocalizedText text={item} />
+                  </li>
+                ))}
+              </ul>
+            </article>
 
-          <article className="portal-card stack">
-            <LocalizedText as="p" className="eyebrow" text={ageCriteriaTitle} />
-            <LocalizedText as="h2" className="portal-title" text={ageCriteriaTitle} />
-            <ul className="about-list">
-              {ageCriteria.map((item) => (
-                <li key={item.title.en}>
-                  <strong>
-                    <LocalizedText text={item.title} />
-                  </strong>
-                  <span>{": "}</span>
-                  <LocalizedText text={item.body} />
-                </li>
-              ))}
-            </ul>
-          </article>
+            <article className="portal-card stack">
+              <LocalizedText as="p" className="eyebrow" text={ageCriteriaTitle} />
+              <LocalizedText as="h2" className="portal-title" text={ageCriteriaTitle} />
+              <ul className="about-list">
+                {ageCriteria.map((item) => (
+                  <li key={item.title.en}>
+                    <strong>
+                      <LocalizedText text={item.title} />
+                    </strong>
+                    <span>{": "}</span>
+                    <LocalizedText text={item.body} />
+                  </li>
+                ))}
+              </ul>
+            </article>
 
-          <article className="portal-card stack">
-            <LocalizedText as="p" className="eyebrow" text={admissionProcessTitle} />
-            <LocalizedText as="h2" className="portal-title" text={admissionProcessTitle} />
-            <ol
-              className="about-list"
-              style={{ listStyleType: "lower-alpha", paddingLeft: "1.4rem" }}
-            >
-              {admissionProcess.map((item) => (
-                <li key={item.title.en}>
-                  <strong>
-                    <LocalizedText text={item.title} />
-                  </strong>
-                  <LocalizedText as="p" text={item.body} />
-                </li>
-              ))}
-            </ol>
-          </article>
+            <article className="portal-card stack">
+              <LocalizedText as="p" className="eyebrow" text={admissionProcessTitle} />
+              <LocalizedText as="h2" className="portal-title" text={admissionProcessTitle} />
+              <ol
+                className="about-list"
+                style={{ listStyleType: "lower-alpha", paddingLeft: "1.4rem" }}
+              >
+                {admissionProcess.map((item) => (
+                  <li key={item.title.en}>
+                    <strong>
+                      <LocalizedText text={item.title} />
+                    </strong>
+                    <LocalizedText as="p" text={item.body} />
+                  </li>
+                ))}
+              </ol>
+            </article>
 
-          <article className="portal-card stack">
-            <LocalizedText as="p" className="eyebrow" text={documentsTitle} />
-            <LocalizedText as="h2" className="portal-title" text={documentsTitle} />
-            <ul className="about-list">
-              {requiredDocuments.map((item) => (
-                <li key={item.en}>
-                  <LocalizedText text={item} />
-                </li>
-              ))}
-            </ul>
-          </article>
+            <article className="portal-card stack">
+              <LocalizedText as="p" className="eyebrow" text={documentsTitle} />
+              <LocalizedText as="h2" className="portal-title" text={documentsTitle} />
+              <ul className="about-list">
+                {requiredDocuments.map((item) => (
+                  <li key={item.en}>
+                    <LocalizedText text={item} />
+                  </li>
+                ))}
+              </ul>
+            </article>
+          </div>
+
+          <aside aria-hidden="true" className="admissions-overview__art">
+            <Image
+              alt=""
+              className="admissions-overview__art-image"
+              height={960}
+              src="/media/illustrations/admissions-desk.svg"
+              width={760}
+            />
+          </aside>
         </div>
       </section>
 

@@ -6,7 +6,7 @@ import {
   LocalizedText,
 } from "@/components/language-provider";
 import { PageIntro } from "@/components/page-intro";
-import { getNewsPosts, getResults } from "@/lib/content";
+import { getNewsPosts } from "@/lib/content";
 
 const introEyebrow = {
   en: "Events & News",
@@ -28,14 +28,8 @@ const readArticle = {
   bn: "খবরটি পড়ুন",
 };
 
-const upcomingNotice = {
-  en: "Upcoming Notice",
-  bn: "আসন্ন নোটিশ",
-};
-
 export default async function BlogPage() {
-  const [posts, results] = await Promise.all([getNewsPosts(), getResults()]);
-  const latestResult = results[0];
+  const posts = await getNewsPosts();
 
   return (
     <>
@@ -64,25 +58,6 @@ export default async function BlogPage() {
               </div>
             </article>
           ))}
-        </div>
-      </section>
-
-      <section className="section">
-        <div className="shell">
-          {latestResult ? (
-            <article className="portal-card stack">
-              <LocalizedText as="p" className="eyebrow" text={upcomingNotice} />
-              <LocalizedText as="h3" text={latestResult.title} />
-              <LocalizedText as="p" text={latestResult.summary} />
-              <div className="chip-row">
-                <LocalizedText as="span" className="chip" text={latestResult.status} />
-                <LocalizedText as="span" className="chip" text={latestResult.location} />
-              </div>
-              <Link className="btn btn--accent" href={`/events/${latestResult.slug}`}>
-                <LocalizedText text={{ en: "View Notice", bn: "নোটিশ দেখুন" }} />
-              </Link>
-            </article>
-          ) : null}
         </div>
       </section>
     </>
