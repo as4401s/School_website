@@ -3621,6 +3621,15 @@ body::before {
 }
 
 @media (max-width: 720px) {
+  .page-intro__inner h1,
+  .section h2,
+  .section h3,
+  .portal-title,
+  .story-card__body h3,
+  .doc-card__body h3,
+  .portal-card h3 {
+    text-wrap: balance;
+  }
 
   .admissions-overview__grid {
     grid-template-columns: 1fr;
@@ -3659,17 +3668,17 @@ body::before {
   .hero,
   .login-layout,
   .portal-layout {
-    padding: 52px 0;
+    padding: 48px 0;
   }
 
   .stack {
-    gap: 16px;
+    gap: 14px;
   }
 
   .grid-2,
   .grid-3,
   .grid-4 {
-    gap: 18px;
+    gap: 20px;
   }
 
   .home-launchpad-section {
@@ -3686,8 +3695,18 @@ body::before {
   }
 
   .home-launchpad__tile {
-    min-height: 84px;
-    font-size: 1.25rem;
+    min-height: 88px;
+    padding: 18px 20px;
+    font-size: 1.12rem;
+    line-height: 1.2;
+    justify-content: flex-start;
+    text-align: left;
+  }
+
+  .home-launchpad__tile svg {
+    width: 24px;
+    height: 24px;
+    flex: 0 0 auto;
   }
 
   .video-reel {
@@ -3851,13 +3870,14 @@ body::before {
   }
 
   .hero__copy h1 {
-    font-size: clamp(2.2rem, 9vw, 3.6rem);
+    font-size: clamp(2.35rem, 9vw, 3.6rem);
+    line-height: 0.98;
   }
 
   .hero__copy p {
     font-size: 1rem;
     margin-top: 12px;
-    line-height: 1.55;
+    line-height: 1.68;
   }
 
   .hero__actions {
@@ -3895,12 +3915,13 @@ body::before {
   }
 
   .lede {
-    font-size: 0.97rem;
+    font-size: 1rem;
+    line-height: 1.72;
   }
 
   .feature-panel__copy h2,
   .section h2 {
-    font-size: clamp(1.7rem, 6vw, 2.6rem);
+    font-size: clamp(1.85rem, 6.5vw, 2.6rem);
   }
 
   .story-card__body,
@@ -3912,14 +3933,31 @@ body::before {
   .contact-panel,
   .contact-form-card,
   .login-card {
-    padding: 24px;
+    padding: 24px 22px;
     gap: 12px;
+  }
+
+  .feature-panel,
+  .story-card,
+  .tour-card,
+  .doc-card,
+  .gallery-card,
+  .portal-card,
+  .portal-pane,
+  .contact-panel,
+  .contact-form-card,
+  .login-card,
+  .page-intro__inner,
+  .notice-spotlight,
+  .prospectus-panel__copy {
+    border-radius: 24px;
   }
 
   .story-card__body h3,
   .doc-card__body h3,
   .portal-card h3 {
-    font-size: 1.3rem;
+    font-size: 1.34rem;
+    line-height: 1.2;
   }
 
   .subject-card__body {
@@ -3979,7 +4017,7 @@ body::before {
 
   .feature-panel__copy {
     gap: 16px;
-    padding: 28px 24px;
+    padding: 26px 22px;
   }
 
   .feature-panel__image-wrap {
@@ -4028,8 +4066,26 @@ body::before {
   }
 
   .page-intro__inner {
-    padding: 34px 26px 28px;
-    border-radius: 30px;
+    padding: 32px 24px 26px;
+    border-radius: 26px;
+  }
+
+  .page-intro__inner h1 {
+    font-size: clamp(2.25rem, 8vw, 3.2rem);
+    line-height: 1.02;
+  }
+
+  .page-intro__inner .lede,
+  .story-card__body p,
+  .tour-card__body p,
+  .doc-card__body p,
+  .gallery-card__body p,
+  .portal-card p,
+  .portal-pane p,
+  .contact-panel p,
+  .contact-form-card p {
+    font-size: 0.99rem;
+    line-height: 1.72;
   }
 
   .site-header__inner {
@@ -4060,9 +4116,17 @@ body::before {
   }
 
   .social-link--header {
-    width: 42px;
-    height: 42px;
+    width: 44px;
+    height: 44px;
     margin-right: 8px;
+  }
+
+  .social-link--header svg,
+  .social-link--menu svg,
+  .social-link--footer svg,
+  .chip svg {
+    width: 20px;
+    height: 20px;
   }
 
   .site-header__actions .language-toggle {
@@ -4076,8 +4140,11 @@ body::before {
   }
 
   .menu-button {
-    min-height: 42px;
-    padding-inline: 13px;
+    min-height: 44px;
+    min-width: 44px;
+    padding-inline: 14px;
+    border-radius: 16px;
+    box-shadow: 0 12px 26px rgba(36, 48, 68, 0.1);
   }
 
   .menu-button__label {
@@ -4106,17 +4173,35 @@ body::before {
   }
 
   .site-nav__link {
-    font-size: 0.96rem;
+    font-size: 0.98rem;
+    line-height: 1.35;
+  }
+
+  .site-nav__mobile-actions {
+    gap: 12px;
+  }
+
+  .site-nav__mobile-actions .social-link--menu,
+  .site-nav__mobile-actions .btn {
+    min-height: 50px;
+    border-radius: 18px;
+    justify-content: center;
   }
 
   .chip-row {
-    gap: 8px;
+    display: grid;
+    gap: 10px;
   }
 
   .chip {
     width: 100%;
-    justify-content: center;
-    text-align: center;
+    min-height: 48px;
+    padding: 13px 16px;
+    border-radius: 18px;
+    justify-content: flex-start;
+    text-align: left;
+    font-size: 0.94rem;
+    line-height: 1.35;
   }
 
   .gallery-grid-layout {
@@ -4258,18 +4343,31 @@ body::before {
   }
 
   .site-footer__lead {
-    padding-bottom: 32px;
+    padding-bottom: 28px;
   }
 
   .site-footer__brand {
     align-items: flex-start;
     flex-direction: column;
+    gap: 16px;
   }
 
   .site-footer__logo {
     width: 88px;
     height: 88px;
     border-radius: 20px;
+  }
+
+  .site-footer__grid {
+    gap: 18px;
+    padding-top: 28px;
+  }
+
+  .site-footer__block {
+    padding: 18px 18px 20px;
+    border-radius: 22px;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.08);
   }
 
   .site-footer__cta .btn,
@@ -4283,6 +4381,8 @@ body::before {
 
   .site-footer__meta {
     flex-direction: column;
+    gap: 8px;
+    margin-top: 28px;
   }
 }
 
@@ -4317,9 +4417,14 @@ body::before {
 
   .home-launchpad__tile {
     gap: 10px;
-    min-height: 76px;
+    min-height: 78px;
     padding: 14px 16px;
-    font-size: 1.05rem;
+    font-size: 1rem;
+  }
+
+  .home-launchpad__tile svg {
+    width: 20px;
+    height: 20px;
   }
 
   .academic-cat-mascot--default,
@@ -4436,11 +4541,12 @@ body::before {
   }
 
   .hero__copy h1 {
-    font-size: clamp(2rem, 10vw, 3rem);
+    font-size: clamp(2.1rem, 10vw, 3rem);
   }
 
   .hero__copy p {
-    font-size: 0.95rem;
+    font-size: 0.96rem;
+    line-height: 1.68;
   }
 
   .page-intro,
@@ -4448,7 +4554,7 @@ body::before {
   .hero,
   .login-layout,
   .portal-layout {
-    padding: 40px 0;
+    padding: 36px 0;
   }
 
   .story-card__body,
@@ -4460,17 +4566,17 @@ body::before {
   .contact-panel,
   .contact-form-card,
   .login-card {
-    padding: 20px;
+    padding: 20px 18px;
   }
 
   .notice-spotlight,
   .prospectus-panel__copy,
   .page-intro__inner {
-    padding: 22px;
+    padding: 20px 18px;
   }
 
   .feature-panel__copy {
-    padding: 22px;
+    padding: 20px 18px;
   }
 
   .feature-panel__image-wrap--brand,
@@ -4494,9 +4600,9 @@ body::before {
   }
 
   .btn {
-    font-size: 0.88rem;
+    font-size: 0.92rem;
     padding-inline: 18px;
-    min-height: 42px;
+    min-height: 44px;
   }
 
   .eyebrow {
@@ -4514,18 +4620,39 @@ body::before {
     border-radius: 12px;
   }
 
+  .brand-mark__copy strong {
+    font-size: 1rem;
+  }
+
   .site-header__actions .language-toggle__button {
     padding: 0 9px;
     font-size: 0.76rem;
   }
 
   .menu-button {
-    min-height: 40px;
+    min-height: 42px;
     padding-inline: 12px;
+  }
+
+  .social-link--header {
+    width: 42px;
+    height: 42px;
+    margin-right: 6px;
   }
 
   .site-nav {
     width: 100vw;
+  }
+
+  .chip {
+    min-height: 46px;
+    padding: 12px 14px;
+    font-size: 0.92rem;
+  }
+
+  .site-footer__block {
+    padding: 16px 16px 18px;
+    border-radius: 20px;
   }
 
   .gallery-lightbox__caption h3 {
