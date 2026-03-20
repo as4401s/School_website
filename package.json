@@ -23,6 +23,7 @@
     "react": "^19.2.4",
     "react-dom": "^19.2.4",
     "regenerator-runtime": "^0.14.1",
+    "three": "^0.128.0",
     "zod": "^4.3.6"
   },
   "devDependencies": {
@@ -30,6 +31,7 @@
     "@types/node": "^25.3.5",
     "@types/react": "^19.2.14",
     "@types/react-dom": "^19.2.3",
+    "@types/three": "^0.128.0",
     "eslint": "^9.39.4",
     "eslint-config-next": "^16.1.6",
     "typescript": "^5.9.3"

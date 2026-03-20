@@ -1,269 +1,677 @@
 "use client";
 
-import { useEffect, useEffectEvent, useRef } from "react";
+import { useEffect, useRef } from "react";
 
-function clamp(value: number, min: number, max: number) {
-  return Math.min(max, Math.max(min, value));
-}
+import { cn } from "@/lib/utils";
 
-export function AcademicCatMascot() {
-  const rootRef = useRef<HTMLDivElement | null>(null);
-  const pointerRef = useRef({ x: 0, y: 0 });
-  const lookRef = useRef({ x: 0, y: 0 });
-  const idleRef = useRef(0);
-  const lastMoveRef = useRef(0);
+type AcademicCatMascotVariant = "default" | "hero" | "feature" | "compact";
 
-  const renderFrame = useEffectEvent((nowMs: number) => {
-    const root = rootRef.current;
+type AcademicCatMascotProps = {
+  className?: string;
+  variant?: AcademicCatMascotVariant;
+};
 
-    if (!root) {
-      return;
-    }
+function createAcademicCatScene(
+  container: HTMLDivElement,
+  THREE: typeof import("three"),
+) {
+  const COLORS = {
+    catMain: 0x64748b,
+    catWhite: 0xffffff,
+    nosePink: 0xff77a9,
+    eyes: 0xffffff,
+    pupils: 0x1e293b,
+    sparkle: 0xffffff,
+    capBase: 0x1a1a24,
+    tassel: 0xfbbf24,
+    bagMain: 0x3b82f6,
+  };
 
-    if (lastMoveRef.current === 0) {
-      lastMoveRef.current = nowMs;
-    }
-
-    const time = nowMs / 1000;
-    const idleTarget = nowMs - lastMoveRef.current > 2600 ? 1 : 0;
-    const idleLerp = idleTarget > idleRef.current ? 0.03 : 0.08;
-
-    idleRef.current += (idleTarget - idleRef.current) * idleLerp;
-
-    const followStrength = 0.115 - idleRef.current * 0.035;
-    lookRef.current.x += (pointerRef.current.x - lookRef.current.x) * followStrength;
-    lookRef.current.y += (pointerRef.current.y - lookRef.current.y) * followStrength;
-
-    const bodyBob = Math.sin(time * 2.35) * (2.2 - idleRef.current * 0.8);
-    const headNod = Math.sin(time * 1.8 + 0.5) * 1.75;
-    const tailSwing = Math.sin(time * (2.7 + idleRef.current * 1.9)) * (15 + idleRef.current * 14);
-    const pawPhase = idleRef.current > 0.04 ? (Math.sin(time * 8.2) * 0.5 + 0.5) : 0;
-    const lickPhase = idleRef.current > 0.04 ? (Math.sin(time * 8.2 + 0.9) * 0.5 + 0.5) : 0;
-    const blinkGate = Math.max(0, Math.sin(time * 0.82 + Math.sin(time * 0.19) * 0.7) - 0.94);
-    const blink = blinkGate / 0.06;
-
-    root.style.setProperty("--cat-look-x", lookRef.current.x.toFixed(4));
-    root.style.setProperty("--cat-look-y", lookRef.current.y.toFixed(4));
-    root.style.setProperty("--cat-idle", idleRef.current.toFixed(4));
-    root.style.setProperty("--cat-body-bob", `${bodyBob.toFixed(2)}px`);
-    root.style.setProperty("--cat-head-nod", `${headNod.toFixed(2)}deg`);
-    root.style.setProperty("--cat-tail-swing", `${tailSwing.toFixed(2)}deg`);
-    root.style.setProperty("--cat-paw-phase", pawPhase.toFixed(4));
-    root.style.setProperty("--cat-lick-phase", lickPhase.toFixed(4));
-    root.style.setProperty("--cat-blink", clamp(blink, 0, 1).toFixed(4));
+  const getSize = () => ({
+    width: Math.max(container.clientWidth, 1),
+    height: Math.max(container.clientHeight, 1),
   });
 
-  useEffect(() => {
-    const handlePointerMove = (event: PointerEvent) => {
-      pointerRef.current = {
-        x: clamp((event.clientX / window.innerWidth) * 2 - 1, -1, 1),
-        y: clamp((event.clientY / window.innerHeight) * 2 - 1, -1, 1),
+  const scene = new THREE.Scene();
+  scene.background = null;
+
+  const initialSize = getSize();
+  const camera = new THREE.PerspectiveCamera(
+    40,
+    initialSize.width / initialSize.height,
+    0.1,
+    100,
+  );
+  camera.position.z = 18;
+  camera.position.y = 1;
+  camera.position.x = 0;
+
+  const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+  renderer.setSize(initialSize.width, initialSize.height);
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+  renderer.shadowMap.enabled = true;
+  renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+  renderer.domElement.className = "academic-cat-mascot__canvas";
+  container.appendChild(renderer.domElement);
+
+  const ambientLight = new THREE.AmbientLight(0xffffff, 0.45);
+  scene.add(ambientLight);
+
+  const mainLight = new THREE.DirectionalLight(0xffffff, 0.65);
+  mainLight.position.set(8, 12, 10);
+  mainLight.castShadow = true;
+  mainLight.shadow.mapSize.width = 2048;
+  mainLight.shadow.mapSize.height = 2048;
+  mainLight.shadow.bias = -0.001;
+  scene.add(mainLight);
+
+  const fillLight = new THREE.DirectionalLight(0xe0e7ff, 0.5);
+  fillLight.position.set(-8, 0, 5);
+  scene.add(fillLight);
+
+  const rimLight = new THREE.DirectionalLight(0xffd700, 0.4);
+  rimLight.position.set(0, 5, -10);
+  scene.add(rimLight);
+
+  const mascot = new THREE.Group();
+  const mascotParts: Record<string, any> = {};
+
+  const catMat = new THREE.MeshStandardMaterial({
+    color: COLORS.catMain,
+    roughness: 0.8,
+  });
+  const whiteMat = new THREE.MeshStandardMaterial({
+    color: COLORS.catWhite,
+    roughness: 0.8,
+  });
+  const pinkMat = new THREE.MeshStandardMaterial({
+    color: COLORS.nosePink,
+    roughness: 0.6,
+  });
+  const eyeMat = new THREE.MeshStandardMaterial({
+    color: COLORS.eyes,
+    roughness: 0.1,
+  });
+  const pupilMat = new THREE.MeshStandardMaterial({
+    color: COLORS.pupils,
+    roughness: 0.1,
+  });
+  const capMat = new THREE.MeshStandardMaterial({
+    color: COLORS.capBase,
+    roughness: 0.9,
+  });
+  const bagMat = new THREE.MeshStandardMaterial({
+    color: COLORS.bagMain,
+    roughness: 0.7,
+  });
+
+  const bodyGroup = new THREE.Group();
+  mascot.add(bodyGroup);
+  mascotParts.body = bodyGroup;
+
+  const bodyGeo = new THREE.SphereGeometry(1.8, 64, 64);
+  const body = new THREE.Mesh(bodyGeo, catMat);
+  body.scale.set(1, 1.15, 0.9);
+  body.position.y = -1;
+  body.castShadow = true;
+  bodyGroup.add(body);
+
+  const bellyGeo = new THREE.SphereGeometry(1.5, 64, 64);
+  const belly = new THREE.Mesh(bellyGeo, whiteMat);
+  belly.scale.set(0.9, 1, 0.6);
+  belly.position.set(0, -1.2, 1);
+  bodyGroup.add(belly);
+
+  const bagGroup = new THREE.Group();
+  bagGroup.position.set(0, -0.6, -1.5);
+
+  const bagMainGeo = new THREE.SphereGeometry(1.1, 64, 64);
+  bagMainGeo.scale(1, 1.2, 0.5);
+  const bagMain = new THREE.Mesh(bagMainGeo, bagMat);
+  bagMain.castShadow = true;
+  bagGroup.add(bagMain);
+
+  const bagPocketGeo = new THREE.SphereGeometry(0.8, 64, 64);
+  bagPocketGeo.scale(1, 0.8, 0.4);
+  const bagPocket = new THREE.Mesh(bagPocketGeo, bagMat);
+  bagPocket.position.set(0, -0.4, -0.5);
+  bagGroup.add(bagPocket);
+  bodyGroup.add(bagGroup);
+
+  const pawGeo = new THREE.SphereGeometry(0.5, 64, 64);
+
+  const leftArmGroup = new THREE.Group();
+  leftArmGroup.position.set(-1.6, -0.2, 0.5);
+  const leftArm = new THREE.Mesh(pawGeo, whiteMat);
+  leftArm.scale.set(1, 1.4, 1);
+  leftArm.position.y = -0.5;
+  leftArmGroup.add(leftArm);
+  bodyGroup.add(leftArmGroup);
+  mascotParts.leftArm = leftArmGroup;
+
+  const rightArmGroup = new THREE.Group();
+  rightArmGroup.position.set(1.6, -0.2, 0.5);
+  const rightArm = new THREE.Mesh(pawGeo, whiteMat);
+  rightArm.scale.set(1, 1.4, 1);
+  rightArm.position.y = -0.5;
+  rightArmGroup.add(rightArm);
+  bodyGroup.add(rightArmGroup);
+  mascotParts.rightArm = rightArmGroup;
+
+  function createFoot() {
+    const footGroup = new THREE.Group();
+    const foot = new THREE.Mesh(pawGeo, whiteMat);
+    foot.scale.set(1.1, 1.4, 1.2);
+    foot.position.y = -0.5;
+    footGroup.add(foot);
+
+    const beanGeo = new THREE.SphereGeometry(0.12, 32, 32);
+
+    const mainPad = new THREE.Mesh(
+      new THREE.SphereGeometry(0.2, 32, 32),
+      pinkMat,
+    );
+    mainPad.scale.set(1.2, 1, 0.5);
+    mainPad.position.set(0, -1, 0.5);
+    mainPad.rotation.x = Math.PI / 4;
+    footGroup.add(mainPad);
+
+    const toe1 = new THREE.Mesh(beanGeo, pinkMat);
+    toe1.position.set(-0.25, -0.7, 0.55);
+    footGroup.add(toe1);
+
+    const toe2 = new THREE.Mesh(beanGeo, pinkMat);
+    toe2.position.set(0, -0.65, 0.6);
+    footGroup.add(toe2);
+
+    const toe3 = new THREE.Mesh(beanGeo, pinkMat);
+    toe3.position.set(0.25, -0.7, 0.55);
+    footGroup.add(toe3);
+
+    return footGroup;
+  }
+
+  const leftLegGroup = new THREE.Group();
+  leftLegGroup.position.set(-1, -1.8, 0.2);
+  leftLegGroup.add(createFoot());
+  bodyGroup.add(leftLegGroup);
+  mascotParts.leftLeg = leftLegGroup;
+
+  const rightLegGroup = new THREE.Group();
+  rightLegGroup.position.set(1, -1.8, 0.2);
+  rightLegGroup.add(createFoot());
+  bodyGroup.add(rightLegGroup);
+  mascotParts.rightLeg = rightLegGroup;
+
+  const tailGroup = new THREE.Group();
+  tailGroup.position.set(0, -1.6, -1.2);
+  const tailGeo = new THREE.SphereGeometry(0.75, 64, 64);
+  const tail = new THREE.Mesh(tailGeo, catMat);
+  tail.scale.set(1, 3.5, 1.2);
+  tail.position.set(0, 1.8, -0.6);
+  tail.rotation.x = -Math.PI / 3.5;
+  tailGroup.add(tail);
+  bodyGroup.add(tailGroup);
+  mascotParts.tail = tailGroup;
+
+  const headGroup = new THREE.Group();
+  headGroup.position.y = 1;
+  mascot.add(headGroup);
+  mascotParts.head = headGroup;
+
+  const headGeo = new THREE.SphereGeometry(2.2, 64, 64);
+  const head = new THREE.Mesh(headGeo, catMat);
+  head.scale.set(1.3, 0.95, 1.1);
+  head.castShadow = true;
+  headGroup.add(head);
+
+  const earGeo = new THREE.ConeGeometry(0.6, 1.4, 64);
+  const innerEarGeo = new THREE.ConeGeometry(0.35, 1, 64);
+
+  const leftEar = new THREE.Group();
+  leftEar.position.set(-1.6, 1.8, 0.2);
+  leftEar.rotation.z = 0.3;
+  leftEar.rotation.x = -0.1;
+  const leftEarOuter = new THREE.Mesh(earGeo, catMat);
+  const leftEarInner = new THREE.Mesh(innerEarGeo, pinkMat);
+  leftEarInner.position.set(0, -0.1, 0.28);
+  leftEar.add(leftEarOuter, leftEarInner);
+  headGroup.add(leftEar);
+
+  const rightEar = new THREE.Group();
+  rightEar.position.set(1.6, 1.8, 0.2);
+  rightEar.rotation.z = -0.3;
+  rightEar.rotation.x = -0.1;
+  const rightEarOuter = new THREE.Mesh(earGeo, catMat);
+  const rightEarInner = new THREE.Mesh(innerEarGeo, pinkMat);
+  rightEarInner.position.set(0, -0.1, 0.28);
+  rightEar.add(rightEarOuter, rightEarInner);
+  headGroup.add(rightEar);
+
+  const faceGroup = new THREE.Group();
+  headGroup.add(faceGroup);
+
+  const snoutGeo = new THREE.SphereGeometry(0.9, 64, 64);
+  const snout = new THREE.Mesh(snoutGeo, whiteMat);
+  snout.scale.set(1.3, 0.75, 0.4);
+  snout.position.set(0, -0.5, 2.2);
+  faceGroup.add(snout);
+
+  const noseGeo = new THREE.SphereGeometry(0.15, 32, 32);
+  const nose = new THREE.Mesh(noseGeo, pinkMat);
+  nose.scale.set(1.2, 0.8, 0.6);
+  nose.position.set(0, -0.35, 2.55);
+  faceGroup.add(nose);
+
+  const mouthsGroup = new THREE.Group();
+  faceGroup.add(mouthsGroup);
+  mascotParts.mouths = {};
+
+  const mouthMat = new THREE.MeshBasicMaterial({ color: 0x222222 });
+  const insideMouthMat = new THREE.MeshBasicMaterial({ color: 0x1a0f14 });
+
+  const standardMouth = new THREE.Group();
+  const mouthGeo = new THREE.TorusGeometry(0.18, 0.04, 32, 64, Math.PI);
+  const leftMouth = new THREE.Mesh(mouthGeo, mouthMat);
+  leftMouth.rotation.x = Math.PI;
+  leftMouth.position.set(-0.18, -0.55, 2.5);
+  const rightMouth = new THREE.Mesh(mouthGeo, mouthMat);
+  rightMouth.rotation.x = Math.PI;
+  rightMouth.position.set(0.18, -0.55, 2.5);
+  standardMouth.add(leftMouth, rightMouth);
+  mouthsGroup.add(standardMouth);
+  mascotParts.mouths.standard = standardMouth;
+
+  const tongueMouth = new THREE.Group();
+  tongueMouth.add(leftMouth.clone(), rightMouth.clone());
+  const tongueGeo = new THREE.SphereGeometry(0.12, 32, 32);
+  const tongue = new THREE.Mesh(tongueGeo, pinkMat);
+  tongue.scale.set(1, 1.5, 0.5);
+  tongue.position.set(0, -0.7, 2.52);
+  tongue.rotation.x = -0.2;
+  tongueMouth.add(tongue);
+  mouthsGroup.add(tongueMouth);
+  mascotParts.mouths.tongue = tongueMouth;
+  mascotParts.tongueMesh = tongue;
+
+  const openMouth = new THREE.Group();
+  const cavity = new THREE.Mesh(
+    new THREE.SphereGeometry(0.25, 32, 32),
+    insideMouthMat,
+  );
+  cavity.scale.set(1.4, 1.2, 0.2);
+  cavity.position.set(0, -0.6, 2.51);
+  openMouth.add(cavity);
+  const insideTongue = new THREE.Mesh(
+    new THREE.SphereGeometry(0.15, 32, 32),
+    pinkMat,
+  );
+  insideTongue.scale.set(1.2, 0.8, 0.4);
+  insideTongue.position.set(0, -0.75, 2.54);
+  openMouth.add(insideTongue);
+  mouthsGroup.add(openMouth);
+  mascotParts.mouths.open = openMouth;
+
+  const surprisedMouth = new THREE.Group();
+  const surprisedMesh = new THREE.Mesh(
+    new THREE.TorusGeometry(0.1, 0.04, 16, 32),
+    mouthMat,
+  );
+  surprisedMesh.position.set(0, -0.6, 2.52);
+  surprisedMouth.add(surprisedMesh);
+  mouthsGroup.add(surprisedMouth);
+  mascotParts.mouths.surprised = surprisedMouth;
+
+  mascotParts.setExpression = (expression: string) => {
+    Object.values(
+      mascotParts.mouths as Record<string, { visible: boolean }>,
+    ).forEach((mouth) => {
+      mouth.visible = false;
+    });
+
+    if (mascotParts.mouths[expression]) {
+      mascotParts.mouths[expression].visible = true;
+    }
+  };
+  mascotParts.setExpression("standard");
+
+  const whiskerGeo = new THREE.CylinderGeometry(0.02, 0.02, 1.2, 16);
+  const whiskerMat = new THREE.MeshBasicMaterial({ color: 0xdddddd });
+  for (let i = 0; i < 2; i += 1) {
+    const leftWhisker = new THREE.Mesh(whiskerGeo, whiskerMat);
+    leftWhisker.position.set(-1.4, -0.4 - i * 0.2, 2.1);
+    leftWhisker.rotation.z = Math.PI / 2 + (i * 0.1 - 0.05);
+    leftWhisker.rotation.y = 0.2;
+    faceGroup.add(leftWhisker);
+
+    const rightWhisker = new THREE.Mesh(whiskerGeo, whiskerMat);
+    rightWhisker.position.set(1.4, -0.4 - i * 0.2, 2.1);
+    rightWhisker.rotation.z = Math.PI / 2 - (i * 0.1 - 0.05);
+    rightWhisker.rotation.y = -0.2;
+    faceGroup.add(rightWhisker);
+  }
+
+  const eyeGeo = new THREE.SphereGeometry(0.5, 64, 64);
+  const leftEye = new THREE.Mesh(eyeGeo, eyeMat);
+  leftEye.position.set(-1, 0.3, 2.15);
+  leftEye.scale.set(1.2, 1.7, 0.3);
+  leftEye.rotation.y = -0.25;
+  leftEye.rotation.z = 0.05;
+  faceGroup.add(leftEye);
+
+  const rightEye = new THREE.Mesh(eyeGeo, eyeMat);
+  rightEye.position.set(1, 0.3, 2.15);
+  rightEye.scale.set(1.2, 1.7, 0.3);
+  rightEye.rotation.y = 0.25;
+  rightEye.rotation.z = -0.05;
+  faceGroup.add(rightEye);
+
+  const pupilsGroup = new THREE.Group();
+  faceGroup.add(pupilsGroup);
+  mascotParts.pupils = pupilsGroup;
+
+  function createPupil() {
+    const pupilGroup = new THREE.Group();
+
+    const blackPart = new THREE.Mesh(
+      new THREE.SphereGeometry(0.35, 64, 64),
+      pupilMat,
+    );
+    blackPart.scale.set(1.1, 1.6, 0.1);
+    pupilGroup.add(blackPart);
+
+    const sparkleMat = new THREE.MeshBasicMaterial({ color: COLORS.sparkle });
+
+    const bigSparkle = new THREE.Mesh(
+      new THREE.SphereGeometry(0.12, 32, 32),
+      sparkleMat,
+    );
+    bigSparkle.position.set(0.12, 0.18, 0.05);
+    bigSparkle.scale.set(0.8, 0.8, 0.5);
+    pupilGroup.add(bigSparkle);
+
+    const smallSparkle = new THREE.Mesh(
+      new THREE.SphereGeometry(0.05, 32, 32),
+      sparkleMat,
+    );
+    smallSparkle.position.set(-0.12, -0.1, 0.05);
+    smallSparkle.scale.set(0.8, 0.8, 0.5);
+    pupilGroup.add(smallSparkle);
+
+    return pupilGroup;
+  }
+
+  const leftPupil = createPupil();
+  leftPupil.position.set(-1, 0.3, 2.34);
+  leftPupil.rotation.y = -0.25;
+  leftPupil.rotation.z = 0.05;
+  pupilsGroup.add(leftPupil);
+
+  const rightPupil = createPupil();
+  rightPupil.position.set(1, 0.3, 2.34);
+  rightPupil.rotation.y = 0.25;
+  rightPupil.rotation.z = -0.05;
+  pupilsGroup.add(rightPupil);
+
+  const capGroup = new THREE.Group();
+  capGroup.position.set(0, 2, 0.2);
+  capGroup.rotation.x = -0.1;
+  capGroup.rotation.z = 0.1;
+  const capSkull = new THREE.Mesh(
+    new THREE.CylinderGeometry(1.2, 1.2, 0.4, 64),
+    capMat,
+  );
+  capGroup.add(capSkull);
+
+  const capBoard = new THREE.Mesh(
+    new THREE.BoxGeometry(3.6, 0.1, 3.6),
+    capMat,
+  );
+  capBoard.position.y = 0.25;
+  capBoard.castShadow = true;
+  capGroup.add(capBoard);
+
+  const tasselMat = new THREE.MeshStandardMaterial({
+    color: COLORS.tassel,
+    roughness: 0.4,
+  });
+  const tasselButton = new THREE.Mesh(
+    new THREE.SphereGeometry(0.15, 32, 32),
+    tasselMat,
+  );
+  tasselButton.position.y = 0.35;
+  capGroup.add(tasselButton);
+
+  const tasselString = new THREE.Mesh(
+    new THREE.CylinderGeometry(0.03, 0.03, 1.6, 16),
+    tasselMat,
+  );
+  tasselString.position.set(1.6, -0.4, 1.6);
+  tasselString.rotation.x = 0.2;
+  tasselString.rotation.z = -0.2;
+  capGroup.add(tasselString);
+  headGroup.add(capGroup);
+
+  scene.add(mascot);
+
+  const shadowGeo = new THREE.PlaneGeometry(12, 12);
+  const shadowMat = new THREE.MeshBasicMaterial({
+    color: 0x000000,
+    transparent: true,
+    opacity: 0.1,
+  });
+  const shadow = new THREE.Mesh(shadowGeo, shadowMat);
+  shadow.rotation.x = -Math.PI / 2;
+  shadow.position.y = -2.8;
+  scene.add(shadow);
+
+  let mouseX = 0;
+  let mouseY = 0;
+  let targetX = 0;
+  let targetY = 0;
+  let lastMoveTime = Date.now();
+  let idleWeight = 0;
+  let frameId = 0;
+
+  const handleMouseMove = (event: MouseEvent) => {
+    mouseX = (event.clientX / window.innerWidth) * 2 - 1;
+    mouseY = -(event.clientY / window.innerHeight) * 2 + 1;
+    lastMoveTime = Date.now();
+  };
+
+  const resize = () => {
+    const { width, height } = getSize();
+    camera.aspect = width / height;
+    camera.updateProjectionMatrix();
+    renderer.setSize(width, height);
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+  };
+
+  const clock = new THREE.Clock();
+  const { lerp } = THREE.MathUtils;
+
+  const animate = () => {
+    frameId = window.requestAnimationFrame(animate);
+
+    const time = clock.getElapsedTime();
+
+    targetX += (mouseX - targetX) * 0.08;
+    targetY += (mouseY - targetY) * 0.08;
+
+    const timeSinceMove = (Date.now() - lastMoveTime) / 1000;
+    if (timeSinceMove > 3) {
+      idleWeight = lerp(idleWeight, 1, 0.03);
+    } else {
+      idleWeight = lerp(idleWeight, 0, 0.08);
+    }
+
+    const headVelocity = Math.sqrt(
+      (mouseX - targetX) ** 2 + (mouseY - targetY) ** 2,
+    );
+
+    if (idleWeight > 0.5) {
+      mascotParts.setExpression("tongue");
+    } else if (headVelocity > 0.6) {
+      mascotParts.setExpression("surprised");
+    } else if (headVelocity > 0.1) {
+      mascotParts.setExpression("open");
+    } else {
+      mascotParts.setExpression("standard");
+    }
+
+    mascotParts.mouths.standard.scale.set(1, 1, 1);
+    mascotParts.mouths.standard.position.y = 0;
+    mascotParts.tongueMesh.scale.y = 1.5 + Math.abs(Math.sin(time * 8)) * 0.8;
+    mascotParts.tongueMesh.rotation.x = -0.2 - Math.sin(time * 8) * 0.2;
+    mascotParts.mouths.open.scale.y = 1 + Math.abs(Math.sin(time * 10)) * 0.2;
+    mascotParts.mouths.open.position.y = Math.sin(time * 10) * 0.02;
+    mascotParts.mouths.surprised.scale.set(1, 1, 1);
+
+    const activeBodyY = 0.5 + Math.sin(time * 2) * 0.05;
+    const idleBodyY = -0.5;
+    mascot.position.y = lerp(activeBodyY, idleBodyY, idleWeight);
+
+    const activeHeadY = targetX * 0.45;
+    const activeHeadX = -targetY * 0.3;
+    const idleHeadY = 0.4;
+    const idleHeadX = 0.2;
+    mascotParts.head.rotation.y = lerp(activeHeadY, idleHeadY, idleWeight);
+    mascotParts.head.rotation.x = lerp(activeHeadX, idleHeadX, idleWeight);
+    mascotParts.head.rotation.z = lerp(0, 0.1, idleWeight);
+
+    mascotParts.pupils.position.x = lerp(targetX * 0.08, 0.12, idleWeight);
+    mascotParts.pupils.position.y = lerp(targetY * 0.08, -0.05, idleWeight);
+
+    const activeLeftLegX = Math.sin(time * 4) * 0.08;
+    const activeRightLegX = Math.cos(time * 4) * 0.08;
+    const activeLeftLegY = Math.cos(time * 2) * 0.05;
+    const activeRightLegY = Math.sin(time * 2) * 0.05;
+    const idleLeftLegX = -Math.PI / 2.2 + Math.sin(time * 6) * 0.05;
+    const idleRightLegX = -Math.PI / 2.2 + Math.cos(time * 6) * 0.05;
+    mascotParts.leftLeg.rotation.x = lerp(activeLeftLegX, idleLeftLegX, idleWeight);
+    mascotParts.rightLeg.rotation.x = lerp(activeRightLegX, idleRightLegX, idleWeight);
+    mascotParts.leftLeg.rotation.y = lerp(activeLeftLegY, 0.1, idleWeight);
+    mascotParts.rightLeg.rotation.y = lerp(activeRightLegY, -0.1, idleWeight);
+    mascotParts.leftLeg.rotation.z = lerp(0, 0.2, idleWeight);
+    mascotParts.rightLeg.rotation.z = lerp(0, -0.2, idleWeight);
+
+    const activeLeftArmX = Math.sin(time * 4) * 0.15;
+    const activeLeftArmZ = 0.05 + Math.cos(time * 2) * 0.05;
+    const activeRightArmX = -Math.cos(time * 4) * 0.15;
+    const activeRightArmZ = -0.05 - Math.sin(time * 2) * 0.05;
+    const idleLeftArmX = 0.4 + Math.sin(time * 2) * 0.05;
+    const idleLeftArmZ = 0.1;
+    const lickSpeed = time * 8;
+    const idleRightArmX = -1.8 + Math.cos(lickSpeed) * 0.3;
+    const idleRightArmZ = 1 + Math.sin(lickSpeed) * 0.2;
+    mascotParts.leftArm.rotation.x = lerp(activeLeftArmX, idleLeftArmX, idleWeight);
+    mascotParts.leftArm.rotation.z = lerp(activeLeftArmZ, idleLeftArmZ, idleWeight);
+    mascotParts.rightArm.rotation.x = lerp(
+      activeRightArmX,
+      idleRightArmX,
+      idleWeight,
+    );
+    mascotParts.rightArm.rotation.z = lerp(
+      activeRightArmZ,
+      idleRightArmZ,
+      idleWeight,
+    );
+
+    const activeTailZ = Math.sin(time * 3) * 0.15;
+    const idleTailZ = Math.sin(time * 5) * 0.4;
+    mascotParts.tail.rotation.z = lerp(activeTailZ, idleTailZ, idleWeight);
+    mascotParts.tail.rotation.y = 0;
+
+    const activeTailX = -Math.PI / 6 + Math.cos(time * 3) * 0.05;
+    const idleTailX = Math.sin(time * 5) * 0.05;
+    mascotParts.tail.rotation.x = lerp(activeTailX, idleTailX, idleWeight);
+
+    shadow.scale.setScalar(1 - mascot.position.y * 0.05);
+    shadowMat.opacity = 0.1 - mascot.position.y * 0.02;
+
+    renderer.render(scene, camera);
+  };
+
+  const resizeObserver =
+    typeof ResizeObserver !== "undefined"
+      ? new ResizeObserver(() => {
+          resize();
+        })
+      : null;
+
+  document.addEventListener("mousemove", handleMouseMove);
+  window.addEventListener("resize", resize);
+  resizeObserver?.observe(container);
+  animate();
+
+  return () => {
+    window.cancelAnimationFrame(frameId);
+    document.removeEventListener("mousemove", handleMouseMove);
+    window.removeEventListener("resize", resize);
+    resizeObserver?.disconnect();
+
+    scene.traverse((object) => {
+      const mesh = object as {
+        geometry?: { dispose?: () => void };
+        material?:
+          | { dispose?: () => void }
+          | Array<{ dispose?: () => void }>;
       };
-      lastMoveRef.current = performance.now();
-    };
 
-    const handleBlur = () => {
-      pointerRef.current = { x: 0, y: 0 };
-    };
+      mesh.geometry?.dispose?.();
 
-    let frameId = 0;
+      if (Array.isArray(mesh.material)) {
+        mesh.material.forEach((material) => {
+          material.dispose?.();
+        });
+      } else {
+        mesh.material?.dispose?.();
+      }
+    });
 
-    const loop = (nowMs: number) => {
-      renderFrame(nowMs);
-      frameId = window.requestAnimationFrame(loop);
-    };
+    renderer.dispose();
+    renderer.forceContextLoss();
+    if (renderer.domElement.parentNode === container) {
+      container.removeChild(renderer.domElement);
+    }
+  };
+}
 
-    lastMoveRef.current = performance.now();
-    frameId = window.requestAnimationFrame(loop);
+export function AcademicCatMascot({
+  className,
+  variant = "default",
+}: AcademicCatMascotProps) {
+  const rootRef = useRef<HTMLDivElement | null>(null);
 
-    window.addEventListener("pointermove", handlePointerMove, { passive: true });
-    window.addEventListener("blur", handleBlur);
+  useEffect(() => {
+    let disposeScene: (() => void) | undefined;
+    let isCancelled = false;
+
+    void import("three").then((THREE) => {
+      if (isCancelled || !rootRef.current) {
+        return;
+      }
+
+      disposeScene = createAcademicCatScene(rootRef.current, THREE);
+    }).catch((error: unknown) => {
+      console.error("Failed to load Three.js mascot", error);
+    });
 
     return () => {
-      window.cancelAnimationFrame(frameId);
-      window.removeEventListener("pointermove", handlePointerMove);
-      window.removeEventListener("blur", handleBlur);
+      isCancelled = true;
+      disposeScene?.();
     };
-  }, [renderFrame]);
+  }, []);
 
   return (
-    <div aria-hidden="true" className="academic-cat-mascot" ref={rootRef}>
-      <svg
-        className="academic-cat-mascot__svg"
-        fill="none"
-        viewBox="0 0 430 470"
-        xmlns="http://www.w3.org/2000/svg"
-      >
-        <defs>
-          <linearGradient id="catCartoonFur" x1="140" x2="290" y1="90" y2="320" gradientUnits="userSpaceOnUse">
-            <stop stopColor="#FFC765" />
-            <stop offset="0.55" stopColor="#F59E34" />
-            <stop offset="1" stopColor="#D87C22" />
-          </linearGradient>
-          <linearGradient id="catCartoonFurDark" x1="158" x2="276" y1="90" y2="230" gradientUnits="userSpaceOnUse">
-            <stop stopColor="#A95C20" stopOpacity="0.84" />
-            <stop offset="1" stopColor="#844514" stopOpacity="0.2" />
-          </linearGradient>
-          <linearGradient id="catCartoonCream" x1="168" x2="255" y1="176" y2="348" gradientUnits="userSpaceOnUse">
-            <stop stopColor="#FFF9F2" />
-            <stop offset="1" stopColor="#F6E4D2" />
-          </linearGradient>
-          <linearGradient id="catCartoonBag" x1="118" x2="292" y1="160" y2="286" gradientUnits="userSpaceOnUse">
-            <stop stopColor="#7BC7FF" />
-            <stop offset="1" stopColor="#2D74F0" />
-          </linearGradient>
-          <linearGradient id="catCartoonPocket" x1="176" x2="246" y1="226" y2="286" gradientUnits="userSpaceOnUse">
-            <stop stopColor="#A8D9FF" />
-            <stop offset="1" stopColor="#5A95FB" />
-          </linearGradient>
-          <linearGradient id="catCartoonCap" x1="150" x2="282" y1="44" y2="112" gradientUnits="userSpaceOnUse">
-            <stop stopColor="#45464E" />
-            <stop offset="1" stopColor="#16171B" />
-          </linearGradient>
-          <radialGradient id="catCartoonShadow" cx="0" cy="0" r="1" gradientTransform="translate(214 420) rotate(90) scale(28 126)" gradientUnits="userSpaceOnUse">
-            <stop stopColor="#1F2937" stopOpacity="0.24" />
-            <stop offset="1" stopColor="#1F2937" stopOpacity="0" />
-          </radialGradient>
-          <radialGradient id="catCartoonBlush" cx="0" cy="0" r="1" gradientTransform="translate(0.5 0.5) scale(0.5)" gradientUnits="objectBoundingBox">
-            <stop stopColor="#FFB7AF" />
-            <stop offset="1" stopColor="#FFB7AF" stopOpacity="0" />
-          </radialGradient>
-          <filter id="catCartoonSoftShadow" colorInterpolationFilters="sRGB" filterUnits="userSpaceOnUse" height="480" width="430" x="0" y="-4">
-            <feDropShadow dx="0" dy="18" floodColor="#1F2937" floodOpacity="0.16" stdDeviation="16" />
-          </filter>
-          <filter id="catCartoonCapShadow" colorInterpolationFilters="sRGB" filterUnits="userSpaceOnUse" height="118" width="192" x="120" y="18">
-            <feDropShadow dx="0" dy="8" floodColor="#111827" floodOpacity="0.22" stdDeviation="7" />
-          </filter>
-        </defs>
-
-        <ellipse className="academic-cat-mascot__shadow" cx="214" cy="420" fill="url(#catCartoonShadow)" rx="126" ry="28" />
-
-        <g className="academic-cat-mascot__sparkle academic-cat-mascot__sparkle--one">
-          <path d="M84 132L89 118L94 132L108 137L94 142L89 156L84 142L70 137L84 132Z" fill="#F7C948" />
-        </g>
-        <g className="academic-cat-mascot__sparkle academic-cat-mascot__sparkle--two">
-          <path d="M338 122L342 110L346 122L358 126L346 130L342 142L338 130L326 126L338 122Z" fill="#7C8DF1" />
-        </g>
-
-        <g className="academic-cat-mascot__tail">
-          <path d="M123 316C73 307 57 252 87 218C111 190 162 193 174 228C183 257 163 280 138 292C123 300 114 313 116 334" stroke="url(#catCartoonFur)" strokeLinecap="round" strokeWidth="34" />
-          <path d="M110 311C95 294 95 254 119 237" stroke="url(#catCartoonFurDark)" strokeLinecap="round" strokeWidth="11" />
-          <path d="M126 326C116 311 121 293 134 285" stroke="url(#catCartoonFurDark)" strokeLinecap="round" strokeWidth="9" />
-        </g>
-
-        <g className="academic-cat-mascot__torso" filter="url(#catCartoonSoftShadow)">
-          <g className="academic-cat-mascot__bag">
-            <path d="M139 184C139 163 156 146 177 146H247C270 146 287 163 287 184V294C287 307 276 318 263 318H163C150 318 139 307 139 294V184Z" fill="url(#catCartoonBag)" />
-            <path d="M180 146C180 121 194 106 214 106C234 106 248 121 248 146" stroke="#2058CB" strokeLinecap="round" strokeWidth="14" />
-            <path d="M170 223C170 213 178 205 188 205H240C250 205 258 213 258 223V274C258 284 250 292 240 292H188C178 292 170 284 170 274V223Z" fill="url(#catCartoonPocket)" />
-            <path d="M172 210C158 227 151 241 148 258" stroke="#1246A7" strokeLinecap="round" strokeOpacity="0.65" strokeWidth="10" />
-            <path d="M256 210C270 227 277 241 280 258" stroke="#1246A7" strokeLinecap="round" strokeOpacity="0.65" strokeWidth="10" />
-            <circle cx="214" cy="248" fill="#FDE68A" r="16" />
-            <path d="M214 235L217 243H226L219 248L222 257L214 252L206 257L209 248L202 243H211L214 235Z" fill="#FFF8E8" />
-          </g>
-
-          <g className="academic-cat-mascot__legs">
-            <g className="academic-cat-mascot__leg academic-cat-mascot__leg--left">
-              <ellipse cx="182" cy="350" fill="url(#catCartoonCream)" rx="34" ry="53" />
-              <ellipse cx="182" cy="389" fill="#FFFDF8" rx="40" ry="22" />
-              <circle cx="167" cy="388" fill="#F5C4D2" r="4" />
-              <circle cx="182" cy="392" fill="#F5C4D2" r="4" />
-              <circle cx="196" cy="388" fill="#F5C4D2" r="4" />
-            </g>
-            <g className="academic-cat-mascot__leg academic-cat-mascot__leg--right">
-              <ellipse cx="247" cy="350" fill="url(#catCartoonCream)" rx="34" ry="53" />
-              <ellipse cx="247" cy="389" fill="#FFFDF8" rx="40" ry="22" />
-              <circle cx="232" cy="388" fill="#F5C4D2" r="4" />
-              <circle cx="247" cy="392" fill="#F5C4D2" r="4" />
-              <circle cx="261" cy="388" fill="#F5C4D2" r="4" />
-            </g>
-          </g>
-
-          <g className="academic-cat-mascot__body">
-            <ellipse cx="214" cy="272" fill="url(#catCartoonFur)" rx="92" ry="98" />
-            <ellipse cx="214" cy="286" fill="url(#catCartoonCream)" rx="60" ry="74" />
-            <path d="M183 218C174 235 169 249 167 265" stroke="url(#catCartoonFurDark)" strokeLinecap="round" strokeWidth="11" />
-            <path d="M245 218C254 235 259 249 261 265" stroke="url(#catCartoonFurDark)" strokeLinecap="round" strokeWidth="11" />
-            <path d="M214 224V347" stroke="#FFFDF8" strokeLinecap="round" strokeOpacity="0.28" strokeWidth="5" />
-          </g>
-        </g>
-
-        <g className="academic-cat-mascot__left-arm">
-          <ellipse cx="144" cy="264" fill="url(#catCartoonCream)" rx="24" ry="58" transform="rotate(-16 144 264)" />
-          <ellipse cx="126" cy="316" fill="#FFFDF8" rx="27" ry="19" />
-        </g>
-
-        <g className="academic-cat-mascot__right-arm">
-          <ellipse cx="284" cy="267" fill="url(#catCartoonCream)" rx="24" ry="62" transform="rotate(18 284 267)" />
-          <ellipse cx="302" cy="319" fill="#FFFDF8" rx="28" ry="20" />
-          <circle cx="290" cy="319" fill="#F6C6CF" r="4.4" />
-          <circle cx="302" cy="323" fill="#F6C6CF" r="4.4" />
-          <circle cx="312" cy="317" fill="#F6C6CF" r="4.4" />
-        </g>
-
-        <g className="academic-cat-mascot__head" filter="url(#catCartoonSoftShadow)">
-          <g className="academic-cat-mascot__ear academic-cat-mascot__ear--left">
-            <path d="M136 128C128 87 145 62 180 56C189 89 188 118 176 144L136 128Z" fill="url(#catCartoonFur)" />
-            <path d="M149 123C145 96 155 79 176 72C180 94 178 112 169 129L149 123Z" fill="#F7B2C7" />
-          </g>
-          <g className="academic-cat-mascot__ear academic-cat-mascot__ear--right">
-            <path d="M292 128C300 87 283 62 248 56C239 89 240 118 252 144L292 128Z" fill="url(#catCartoonFur)" />
-            <path d="M279 123C283 96 273 79 252 72C248 94 250 112 259 129L279 123Z" fill="#F7B2C7" />
-          </g>
-
-          <ellipse className="academic-cat-mascot__head-shell" cx="214" cy="162" fill="url(#catCartoonFur)" rx="106" ry="92" />
-          <path d="M214 86C203 101 196 118 194 136" stroke="url(#catCartoonFurDark)" strokeLinecap="round" strokeWidth="13" />
-          <path d="M179 101C169 113 164 126 163 142" stroke="url(#catCartoonFurDark)" strokeLinecap="round" strokeWidth="9" />
-          <path d="M249 101C259 113 264 126 265 142" stroke="url(#catCartoonFurDark)" strokeLinecap="round" strokeWidth="9" />
-
-          <g className="academic-cat-mascot__cap" filter="url(#catCartoonCapShadow)">
-            <path d="M149 76L214 46L282 76L217 103L149 76Z" fill="url(#catCartoonCap)" />
-            <path d="M176 83C176 62 192 45 214 45C236 45 252 62 252 83V97H176V83Z" fill="url(#catCartoonCap)" />
-            <circle cx="214" cy="77" fill="#F2C94C" r="6" />
-            <path className="academic-cat-mascot__tassel" d="M214 77C238 92 253 114 258 142" stroke="#F2C94C" strokeLinecap="round" strokeWidth="5" />
-            <circle className="academic-cat-mascot__tassel-end" cx="260" cy="145" fill="#F2C94C" r="9" />
-          </g>
-
-          <g className="academic-cat-mascot__eyes">
-            <g className="academic-cat-mascot__eye academic-cat-mascot__eye--left">
-              <ellipse cx="173" cy="160" fill="#FFFDF9" rx="31" ry="34" />
-              <ellipse cx="173" cy="167" fill="#F1F5F9" opacity="0.7" rx="26" ry="20" />
-              <g className="academic-cat-mascot__pupil academic-cat-mascot__pupil--left">
-                <ellipse cx="173" cy="164" fill="#1F2937" rx="13" ry="18" />
-                <circle cx="179" cy="157" fill="#FFF" r="5" />
-                <circle cx="168" cy="169" fill="#FFF" opacity="0.95" r="2.6" />
-              </g>
-            </g>
-            <g className="academic-cat-mascot__eye academic-cat-mascot__eye--right">
-              <ellipse cx="255" cy="160" fill="#FFFDF9" rx="31" ry="34" />
-              <ellipse cx="255" cy="167" fill="#F1F5F9" opacity="0.7" rx="26" ry="20" />
-              <g className="academic-cat-mascot__pupil academic-cat-mascot__pupil--right">
-                <ellipse cx="255" cy="164" fill="#1F2937" rx="13" ry="18" />
-                <circle cx="261" cy="157" fill="#FFF" r="5" />
-                <circle cx="250" cy="169" fill="#FFF" opacity="0.95" r="2.6" />
-              </g>
-            </g>
-          </g>
-
-          <path d="M148 132C155 127 163 126 171 129" stroke="#7E4415" strokeLinecap="round" strokeWidth="5" />
-          <path d="M280 132C273 127 265 126 257 129" stroke="#7E4415" strokeLinecap="round" strokeWidth="5" />
-          <ellipse cx="168" cy="203" fill="url(#catCartoonBlush)" opacity="0.9" rx="27" ry="20" />
-          <ellipse cx="260" cy="203" fill="url(#catCartoonBlush)" opacity="0.9" rx="27" ry="20" />
-          <ellipse cx="214" cy="202" fill="url(#catCartoonCream)" rx="57" ry="39" />
-          <ellipse cx="189" cy="204" fill="url(#catCartoonCream)" rx="28" ry="21" />
-          <ellipse cx="239" cy="204" fill="url(#catCartoonCream)" rx="28" ry="21" />
-          <path d="M214 187L203 198H225L214 187Z" fill="#F59DB4" />
-          <path d="M213 199V212" stroke="#6A3B21" strokeLinecap="round" strokeWidth="3.5" />
-          <path d="M214 212C205 213 199 218 197 225" stroke="#6A3B21" strokeLinecap="round" strokeWidth="3.5" />
-          <path d="M214 212C223 213 229 218 231 225" stroke="#6A3B21" strokeLinecap="round" strokeWidth="3.5" />
-          <path className="academic-cat-mascot__tongue" d="M207 225C207 238 221 238 221 225C221 241 207 241 207 225Z" fill="#F48FB1" />
-
-          <path d="M145 196H92" stroke="#7A7285" strokeLinecap="round" strokeWidth="3" />
-          <path d="M148 208H88" stroke="#7A7285" strokeLinecap="round" strokeWidth="3" />
-          <path d="M283 196H336" stroke="#7A7285" strokeLinecap="round" strokeWidth="3" />
-          <path d="M280 208H340" stroke="#7A7285" strokeLinecap="round" strokeWidth="3" />
-        </g>
-      </svg>
-    </div>
+    <div
+      aria-hidden="true"
+      className={cn(
+        "academic-cat-mascot",
+        `academic-cat-mascot--${variant}`,
+        className,
+      )}
+      ref={rootRef}
+    />
   );
 }
