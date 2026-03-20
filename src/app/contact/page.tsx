@@ -69,12 +69,9 @@ export default function ContactPage() {
         <div className="shell grid-2">
           <div className="contact-form-shell">
             <ContactForm />
-            <div aria-hidden="true" className="contact-form-shell__mascot">
-              <AcademicCatMascot variant="contact" />
-            </div>
           </div>
 
-          <article className="contact-panel stack">
+          <article className="contact-panel stack contact-office-panel">
             <LocalizedText
               as="p"
               className="eyebrow"
@@ -99,6 +96,9 @@ export default function ContactPage() {
                 <LocalizedText text={{ en: "Visit the school Facebook page", bn: "স্কুলের ফেসবুক পেজ দেখুন" }} />
               </a>
             </p>
+            <div aria-hidden="true" className="contact-office-panel__mascot">
+              <AcademicCatMascot variant="contact" />
+            </div>
           </article>
         </div>
       </section>

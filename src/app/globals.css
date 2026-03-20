@@ -654,8 +654,7 @@ h4,
 .academic-cat-mascot__envelope,
 .academic-cat-mascot__pin,
 .academic-cat-mascot__chalkboard,
-.academic-cat-mascot__resumes,
-.academic-cat-mascot__glasses {
+.academic-cat-mascot__resumes {
   position: absolute;
   pointer-events: none;
 }
@@ -901,43 +900,6 @@ h4,
 
 .academic-cat-mascot__resumes span:last-child {
   transform: rotate(7deg) translateX(10%);
-}
-
-.academic-cat-mascot__glasses {
-  top: 25%;
-  left: 27%;
-  z-index: 4;
-  width: 46%;
-  height: 12%;
-}
-
-.academic-cat-mascot__glasses span {
-  position: absolute;
-  top: 0;
-  width: 34%;
-  height: 100%;
-  border: 4px solid rgba(31, 41, 55, 0.85);
-  border-radius: 999px;
-  background: rgba(255, 255, 255, 0.08);
-}
-
-.academic-cat-mascot__glasses span:nth-child(1) {
-  left: 0;
-}
-
-.academic-cat-mascot__glasses span:nth-child(2) {
-  right: 0;
-}
-
-.academic-cat-mascot__glasses span:nth-child(3) {
-  top: 42%;
-  left: 50%;
-  width: 18%;
-  height: 0;
-  transform: translateX(-50%);
-  border: 0;
-  border-top: 4px solid rgba(31, 41, 55, 0.85);
-  border-radius: 0;
 }
 
 .academic-cat-mascot__book-stack {
@@ -2142,10 +2104,15 @@ body::before {
   isolation: isolate;
 }
 
+.admissions-form-panel {
+  display: grid;
+  gap: 12px;
+}
+
 .admissions-form-panel__mascot {
-  position: absolute;
-  right: clamp(-26px, -2vw, 8px);
-  bottom: -24px;
+  position: relative;
+  justify-self: end;
+  margin-right: 8px;
   z-index: 2;
 }
 
@@ -2742,10 +2709,10 @@ body::before {
   gap: 32px;
 }
 
-.contact-form-shell__mascot {
-  position: absolute;
-  right: clamp(-30px, -2.6vw, 6px);
-  bottom: 22px;
+.contact-office-panel__mascot {
+  align-self: center;
+  margin-top: auto;
+  padding-top: 22px;
   z-index: 2;
 }
 
@@ -3047,14 +3014,17 @@ body::before {
 
 .careers-stage {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) clamp(260px, 28vw, 360px);
+  grid-template-columns: minmax(0, 1fr) clamp(320px, 30vw, 420px);
   gap: 28px;
   align-items: center;
+  overflow: visible;
 }
 
 .careers-stage__mascot {
   display: grid;
   place-items: center;
+  justify-self: end;
+  transform: translateX(58px);
 }
 
 .staff-grid {
@@ -3371,12 +3341,17 @@ body::before {
   }
 
   .admissions-form-panel__mascot,
-  .contact-form-shell__mascot {
+  .contact-office-panel__mascot {
     position: relative;
     right: auto;
     bottom: auto;
     margin: 16px auto 0;
     width: fit-content;
+  }
+
+  .careers-stage__mascot {
+    justify-self: center;
+    transform: none;
   }
 
   .site-header {
@@ -3662,7 +3637,7 @@ body::before {
   }
 
   .admissions-form-panel__mascot,
-  .contact-form-shell__mascot,
+  .contact-office-panel__mascot,
   .careers-stage__mascot {
     transform: scale(0.94);
     transform-origin: center top;

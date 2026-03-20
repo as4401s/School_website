@@ -22,6 +22,7 @@ type AcademicCatMascotProps = {
 function createAcademicCatScene(
   container: HTMLDivElement,
   THREE: typeof import("three"),
+  variant: AcademicCatMascotVariant,
 ) {
   const COLORS = {
     catMain: 0x64748b,
@@ -421,6 +422,52 @@ function createAcademicCatScene(
   rightPupil.rotation.z = -0.05;
   pupilsGroup.add(rightPupil);
 
+  if (variant === "careers") {
+    const glassesMat = new THREE.MeshBasicMaterial({ color: 0x3f4756 });
+    const glassesGroup = new THREE.Group();
+
+    const leftFrame = new THREE.Mesh(
+      new THREE.TorusGeometry(0.38, 0.045, 18, 48),
+      glassesMat,
+    );
+    leftFrame.scale.set(1.08, 0.9, 0.2);
+    leftFrame.position.set(-0.98, 0.28, 2.42);
+    leftFrame.rotation.y = -0.18;
+    leftFrame.rotation.z = 0.05;
+    glassesGroup.add(leftFrame);
+
+    const rightFrame = leftFrame.clone();
+    rightFrame.position.set(0.98, 0.28, 2.42);
+    rightFrame.rotation.y = 0.18;
+    rightFrame.rotation.z = -0.05;
+    glassesGroup.add(rightFrame);
+
+    const bridge = new THREE.Mesh(
+      new THREE.CylinderGeometry(0.03, 0.03, 0.42, 16),
+      glassesMat,
+    );
+    bridge.position.set(0, 0.28, 2.42);
+    bridge.rotation.z = Math.PI / 2;
+    glassesGroup.add(bridge);
+
+    const leftTemple = new THREE.Mesh(
+      new THREE.CylinderGeometry(0.02, 0.02, 0.52, 12),
+      glassesMat,
+    );
+    leftTemple.position.set(-1.42, 0.26, 1.98);
+    leftTemple.rotation.y = Math.PI / 2.9;
+    leftTemple.rotation.z = 0.18;
+    glassesGroup.add(leftTemple);
+
+    const rightTemple = leftTemple.clone();
+    rightTemple.position.set(1.42, 0.26, 1.98);
+    rightTemple.rotation.y = -Math.PI / 2.9;
+    rightTemple.rotation.z = -0.18;
+    glassesGroup.add(rightTemple);
+
+    faceGroup.add(glassesGroup);
+  }
+
   const capGroup = new THREE.Group();
   capGroup.position.set(0, 2, 0.2);
   capGroup.rotation.x = -0.1;
@@ -646,7 +693,7 @@ export function AcademicCatMascot({
         return;
       }
 
-      disposeScene = createAcademicCatScene(rootRef.current, THREE);
+      disposeScene = createAcademicCatScene(rootRef.current, THREE, variant);
     }).catch((error: unknown) => {
       console.error("Failed to load Three.js mascot", error);
     });
@@ -655,7 +702,7 @@ export function AcademicCatMascot({
       isCancelled = true;
       disposeScene?.();
     };
-  }, []);
+  }, [variant]);
 
   return (
     <div
@@ -713,11 +760,6 @@ export function AcademicCatMascot({
             <span />
           </div>
           <div className="academic-cat-mascot__resumes" aria-hidden="true">
-            <span />
-            <span />
-          </div>
-          <div className="academic-cat-mascot__glasses" aria-hidden="true">
-            <span />
             <span />
             <span />
           </div>
