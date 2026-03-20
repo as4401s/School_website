@@ -46,7 +46,7 @@ export default async function AnnouncementsPage() {
                                 alt=""
                                 className="announcements-feature__art-image"
                                 height={900}
-                                src="/media/illustrations/announcements-board.svg"
+                                src="/media/simple_announcements_board.png"
                                 width={760}
                             />
                         </div>

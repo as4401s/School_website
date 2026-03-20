@@ -305,7 +305,7 @@ export default function OurSchoolPage() {
                 alt=""
                 className="staff-showcase__art-image"
                 height={620}
-                src="/media/illustrations/staff-collage.svg"
+                src="/media/simple_classroom_collage.png"
                 width={920}
               />
             </div>

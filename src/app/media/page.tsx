@@ -58,7 +58,7 @@ const mediaSections: MediaSection[] = [
       en: "Open Events & News",
       bn: "অনুষ্ঠান ও সংবাদ দেখুন",
     },
-    imageSrc: "/media/illustrations/media-events.svg",
+    imageSrc: "/media/simple_media_events.png",
   },
   {
     href: "/gallery",
@@ -74,7 +74,7 @@ const mediaSections: MediaSection[] = [
       en: "Open Gallery",
       bn: "গ্যালারি দেখুন",
     },
-    imageSrc: "/media/illustrations/media-gallery.svg",
+    imageSrc: "/media/simple_media_gallery.png",
   },
   {
     href: "/announcements",
@@ -90,7 +90,7 @@ const mediaSections: MediaSection[] = [
       en: "Open Announcements",
       bn: "বিজ্ঞপ্তি দেখুন",
     },
-    imageSrc: "/media/illustrations/media-announcements.svg",
+    imageSrc: "/media/simple_media_announcements.png",
   },
 ];
 

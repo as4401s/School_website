@@ -252,7 +252,7 @@ export default function AdmissionsPage() {
               alt=""
               className="admissions-overview__art-image"
               height={960}
-              src="/media/illustrations/admissions-desk.svg"
+              src="/media/simple_admissions_desk.png"
               width={760}
             />
           </aside>
