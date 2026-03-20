@@ -5,6 +5,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 
+import { FacebookIcon } from "@/components/facebook-icon";
 import {
   LanguageToggle,
   LocalizedText,
@@ -231,6 +232,15 @@ export function SiteHeader() {
             <div className="site-nav__mobile-language">
               <LanguageToggle />
             </div>
+            <a
+              className="social-link social-link--menu"
+              href={siteMeta.facebookUrl}
+              rel="noreferrer"
+              target="_blank"
+            >
+              <FacebookIcon />
+              <LocalizedText text={{ en: "Facebook Page", bn: "ফেসবুক পেজ" }} />
+            </a>
             <Link className="btn btn--accent" href="/login" onClick={() => setOpen(false)}>
               <LocalizedText text={{ en: "Staff CMS", bn: "স্টাফ সিএমএস" }} />
             </Link>
@@ -243,6 +253,15 @@ export function SiteHeader() {
         </nav>
 
         <div className="site-header__actions">
+          <a
+            aria-label={language === "bn" ? "ফেসবুক পেজ" : "School Facebook page"}
+            className="social-link social-link--header"
+            href={siteMeta.facebookUrl}
+            rel="noreferrer"
+            target="_blank"
+          >
+            <FacebookIcon />
+          </a>
           <LanguageToggle />
           <Link className="btn btn--accent site-header__staff-link" href="/login">
             <LocalizedText text={{ en: "Staff CMS", bn: "স্টাফ সিএমএস" }} />

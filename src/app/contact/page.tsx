@@ -1,4 +1,5 @@
 import { ContactForm } from "@/components/contact-form";
+import { FacebookIcon } from "@/components/facebook-icon";
 import { LocalizedText } from "@/components/language-provider";
 import { PageIntro } from "@/components/page-intro";
 import { siteMeta } from "@/data/site-content";
@@ -34,6 +35,15 @@ export default function ContactPage() {
             <div className="chip-row">
               <a className="chip" href={`mailto:${siteMeta.schoolEmail}`}>
                 {siteMeta.schoolEmail}
+              </a>
+              <a
+                className="chip chip--facebook"
+                href={siteMeta.facebookUrl}
+                rel="noreferrer"
+                target="_blank"
+              >
+                <FacebookIcon />
+                <LocalizedText text={{ en: "Facebook Page", bn: "ফেসবুক পেজ" }} />
               </a>
             </div>
           </article>
@@ -77,6 +87,11 @@ export default function ContactPage() {
             />
             <p>
               <a href={`mailto:${siteMeta.schoolEmail}`}>{siteMeta.schoolEmail}</a>
+            </p>
+            <p>
+              <a href={siteMeta.facebookUrl} rel="noreferrer" target="_blank">
+                <LocalizedText text={{ en: "Visit the school Facebook page", bn: "স্কুলের ফেসবুক পেজ দেখুন" }} />
+              </a>
             </p>
           </article>
         </div>

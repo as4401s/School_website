@@ -3,6 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 
+import { FacebookIcon } from "@/components/facebook-icon";
 import { LocalizedText } from "@/components/language-provider";
 import { navigation, siteMeta } from "@/data/site-content";
 
@@ -44,6 +45,11 @@ const footerContactAction = {
 const footerContactPage = {
   en: "Contact Page",
   bn: "যোগাযোগ পৃষ্ঠা",
+};
+
+const footerFacebookPage = {
+  en: "Follow on Facebook",
+  bn: "ফেসবুকে দেখুন",
 };
 
 export function SiteFooter() {
@@ -95,6 +101,17 @@ export function SiteFooter() {
               <a href={`tel:${siteMeta.schoolPhone.replace(/-/g, "")}`}>{siteMeta.schoolPhone}</a>
               <a href="mailto:contact@ngbmfoundation.com">contact@ngbmfoundation.com</a>
             </p>
+            <div className="site-footer__social">
+              <a
+                className="social-link social-link--footer"
+                href={siteMeta.facebookUrl}
+                rel="noreferrer"
+                target="_blank"
+              >
+                <FacebookIcon />
+                <LocalizedText text={footerFacebookPage} />
+              </a>
+            </div>
           </div>
 
           <div className="site-footer__block">

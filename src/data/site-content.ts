@@ -89,6 +89,7 @@ export const siteMeta = {
   schoolPhone: "+91-8756339237",
   schoolEmail: "info@kmschool.co.in",
   foundationEmail: "contact@ngbmfoundation.com",
+  facebookUrl: "https://www.facebook.com/share/17S2pWwVEf/",
 };
 
 export const navigation: NavigationItem[] = [
