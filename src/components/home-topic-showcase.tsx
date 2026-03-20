@@ -69,7 +69,7 @@ export function HomeTopicShowcase({ items }: HomeTopicShowcaseProps) {
             item.paragraphs[0]?.[language] ?? item.teaser[language],
           );
           const hasMascot = item.showMascot === true;
-          const isReverse = hasMascot || index % 2 === 1;
+          const isReverse = index % 2 === 1;
           const cardClassName = [
             "home-topic-card",
             isReverse ? "home-topic-card--reverse" : "",
@@ -82,14 +82,7 @@ export function HomeTopicShowcase({ items }: HomeTopicShowcaseProps) {
             <article className={cardClassName} key={item.title.en}>
               {/* Keep the preview to one complete sentence before the CTA. */}
               <div className="home-topic-card__media">
-                {hasMascot ? (
-                  <div className="home-topic-card__mascot-shell">
-                    <AcademicCatMascot
-                      className="home-topic-card__mascot-figure"
-                      variant="feature"
-                    />
-                  </div>
-                ) : item.image.src ? (
+                {item.image.src ? (
                   <Image
                     alt={item.image.alt}
                     className="home-topic-card__image"
@@ -117,6 +110,15 @@ export function HomeTopicShowcase({ items }: HomeTopicShowcaseProps) {
                   <LocalizedText text={moreText} />
                 </button>
               </div>
+
+              {hasMascot ? (
+                <div className="home-topic-card__mascot">
+                  <AcademicCatMascot
+                    className="home-topic-card__mascot-figure"
+                    variant="feature"
+                  />
+                </div>
+              ) : null}
             </article>
           );
         })}
