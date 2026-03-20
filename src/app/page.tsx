@@ -277,11 +277,6 @@ const campusReelTitle = {
   bn: "ক্যাম্পাস ভিডিও",
 };
 
-const campusReelSummary = {
-  en: "Short classroom and campus clips from Humaniapota play here one after another. Tap the sound button if you want to listen.",
-  bn: "হুমানিয়াপোতা ক্যাম্পাসের ছোট ছোট ভিডিও এখানে একটার পর একটা চলবে। শুনতে চাইলে সাউন্ড বোতাম টিপুন।",
-};
-
 const viewAllUpdatesText = {
   en: "View all updates",
   bn: "সব আপডেট দেখুন",
@@ -322,50 +317,14 @@ const campusVideos = [
   {
     src: "/media/Humaniapota%20School/School%20Video.mp4",
     poster: "/media/Humaniapota%20School/IMG_3260.jpg",
-    title: {
-      en: "A warm day on campus",
-      bn: "ক্যাম্পাসের উষ্ণ একটি দিন",
-    },
-    summary: {
-      en: "A quick look at daily school life and the welcoming campus setting.",
-      bn: "প্রতিদিনের স্কুলজীবন ও স্নেহময় ক্যাম্পাস পরিবেশের এক ঝলক।",
-    },
   },
   {
     src: "/media/Humaniapota%20School/School%20Video02.mp4",
     poster: "/media/Humaniapota%20School/IMG_3345.jpg",
-    title: {
-      en: "Learning in motion",
-      bn: "শেখার প্রাণবন্ত মুহূর্ত",
-    },
-    summary: {
-      en: "Children and teachers moving through hands-on classroom moments together.",
-      bn: "শিশু ও শিক্ষকদের হাতে-কলমে শেখার কিছু প্রাণবন্ত মুহূর্ত।",
-    },
-  },
-  {
-    src: "/media/Humaniapota%20School/Art%20exam%202026.mp4",
-    poster: "/media/Humaniapota%20School/IMG_3280.jpg",
-    title: {
-      en: "Art exam 2026",
-      bn: "আর্ট পরীক্ষা ২০২৬",
-    },
-    summary: {
-      en: "Creative work, focus, and classroom confidence during the art session.",
-      bn: "শিল্পচর্চার সময় সৃজনশীলতা, মনোযোগ ও আত্মবিশ্বাসের ছবি।",
-    },
   },
   {
     src: "/media/Humaniapota%20School/Feb%2026_video.mp4",
     poster: "/media/Humaniapota%20School/IMG_3319.jpg",
-    title: {
-      en: "February highlights",
-      bn: "ফেব্রুয়ারির কিছু ঝলক",
-    },
-    summary: {
-      en: "A brief highlight reel from campus activities and student participation.",
-      bn: "ক্যাম্পাসের কার্যক্রম ও শিক্ষার্থীদের অংশগ্রহণের সংক্ষিপ্ত ঝলক।",
-    },
   },
 ];
 
@@ -464,7 +423,6 @@ export default async function HomePage() {
           <div className="section-header">
             <div>
               <LocalizedText as="h2" text={campusReelTitle} />
-              <LocalizedText as="p" className="lede" text={campusReelSummary} />
             </div>
           </div>
 
