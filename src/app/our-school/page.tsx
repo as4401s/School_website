@@ -12,6 +12,11 @@ type AboutCard = {
   imageUrl: string;
 };
 
+type StaffMember = {
+  name: BilingualText;
+  details: BilingualText[];
+};
+
 const introEyebrow = {
   en: "About",
   bn: "আমাদের সম্পর্কে",
@@ -156,20 +161,70 @@ const aboutCards: AboutCard[] = [
   },
 ];
 
-const futureUpdateLabel = {
-  en: "More Updates",
-  bn: "পরবর্তী সংযোজন",
+const staffLabel = {
+  en: "Our Staff",
+  bn: "আমাদের স্টাফ",
 };
 
-const futureUpdateTitle = {
-  en: "Teacher information will be added later",
-  bn: "শিক্ষক-শিক্ষিকাদের তথ্য পরে যুক্ত করা হবে",
+const staffTitle = {
+  en: "Our Staff",
+  bn: "আমাদের স্টাফ",
 };
 
-const futureUpdateText = {
-  en: "Additional teacher details and other school information will be added to this page once the material is received.",
-  bn: "শিক্ষক-শিক্ষিকাদের বিস্তারিত পরিচিতি এবং বিদ্যালয়ের আরও কিছু তথ্য প্রয়োজনীয় উপকরণ পাওয়া গেলে পরে এই পৃষ্ঠাতেই যুক্ত করা হবে।",
-};
+const staffMembers: StaffMember[] = [
+  {
+    name: {
+      en: "Mamata Shee",
+      bn: "Mamata Shee",
+    },
+    details: [
+      {
+        en: "Graduate (NTT)",
+        bn: "Graduate (NTT)",
+      },
+    ],
+  },
+  {
+    name: {
+      en: "Aritri Raha",
+      bn: "Aritri Raha",
+    },
+    details: [
+      {
+        en: "Trainee Teacher",
+        bn: "Trainee Teacher",
+      },
+      {
+        en: "B.A. Honours in English",
+        bn: "B.A. Honours in English",
+      },
+      {
+        en: "M.A. in English (Pursuing)",
+        bn: "M.A. in English (Pursuing)",
+      },
+    ],
+  },
+  {
+    name: {
+      en: "Aditi Das Biswas",
+      bn: "Aditi Das Biswas",
+    },
+    details: [
+      {
+        en: "H.S.",
+        bn: "H.S.",
+      },
+      {
+        en: "NTT",
+        bn: "NTT",
+      },
+      {
+        en: "Trainee Teacher",
+        bn: "Trainee Teacher",
+      },
+    ],
+  },
+];
 
 export default function OurSchoolPage() {
   return (
@@ -236,12 +291,27 @@ export default function OurSchoolPage() {
       </section>
 
       <section className="section section--tight-top">
-        <div className="shell" style={{ maxWidth: "980px" }}>
-          <article className="portal-card stack">
-            <LocalizedText as="p" className="eyebrow" text={futureUpdateLabel} />
-            <LocalizedText as="h2" className="portal-title" text={futureUpdateTitle} />
-            <LocalizedText as="p" text={futureUpdateText} />
-          </article>
+        <div className="shell">
+          <div className="section-header">
+            <div>
+              <LocalizedText as="p" className="eyebrow" text={staffLabel} />
+              <LocalizedText as="h2" text={staffTitle} />
+            </div>
+          </div>
+
+          <div className="staff-grid">
+            {staffMembers.map((member) => (
+              <article className="staff-card" key={member.name.en}>
+                <div aria-hidden="true" className="staff-card__avatar" />
+                <LocalizedText as="h3" text={member.name} />
+                <div className="staff-card__details">
+                  {member.details.map((detail) => (
+                    <LocalizedText as="p" key={`${member.name.en}-${detail.en}`} text={detail} />
+                  ))}
+                </div>
+              </article>
+            ))}
+          </div>
         </div>
       </section>
     </>
