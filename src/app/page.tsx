@@ -17,6 +17,7 @@ import {
   homeHeroSlides,
 } from "@/data/site-content";
 import { GallerySlider } from "@/components/gallery-slider";
+import { AcademicCatMascot } from "@/components/academic-cat-mascot";
 import {
   HomeTopicShowcase,
   type HomeTopicItem,
@@ -75,22 +76,6 @@ const montessoriParagraphs: BilingualText[] = [
   {
     en: "With patient guidance and a supportive environment, this method helps children build independence, concentration, creativity, and problem-solving skills.",
     bn: "ধাপে ধাপে সঠিক দিকনির্দেশনা ও সহায়ক পরিবেশের মাধ্যমে শিশুদের স্বনির্ভরতা, মনোযোগ, সৃজনশীলতা এবং সমস্যা সমাধানের দক্ষতা বিকশিত হয়।",
-  },
-];
-
-const visionTitle = {
-  en: "Our Vision",
-  bn: "আমাদের স্বপ্ন",
-};
-
-const visionParagraphs: BilingualText[] = [
-  {
-    en: "Our vision is to inspire young minds to learn with curiosity, grow with confidence, and live with strong values.",
-    bn: "আমাদের স্বপ্ন এমন একটি শিক্ষাভিত্তি গড়ে তোলা, যেখানে শিশুরা কৌতূহলী মন নিয়ে শিখবে, আত্মবিশ্বাসের সঙ্গে বড় হবে এবং মানবিক মূল্যবোধে সমৃদ্ধ হয়ে উঠবে।",
-  },
-  {
-    en: "We want every child to build a strong foundation of knowledge, character, and a lifelong love for learning.",
-    bn: "প্রতিটি শিশুর জ্ঞান, চরিত্র এবং আজীবন শেখার আনন্দকে একসঙ্গে লালন করাই আমাদের লক্ষ্য।",
   },
 ];
 
@@ -206,15 +191,6 @@ const homeTopics: HomeTopicItem[] = [
     image: {
       src: "/media/Humaniapota%20School/IMG_3345.jpg",
       alt: "Children working at classroom tables with a teacher nearby",
-    },
-  },
-  {
-    title: visionTitle,
-    teaser: visionParagraphs[0],
-    paragraphs: visionParagraphs,
-    image: {
-      src: "/media/Humaniapota%20School/IMG_3254.jpg",
-      alt: "A teacher and children gathered together in the courtyard",
     },
   },
   {
@@ -360,7 +336,10 @@ export default async function HomePage() {
             </div>
           </div>
 
-          <GallerySlider items={sliderItems} />
+          <div className="campus-life-stage">
+            <GallerySlider items={sliderItems} />
+            <AcademicCatMascot />
+          </div>
         </div>
       </section>
 
