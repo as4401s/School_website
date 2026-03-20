@@ -613,6 +613,11 @@ h4,
   border-bottom: 0;
 }
 
+.home-page .feature-panel--admissions .feature-panel__copy h2 {
+  padding-left: 0;
+  border: 0;
+}
+
 /* Eyebrow text – sprinkle a bit more color */
 .eyebrow {
   display: inline-flex;
