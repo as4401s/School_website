@@ -428,7 +428,10 @@ h4,
 }
 
 .site-header__staff-link {
+  min-height: 36px;
+  padding-inline: 13px;
   border-radius: 16px;
+  font-size: 0.84rem;
 }
 
 .social-link {
@@ -857,14 +860,34 @@ h4,
 }
 
 .home-page {
-  --home-gap: clamp(28px, 3vw, 42px);
+  --home-gap: clamp(42px, 5vw, 72px);
+  position: relative;
+  isolation: isolate;
   display: grid;
   gap: var(--home-gap);
-  padding-bottom: 84px;
+  padding-bottom: 96px;
   background:
     radial-gradient(circle at top left, rgba(255, 210, 120, 0.18), transparent 24%),
     radial-gradient(circle at 86% 18%, rgba(255, 98, 132, 0.12), transparent 18%),
     linear-gradient(180deg, #fff7f0 0%, #fffdf9 22%, #fff5ee 100%);
+}
+
+.home-page::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: url("/media/logo.jpg");
+  background-repeat: no-repeat;
+  background-position: center 18%;
+  background-size: min(44vmin, 380px);
+  opacity: 0.06;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.home-page > * {
+  position: relative;
+  z-index: 1;
 }
 
 .home-page > .hero,
@@ -1225,16 +1248,17 @@ h4,
 .home-topics {
   display: grid;
   grid-template-columns: 1fr;
-  gap: 32px;
+  gap: 52px;
   align-items: start;
 }
 
 .home-topic-card {
   display: grid;
-  grid-template-columns: minmax(280px, 0.92fr) minmax(280px, 1.08fr);
+  grid-template-columns: minmax(280px, 540px) minmax(280px, 430px);
+  justify-content: center;
   align-items: center;
-  gap: 30px;
-  min-height: 360px;
+  gap: clamp(28px, 4vw, 72px);
+  min-height: 0;
 }
 
 .home-topic-card--reverse .home-topic-card__media {
@@ -1247,12 +1271,13 @@ h4,
 
 .home-topic-card__media {
   position: relative;
-  min-height: 100%;
+  width: 100%;
   aspect-ratio: 5 / 4;
   overflow: hidden;
   border-radius: 28px;
   background: rgba(21, 32, 51, 0.06);
   box-shadow: 0 18px 38px rgba(36, 48, 68, 0.1);
+  justify-self: end;
 }
 
 .home-topic-card__image {
@@ -1279,8 +1304,10 @@ h4,
 .home-topic-card__content {
   display: grid;
   justify-items: start;
-  gap: 14px;
-  padding: 24px 12px 24px 0;
+  width: min(100%, 420px);
+  gap: 18px;
+  padding: 0;
+  justify-self: start;
   border-radius: 28px;
   background: transparent;
   box-shadow: none;
@@ -1288,7 +1315,11 @@ h4,
 }
 
 .home-topic-card--reverse .home-topic-card__content {
-  padding: 24px 0 24px 12px;
+  justify-self: end;
+}
+
+.home-topic-card--reverse .home-topic-card__media {
+  justify-self: start;
 }
 
 .home-topic-card__content h3 {
@@ -1302,11 +1333,11 @@ h4,
 
 .home-topic-card__teaser {
   margin: 0;
-  max-width: 34ch;
+  max-width: 32ch;
   color: var(--ink);
-  font-size: 1rem;
+  font-size: 1.04rem;
   font-weight: 400;
-  line-height: 1.7;
+  line-height: 1.82;
   display: -webkit-box;
   -webkit-line-clamp: 4;
   -webkit-box-orient: vertical;
@@ -1317,6 +1348,7 @@ h4,
   min-width: 120px;
   padding-inline: 24px;
   justify-self: start;
+  margin-top: 4px;
   box-shadow: 0 14px 28px rgba(217, 107, 97, 0.18);
 }
 
@@ -2410,7 +2442,7 @@ body::before {
 }
 
 .section--tight-top {
-  padding-top: 26px;
+  padding-top: 44px;
 }
 
 .staff-placeholder {
@@ -2865,8 +2897,8 @@ body::before {
 @media (max-width: 720px) {
 
   .home-page {
-    --home-gap: 24px;
-    padding-bottom: 48px;
+    --home-gap: 32px;
+    padding-bottom: 56px;
   }
 
   .shell {
@@ -2914,7 +2946,7 @@ body::before {
   }
 
   .home-topics {
-    gap: 18px;
+    gap: 30px;
   }
 
   .home-topic-card,
@@ -2932,11 +2964,13 @@ body::before {
   }
 
   .home-topic-card__content {
-    padding: 6px 0 0;
+    width: 100%;
+    gap: 14px;
+    padding: 10px 2px 0;
   }
 
   .home-topic-card--reverse .home-topic-card__content {
-    padding: 6px 0 0;
+    padding: 10px 2px 0;
   }
 
   .home-topic-modal__card {
@@ -3446,8 +3480,8 @@ body::before {
 @media (max-width: 430px) {
 
   .home-page {
-    --home-gap: 16px;
-    padding-bottom: 32px;
+    --home-gap: 24px;
+    padding-bottom: 40px;
   }
 
   .home-launchpad__tile {
@@ -3507,7 +3541,7 @@ body::before {
 
   .home-topic-card__teaser {
     font-size: 0.96rem;
-    line-height: 1.65;
+    line-height: 1.72;
     -webkit-line-clamp: 5;
   }
 
