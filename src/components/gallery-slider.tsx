@@ -5,46 +5,130 @@ import { useCallback, useEffect, useRef, useState } from "react";
 
 import type { GalleryItem } from "@/data/site-content";
 
-const VISIBLE = 4; // images visible at once on desktop
+function getVisibleCount(width: number) {
+  if (width <= 430) {
+    return 1;
+  }
+
+  if (width <= 1120) {
+    return 2;
+  }
+
+  return 3;
+}
 
 export function GallerySlider({ items }: { items: GalleryItem[] }) {
+  const trackRef = useRef<HTMLDivElement | null>(null);
+  const scrollFrameRef = useRef<number | null>(null);
   const [index, setIndex] = useState(0);
-  const [isAnimating, setIsAnimating] = useState(false);
-  const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const [visibleCount, setVisibleCount] = useState(3);
 
-  const clamp = (n: number) => ((n % items.length) + items.length) % items.length;
+  const lastIndex = Math.max(items.length - visibleCount, 0);
 
-  const go = useCallback(
-    (dir: 1 | -1) => {
-      if (isAnimating) return;
-      setIsAnimating(true);
-      setIndex((prev) => clamp(prev + dir));
-      if (timeoutRef.current) clearTimeout(timeoutRef.current);
-      timeoutRef.current = setTimeout(() => setIsAnimating(false), 420);
-    },
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    [isAnimating, items.length],
-  );
+  const getStepWidth = useCallback(() => {
+    const track = trackRef.current;
+    const slide = track?.querySelector<HTMLElement>(".gallery-slider__slide");
+
+    if (!track || !slide) {
+      return 0;
+    }
+
+    const styles = window.getComputedStyle(track);
+    const gap = Number.parseFloat(styles.columnGap || styles.gap || "0");
+
+    return slide.getBoundingClientRect().width + gap;
+  }, []);
 
   useEffect(() => {
+    const updateVisibleCount = () => {
+      setVisibleCount(getVisibleCount(window.innerWidth));
+    };
+
+    updateVisibleCount();
+    window.addEventListener("resize", updateVisibleCount);
+
     return () => {
-      if (timeoutRef.current) clearTimeout(timeoutRef.current);
+      window.removeEventListener("resize", updateVisibleCount);
     };
   }, []);
 
-  // Build a circular window of VISIBLE + 2 (buffer) images
-  const visibleItems = Array.from({ length: VISIBLE }, (_, i) => {
-    const src = items[clamp(index + i)];
-    return { ...src, key: `${src.id}-${index + i}` };
-  });
+  useEffect(() => {
+    setIndex((current) => Math.min(current, Math.max(items.length - visibleCount, 0)));
+  }, [items.length, visibleCount]);
+
+  useEffect(() => {
+    const track = trackRef.current;
+    const step = getStepWidth();
+
+    if (!track || !step) {
+      return;
+    }
+
+    track.scrollLeft = index * step;
+  }, [getStepWidth, items.length, visibleCount]);
+
+  const syncIndex = useCallback(() => {
+    const track = trackRef.current;
+    const step = getStepWidth();
+
+    if (!track || !step) {
+      return;
+    }
+
+    const nextIndex = Math.round(track.scrollLeft / step);
+    setIndex(Math.max(0, Math.min(nextIndex, Math.max(items.length - visibleCount, 0))));
+  }, [getStepWidth, items.length, visibleCount]);
+
+  const scrollToIndex = useCallback(
+    (nextIndex: number) => {
+      const track = trackRef.current;
+      const step = getStepWidth();
+
+      if (!track || !step) {
+        return;
+      }
+
+      track.scrollTo({
+        left: Math.max(0, Math.min(nextIndex, lastIndex)) * step,
+        behavior: "smooth",
+      });
+    },
+    [getStepWidth, lastIndex],
+  );
+
+  const go = useCallback(
+    (dir: 1 | -1) => {
+      scrollToIndex(index + dir);
+    },
+    [index, scrollToIndex],
+  );
+
+  const handleScroll = useCallback(() => {
+    if (scrollFrameRef.current) {
+      window.cancelAnimationFrame(scrollFrameRef.current);
+    }
+
+    scrollFrameRef.current = window.requestAnimationFrame(syncIndex);
+  }, [syncIndex]);
+
+  useEffect(() => {
+    return () => {
+      if (scrollFrameRef.current) {
+        window.cancelAnimationFrame(scrollFrameRef.current);
+      }
+    };
+  }, []);
+
+  if (items.length === 0) {
+    return null;
+  }
 
   return (
     <div className="gallery-slider" aria-label="Campus life photos">
-      {/* Left arrow */}
       <button
         aria-label="Previous photos"
         className="gallery-slider__arrow gallery-slider__arrow--prev"
-        disabled={isAnimating}
+        disabled={index <= 0}
         onClick={() => go(-1)}
         type="button"
       >
@@ -53,30 +137,27 @@ export function GallerySlider({ items }: { items: GalleryItem[] }) {
         </svg>
       </button>
 
-      {/* Track */}
-      <div className="gallery-slider__track">
-        {visibleItems.map((item, i) => (
+      <div className="gallery-slider__track" onScroll={handleScroll} ref={trackRef}>
+        {items.map((item) => (
           <div
             className="gallery-slider__slide"
-            key={item.key}
-            style={{ animationDelay: `${i * 40}ms` }}
+            key={item.id}
           >
             <Image
               alt={item.title.en}
               className="gallery-slider__image"
               fill
-              sizes="(max-width: 600px) 100vw, (max-width: 900px) 50vw, 25vw"
+              sizes="(max-width: 430px) 82vw, (max-width: 1120px) 50vw, 33vw"
               src={item.imageUrl}
             />
           </div>
         ))}
       </div>
 
-      {/* Right arrow */}
       <button
         aria-label="Next photos"
         className="gallery-slider__arrow gallery-slider__arrow--next"
-        disabled={isAnimating}
+        disabled={index >= lastIndex}
         onClick={() => go(1)}
         type="button"
       >
@@ -85,15 +166,14 @@ export function GallerySlider({ items }: { items: GalleryItem[] }) {
         </svg>
       </button>
 
-      {/* Dots */}
       <div className="gallery-slider__dots" aria-hidden="true">
-        {items.map((item, i) => (
+        {Array.from({ length: lastIndex + 1 }, (_, i) => (
           <button
-            className={`gallery-slider__dot${i === index % items.length ? " gallery-slider__dot--active" : ""}`}
-            key={item.id}
-            onClick={() => { if (!isAnimating) { setIndex(i); } }}
+            className={`gallery-slider__dot${i === index ? " gallery-slider__dot--active" : ""}`}
+            key={`dot-${i}`}
+            onClick={() => scrollToIndex(i)}
+            aria-label={`Go to photo group ${i + 1}`}
             type="button"
-            aria-label={`Go to photo ${i + 1}`}
           />
         ))}
       </div>
