@@ -3,7 +3,7 @@
 import Image from "next/image";
 import { useEffect, useState } from "react";
 
-import { LocalizedText } from "@/components/language-provider";
+import { LocalizedText, useLanguage } from "@/components/language-provider";
 import type { BilingualText } from "@/data/site-content";
 
 export type HomeTopicItem = {
@@ -11,7 +11,7 @@ export type HomeTopicItem = {
   teaser: BilingualText;
   paragraphs: BilingualText[];
   image: {
-    src: string;
+    src?: string;
     alt: string;
   };
 };
@@ -32,6 +32,7 @@ const closeText = {
 
 export function HomeTopicShowcase({ items }: HomeTopicShowcaseProps) {
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
+  const { language } = useLanguage();
 
   useEffect(() => {
     if (activeIndex === null) {
@@ -52,22 +53,30 @@ export function HomeTopicShowcase({ items }: HomeTopicShowcaseProps) {
       <div className="home-topics">
         {items.map((item, index) => (
           <article
-            className={`home-topic-card${index % 2 === 1 ? " home-topic-card--reverse" : ""}${index > 1 ? " home-topic-card--raised" : ""}`}
+            className={`home-topic-card${index % 2 === 1 ? " home-topic-card--reverse" : ""}`}
             key={item.title.en}
           >
             <div className="home-topic-card__media">
-              <Image
-                alt={item.image.alt}
-                className="home-topic-card__image"
-                fill
-                sizes="(max-width: 720px) 100vw, 50vw"
-                src={item.image.src}
-              />
+              {item.image.src ? (
+                <Image
+                  alt={item.image.alt}
+                  className="home-topic-card__image"
+                  fill
+                  sizes="(max-width: 720px) 100vw, 50vw"
+                  src={item.image.src}
+                />
+              ) : (
+                <div
+                  aria-label={item.image.alt}
+                  className="home-topic-card__placeholder"
+                  role="img"
+                />
+              )}
             </div>
 
             <div className="home-topic-card__content">
               <LocalizedText as="h3" text={item.title} />
-              <LocalizedText as="p" className="home-topic-card__teaser" text={item.teaser} />
+              <p className="home-topic-card__teaser">{item.teaser[language]}</p>
               <button
                 className="btn btn--accent home-topic-card__button"
                 onClick={() => setActiveIndex(index)}
@@ -101,13 +110,21 @@ export function HomeTopicShowcase({ items }: HomeTopicShowcaseProps) {
             </button>
 
             <div className="home-topic-modal__media">
-              <Image
-                alt={activeItem.image.alt}
-                className="home-topic-modal__image"
-                fill
-                sizes="(max-width: 720px) 100vw, 50vw"
-                src={activeItem.image.src}
-              />
+              {activeItem.image.src ? (
+                <Image
+                  alt={activeItem.image.alt}
+                  className="home-topic-modal__image"
+                  fill
+                  sizes="(max-width: 720px) 100vw, 50vw"
+                  src={activeItem.image.src}
+                />
+              ) : (
+                <div
+                  aria-label={activeItem.image.alt}
+                  className="home-topic-modal__placeholder"
+                  role="img"
+                />
+              )}
             </div>
 
             <div className="home-topic-modal__content">

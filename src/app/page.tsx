@@ -261,8 +261,7 @@ const homeTopics: HomeTopicItem[] = [
     paragraphs: headTeacherParagraphs,
     teaser: headTeacherGreeting,
     image: {
-      src: "/media/Humaniapota%20School/IMG_3343.jpg",
-      alt: "A classroom learning moment with children at KMS",
+      alt: "Placeholder for the head teacher message image",
     },
   },
 ];
