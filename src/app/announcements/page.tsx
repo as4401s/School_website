@@ -51,16 +51,7 @@ export default async function AnnouncementsPage() {
                             />
                         </div>
 
-                        <div
-                            className="stack announcements-feature__card"
-                            style={{
-                                background: "white",
-                                padding: "clamp(2rem, 5vw, 3rem)",
-                                borderRadius: "28px",
-                                border: "1px solid var(--line)",
-                                boxShadow: "var(--shadow)",
-                            }}
-                        >
+                        <div className="stack announcements-feature__card">
                             <LocalizedText
                                 as="h2"
                                 className="announcement-title"

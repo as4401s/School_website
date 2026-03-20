@@ -2118,9 +2118,9 @@ body::before {
 
 .announcements-feature {
   display: grid;
-  grid-template-columns: minmax(260px, 0.72fr) minmax(0, 1.28fr);
+  grid-template-columns: clamp(280px, 28vw, 380px) minmax(0, 1fr);
   gap: 28px;
-  align-items: stretch;
+  align-items: start;
 }
 
 .announcements-feature__art,
@@ -2137,7 +2137,9 @@ body::before {
 }
 
 .announcements-feature__art {
-  min-height: 100%;
+  position: sticky;
+  top: 108px;
+  align-self: start;
 }
 
 .announcements-feature__art-image,
@@ -2150,6 +2152,11 @@ body::before {
 .announcements-feature__card {
   position: relative;
   min-height: 100%;
+  padding: clamp(2rem, 5vw, 3rem);
+  border-radius: 28px;
+  background: white;
+  border: 1px solid var(--line);
+  box-shadow: var(--shadow);
 }
 
 .media-portal-card__art {
@@ -2169,15 +2176,7 @@ body::before {
 }
 
 .staff-showcase__header {
-  display: grid;
-  grid-template-columns: minmax(0, 0.9fr) minmax(300px, 0.7fr);
-  gap: 28px;
-  align-items: end;
   margin-bottom: 28px;
-}
-
-.staff-showcase__header .section-header {
-  margin-bottom: 0;
 }
 
 .staff-showcase__art {
@@ -2710,6 +2709,9 @@ body::before {
 }
 
 .contact-office-panel__mascot {
+  display: flex;
+  justify-content: center;
+  width: 100%;
   align-self: center;
   margin-top: auto;
   padding-top: 22px;
