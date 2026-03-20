@@ -17,7 +17,6 @@ import {
   homeHeroSlides,
 } from "@/data/site-content";
 import { GallerySlider } from "@/components/gallery-slider";
-import { AcademicCatMascot } from "@/components/academic-cat-mascot";
 import {
   HomeTopicShowcase,
   type HomeTopicItem,
@@ -179,6 +178,7 @@ const homeTopics: HomeTopicItem[] = [
     title: whoWeAreTitle,
     teaser: whoWeAreParagraphs[0],
     paragraphs: whoWeAreParagraphs,
+    showMascot: true,
     image: {
       src: "/media/Humaniapota%20School/IMG_3386.jpg",
       alt: "Front entrance of the school campus",
@@ -285,12 +285,7 @@ export default async function HomePage() {
     <main className="home-page">
       <section className="hero">
         <div className="shell">
-          <div className="hero-stage">
-            <HeroCarousel slides={homeHeroSlides} />
-            <div className="hero-stage__mascot">
-              <AcademicCatMascot variant="hero" />
-            </div>
-          </div>
+          <HeroCarousel slides={homeHeroSlides} />
         </div>
       </section>
 

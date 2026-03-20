@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { useEffect, useState } from "react";
 
+import { AcademicCatMascot } from "@/components/academic-cat-mascot";
 import { LocalizedText, useLanguage } from "@/components/language-provider";
 import type { BilingualText } from "@/data/site-content";
 
@@ -10,6 +11,7 @@ export type HomeTopicItem = {
   title: BilingualText;
   teaser: BilingualText;
   paragraphs: BilingualText[];
+  showMascot?: boolean;
   image: {
     src?: string;
     alt: string;
@@ -66,42 +68,55 @@ export function HomeTopicShowcase({ items }: HomeTopicShowcaseProps) {
           const previewText = getPreviewSentence(
             item.paragraphs[0]?.[language] ?? item.teaser[language],
           );
+          const hasMascot = item.showMascot === true;
+          const isReverse = hasMascot || index % 2 === 1;
+          const cardClassName = [
+            "home-topic-card",
+            isReverse ? "home-topic-card--reverse" : "",
+            hasMascot ? "home-topic-card--mascot" : "",
+          ]
+            .filter(Boolean)
+            .join(" ");
 
           return (
-            <article
-              className={`home-topic-card${index % 2 === 1 ? " home-topic-card--reverse" : ""}`}
-              key={item.title.en}
-            >
+            <article className={cardClassName} key={item.title.en}>
               {/* Keep the preview to one complete sentence before the CTA. */}
-            <div className="home-topic-card__media">
-              {item.image.src ? (
-                <Image
-                  alt={item.image.alt}
-                  className="home-topic-card__image"
-                  fill
-                  sizes="(max-width: 720px) 100vw, 500px"
-                  src={item.image.src}
-                />
-              ) : (
-                <div
-                  aria-label={item.image.alt}
-                  className="home-topic-card__placeholder"
-                  role="img"
-                />
-              )}
-            </div>
+              <div className="home-topic-card__media">
+                {hasMascot ? (
+                  <div className="home-topic-card__mascot-shell">
+                    <AcademicCatMascot
+                      className="home-topic-card__mascot-figure"
+                      variant="feature"
+                    />
+                  </div>
+                ) : item.image.src ? (
+                  <Image
+                    alt={item.image.alt}
+                    className="home-topic-card__image"
+                    fill
+                    sizes="(max-width: 720px) 100vw, 500px"
+                    src={item.image.src}
+                  />
+                ) : (
+                  <div
+                    aria-label={item.image.alt}
+                    className="home-topic-card__placeholder"
+                    role="img"
+                  />
+                )}
+              </div>
 
-            <div className="home-topic-card__content">
-              <LocalizedText as="h3" text={item.title} />
-              <p className="home-topic-card__teaser">{previewText}</p>
-              <button
-                className="btn btn--accent home-topic-card__button"
-                onClick={() => setActiveIndex(index)}
-                type="button"
-              >
-                <LocalizedText text={moreText} />
-              </button>
-            </div>
+              <div className="home-topic-card__content">
+                <LocalizedText as="h3" text={item.title} />
+                <p className="home-topic-card__teaser">{previewText}</p>
+                <button
+                  className="btn btn--accent home-topic-card__button"
+                  onClick={() => setActiveIndex(index)}
+                  type="button"
+                >
+                  <LocalizedText text={moreText} />
+                </button>
+              </div>
             </article>
           );
         })}
