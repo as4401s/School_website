@@ -22,6 +22,7 @@ const REVEAL_SELECTOR = [
   ".status-banner",
   ".gallery-slider",
   ".video-reel",
+  ".home-topic-card",
 ].join(", ");
 
 function getRevealVariant(element: Element) {

@@ -11,6 +11,10 @@ import {
   homeHeroSlides,
 } from "@/data/site-content";
 import { GallerySlider } from "@/components/gallery-slider";
+import {
+  HomeTopicShowcase,
+  type HomeTopicItem,
+} from "@/components/home-topic-showcase";
 import { HomeVideoReel } from "@/components/home-video-reel";
 import {
   getGalleryItems,
@@ -109,21 +113,6 @@ const headTeacherParagraphs: BilingualText[] = [
   },
 ];
 
-const headTeacherCardLabel = {
-  en: "School Leadership",
-  bn: "বিদ্যালয়ের নেতৃত্ব",
-};
-
-const headTeacherCardTitle = {
-  en: "Formal portrait to be added soon",
-  bn: "আনুষ্ঠানিক ছবি শিগগিরই যুক্ত হবে",
-};
-
-const headTeacherCardSummary = {
-  en: "Until then, this section carries the school's identity while the head teacher's message remains available here for families.",
-  bn: "ততদিন এই অংশে বিদ্যালয়ের নিজস্ব পরিচয় থাকবে, আর পরিবারের জন্য প্রধান শিক্ষকের বার্তাটি এখানেই পড়া যাবে।",
-};
-
 const admissionFormTitle = {
   en: "Application Form",
   bn: "ভর্তি ফর্ম",
@@ -164,20 +153,19 @@ const admissionFormSupportText = {
   bn: "ফর্মটি স্ক্রিনে পূরণ করা যাবে, তবে জমা দেওয়ার আগে প্রিন্ট নিয়ে স্বাক্ষর করতে হবে।",
 };
 
-type HomeHighlight = {
-  title: BilingualText;
-  lead?: BilingualText;
-  paragraphs: BilingualText[];
-  image?: {
-    src: string;
-    alt: string;
-  };
-  variant?: "brand";
-};
-
-const learningHighlights: HomeHighlight[] = [
+const homeTopics: HomeTopicItem[] = [
+  {
+    title: whoWeAreTitle,
+    teaser: whoWeAreParagraphs[0],
+    paragraphs: whoWeAreParagraphs,
+    image: {
+      src: "/media/Humaniapota%20School/IMG_3386.jpg",
+      alt: "Front entrance of the school campus",
+    },
+  },
   {
     title: montessoriTitle,
+    teaser: montessoriParagraphs[0],
     paragraphs: montessoriParagraphs,
     image: {
       src: "/media/Humaniapota%20School/IMG_3345.jpg",
@@ -186,6 +174,7 @@ const learningHighlights: HomeHighlight[] = [
   },
   {
     title: visionTitle,
+    teaser: visionParagraphs[0],
     paragraphs: visionParagraphs,
     image: {
       src: "/media/Humaniapota%20School/IMG_3254.jpg",
@@ -194,9 +183,12 @@ const learningHighlights: HomeHighlight[] = [
   },
   {
     title: headTeacherTitle,
-    lead: headTeacherGreeting,
     paragraphs: headTeacherParagraphs,
-    variant: "brand",
+    teaser: headTeacherGreeting,
+    image: {
+      src: "/media/Humaniapota%20School/IMG_3343.jpg",
+      alt: "A classroom learning moment with children at KMS",
+    },
   },
 ];
 
@@ -328,73 +320,7 @@ export default async function HomePage() {
 
       <section className="section">
         <div className="shell">
-          <div className="feature-panel">
-            <div className="feature-panel__copy">
-              <LocalizedText as="h2" text={whoWeAreTitle} />
-              {whoWeAreParagraphs.map((paragraph) => (
-                <LocalizedText as="p" key={paragraph.en} text={paragraph} />
-              ))}
-            </div>
-            <div className="feature-panel__image-wrap">
-              <Image
-                alt="Front entrance of the school campus"
-                className="feature-panel__image"
-                height={700}
-                src="/media/Humaniapota%20School/IMG_3386.jpg"
-                width={900}
-              />
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section className="section section--tight-top">
-        <div className="shell stack stack--spacious">
-          {learningHighlights.map((item) => (
-            <article className="feature-panel" key={item.title.en}>
-              <div className="feature-panel__copy">
-                <LocalizedText as="h2" text={item.title} />
-                {item.lead ? <LocalizedText as="p" text={item.lead} /> : null}
-                {item.paragraphs.map((paragraph) => (
-                  <LocalizedText as="p" key={paragraph.en} text={paragraph} />
-                ))}
-              </div>
-              {item.image ? (
-                <div className="feature-panel__image-wrap">
-                  <Image
-                    alt={item.image.alt}
-                    className="feature-panel__image"
-                    height={700}
-                    src={item.image.src}
-                    width={900}
-                  />
-                </div>
-              ) : (
-                <div className="feature-panel__image-wrap feature-panel__image-wrap--brand">
-                  <div className="feature-panel__brand-card">
-                    <Image
-                      alt="KMS logo"
-                      className="feature-panel__brand-logo"
-                      height={144}
-                      src="/media/logo.jpg"
-                      width={144}
-                    />
-                    <LocalizedText
-                      as="span"
-                      className="feature-panel__placeholder-badge"
-                      text={headTeacherCardLabel}
-                    />
-                    <LocalizedText as="h3" text={headTeacherCardTitle} />
-                    <LocalizedText
-                      as="p"
-                      className="feature-panel__brand-note"
-                      text={headTeacherCardSummary}
-                    />
-                  </div>
-                </div>
-              )}
-            </article>
-          ))}
+          <HomeTopicShowcase items={homeTopics} />
         </div>
       </section>
 
