@@ -21,6 +21,7 @@ const REVEAL_SELECTOR = [
   ".login-card",
   ".status-banner",
   ".gallery-slider",
+  ".video-reel",
 ].join(", ");
 
 function getRevealVariant(element: Element) {
@@ -37,6 +38,10 @@ function getRevealVariant(element: Element) {
   }
 
   if (element.classList.contains("gallery-slider")) {
+    return "wide";
+  }
+
+  if (element.classList.contains("video-reel")) {
     return "wide";
   }
 
