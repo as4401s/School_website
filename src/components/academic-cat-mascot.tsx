@@ -4,7 +4,12 @@ import { useEffect, useRef } from "react";
 
 import { cn } from "@/lib/utils";
 
-type AcademicCatMascotVariant = "default" | "hero" | "feature" | "compact";
+type AcademicCatMascotVariant =
+  | "default"
+  | "hero"
+  | "feature"
+  | "compact"
+  | "reader";
 
 type AcademicCatMascotProps = {
   className?: string;
@@ -658,6 +663,14 @@ export function AcademicCatMascot({
         className,
       )}
       ref={rootRef}
-    />
+    >
+      {variant === "reader" ? (
+        <div className="academic-cat-mascot__book" aria-hidden="true">
+          <div className="academic-cat-mascot__book-page academic-cat-mascot__book-page--left" />
+          <div className="academic-cat-mascot__book-spine" />
+          <div className="academic-cat-mascot__book-page academic-cat-mascot__book-page--right" />
+        </div>
+      ) : null}
+    </div>
   );
 }
