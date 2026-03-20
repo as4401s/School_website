@@ -1,3 +1,4 @@
+import { AcademicCatMascot } from "@/components/academic-cat-mascot";
 import { ContactForm } from "@/components/contact-form";
 import { FacebookIcon } from "@/components/facebook-icon";
 import { LocalizedText } from "@/components/language-provider";
@@ -66,7 +67,12 @@ export default function ContactPage() {
 
       <section className="section section--tight-top">
         <div className="shell grid-2">
-          <ContactForm />
+          <div className="contact-form-shell">
+            <ContactForm />
+            <div aria-hidden="true" className="contact-form-shell__mascot">
+              <AcademicCatMascot variant="contact" />
+            </div>
+          </div>
 
           <article className="contact-panel stack">
             <LocalizedText

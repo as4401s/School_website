@@ -1,5 +1,6 @@
 import Image from "next/image";
 
+import { AcademicCatMascot } from "@/components/academic-cat-mascot";
 import { LocalizedText } from "@/components/language-provider";
 import { PageIntro } from "@/components/page-intro";
 import type { BilingualText } from "@/data/site-content";
@@ -260,18 +261,24 @@ export default function AdmissionsPage() {
 
       <section className="section section--tight-top">
         <div className="shell grid-2">
-          <article className="portal-card stack">
-            <LocalizedText as="p" className="eyebrow" text={formLabel} />
-            <LocalizedText as="h2" className="portal-title" text={formTitle} />
-            <LocalizedText as="p" text={formSummary} />
-            <a
-              className="btn btn--accent"
-              download="kms-admission-form.pdf"
-              href="/forms/kms-admission-form.pdf"
-            >
-              <LocalizedText text={formButton} />
-            </a>
-          </article>
+          <div className="admissions-form-panel">
+            <article className="portal-card stack">
+              <LocalizedText as="p" className="eyebrow" text={formLabel} />
+              <LocalizedText as="h2" className="portal-title" text={formTitle} />
+              <LocalizedText as="p" text={formSummary} />
+              <a
+                className="btn btn--accent"
+                download="kms-admission-form.pdf"
+                href="/forms/kms-admission-form.pdf"
+              >
+                <LocalizedText text={formButton} />
+              </a>
+            </article>
+
+            <div aria-hidden="true" className="admissions-form-panel__mascot">
+              <AcademicCatMascot variant="admissions" />
+            </div>
+          </div>
 
           <article className="contact-panel stack">
             <LocalizedText as="p" className="eyebrow" text={contactLabel} />

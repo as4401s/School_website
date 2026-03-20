@@ -9,7 +9,10 @@ type AcademicCatMascotVariant =
   | "hero"
   | "feature"
   | "compact"
-  | "reader";
+  | "reader"
+  | "admissions"
+  | "contact"
+  | "careers";
 
 type AcademicCatMascotProps = {
   className?: string;
@@ -676,6 +679,49 @@ export function AcademicCatMascot({
             <span />
           </div>
         </div>
+      ) : null}
+
+      {variant === "admissions" ? (
+        <>
+          <div className="academic-cat-mascot__application" aria-hidden="true">
+            <span />
+            <span />
+            <span />
+          </div>
+          <div className="academic-cat-mascot__satchel" aria-hidden="true">
+            <span />
+          </div>
+        </>
+      ) : null}
+
+      {variant === "contact" ? (
+        <>
+          <div className="academic-cat-mascot__envelope" aria-hidden="true">
+            <span />
+          </div>
+          <div className="academic-cat-mascot__pin" aria-hidden="true">
+            <span />
+          </div>
+        </>
+      ) : null}
+
+      {variant === "careers" ? (
+        <>
+          <div className="academic-cat-mascot__chalkboard" aria-hidden="true">
+            <span />
+            <span />
+            <span />
+          </div>
+          <div className="academic-cat-mascot__resumes" aria-hidden="true">
+            <span />
+            <span />
+          </div>
+          <div className="academic-cat-mascot__glasses" aria-hidden="true">
+            <span />
+            <span />
+            <span />
+          </div>
+        </>
       ) : null}
     </div>
   );

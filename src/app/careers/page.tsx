@@ -1,3 +1,4 @@
+import { AcademicCatMascot } from "@/components/academic-cat-mascot";
 import { LocalizedText } from "@/components/language-provider";
 import { PageIntro } from "@/components/page-intro";
 import type { BilingualText } from "@/data/site-content";
@@ -48,7 +49,7 @@ export default function CareersPage() {
       <PageIntro eyebrow={introEyebrow} summary={introSummary} title={introTitle} />
 
       <section className="section">
-        <div className="shell" style={{ maxWidth: "980px" }}>
+        <div className="shell careers-stage" style={{ maxWidth: "980px" }}>
           <article className="portal-card stack">
             <LocalizedText as="p" className="eyebrow" text={careersLabel} />
             <LocalizedText as="h2" className="portal-title" text={careersTitle} />
@@ -56,6 +57,10 @@ export default function CareersPage() {
               <LocalizedText as="p" key={paragraph.en} text={paragraph} />
             ))}
           </article>
+
+          <div aria-hidden="true" className="careers-stage__mascot">
+            <AcademicCatMascot variant="careers" />
+          </div>
         </div>
       </section>
     </>
