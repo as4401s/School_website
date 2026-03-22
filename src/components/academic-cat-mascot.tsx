@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 
 import { cn } from "@/lib/utils";
 
@@ -683,10 +683,12 @@ export function AcademicCatMascot({
   variant = "default",
 }: AcademicCatMascotProps) {
   const rootRef = useRef<HTMLDivElement | null>(null);
+  const [hasScene, setHasScene] = useState(false);
 
   useEffect(() => {
     let disposeScene: (() => void) | undefined;
     let isCancelled = false;
+    setHasScene(false);
 
     void import("three").then((THREE) => {
       if (isCancelled || !rootRef.current) {
@@ -694,6 +696,7 @@ export function AcademicCatMascot({
       }
 
       disposeScene = createAcademicCatScene(rootRef.current, THREE, variant);
+      setHasScene(true);
     }).catch((error: unknown) => {
       console.error("Failed to load Three.js mascot", error);
     });
@@ -714,6 +717,22 @@ export function AcademicCatMascot({
       )}
       ref={rootRef}
     >
+      <div
+        aria-hidden="true"
+        className={cn(
+          "academic-cat-mascot__fallback",
+          hasScene && "academic-cat-mascot__fallback--hidden",
+        )}
+      >
+        <div className="academic-cat-mascot__fallback-tail" />
+        <div className="academic-cat-mascot__fallback-body" />
+        <div className="academic-cat-mascot__fallback-head">
+          <span className="academic-cat-mascot__fallback-ear academic-cat-mascot__fallback-ear--left" />
+          <span className="academic-cat-mascot__fallback-ear academic-cat-mascot__fallback-ear--right" />
+          <span className="academic-cat-mascot__fallback-face" />
+        </div>
+      </div>
+
       {variant === "reader" ? (
         <div className="academic-cat-mascot__book-stack" aria-hidden="true">
           <div className="academic-cat-mascot__book-volume academic-cat-mascot__book-volume--teal">

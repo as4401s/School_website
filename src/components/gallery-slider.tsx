@@ -6,7 +6,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import type { GalleryItem } from "@/data/site-content";
 
 function getVisibleCount(width: number) {
-  if (width <= 430) {
+  if (width <= 720) {
     return 1;
   }
 
@@ -147,7 +147,7 @@ export function GallerySlider({ items }: { items: GalleryItem[] }) {
               alt={item.title.en}
               className="gallery-slider__image"
               fill
-              sizes="(max-width: 430px) 82vw, (max-width: 1120px) 50vw, 33vw"
+              sizes="(max-width: 720px) 92vw, (max-width: 1120px) 50vw, 33vw"
               src={item.imageUrl}
             />
           </div>
