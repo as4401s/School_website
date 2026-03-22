@@ -138,7 +138,8 @@ select {
 .site-nav__panel-head,
 .site-nav__mobile-actions,
 .site-nav__mobile-language,
-.site-nav__submenu-button {
+.site-nav__submenu-button,
+.site-nav__back {
   display: none;
 }
 
@@ -1938,6 +1939,10 @@ h4,
   margin-top: 8px;
 }
 
+.mobile-bottom-mascot {
+  display: none;
+}
+
 
 .hero__panel {
   position: relative;
@@ -3594,7 +3599,22 @@ body::before {
 
   .site-nav__panel-head {
     display: grid;
-    gap: 6px;
+    gap: 10px;
+  }
+
+  .site-nav__back {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    justify-self: start;
+    min-height: 42px;
+    padding: 0 14px;
+    border-radius: 999px;
+    border: 1px solid rgba(21, 32, 51, 0.08);
+    background: rgba(255, 255, 255, 0.82);
+    color: var(--ink);
+    font-weight: 700;
+    box-shadow: 0 12px 24px rgba(36, 48, 68, 0.08);
   }
 
   .site-nav__panel-head .eyebrow {
@@ -3708,6 +3728,35 @@ body::before {
 }
 
 @media (max-width: 720px) {
+  .home-topic-card__mascot,
+  .admissions-form-panel__mascot,
+  .contact-office-panel__mascot,
+  .learning-grid-secondary__mascot,
+  .careers-stage__mascot {
+    display: none !important;
+  }
+
+  .mobile-bottom-mascot {
+    display: block;
+    padding: 6px 0 22px;
+  }
+
+  .mobile-bottom-mascot__shell {
+    display: grid;
+    place-items: center;
+    min-height: 132px;
+    border-radius: 28px;
+    background:
+      radial-gradient(circle at top right, rgba(240, 176, 139, 0.2), transparent 24%),
+      radial-gradient(circle at bottom left, rgba(77, 182, 232, 0.14), transparent 24%),
+      linear-gradient(180deg, rgba(255, 255, 255, 0.76), rgba(255, 248, 241, 0.62));
+    border: 1px solid rgba(21, 32, 51, 0.06);
+  }
+
+  .mobile-bottom-mascot__figure {
+    width: 150px !important;
+  }
+
   .page-intro__inner h1,
   .section h2,
   .section h3,
@@ -3732,13 +3781,6 @@ body::before {
 
   .media-portal-card__art {
     aspect-ratio: 5 / 3;
-  }
-
-  .admissions-form-panel__mascot,
-  .contact-office-panel__mascot,
-  .careers-stage__mascot {
-    transform: none;
-    width: 100%;
   }
 
   .home-page {
@@ -3834,78 +3876,31 @@ body::before {
     padding-top: 4px;
   }
 
-  .home-topic-card__mascot {
-    position: relative;
-    display: grid;
-    justify-items: end;
-    align-items: center;
-    width: 100%;
-    left: 0;
-    top: 0;
-    transform: none;
-    min-height: 0;
-    margin: 2px 0 0;
-  }
-
-  .home-topic-card__mascot-figure {
-    width: min(160px, 42vw);
-    min-width: 0;
-  }
-
   .home-topic-modal__card {
+    display: block;
     grid-template-columns: 1fr;
-    max-height: 88vh;
+    max-height: none;
+    overflow: visible;
   }
 
   .home-topic-modal__media {
     min-height: 280px;
   }
 
+  .home-topic-modal {
+    place-items: start center;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
   .home-topic-modal__content {
     padding: 24px 22px 22px;
-  }
-
-  .academic-cat-mascot--default,
-  .academic-cat-mascot--feature {
-    width: min(168px, 44vw);
-  }
-
-  .academic-cat-mascot--compact {
-    width: min(124px, 34vw);
-  }
-
-  .academic-cat-mascot--hero {
-    width: min(132px, 36vw);
-  }
-
-  .academic-cat-mascot--reader {
-    width: min(100%, 220px);
-    min-width: 0;
-  }
-
-  .academic-cat-mascot--admissions {
-    width: min(180px, 48vw);
-  }
-
-  .academic-cat-mascot--contact {
-    width: min(132px, 34vw);
-  }
-
-  .academic-cat-mascot--careers {
-    width: min(190px, 52vw);
+    overflow: visible;
   }
 
   .learning-grid-secondary {
     width: min(100%, 560px);
     grid-template-columns: 1fr;
-  }
-
-  .learning-grid-secondary__mascot {
-    position: relative;
-    top: 0;
-    right: 0;
-    transform: none;
-    margin: 16px auto 0;
   }
 
   .hero__panel {
@@ -4525,6 +4520,18 @@ body::before {
 }
 
 @media (max-width: 430px) {
+  .mobile-bottom-mascot {
+    padding: 4px 0 18px;
+  }
+
+  .mobile-bottom-mascot__shell {
+    min-height: 120px;
+    border-radius: 24px;
+  }
+
+  .mobile-bottom-mascot__figure {
+    width: 136px !important;
+  }
 
   .admissions-overview__art,
   .announcements-feature__art,
@@ -4653,6 +4660,10 @@ body::before {
 
   .home-topic-modal__media {
     min-height: 220px;
+  }
+
+  .home-topic-modal__content {
+    padding-bottom: 26px;
   }
 
   .home-topic-modal__close {

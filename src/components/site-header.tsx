@@ -85,6 +85,25 @@ export function SiteHeader() {
           className={cn("site-nav", open && "site-nav--open")}
         >
           <div className="site-nav__panel-head">
+            <button
+              className="site-nav__back"
+              onClick={() => setOpen(false)}
+              type="button"
+            >
+              <svg
+                fill="none"
+                height="16"
+                stroke="currentColor"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+                viewBox="0 0 24 24"
+                width="16"
+              >
+                <polyline points="15 18 9 12 15 6" />
+              </svg>
+              <LocalizedText text={{ en: "Back", bn: "ফিরুন" }} />
+            </button>
             <LocalizedText
               as="p"
               className="eyebrow"
