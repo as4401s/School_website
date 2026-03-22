@@ -68,29 +68,33 @@ export function PageMotion() {
 
   useEffect(() => {
     const root = document.documentElement;
-    root.classList.add("has-motion");
-
     const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const mobileViewport = window.matchMedia("(max-width: 820px)");
     const elements = Array.from(document.querySelectorAll<HTMLElement>(REVEAL_SELECTOR));
+
+    const resetElements = () => {
+      for (const element of elements) {
+        element.classList.remove("reveal-on-scroll", "is-visible");
+        element.removeAttribute("data-reveal");
+        element.style.removeProperty("--reveal-delay");
+      }
+    };
+
+    if (reducedMotion.matches || mobileViewport.matches) {
+      root.classList.remove("has-motion");
+      resetElements();
+
+      return () => {
+        resetElements();
+      };
+    }
+
+    root.classList.add("has-motion");
 
     for (const element of elements) {
       element.classList.add("reveal-on-scroll");
       element.dataset.reveal = getRevealVariant(element);
       element.style.setProperty("--reveal-delay", `${getRevealDelay(element)}ms`);
-    }
-
-    if (reducedMotion.matches) {
-      for (const element of elements) {
-        element.classList.add("is-visible");
-      }
-
-      return () => {
-        for (const element of elements) {
-          element.classList.remove("reveal-on-scroll", "is-visible");
-          element.removeAttribute("data-reveal");
-          element.style.removeProperty("--reveal-delay");
-        }
-      };
     }
 
     const observer = new IntersectionObserver(
@@ -117,12 +121,7 @@ export function PageMotion() {
     return () => {
       window.cancelAnimationFrame(frameId);
       observer.disconnect();
-
-      for (const element of elements) {
-        element.classList.remove("reveal-on-scroll", "is-visible");
-        element.removeAttribute("data-reveal");
-        element.style.removeProperty("--reveal-delay");
-      }
+      resetElements();
     };
   }, [pathname]);
 

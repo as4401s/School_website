@@ -725,6 +725,17 @@ export function AcademicCatMascot({
     let isCancelled = false;
     setHasScene(false);
 
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const mobileViewport = window.matchMedia("(max-width: 820px)");
+
+    // Keep mobile scroll smooth by using the lightweight fallback art instead of
+    // mounting the animated Three.js scene on small screens.
+    if (reducedMotion.matches || mobileViewport.matches) {
+      return () => {
+        isCancelled = true;
+      };
+    }
+
     void import("three").then((THREE) => {
       if (isCancelled || !rootRef.current) {
         return;
