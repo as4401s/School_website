@@ -517,9 +517,39 @@ function createAcademicCatScene(
   let idleWeight = 0;
   let frameId = 0;
 
-  const handleMouseMove = (event: MouseEvent) => {
-    mouseX = (event.clientX / window.innerWidth) * 2 - 1;
-    mouseY = -(event.clientY / window.innerHeight) * 2 + 1;
+  const setPointerTarget = (clientX: number, clientY: number) => {
+    mouseX = (clientX / window.innerWidth) * 2 - 1;
+    mouseY = -(clientY / window.innerHeight) * 2 + 1;
+    lastMoveTime = Date.now();
+  };
+
+  const handlePointerMove = (event: PointerEvent) => {
+    setPointerTarget(event.clientX, event.clientY);
+  };
+
+  const handleTouchMove = (event: TouchEvent) => {
+    const touch = event.touches[0];
+
+    if (!touch) {
+      return;
+    }
+
+    setPointerTarget(touch.clientX, touch.clientY);
+  };
+
+  const handleScroll = () => {
+    if (window.innerWidth > 820) {
+      return;
+    }
+
+    const rect = container.getBoundingClientRect();
+    const centerX = rect.left + rect.width / 2;
+    const centerY = rect.top + rect.height / 2;
+    const normalizedX = (centerX - window.innerWidth / 2) / window.innerWidth;
+    const normalizedY = (centerY - window.innerHeight / 2) / window.innerHeight;
+
+    mouseX = THREE.MathUtils.clamp(-normalizedX * 1.6, -0.65, 0.65);
+    mouseY = THREE.MathUtils.clamp(-normalizedY * 1.6, -0.65, 0.65);
     lastMoveTime = Date.now();
   };
 
@@ -640,14 +670,19 @@ function createAcademicCatScene(
         })
       : null;
 
-  document.addEventListener("mousemove", handleMouseMove);
+  window.addEventListener("pointermove", handlePointerMove);
+  window.addEventListener("touchmove", handleTouchMove, { passive: true });
+  window.addEventListener("scroll", handleScroll, { passive: true });
   window.addEventListener("resize", resize);
   resizeObserver?.observe(container);
+  handleScroll();
   animate();
 
   return () => {
     window.cancelAnimationFrame(frameId);
-    document.removeEventListener("mousemove", handleMouseMove);
+    window.removeEventListener("pointermove", handlePointerMove);
+    window.removeEventListener("touchmove", handleTouchMove);
+    window.removeEventListener("scroll", handleScroll);
     window.removeEventListener("resize", resize);
     resizeObserver?.disconnect();
 

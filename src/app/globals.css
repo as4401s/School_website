@@ -3755,21 +3755,21 @@ body::before {
   .hero,
   .login-layout,
   .portal-layout {
-    padding: 48px 0;
+    padding: 58px 0;
   }
 
   .stack {
-    gap: 14px;
+    gap: 18px;
   }
 
   .grid-2,
   .grid-3,
   .grid-4 {
-    gap: 20px;
+    gap: 28px;
   }
 
   .home-launchpad-section {
-    margin-top: -22px;
+    margin-top: -10px;
   }
 
   .home-launchpad {
@@ -3778,21 +3778,23 @@ body::before {
 
   .home-launchpad__band-grid {
     grid-template-columns: 1fr;
-    border-radius: 24px;
+    border-radius: 22px;
+    box-shadow: 0 18px 36px rgba(36, 48, 68, 0.1);
   }
 
   .home-launchpad__tile {
-    min-height: 78px;
-    padding: 15px 16px;
-    font-size: 0.94rem;
-    line-height: 1.2;
+    min-height: 62px;
+    padding: 12px 14px;
+    font-size: 0.82rem;
+    line-height: 1.15;
+    letter-spacing: -0.01em;
     justify-content: flex-start;
     text-align: left;
   }
 
   .home-launchpad__tile svg {
-    width: 18px;
-    height: 18px;
+    width: 14px;
+    height: 14px;
     flex: 0 0 auto;
   }
 
@@ -3801,7 +3803,7 @@ body::before {
   }
 
   .home-topics {
-    gap: 30px;
+    gap: 52px;
   }
 
   .home-topic-card,
@@ -3820,33 +3822,34 @@ body::before {
 
   .home-topic-card__content {
     width: 100%;
-    gap: 14px;
-    padding: 10px 2px 0;
+    gap: 18px;
+    padding: 8px 4px 0;
   }
 
   .home-topic-card--reverse .home-topic-card__content {
-    padding: 10px 2px 0;
+    padding: 8px 4px 0;
   }
 
   .home-topic-card--mascot {
-    padding-top: 12px;
+    padding-top: 4px;
   }
 
   .home-topic-card__mascot {
     position: relative;
     display: grid;
-    place-items: center;
+    justify-items: end;
+    align-items: center;
     width: 100%;
     left: 0;
     top: 0;
     transform: none;
-    min-height: 220px;
-    margin: 14px auto 0;
+    min-height: 0;
+    margin: 2px 0 0;
   }
 
   .home-topic-card__mascot-figure {
-    width: min(100%, 320px);
-    min-width: min(220px, 100%);
+    width: min(160px, 42vw);
+    min-width: 0;
   }
 
   .home-topic-modal__card {
@@ -3864,20 +3867,32 @@ body::before {
 
   .academic-cat-mascot--default,
   .academic-cat-mascot--feature {
-    width: min(240px, 66vw);
+    width: min(168px, 44vw);
   }
 
   .academic-cat-mascot--compact {
-    width: min(164px, 44vw);
+    width: min(124px, 34vw);
   }
 
   .academic-cat-mascot--hero {
-    width: min(180px, 48vw);
+    width: min(132px, 36vw);
   }
 
   .academic-cat-mascot--reader {
-    width: min(100%, 320px);
-    min-width: min(240px, 100%);
+    width: min(100%, 220px);
+    min-width: 0;
+  }
+
+  .academic-cat-mascot--admissions {
+    width: min(180px, 48vw);
+  }
+
+  .academic-cat-mascot--contact {
+    width: min(132px, 34vw);
+  }
+
+  .academic-cat-mascot--careers {
+    width: min(190px, 52vw);
   }
 
   .learning-grid-secondary {
@@ -3975,7 +3990,7 @@ body::before {
   }
 
   .hero__content {
-    padding: 24px 0 0;
+    padding: 30px 0 0;
     gap: 0;
   }
 
@@ -4016,12 +4031,12 @@ body::before {
   .section-header {
     flex-direction: column;
     align-items: stretch;
-    gap: 14px;
-    margin-bottom: 22px;
+    gap: 18px;
+    margin-bottom: 30px;
   }
 
   .section-header p {
-    margin-top: 6px;
+    margin-top: 10px;
   }
 
   .lede {
@@ -4043,8 +4058,8 @@ body::before {
   .contact-panel,
   .contact-form-card,
   .login-card {
-    padding: 24px 22px;
-    gap: 12px;
+    padding: 28px 24px;
+    gap: 16px;
   }
 
   .feature-panel,
@@ -4083,8 +4098,8 @@ body::before {
   }
 
   .notice-spotlight {
-    padding: 26px;
-    gap: 18px;
+    padding: 30px 26px;
+    gap: 20px;
   }
 
   .notice-spotlight h3 {
@@ -4106,8 +4121,8 @@ body::before {
   }
 
   .prospectus-panel__copy {
-    padding: 26px;
-    gap: 16px;
+    padding: 30px 26px;
+    gap: 20px;
   }
 
   .prospectus-panel__copy h2 {
@@ -4126,8 +4141,8 @@ body::before {
   }
 
   .feature-panel__copy {
-    gap: 16px;
-    padding: 26px 22px;
+    gap: 20px;
+    padding: 30px 26px;
   }
 
   .feature-panel__image-wrap {
@@ -4176,7 +4191,7 @@ body::before {
   }
 
   .page-intro__inner {
-    padding: 32px 24px 26px;
+    padding: 40px 28px 32px;
     border-radius: 26px;
   }
 
@@ -4196,6 +4211,19 @@ body::before {
   .contact-form-card p {
     font-size: 0.99rem;
     line-height: 1.72;
+  }
+
+  .page-intro__inner h1 + .lede,
+  .section-header h2 + p,
+  .section-header h3 + p,
+  .feature-panel__copy h2 + p,
+  .portal-card h3 + p,
+  .contact-panel h3 + p,
+  .story-card__body h3 + p,
+  .tour-card__body h3 + p,
+  .doc-card__body h3 + p,
+  .gallery-card__body h3 + p {
+    margin-top: 10px;
   }
 
   .site-header__inner {
@@ -4453,7 +4481,7 @@ body::before {
   }
 
   .site-footer__lead {
-    padding-bottom: 28px;
+    padding-bottom: 36px;
   }
 
   .site-footer__brand {
@@ -4469,8 +4497,8 @@ body::before {
   }
 
   .site-footer__grid {
-    gap: 18px;
-    padding-top: 28px;
+    gap: 22px;
+    padding-top: 36px;
   }
 
   .site-footer__block {
@@ -4509,15 +4537,15 @@ body::before {
   }
 
   .academic-cat-mascot--admissions {
-    width: min(220px, 68vw);
+    width: min(156px, 44vw);
   }
 
   .academic-cat-mascot--contact {
-    width: min(162px, 44vw);
+    width: min(120px, 32vw);
   }
 
   .academic-cat-mascot--careers {
-    width: min(240px, 72vw);
+    width: min(170px, 48vw);
   }
 
   .home-page {
@@ -4527,32 +4555,32 @@ body::before {
 
   .home-launchpad__tile {
     gap: 8px;
-    min-height: 68px;
-    padding: 12px 13px;
-    font-size: 0.86rem;
+    min-height: 58px;
+    padding: 10px 12px;
+    font-size: 0.78rem;
   }
 
   .home-launchpad__tile svg {
-    width: 15px;
-    height: 15px;
+    width: 13px;
+    height: 13px;
   }
 
   .academic-cat-mascot--default,
   .academic-cat-mascot--feature {
-    width: min(220px, 70vw);
+    width: min(148px, 42vw);
   }
 
   .academic-cat-mascot--compact {
-    width: min(140px, 44vw);
+    width: min(112px, 32vw);
   }
 
   .academic-cat-mascot--hero {
-    width: min(170px, 52vw);
+    width: min(120px, 34vw);
   }
 
   .academic-cat-mascot--reader {
-    width: min(100%, 280px);
-    min-width: min(220px, 100%);
+    width: min(100%, 190px);
+    min-width: 0;
   }
 
   .gallery-slider__track {
@@ -4605,8 +4633,8 @@ body::before {
   }
 
   .home-topic-card__mascot-figure {
-    width: min(100%, 280px);
-    min-width: min(210px, 100%);
+    width: min(132px, 40vw);
+    min-width: 0;
   }
 
   .home-topic-card__teaser {
@@ -4667,7 +4695,7 @@ body::before {
   .hero,
   .login-layout,
   .portal-layout {
-    padding: 36px 0;
+    padding: 46px 0;
   }
 
   .story-card__body,
@@ -4679,17 +4707,17 @@ body::before {
   .contact-panel,
   .contact-form-card,
   .login-card {
-    padding: 20px 18px;
+    padding: 24px 20px;
   }
 
   .notice-spotlight,
   .prospectus-panel__copy,
   .page-intro__inner {
-    padding: 20px 18px;
+    padding: 26px 22px;
   }
 
   .feature-panel__copy {
-    padding: 20px 18px;
+    padding: 26px 22px;
   }
 
   .feature-panel__image-wrap--brand,
