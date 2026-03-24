@@ -4,7 +4,6 @@ import localFont from "next/font/local";
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { LanguageProvider } from "@/components/language-provider";
-import { MobileBottomMascot } from "@/components/mobile-bottom-mascot";
 import { PageMotion } from "@/components/page-motion";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
@@ -95,7 +94,6 @@ export default function RootLayout({
           <div className="site-backdrop" />
           <SiteHeader />
           <main>{children}</main>
-          <MobileBottomMascot />
           <SiteFooter />
           <Analytics />
           <SpeedInsights />

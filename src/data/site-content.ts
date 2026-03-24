@@ -61,7 +61,7 @@ export type DocumentItem = {
 export const siteMeta = {
   name: {
     en: "Krishnarati Montessori School (KMS)",
-    bn: "কৃষ্ণরাতি মন্টেসরি স্কুল (কেএমএস)",
+    bn: "কৃষ্ণারতি মন্টেসরি স্কুল (কেএমএস)",
   },
   shortName: "KMS",
   foundation: "NGBM Foundation",
@@ -72,11 +72,11 @@ export const siteMeta = {
   },
   heroSummary: {
     en: "A warm learning environment focused on safety, joyful classroom life, and everyday growth.",
-    bn: "নিরাপত্তা, আনন্দময় শ্রেণিকক্ষের পরিবেশ এবং প্রতিদিনের অগ্রগতিকে গুরুত্ব দিয়ে গড়ে ওঠা একটি স্নেহময় শিক্ষাঙ্গন।",
+    bn: "শ্রেণিকক্ষের নিরাপদ, আনন্দময় পরিবেশ এবং প্রতিদিনের অগ্রগতিকে গুরুত্ব দিয়ে গড়ে ওঠা একটি স্নেহময় শিক্ষাঙ্গন।",
   },
   safetyMessage: {
     en: "SAFETY FIRST: We're taking extra measures to ensure your children are safe in our school.",
-    bn: "সুরক্ষা সবার আগে: আপনার সন্তানের নিরাপত্তা নিশ্চিত করতে আমাদের বিদ্যালয়ে অতিরিক্ত ব্যবস্থা নেওয়া হয়েছে।",
+    bn: "সুরক্ষা: শিক্ষাক্ষেত্রে ছাত্র-ছাত্রীদের নিরাপদ ও সুরক্ষিত রাখা আমাদের কর্তব্য।",
   },
   address: {
     en: "Post & Village - Humaniapota, Thakurbari, PS - Gangnapur, Ranaghat - II, Nadia, Pin - 741238",
@@ -95,7 +95,7 @@ export const siteMeta = {
 export const navigation: NavigationItem[] = [
   { href: "/", label: { en: "HOME", bn: "হোম" } },
   { href: "/our-school", label: { en: "ABOUT", bn: "আমাদের সম্পর্কে" } },
-  { href: "/academics", label: { en: "LEARNING AT KMS", bn: "কেএমএস-এ শেখা" } },
+  { href: "/academics", label: { en: "LEARNING AT KMS", bn: "শিক্ষণ পদ্ধতি" } },
   { href: "/admissions", label: { en: "ADMISSIONS", bn: "ভর্তি" } },
   { href: "/announcements", label: { en: "ANNOUNCEMENTS", bn: "বিজ্ঞপ্তি" } },
   {

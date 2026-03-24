@@ -1549,6 +1549,7 @@ h4,
 }
 
 .gallery-slider__slide {
+  display: block;
   position: relative;
   scroll-snap-align: start;
   aspect-ratio: 5 / 4;

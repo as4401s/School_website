@@ -85,7 +85,7 @@ export default function ContactPage() {
               as="p"
               text={{
                 en: "For admissions, school updates, or general enquiries, families may write to the school email shown here.",
-                bn: "ভর্তি, বিদ্যালয়ের আপডেট বা সাধারণ জিজ্ঞাসার জন্য পরিবারগুলি এখানে দেওয়া বিদ্যালয়ের ইমেলে যোগাযোগ করতে পারেন।",
+                bn: "ভর্তি, বিদ্যালয়ের আপডেট বা সাধারণ জিজ্ঞাসার জন্য অভিভাবকগণ এখানে দেওয়া বিদ্যালয়ের ইমেলে যোগাযোগ করতে পারেন।",
               }}
             />
             <p>

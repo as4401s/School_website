@@ -35,7 +35,7 @@ const latestNewsLabel = {
 
 const latestNewsDescription = {
   en: "Recent celebrations, school stories, and important public updates from the current school year.",
-  bn: "চলতি শিক্ষাবর্ষের উল্লেখযোগ্য অনুষ্ঠান, বিদ্যালয়ের গল্প এবং গুরুত্বপূর্ণ বিদ্যালয়সংক্রান্ত আপডেট।",
+  bn: "বর্তমান শিক্ষাবর্ষের সাম্প্রতিক উৎসব ও বিদ্যালয়-সম্পর্কিত তথ্য।",
 };
 
 const whoWeAreTitle = {
@@ -46,15 +46,15 @@ const whoWeAreTitle = {
 const whoWeAreParagraphs: BilingualText[] = [
   {
     en: "Krishnarati Montessori School (KMS) is an initiative of the NGBM Foundation, started in the second half of 2022 at the foundation's ancestral home in Humania Pota.",
-    bn: "কৃষ্ণরাতি মন্টেসরি স্কুল (কেএমএস) হল এনজিবিএম ফাউন্ডেশনের একটি উদ্যোগ। ২০২২ সালের দ্বিতীয়ার্ধে হুমানিয়া পোতার পৈতৃক ভিটেতে এই বিদ্যালয়ের সূচনা হয়।",
+    bn: "কৃষ্ণারতি মন্টেসরি স্কুল (কেএমএস) হল এনজিবিএম ফাউন্ডেশনের একটি উদ্যোগ, যা ২০২২ সালের দ্বিতীয়ার্ধে হুমানিয়াপোতায় প্রতিষ্ঠাতার পৈতৃক নিবাসে শুরু হয়।",
   },
   {
     en: "The school was founded with a simple aim: to bring quality English-medium early education closer to local families and give children a joyful beginning to their learning journey.",
-    bn: "স্থানীয় ও আশপাশের পরিবারের শিশুদের জন্য মানসম্মত ইংরেজি মাধ্যমে প্রাথমিক শিক্ষা সহজলভ্য করা এবং তাদের শেখার শুরুটাকে আনন্দময় করে তোলাই বিদ্যালয়ের মূল উদ্দেশ্য।",
+    bn: "স্কুলটির মূল লক্ষ্য হল: স্থানীয় পরিবারে শিশুদের কাছে মানসম্মত ইংরেজি মাধ্যমের প্রারম্ভিক শিক্ষাকে আরও সহজলভ্য করে তোলা এবং তাদের শিক্ষাজীবনকে আরও আনন্দময় করে তোলা।",
   },
   {
     en: "At KMS, school life is shaped by stories, songs, play, creative work, and caring relationships so that children grow with confidence, curiosity, and a strong sense of belonging.",
-    bn: "কেএমএস-এ গল্প, গান, খেলা, সৃজনশীল কাজ এবং স্নেহময় যত্নের মধ্য দিয়ে শিশুদের আত্মবিশ্বাস, কৌতূহল ও একাত্মবোধ গড়ে তোলা হয়।",
+    bn: "কেএমএস-এ শিশুদের স্কুল জীবন গল্প, গান, খেলাধুলা, সৃজনশীল কাজ এবং স্নেহপূর্ণ সম্পর্কের মাধ্যমে এমনভাবে সাজানো হয়, যাতে তারা আত্মবিশ্বাস, কৌতূহল এবং প্রবল একাত্মবোধ নিয়ে বেড়ে উঠতে পারে।",
   },
 ];
 
@@ -66,15 +66,15 @@ const montessoriTitle = {
 const montessoriParagraphs: BilingualText[] = [
   {
     en: "KMS follows the Montessori approach, which respects each child as an individual learner and encourages discovery through observation, movement, and hands-on experiences.",
-    bn: "কেএমএস-এ মন্টেসরি শিক্ষাদর্শ অনুসরণ করা হয়, যেখানে প্রতিটি শিশুকে নিজস্ব স্বভাব ও গতির শিক্ষার্থী হিসেবে সম্মান করা হয়।",
+    bn: "কেএমএস-এ মন্টেসরি শিক্ষাদর্শ অনুসরণ করা হয়, যা প্রতিটি শিশুকে একজন স্বতন্ত্র শিক্ষার্থী হিসেবে মূল্যায়ন করে এবং বিভিন্ন হাতে-কলমে অভিজ্ঞতার মাধ্যমে শিক্ষা অর্জনে উৎসাহিত করে।",
   },
   {
     en: "Children are guided step by step to explore materials, ask questions, make choices, and think independently rather than only memorizing or listening.",
-    bn: "এখানে হাতে-কলমে কাজ, পর্যবেক্ষণ, স্পর্শ, অনুসন্ধান এবং নিজের মতো করে ভাবার সুযোগের মধ্য দিয়ে শেখার অভ্যাস গড়ে ওঠে।",
+    bn: "শিশুদের কেবল প্রথাগত শিক্ষার মধ্যে সীমাবদ্ধ না রেখে, বিভিন্ন উপকরণের মাধ্যমে প্রশ্ন করতে, নিজেদের পছন্দ নির্বাচন করতে এবং স্বাধীনভাবে চিন্তা করতে উৎসাহ দেওয়া হয়।",
   },
   {
     en: "With patient guidance and a supportive environment, this method helps children build independence, concentration, creativity, and problem-solving skills.",
-    bn: "ধাপে ধাপে সঠিক দিকনির্দেশনা ও সহায়ক পরিবেশের মাধ্যমে শিশুদের স্বনির্ভরতা, মনোযোগ, সৃজনশীলতা এবং সমস্যা সমাধানের দক্ষতা বিকশিত হয়।",
+    bn: "সঠিক পরিচালনা ও সহায়ক পরিবেশ শিশুদের স্বনির্ভর, মনোযোগী, সৃজনশীল এবং বিভিন্ন সমস্যা সমাধানে দক্ষ হতে সাহায্য করে।",
   },
 ];
 
@@ -110,7 +110,7 @@ const admissionFormTitle = {
 
 const admissionFormDescription = {
   en: "Families can download the printable admission form, fill in the child and parent details at home, sign it after printing, and submit it at the school office with the required documents.",
-  bn: "অভিভাবকেরা এখান থেকেই ভর্তি ফর্ম ডাউনলোড করে বাড়িতে বসে শিক্ষার্থী ও পরিবারের তথ্য পূরণ করতে পারবেন, প্রিন্ট নেওয়ার পর স্বাক্ষর করে প্রয়োজনীয় নথিসহ স্কুল অফিসে জমা দিতে পারবেন।",
+  bn: "অভিভাবকগণ এখান থেকেই ভর্তি ফর্ম ডাউনলোড করে বাড়িতে বসে শিক্ষার্থী ও অভিভাবকের তথ্য পূরণ করতে পারবেন, প্রিন্ট নেওয়ার পর স্বাক্ষর করে প্রয়োজনীয় নথিসহ স্কুল অফিসে জমা দিতে পারবেন।",
 };
 
 const admissionFormSteps: BilingualText[] = [
@@ -231,7 +231,7 @@ const viewNoticeText = {
 
 const noticeSupportText = {
   en: "Latest public notices, circulars, and result updates for families.",
-  bn: "অভিভাবকদের জন্য সর্বশেষ বিজ্ঞপ্তি, নোটিশ এবং ফলাফলের আপডেট।",
+  bn: "অভিভাবকদের জন্য সাম্প্রতিক খবর ও ফলাফল-সম্পর্কিত তথ্য।",
 };
 
 // IDs of gallery photos to show in the campus-life slider (in display order)

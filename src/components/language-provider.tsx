@@ -82,14 +82,39 @@ export function LocalizedDate({
   value: string;
 }) {
   const { language } = useLanguage();
+  const date = new Date(value);
+
+  if (language === "bn") {
+    const numberFormatter = new Intl.NumberFormat("bn-BD");
+    const bengaliMonths = [
+      "জানুয়ারি",
+      "ফেব্রুয়ারি",
+      "মার্চ",
+      "এপ্রিল",
+      "মে",
+      "জুন",
+      "জুলাই",
+      "আগস্ট",
+      "সেপ্টেম্বর",
+      "অক্টোবর",
+      "নভেম্বর",
+      "ডিসেম্বর",
+    ];
+
+    return (
+      <span className={className}>
+        {`${numberFormatter.format(date.getDate())} ${bengaliMonths[date.getMonth()]} ${numberFormatter.format(date.getFullYear())}`}
+      </span>
+    );
+  }
 
   return (
     <span className={className}>
-      {new Intl.DateTimeFormat(language === "bn" ? "bn-BD" : "en-IN", {
+      {new Intl.DateTimeFormat("en-IN", {
         day: "numeric",
         month: "short",
         year: "numeric",
-      }).format(new Date(value))}
+      }).format(date)}
     </span>
   );
 }

@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import { useCallback, useEffect, useRef, useState } from "react";
 
 import type { GalleryItem } from "@/data/site-content";
@@ -139,9 +140,11 @@ export function GallerySlider({ items }: { items: GalleryItem[] }) {
 
       <div className="gallery-slider__track" onScroll={handleScroll} ref={trackRef}>
         {items.map((item) => (
-          <div
+          <Link
             className="gallery-slider__slide"
+            href="/gallery"
             key={item.id}
+            prefetch={false}
           >
             <Image
               alt={item.title.en}
@@ -150,7 +153,7 @@ export function GallerySlider({ items }: { items: GalleryItem[] }) {
               sizes="(max-width: 720px) 92vw, (max-width: 1120px) 50vw, 33vw"
               src={item.imageUrl}
             />
-          </div>
+          </Link>
         ))}
       </div>
 

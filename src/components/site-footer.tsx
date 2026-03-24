@@ -34,7 +34,7 @@ const footerCopyright = {
 
 const footerSummary = {
   en: "Official school information, admissions guidance, and public notices for families.",
-  bn: "পরিবারের জন্য বিদ্যালয়ের অফিসিয়াল তথ্য, ভর্তি-সংক্রান্ত দিকনির্দেশনা এবং জনসাধারণের নোটিশ।",
+  bn: "অভিভাবকগণের জন্য বিদ্যালয়ের অফিসিয়াল তথ্য, ভর্তি-সংক্রান্ত দিকনির্দেশনা এবং জনসাধারণের নোটিশ।",
 };
 
 const footerContactAction = {

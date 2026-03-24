@@ -16,17 +16,17 @@ type LearningCard = {
 
 const introEyebrow = {
   en: "Learning at KMS",
-  bn: "কেএমএস-এ শেখা",
+  bn: "শিক্ষণ পদ্ধতি",
 };
 
 const introTitle = {
   en: "Learning at KMS",
-  bn: "কেএমএস-এ শেখা",
+  bn: "শিক্ষণ পদ্ধতি",
 };
 
 const introSummary = {
   en: "Learning at KMS is designed to help children explore, discover, and grow with confidence.",
-  bn: "কেএমএস-এ শেখার পরিসর এমনভাবে গড়ে তোলা, যাতে শিশুরা অনুসন্ধান করতে পারে, নতুন কিছু আবিষ্কার করতে পারে এবং আত্মবিশ্বাসের সঙ্গে বড় হয়ে উঠতে পারে।",
+  bn: "কেএমএস-এর শিক্ষণ পদ্ধতি এমনভাবে গড়ে তোলা, যাতে শিশুরা অনুসন্ধান করতে পারে, নতুন কিছু আবিষ্কার করতে পারে এবং আত্মবিশ্বাসের সঙ্গে বেড়ে উঠতে পারে।",
 };
 
 const learningIntroParagraphs: BilingualText[] = [

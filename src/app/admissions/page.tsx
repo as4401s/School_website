@@ -105,7 +105,7 @@ const admissionProcess: DetailBlock[] = [
     },
     body: {
       en: "After submission, the school will guide families about the next formalities, if required.",
-      bn: "ফর্ম জমা দেওয়ার পর প্রয়োজন হলে বিদ্যালয় পরিবারকে পরবর্তী আনুষ্ঠানিক ধাপ সম্পর্কে জানাবে।",
+      bn: "ফর্ম জমা দেওয়ার পর প্রয়োজন হলে বিদ্যালয় অভিভাবকদের পরবর্তী আনুষ্ঠানিক ধাপ সম্পর্কে জানাবে।",
     },
   },
 ];
@@ -154,7 +154,7 @@ const formTitle = {
 
 const formSummary = {
   en: "For now, admissions are handled offline. Families may download the form, fill it in, and submit it to the school office.",
-  bn: "এই মুহূর্তে ভর্তি-প্রক্রিয়া অফলাইনে সম্পন্ন হচ্ছে। পরিবারগুলি ফর্ম ডাউনলোড করে পূরণ করে স্কুল অফিসে জমা দিতে পারবেন।",
+  bn: "এই মুহূর্তে ভর্তি-প্রক্রিয়া অফলাইনে সম্পন্ন হচ্ছে। অভিভাবকগণ ফর্ম ডাউনলোড করে পূরণ করে স্কুল অফিসে জমা দিতে পারবেন।",
 };
 
 const formButton = {
@@ -174,7 +174,7 @@ const contactTitle = {
 
 const contactSummary = {
   en: "For form collection, document clarification, or admission queries, families may contact the school office directly.",
-  bn: "ফর্ম সংগ্রহ, নথিপত্র সম্পর্কে স্পষ্ট ধারণা বা ভর্তি-সংক্রান্ত অন্য কোনো প্রয়োজনে পরিবারগুলি সরাসরি স্কুল অফিসের সঙ্গে যোগাযোগ করতে পারেন।",
+  bn: "ফর্ম সংগ্রহ, নথিপত্র সম্পর্কে স্পষ্ট ধারণা বা ভর্তি-সংক্রান্ত অন্য কোনো প্রয়োজনে অভিভাবকগণ সরাসরি স্কুল অফিসের সঙ্গে যোগাযোগ করতে পারেন।",
 };
 
 export default function AdmissionsPage() {

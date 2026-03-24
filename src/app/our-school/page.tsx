@@ -24,12 +24,12 @@ const introEyebrow = {
 
 const introTitle = {
   en: "A closer look at life and learning at KMS",
-  bn: "কেএমএস-এর শেখা ও বিদ্যালয়জীবনের আরও কাছের পরিচয়",
+  bn: "কেএমএস সম্পর্কে",
 };
 
 const introSummary = {
   en: "This page brings together the environment, values, and learning culture that shape everyday life at Krishnarati Montessori School.",
-  bn: "কৃষ্ণরাতি মন্টেসরি স্কুলের প্রতিদিনের পরিবেশ, মূল্যবোধ এবং শেখার সংস্কৃতির একটি সমন্বিত পরিচয় এই পৃষ্ঠায় তুলে ধরা হয়েছে।",
+  bn: "শ্রেণিকক্ষ-কেন্দ্রিক জীবন, বিদ্যালয়ের অনুষ্ঠানসমূহ, অভিভাবক সভা এবং প্রতিদিনের ধারাবাহিক অগ্রগতির মাধ্যমে KMS এক বন্ধুসুলভ ও আদর্শ শিখন পরিবেশ নিশ্চিত করে।",
 };
 
 const learningEnvironmentTitle = {
@@ -40,7 +40,7 @@ const learningEnvironmentTitle = {
 const learningEnvironmentParagraphs: BilingualText[] = [
   {
     en: "At KMS, we believe that children learn best in an environment where they feel safe, happy, and encouraged to explore.",
-    bn: "কেএমএস-এ আমাদের বিশ্বাস, শিশুরা সবচেয়ে ভালো শেখে এমন পরিবেশে যেখানে তারা নিরাপদ বোধ করে, আনন্দে থাকে এবং নতুন কিছু জানতে উৎসাহ পায়।",
+    bn: "কেএমএস-এ আমাদের বিশ্বাস, শিশুরা সবচেয়ে ভালো শেখে এমন শ্রেণিকক্ষের নিরাপদ, আনন্দময় পরিবেশে, যেখানে তারা নতুন কিছু জানতে এবং অনুসন্ধান করতে উৎসাহ পায়।",
   },
   {
     en: "Our classrooms are designed to support curiosity, creativity, and active learning through daily routines that are warm, engaging, and age-appropriate.",
