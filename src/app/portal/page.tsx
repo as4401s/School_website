@@ -15,12 +15,12 @@ const introEyebrow = {
 
 const introTitle = {
   en: "Publish school content without coding",
-  bn: "কোড ছাড়া বিদ্যালয়ের কনটেন্ট প্রকাশ করুন",
+  bn: "কোড ছাড়াই বিদ্যালয়ের কনটেন্ট প্রকাশ করুন",
 };
 
 const introSummary = {
   en: "The staff CMS gives authorised editors a simple place to upload images, post notices, update results, and manage public documents.",
-  bn: "স্টাফ সিএমএস অনুমোদিত সম্পাদকদের জন্য ছবি আপলোড, নোটিশ প্রকাশ, ফলাফল আপডেট এবং পাবলিক নথি পরিচালনার একটি সহজ জায়গা দেয়।",
+  bn: "স্টাফ সিএমএস-এর মাধ্যমে অনুমোদিত সম্পাদকরা সহজে ছবি আপলোড, নোটিশ প্রকাশ, ফলাফল হালনাগাদ এবং প্রয়োজনীয় নথি পরিচালনা করতে পারবেন।",
 };
 
 export default async function PortalPage() {
@@ -42,19 +42,35 @@ export default async function PortalPage() {
               <LocalizedText
                 as="p"
                 className="eyebrow"
-                text={{ en: "What editors can update", bn: "সম্পাদকরা যা আপডেট করতে পারবেন" }}
+                text={{ en: "What editors can update", bn: "সম্পাদকরা যা হালনাগাদ করতে পারবেন" }}
               />
               <div className="chip-row">
-                <span className="chip">{news.length} news items</span>
-                <span className="chip">{results.length} result notices</span>
-                <span className="chip">{documents.length} documents</span>
-                <span className="chip">{gallery.length} gallery items</span>
+                <LocalizedText
+                  as="span"
+                  className="chip"
+                  text={{ en: `${news.length} news items`, bn: `${news.length}টি সংবাদ` }}
+                />
+                <LocalizedText
+                  as="span"
+                  className="chip"
+                  text={{ en: `${results.length} result notices`, bn: `${results.length}টি ফলাফল-সংক্রান্ত নোটিশ` }}
+                />
+                <LocalizedText
+                  as="span"
+                  className="chip"
+                  text={{ en: `${documents.length} documents`, bn: `${documents.length}টি নথি` }}
+                />
+                <LocalizedText
+                  as="span"
+                  className="chip"
+                  text={{ en: `${gallery.length} gallery items`, bn: `${gallery.length}টি গ্যালারি ছবি` }}
+                />
               </div>
               <LocalizedText
                 as="p"
                 text={{
                   en: "Use the CMS for bilingual public content, document uploads, image galleries, and school announcements.",
-                  bn: "দ্বিভাষিক পাবলিক কনটেন্ট, নথি আপলোড, ছবি গ্যালারি এবং বিদ্যালয়ের ঘোষণার জন্য সিএমএস ব্যবহার করুন।",
+                  bn: "দ্বিভাষিক কনটেন্ট, নথি আপলোড, গ্যালারির ছবি এবং বিদ্যালয়ের বিজ্ঞপ্তি প্রকাশের জন্য সিএমএস ব্যবহার করুন।",
                 }}
               />
             </article>
@@ -63,13 +79,13 @@ export default async function PortalPage() {
               <LocalizedText
                 as="p"
                 className="eyebrow"
-                text={{ en: "Recommended permissions", bn: "প্রস্তাবিত অনুমতি" }}
+                text={{ en: "Recommended permissions", bn: "প্রবেশাধিকার ও দায়িত্ব" }}
               />
               <LocalizedText
                 as="p"
                 text={{
                   en: "You stay the main repository owner and deployment admin. Other staff can be invited to submit content updates through the CMS with GitHub accounts.",
-                  bn: "আপনি প্রধান রিপোজিটরি মালিক ও ডিপ্লয়মেন্ট অ্যাডমিন থাকবেন। অন্য কর্মীদের GitHub অ্যাকাউন্ট দিয়ে সিএমএসের মাধ্যমে কনটেন্ট আপডেট জমা দেওয়ার অনুমতি দেওয়া যাবে।",
+                  bn: "মূল রিপোজিটরি ও ডিপ্লয়মেন্টের দায়িত্ব প্রধান প্রশাসকের কাছেই থাকবে। অন্য কর্মীদের GitHub অ্যাকাউন্টের মাধ্যমে সিএমএস ব্যবহার করে কনটেন্ট জমা দেওয়ার সুযোগ দেওয়া যেতে পারে।",
                 }}
               />
               <LocalizedText
@@ -77,7 +93,7 @@ export default async function PortalPage() {
                 className="helper-text"
                 text={{
                   en: "This keeps code access separate from school content editing.",
-                  bn: "এতে কোড অ্যাক্সেস এবং বিদ্যালয়ের কনটেন্ট সম্পাদনা আলাদা থাকে।",
+                  bn: "এতে কোডের প্রবেশাধিকার এবং বিদ্যালয়ের কনটেন্ট সম্পাদনার কাজ আলাদা রাখা যায়।",
                 }}
               />
             </article>

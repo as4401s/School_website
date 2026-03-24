@@ -34,7 +34,7 @@ const footerCopyright = {
 
 const footerSummary = {
   en: "Official school information, admissions guidance, and public notices for families.",
-  bn: "অভিভাবকগণের জন্য বিদ্যালয়ের অফিসিয়াল তথ্য, ভর্তি-সংক্রান্ত দিকনির্দেশনা এবং জনসাধারণের নোটিশ।",
+  bn: "অভিভাবকগণের জন্য বিদ্যালয়ের নির্ভরযোগ্য তথ্য, ভর্তি-সংক্রান্ত দিকনির্দেশনা এবং প্রয়োজনীয় বিজ্ঞপ্তি।",
 };
 
 const footerContactAction = {
@@ -49,7 +49,7 @@ const footerContactPage = {
 
 const footerFacebookPage = {
   en: "Follow on Facebook",
-  bn: "ফেসবুকে দেখুন",
+  bn: "ফেসবুকে অনুসরণ করুন",
 };
 
 export function SiteFooter() {

@@ -5,7 +5,7 @@
   "order": 20,
   "title": {
     "en": "Term 1 Notice",
-    "bn": "টার্ম ১ নোটিশ"
+    "bn": "টার্ম ১ ফলাফল-সংক্রান্ত নোটিশ"
   },
   "category": {
     "en": "Results",
@@ -13,7 +13,7 @@
   },
   "description": {
     "en": "Latest public notice related to Term 1 updates.",
-    "bn": "অভিভাবকদের জন্য টার্ম ১ ফলাফল-সম্পর্কিত সর্বশেষ নোটিশ।"
+    "bn": "অভিভাবকদের জন্য টার্ম ১ ফলাফল-সংক্রান্ত সর্বশেষ নোটিশ।"
   },
   "href": "/events/term-1-results"
 }

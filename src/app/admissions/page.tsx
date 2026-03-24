@@ -23,7 +23,7 @@ const introTitle = {
 
 const introSummary = {
   en: "Key admission details, class eligibility, required documents, and the admission form are available here.",
-  bn: "ভর্তি-সংক্রান্ত মূল তথ্য, শ্রেণিভিত্তিক বয়সের যোগ্যতা, প্রয়োজনীয় নথি এবং ভর্তি ফর্মের ডাউনলোড ব্যবস্থা এখানে একসঙ্গে দেওয়া হয়েছে।",
+  bn: "ভর্তি-সংক্রান্ত মূল তথ্য, শ্রেণিভিত্তিক বয়সের যোগ্যতা, প্রয়োজনীয় নথি এবং ভর্তি ফর্মের ডাউনলোডের ব্যবস্থা এখানে একসঙ্গে দেওয়া হয়েছে।",
 };
 
 const classesOfferedTitle = {
@@ -33,7 +33,7 @@ const classesOfferedTitle = {
 
 const classesOfferedIntro = {
   en: "These classes support children through their early learning years and help prepare them for primary school.",
-  bn: "এই শ্রেণিগুলি শিশুদের প্রারম্ভিক শিক্ষার ভিত গড়ে তোলে এবং পরবর্তী প্রাথমিক শিক্ষার জন্য প্রস্তুত হতে সাহায্য করে।",
+  bn: "এই শ্রেণিগুলি শিশুদের প্রারম্ভিক শিক্ষার ভিত গড়ে তোলে এবং ধীরে ধীরে প্রাথমিক শিক্ষার জন্য প্রস্তুত হতে সাহায্য করে।",
 };
 
 const classesOffered: BilingualText[] = [
@@ -75,7 +75,7 @@ const admissionProcess: DetailBlock[] = [
     },
     body: {
       en: "Parents may collect the form from the school office or use the download option provided on this page.",
-      bn: "অভিভাবকেরা স্কুল অফিস থেকে ফর্ম সংগ্রহ করতে পারেন, অথবা এই পৃষ্ঠায় দেওয়া ডাউনলোডের ব্যবস্থা ব্যবহার করতে পারেন।",
+      bn: "অভিভাবকেরা স্কুল অফিস থেকে ফর্ম সংগ্রহ করতে পারেন, অথবা এই পৃষ্ঠায় দেওয়া ডাউনলোডের সুবিধা ব্যবহার করতে পারেন।",
     },
   },
   {
@@ -85,7 +85,7 @@ const admissionProcess: DetailBlock[] = [
     },
     body: {
       en: "Please complete all required details clearly and attach the necessary documents before submission.",
-      bn: "ফর্ম জমা দেওয়ার আগে প্রয়োজনীয় সব তথ্য স্পষ্টভাবে পূরণ করুন এবং নির্ধারিত নথিগুলি সংযুক্ত করুন।",
+      bn: "ফর্ম জমা দেওয়ার আগে প্রয়োজনীয় সব তথ্য স্পষ্টভাবে পূরণ করুন এবং দরকারি নথিগুলি সংযুক্ত করুন।",
     },
   },
   {
@@ -105,7 +105,7 @@ const admissionProcess: DetailBlock[] = [
     },
     body: {
       en: "After submission, the school will guide families about the next formalities, if required.",
-      bn: "ফর্ম জমা দেওয়ার পর প্রয়োজন হলে বিদ্যালয় অভিভাবকদের পরবর্তী আনুষ্ঠানিক ধাপ সম্পর্কে জানাবে।",
+      bn: "ফর্ম জমা দেওয়ার পর প্রয়োজন হলে বিদ্যালয় পরবর্তী ধাপ সম্পর্কে অভিভাবকদের জানিয়ে দেবে।",
     },
   },
 ];
@@ -154,7 +154,7 @@ const formTitle = {
 
 const formSummary = {
   en: "For now, admissions are handled offline. Families may download the form, fill it in, and submit it to the school office.",
-  bn: "এই মুহূর্তে ভর্তি-প্রক্রিয়া অফলাইনে সম্পন্ন হচ্ছে। অভিভাবকগণ ফর্ম ডাউনলোড করে পূরণ করে স্কুল অফিসে জমা দিতে পারবেন।",
+  bn: "এই মুহূর্তে ভর্তি-প্রক্রিয়া অফলাইনে সম্পন্ন হচ্ছে। অভিভাবকগণ ফর্ম ডাউনলোড করে পূরণ করে স্কুল অফিসে জমা দিতে পারবেন।",
 };
 
 const formButton = {
@@ -174,7 +174,7 @@ const contactTitle = {
 
 const contactSummary = {
   en: "For form collection, document clarification, or admission queries, families may contact the school office directly.",
-  bn: "ফর্ম সংগ্রহ, নথিপত্র সম্পর্কে স্পষ্ট ধারণা বা ভর্তি-সংক্রান্ত অন্য কোনো প্রয়োজনে অভিভাবকগণ সরাসরি স্কুল অফিসের সঙ্গে যোগাযোগ করতে পারেন।",
+  bn: "ফর্ম সংগ্রহ, নথিপত্র সম্পর্কে স্পষ্ট ধারণা বা ভর্তি-সংক্রান্ত অন্য কোনো প্রয়োজনে অভিভাবকগণ সরাসরি স্কুল অফিসের সঙ্গে যোগাযোগ করতে পারেন।",
 };
 
 export default function AdmissionsPage() {

@@ -434,7 +434,7 @@ export default async function HomePage() {
                 className="notice-spotlight__summary"
                 text={{
                   en: "Important public notices will appear here as soon as they are published.",
-                  bn: "গুরুত্বপূর্ণ জনসাধারণের নোটিশ প্রকাশিত হলে সেগুলি এখানেই দেখা যাবে।",
+                  bn: "গুরুত্বপূর্ণ নোটিশ প্রকাশিত হলে সেগুলি এখানেই দেখা যাবে।",
                 }}
               />
             </article>

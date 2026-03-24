@@ -15,7 +15,7 @@ const introTitle = {
 
 const introSummary = {
   en: "This section will be used for future recruitment notices and career-related updates from KMS.",
-  bn: "ভবিষ্যতে কেএমএস-এর নিয়োগ-সংক্রান্ত বিজ্ঞপ্তি ও ক্যারিয়ার আপডেট এই অংশে প্রকাশ করা হবে।",
+  bn: "ভবিষ্যতে কেএমএস-এর নিয়োগ-সংক্রান্ত খবর ও কাজের সুযোগ এই অংশে জানানো হবে।",
 };
 
 const careersLabel = {
@@ -31,15 +31,15 @@ const careersTitle = {
 const careersParagraphs: BilingualText[] = [
   {
     en: "KMS welcomes individuals who are interested in working with young learners and contributing meaningfully to early childhood education.",
-    bn: "কেএমএস এমন মানুষদের স্বাগত জানায়, যাঁরা ছোটদের সঙ্গে কাজ করতে আগ্রহী এবং প্রারম্ভিক শিক্ষার ক্ষেত্রে আন্তরিকভাবে যুক্ত হতে চান।",
+    bn: "যাঁরা ছোটদের সঙ্গে কাজ করতে ভালোবাসেন এবং প্রারম্ভিক শিক্ষার কাজে আন্তরিকভাবে যুক্ত হতে চান, কেএমএস তাঁদের স্বাগত জানায়।",
   },
   {
     en: "At present, there are no open positions available. Any future job opportunities or announcements will be posted in this section.",
-    bn: "বর্তমানে কোনো পদ খালি নেই। ভবিষ্যতে কোনো নিয়োগ বা সংশ্লিষ্ট বিজ্ঞপ্তি থাকলে তা এই অংশেই জানানো হবে।",
+    bn: "এই মুহূর্তে কোনো শূন্যপদ নেই। ভবিষ্যতে নিয়োগ-সংক্রান্ত কোনো খবর থাকলে তা এখানেই প্রকাশ করা হবে।",
   },
   {
     en: "Interested candidates are encouraged to check this page regularly for updates.",
-    bn: "আগ্রহী প্রার্থীদের অনুরোধ, পরবর্তী আপডেটের জন্য এই পৃষ্ঠাটি নিয়মিত দেখে নিন।",
+    bn: "আগ্রহী প্রার্থীরা পরবর্তী আপডেটের জন্য এই পৃষ্ঠাটি মাঝে মাঝে দেখে নিতে পারেন।",
   },
 ];
 

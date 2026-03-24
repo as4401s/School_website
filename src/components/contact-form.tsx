@@ -28,7 +28,7 @@ export function ContactForm() {
 
     setNotice(
       language === "bn"
-        ? "আপনার মেইল অ্যাপ খুলছে। বার্তাটি পাঠিয়ে দিন।"
+        ? "আপনার মেইল অ্যাপ খুলছে। সেখান থেকে বার্তাটি পাঠিয়ে দিন।"
         : "Your mail app is opening. Please send the message from there.",
     );
 
@@ -43,7 +43,7 @@ export function ContactForm() {
       <h3>{language === "bn" ? "একটি বার্তা পাঠান" : "Send a message"}</h3>
       <p className="helper-text">
         {language === "bn"
-          ? "এই ফর্মটি আপনার ইমেল অ্যাপ খুলে বিদ্যালয়ের ঠিকানায় বার্তা পাঠাতে সাহায্য করবে।"
+          ? "এই ফর্মটি আপনার ইমেল অ্যাপ খুলে দেবে, যাতে বিদ্যালয়ের ঠিকানায় সহজে বার্তা পাঠানো যায়।"
           : "This form opens your email app with the message addressed to the school office."}
       </p>
 

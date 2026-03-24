@@ -13,7 +13,7 @@ const introTitle = {
 
 const introSummary = {
   en: "School editors can submit updates through the CMS, and the main administrator keeps repository control.",
-  bn: "বিদ্যালয়ের সম্পাদকরা সিএমএসের মাধ্যমে আপডেট জমা দিতে পারবেন, আর প্রধান প্রশাসক রিপোজিটরির নিয়ন্ত্রণ বজায় রাখবেন।",
+  bn: "বিদ্যালয়ের সম্পাদকরা সিএমএসের মাধ্যমে আপডেট জমা দিতে পারবেন, আর মূল প্রশাসক সম্পূর্ণ নিয়ন্ত্রণ দেখভাল করবেন।",
 };
 
 export default function GroupsPage() {
@@ -27,7 +27,7 @@ export default function GroupsPage() {
               as="p"
               text={{
                 en: "Use the staff CMS to upload documents, gallery images, notices, and news. The site owner can review and publish those changes through GitHub and Vercel.",
-                bn: "নথি, গ্যালারির ছবি, নোটিশ ও সংবাদ আপলোড করতে স্টাফ সিএমএস ব্যবহার করুন। সাইটের প্রধান প্রশাসক GitHub ও Vercel-এর মাধ্যমে সেই পরিবর্তনগুলি পর্যালোচনা ও প্রকাশ করতে পারবেন।",
+                bn: "নথি, গ্যালারির ছবি, নোটিশ ও সংবাদ আপলোড করার জন্য স্টাফ সিএমএস ব্যবহার করা যাবে। পরে সাইটের প্রধান প্রশাসক GitHub ও Vercel-এর মাধ্যমে সেগুলি দেখে প্রকাশ করবেন।",
               }}
             />
           </article>

@@ -15,17 +15,17 @@ const introEyebrow = {
 
 const introTitle = {
   en: "School updates and celebrations",
-  bn: "বিদ্যালয়ের সংবাদ ও উদযাপন",
+  bn: "বিদ্যালয়ের খবর ও উদযাপন",
 };
 
 const introSummary = {
   en: "Latest public updates, school celebrations, and notices.",
-  bn: "সাম্প্রতিক পাবলিক আপডেট, বিদ্যালয়ের উদযাপন ও নোটিশ।",
+  bn: "বিদ্যালয়ের সাম্প্রতিক খবর, উদযাপন এবং প্রয়োজনীয় নোটিশ।",
 };
 
 const readArticle = {
   en: "Read Article",
-  bn: "খবরটি পড়ুন",
+  bn: "বিস্তারিত পড়ুন",
 };
 
 export default async function BlogPage() {

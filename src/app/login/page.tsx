@@ -9,12 +9,12 @@ const introEyebrow = {
 
 const introTitle = {
   en: "School content management",
-  bn: "বিদ্যালয়ের কনটেন্ট ব্যবস্থাপনা",
+  bn: "বিদ্যালয়ের কনটেন্ট পরিচালনা",
 };
 
 const introSummary = {
   en: "Authorised staff can use the school CMS to upload images, publish notices, and update documents without touching code.",
-  bn: "অনুমোদিত কর্মীরা কোডে হাত না দিয়েই বিদ্যালয়ের সিএমএস ব্যবহার করে ছবি আপলোড, নোটিশ প্রকাশ এবং নথি আপডেট করতে পারবেন।",
+  bn: "অনুমোদিত কর্মীরা কোডে পরিবর্তন না করেই বিদ্যালয়ের সিএমএস ব্যবহার করে ছবি, নোটিশ ও নথি হালনাগাদ করতে পারবেন।",
 };
 
 export default function LoginPage() {

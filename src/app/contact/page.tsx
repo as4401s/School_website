@@ -79,13 +79,13 @@ export default function ContactPage() {
             />
             <LocalizedText
               as="h3"
-              text={{ en: "Public contact and support", bn: "পাবলিক যোগাযোগ ও সহায়তা" }}
+              text={{ en: "Public contact and support", bn: "যোগাযোগ ও সহায়তা" }}
             />
             <LocalizedText
               as="p"
               text={{
                 en: "For admissions, school updates, or general enquiries, families may write to the school email shown here.",
-                bn: "ভর্তি, বিদ্যালয়ের আপডেট বা সাধারণ জিজ্ঞাসার জন্য অভিভাবকগণ এখানে দেওয়া বিদ্যালয়ের ইমেলে যোগাযোগ করতে পারেন।",
+                bn: "ভর্তি, বিদ্যালয়ের আপডেট বা সাধারণ কোনো জিজ্ঞাসার জন্য অভিভাবকগণ এখানে দেওয়া বিদ্যালয়ের ইমেলে যোগাযোগ করতে পারেন।",
               }}
             />
             <p>
@@ -93,7 +93,7 @@ export default function ContactPage() {
             </p>
             <p>
               <a href={siteMeta.facebookUrl} rel="noreferrer" target="_blank">
-                <LocalizedText text={{ en: "Visit the school Facebook page", bn: "স্কুলের ফেসবুক পেজ দেখুন" }} />
+                <LocalizedText text={{ en: "Visit the school Facebook page", bn: "স্কুলের ফেসবুক পেজে যান" }} />
               </a>
             </p>
             <div aria-hidden="true" className="contact-office-panel__mascot">

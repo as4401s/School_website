@@ -25,7 +25,7 @@ const introTitle = {
 
 const introSummary = {
   en: "Find school stories, photo highlights, and important notices for families in one place.",
-  bn: "বিদ্যালয়ের অনুষ্ঠান, ছবির ঝলক এবং অভিভাবকগণের জন্য প্রয়োজনীয় বিজ্ঞপ্তিগুলি একসঙ্গে এই অংশে পাওয়া যাবে।",
+  bn: "বিদ্যালয়ের অনুষ্ঠান, ছবির ঝলক আর অভিভাবকদের জন্য দরকারি বিজ্ঞপ্তি এই অংশে একসঙ্গে পাওয়া যাবে।",
 };
 
 const mediaOverviewLabel = {
@@ -35,12 +35,12 @@ const mediaOverviewLabel = {
 
 const mediaOverviewTitle = {
   en: "Three sections inside the media tab",
-  bn: "মিডিয়া ট্যাবের তিনটি বিভাগ",
+  bn: "মিডিয়া অংশের তিনটি বিভাগ",
 };
 
 const mediaOverviewSummary = {
   en: "The media section brings together public updates from across school life so families can quickly find the kind of information they need.",
-  bn: "স্কুলজীবনের বিভিন্ন দিকের প্রকাশ্য আপডেট একত্রে সাজানো হয়েছে এই অংশে, যাতে অভিভাবকগণ সহজে প্রয়োজনীয় তথ্য খুঁজে পেতে পারেন।",
+  bn: "স্কুলজীবনের নানা দিকের আপডেট এখানে একসঙ্গে সাজানো আছে, যাতে অভিভাবকরা সহজেই প্রয়োজনীয় তথ্য খুঁজে নিতে পারেন।",
 };
 
 const mediaSections: MediaSection[] = [
@@ -52,7 +52,7 @@ const mediaSections: MediaSection[] = [
     },
     summary: {
       en: "School celebrations, recent activities, and public updates from campus life.",
-      bn: "বিদ্যালয়ের অনুষ্ঠান, সাম্প্রতিক কার্যক্রম এবং ক্যাম্পাস-জীবনের গুরুত্বপূর্ণ খবর এই অংশে প্রকাশিত হয়।",
+      bn: "বিদ্যালয়ের অনুষ্ঠান, সাম্প্রতিক কার্যক্রম এবং ক্যাম্পাস-জীবনের গুরুত্বপূর্ণ খবর এই অংশে পাওয়া যাবে।",
     },
     action: {
       en: "Open Events & News",
@@ -68,7 +68,7 @@ const mediaSections: MediaSection[] = [
     },
     summary: {
       en: "A visual collection of classrooms, campus moments, and school celebrations.",
-      bn: "শ্রেণিকক্ষ, ক্যাম্পাসের মুহূর্ত এবং বিদ্যালয়ের বিভিন্ন উদযাপনের ছবি এখানে দেখা যাবে।",
+      bn: "শ্রেণিকক্ষ, ক্যাম্পাসের নানান মুহূর্ত এবং বিদ্যালয়ের বিভিন্ন উদযাপনের ছবি এখানে দেখা যাবে।",
     },
     action: {
       en: "Open Gallery",
@@ -84,7 +84,7 @@ const mediaSections: MediaSection[] = [
     },
     summary: {
       en: "Important notices, circulars, and updates that families may need to follow.",
-      bn: "অভিভাবকগণের জন্য প্রয়োজনীয় গুরুত্বপূর্ণ নোটিশ, সার্কুলার ও আপডেট এই বিভাগে প্রকাশ করা হয়।",
+      bn: "অভিভাবকদের জন্য প্রয়োজনীয় গুরুত্বপূর্ণ নোটিশ, সার্কুলার ও আপডেট এই বিভাগে প্রকাশ করা হয়।",
     },
     action: {
       en: "Open Announcements",
