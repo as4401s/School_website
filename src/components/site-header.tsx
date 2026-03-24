@@ -84,190 +84,192 @@ export function SiteHeader() {
           aria-label="Primary"
           className={cn("site-nav", open && "site-nav--open")}
         >
-          <div className="site-nav__panel-head">
-            <button
-              className="site-nav__back"
-              onClick={() => setOpen(false)}
-              type="button"
-            >
-              <svg
-                fill="none"
-                height="16"
-                stroke="currentColor"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                viewBox="0 0 24 24"
-                width="16"
+          <div className="site-nav__scroll">
+            <div className="site-nav__panel-head">
+              <button
+                className="site-nav__back"
+                onClick={() => setOpen(false)}
+                type="button"
               >
-                <polyline points="15 18 9 12 15 6" />
-              </svg>
-              <LocalizedText text={{ en: "Back", bn: "ফিরুন" }} />
-            </button>
-            <LocalizedText
-              as="p"
-              className="eyebrow"
-              text={{ en: "Explore", bn: "এক নজরে" }}
-            />
-            <LocalizedText
-              as="p"
-              className="site-nav__panel-title"
-              text={{ en: "Navigate KMS", bn: "কেএমএস ঘুরে দেখুন" }}
-            />
-          </div>
+                <svg
+                  fill="none"
+                  height="16"
+                  stroke="currentColor"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  viewBox="0 0 24 24"
+                  width="16"
+                >
+                  <polyline points="15 18 9 12 15 6" />
+                </svg>
+                <LocalizedText text={{ en: "Back", bn: "ফিরুন" }} />
+              </button>
+              <LocalizedText
+                as="p"
+                className="eyebrow"
+                text={{ en: "Explore", bn: "এক নজরে" }}
+              />
+              <LocalizedText
+                as="p"
+                className="site-nav__panel-title"
+                text={{ en: "Navigate KMS", bn: "কেএমএস ঘুরে দেখুন" }}
+              />
+            </div>
 
-          <div className="site-nav__list">
-            {navigation.map((item) => {
-              const itemActive =
-                item.href &&
-                (item.href === "/"
-                  ? pathname === item.href
-                  : pathname?.startsWith(item.href as string));
-              const childActive = item.children?.some((child) =>
-                pathname?.startsWith(child.href),
-              );
-              const active = Boolean(itemActive || childActive);
-              const submenuOpen = expandedDropdown === item.label.en;
+            <div className="site-nav__list">
+              {navigation.map((item) => {
+                const itemActive =
+                  item.href &&
+                  (item.href === "/"
+                    ? pathname === item.href
+                    : pathname?.startsWith(item.href as string));
+                const childActive = item.children?.some((child) =>
+                  pathname?.startsWith(child.href),
+                );
+                const active = Boolean(itemActive || childActive);
+                const submenuOpen = expandedDropdown === item.label.en;
 
-              if (item.children) {
-                return (
-                  <div
-                    className={cn(
-                      "site-nav__dropdown",
-                      submenuOpen && "site-nav__dropdown--open",
-                    )}
-                    key={item.label.en}
-                  >
-                    <div className="site-nav__dropdown-row">
-                      {item.href ? (
-                        <Link
-                          className={cn(
-                            "site-nav__link site-nav__dropdown-link",
-                            active && "site-nav__link--active",
-                          )}
-                          href={item.href as NonNullable<typeof item.href>}
-                          onClick={() => setOpen(false)}
-                        >
-                          <LocalizedText text={item.label} />
-                          <svg
-                            className="site-nav__dropdown-caret"
-                            fill="none"
-                            height="12"
-                            stroke="currentColor"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            strokeWidth="2"
-                            viewBox="0 0 24 24"
-                            width="12"
-                          >
-                            <polyline points="6 9 12 15 18 9"></polyline>
-                          </svg>
-                        </Link>
-                      ) : (
-                        <span
-                          className={cn(
-                            "site-nav__link site-nav__dropdown-link site-nav__dropdown-label",
-                            active && "site-nav__link--active",
-                          )}
-                        >
-                          <LocalizedText text={item.label} />
-                          <svg
-                            className="site-nav__dropdown-caret"
-                            fill="none"
-                            height="12"
-                            stroke="currentColor"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            strokeWidth="2"
-                            viewBox="0 0 24 24"
-                            width="12"
-                          >
-                            <polyline points="6 9 12 15 18 9"></polyline>
-                          </svg>
-                        </span>
-                      )}
-
-                      <button
-                        aria-expanded={submenuOpen}
-                        aria-label={language === "bn" ? "সাবমেনু খুলুন" : "Toggle submenu"}
-                        className="site-nav__submenu-button"
-                        onClick={() =>
-                          setExpandedDropdown((value) =>
-                            value === item.label.en ? null : item.label.en,
-                          )
-                        }
-                        type="button"
-                      >
-                        <svg
-                          fill="none"
-                          height="16"
-                          stroke="currentColor"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth="2"
-                          viewBox="0 0 24 24"
-                          width="16"
-                        >
-                          <polyline points="6 9 12 15 18 9"></polyline>
-                        </svg>
-                      </button>
-                    </div>
-
+                if (item.children) {
+                  return (
                     <div
                       className={cn(
-                        "site-nav__dropdown-menu",
-                        submenuOpen && "site-nav__dropdown-menu--open",
+                        "site-nav__dropdown",
+                        submenuOpen && "site-nav__dropdown--open",
                       )}
+                      key={item.label.en}
                     >
-                      {item.children.map((child) => (
-                        <Link
-                          className="site-nav__link"
-                          href={child.href as NonNullable<typeof child.href>}
-                          key={child.href}
-                          onClick={() => setOpen(false)}
+                      <div className="site-nav__dropdown-row">
+                        {item.href ? (
+                          <Link
+                            className={cn(
+                              "site-nav__link site-nav__dropdown-link",
+                              active && "site-nav__link--active",
+                            )}
+                            href={item.href as NonNullable<typeof item.href>}
+                            onClick={() => setOpen(false)}
+                          >
+                            <LocalizedText text={item.label} />
+                            <svg
+                              className="site-nav__dropdown-caret"
+                              fill="none"
+                              height="12"
+                              stroke="currentColor"
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              strokeWidth="2"
+                              viewBox="0 0 24 24"
+                              width="12"
+                            >
+                              <polyline points="6 9 12 15 18 9"></polyline>
+                            </svg>
+                          </Link>
+                        ) : (
+                          <span
+                            className={cn(
+                              "site-nav__link site-nav__dropdown-link site-nav__dropdown-label",
+                              active && "site-nav__link--active",
+                            )}
+                          >
+                            <LocalizedText text={item.label} />
+                            <svg
+                              className="site-nav__dropdown-caret"
+                              fill="none"
+                              height="12"
+                              stroke="currentColor"
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              strokeWidth="2"
+                              viewBox="0 0 24 24"
+                              width="12"
+                            >
+                              <polyline points="6 9 12 15 18 9"></polyline>
+                            </svg>
+                          </span>
+                        )}
+
+                        <button
+                          aria-expanded={submenuOpen}
+                          aria-label={language === "bn" ? "সাবমেনু খুলুন" : "Toggle submenu"}
+                          className="site-nav__submenu-button"
+                          onClick={() =>
+                            setExpandedDropdown((value) =>
+                              value === item.label.en ? null : item.label.en,
+                            )
+                          }
+                          type="button"
                         >
-                          <LocalizedText text={child.label} />
-                        </Link>
-                      ))}
+                          <svg
+                            fill="none"
+                            height="16"
+                            stroke="currentColor"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth="2"
+                            viewBox="0 0 24 24"
+                            width="16"
+                          >
+                            <polyline points="6 9 12 15 18 9"></polyline>
+                          </svg>
+                        </button>
+                      </div>
+
+                      <div
+                        className={cn(
+                          "site-nav__dropdown-menu",
+                          submenuOpen && "site-nav__dropdown-menu--open",
+                        )}
+                      >
+                        {item.children.map((child) => (
+                          <Link
+                            className="site-nav__link"
+                            href={child.href as NonNullable<typeof child.href>}
+                            key={child.href}
+                            onClick={() => setOpen(false)}
+                          >
+                            <LocalizedText text={child.label} />
+                          </Link>
+                        ))}
+                      </div>
                     </div>
-                  </div>
+                  );
+                }
+
+                return (
+                  <Link
+                    className={cn("site-nav__link", active && "site-nav__link--active")}
+                    href={item.href as NonNullable<typeof item.href>}
+                    key={item.href}
+                    onClick={() => setOpen(false)}
+                  >
+                    <LocalizedText text={item.label} />
+                  </Link>
                 );
-              }
-
-              return (
-                <Link
-                  className={cn("site-nav__link", active && "site-nav__link--active")}
-                  href={item.href as NonNullable<typeof item.href>}
-                  key={item.href}
-                  onClick={() => setOpen(false)}
-                >
-                  <LocalizedText text={item.label} />
-                </Link>
-              );
-            })}
-          </div>
-
-          <div className="site-nav__mobile-actions">
-            <div className="site-nav__mobile-language">
-              <LanguageToggle />
+              })}
             </div>
-            <a
-              className="social-link social-link--menu"
-              href={siteMeta.facebookUrl}
-              rel="noreferrer"
-              target="_blank"
-            >
-              <FacebookIcon />
-              <LocalizedText text={{ en: "Facebook Page", bn: "ফেসবুক পেজ" }} />
-            </a>
-            <Link className="btn btn--accent" href="/login" onClick={() => setOpen(false)}>
-              <LocalizedText text={{ en: "Staff CMS", bn: "স্টাফ সিএমএস" }} />
-            </Link>
-            <Link className="btn btn--ghost" href="/contact" onClick={() => setOpen(false)}>
-              <LocalizedText
-                text={{ en: "Contact School", bn: "বিদ্যালয়ের সঙ্গে যোগাযোগ" }}
-              />
-            </Link>
+
+            <div className="site-nav__mobile-actions">
+              <div className="site-nav__mobile-language">
+                <LanguageToggle />
+              </div>
+              <a
+                className="social-link social-link--menu"
+                href={siteMeta.facebookUrl}
+                rel="noreferrer"
+                target="_blank"
+              >
+                <FacebookIcon />
+                <LocalizedText text={{ en: "Facebook Page", bn: "ফেসবুক পেজ" }} />
+              </a>
+              <Link className="btn btn--accent" href="/login" onClick={() => setOpen(false)}>
+                <LocalizedText text={{ en: "Staff CMS", bn: "স্টাফ সিএমএস" }} />
+              </Link>
+              <Link className="btn btn--ghost" href="/contact" onClick={() => setOpen(false)}>
+                <LocalizedText
+                  text={{ en: "Contact School", bn: "বিদ্যালয়ের সঙ্গে যোগাযোগ" }}
+                />
+              </Link>
+            </div>
           </div>
         </nav>
 
