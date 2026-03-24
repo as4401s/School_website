@@ -3276,8 +3276,9 @@ body::before {
 }
 
 .site-footer__logo {
-  width: 120px;
-  height: 120px;
+  width: 72px;
+  height: auto;
+  display: block;
   border-radius: 24px;
   box-shadow: 0 16px 32px rgba(0, 0, 0, 0.25);
   background: white;
@@ -4588,8 +4589,8 @@ body::before {
   }
 
   .site-footer__logo {
-    width: 88px;
-    height: 88px;
+    width: 52px;
+    height: auto;
     border-radius: 20px;
   }
 
