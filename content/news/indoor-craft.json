@@ -1,0 +1,28 @@
+{
+  "id": "indoor-craft",
+  "slug": "indoor-craft",
+  "published": true,
+  "featured": false,
+  "showOnHome": false,
+  "publishedAt": "2026-03-28",
+  "title": {
+    "en": "Indoor Craft Activities",
+    "bn": "ইনডোর ক্র্যাফট কার্যক্রম"
+  },
+  "excerpt": {
+    "en": "Students enjoyed an indoor craft session filled with colouring, paper work, and hands-on creativity in the classroom.",
+    "bn": "শ্রেণিকক্ষে রং, কাগজের কাজ ও হাতে-কলমে সৃজনশীল অনুশীলনের মধ্য দিয়ে শিক্ষার্থীরা আনন্দময় ইনডোর ক্র্যাফট কার্যক্রমে অংশ নেয়।"
+  },
+  "body": [
+    {
+      "en": "Students enjoyed an indoor craft session filled with colouring, paper work, and hands-on creativity in the classroom.",
+      "bn": "শ্রেণিকক্ষে রং, কাগজের কাজ ও হাতে-কলমে সৃজনশীল অনুশীলনের মধ্য দিয়ে শিক্ষার্থীরা আনন্দময় ইনডোর ক্র্যাফট কার্যক্রমে অংশ নেয়।"
+    },
+    {
+      "en": "The activity encouraged focus, imagination, and joyful collaboration as children proudly shared their creations with friends and teachers.",
+      "bn": "এই কার্যক্রম শিক্ষার্থীদের মনোযোগ, কল্পনাশক্তি ও আনন্দঘন সহযোগিতার পরিবেশ গড়ে তোলে, যেখানে তারা বন্ধু ও শিক্ষকদের সঙ্গে নিজেদের সৃষ্টিকর্ম ভাগ করে নেয়।"
+    }
+  ],
+  "eventFolder": "media/Events/Indoor Craft",
+  "imageUrl": ""
+}

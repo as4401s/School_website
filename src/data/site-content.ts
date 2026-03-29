@@ -35,6 +35,7 @@ export type NewsPost = {
   excerpt: BilingualText;
   body: BilingualText[];
   imageUrl?: string;
+  galleryImages?: string[];
   publishedAt: string;
   featured?: boolean;
   showOnHome?: boolean;

@@ -2795,6 +2795,43 @@ body::before {
   color: var(--ink);
 }
 
+.post-event-gallery {
+  margin-top: 14px;
+  padding-top: 18px;
+  border-top: 1px solid rgba(21, 32, 51, 0.08);
+  gap: 14px;
+}
+
+.post-event-gallery__title {
+  margin: 0;
+  color: var(--ink);
+  font-family: var(--font-display), var(--font-bengali), var(--font-body), sans-serif;
+  font-size: 1.15rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.post-event-gallery__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 180px));
+  justify-content: start;
+  gap: 12px;
+}
+
+.post-event-gallery__item {
+  position: relative;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  border-radius: 18px;
+  border: 1px solid rgba(21, 32, 51, 0.08);
+  background: rgba(246, 238, 225, 0.7);
+  box-shadow: 0 10px 24px rgba(36, 48, 68, 0.08);
+}
+
+.post-event-gallery__image {
+  object-fit: cover;
+}
+
 .site-nav__dropdown-label {
   cursor: default;
 }

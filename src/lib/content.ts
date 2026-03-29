@@ -14,6 +14,14 @@ import type {
 import { getItems } from "@/lib/cms-store";
 
 const contentRoot = path.join(process.cwd(), "content");
+const publicRoot = path.join(process.cwd(), "public");
+const imageExtensions = new Set([".jpg", ".jpeg", ".png", ".webp", ".avif"]);
+const naturalSort = new Intl.Collator("en", { numeric: true, sensitivity: "base" });
+
+type PublicImageAsset = {
+  fileName: string;
+  url: string;
+};
 
 const bilingualTextSchema = z.object({
   en: z.string().trim().min(1),
@@ -36,6 +44,7 @@ const newsPostSchema = z.object({
   title: bilingualTextSchema,
   excerpt: bilingualTextSchema,
   body: z.array(bilingualTextSchema).min(1),
+  eventFolder: z.string().trim().optional().default(""),
   imageUrl: z.string().trim().optional().default(""),
 });
 
@@ -132,8 +141,79 @@ function normalizeBilingualText(value: BilingualText): BilingualText {
   };
 }
 
-function mapNewsPost(record: RecordWithFileSlug<NewsPostFile>): NewsPost {
+function toPublicUrl(relativePath: string) {
+  return `/${relativePath
+    .split("/")
+    .filter(Boolean)
+    .map((segment) => encodeURIComponent(segment))
+    .join("/")}`;
+}
+
+async function listPublicImageAssets(relativeDirectory: string): Promise<PublicImageAsset[]> {
+  if (!relativeDirectory.trim()) {
+    return [];
+  }
+
+  try {
+    const pathSegments = relativeDirectory.split("/").filter(Boolean);
+    const folder = path.join(publicRoot, ...pathSegments);
+    const entries = await fs.readdir(folder, { withFileTypes: true });
+
+    return entries
+      .filter(
+        (entry) =>
+          entry.isFile() &&
+          imageExtensions.has(path.extname(entry.name).toLowerCase()),
+      )
+      .sort((left, right) => naturalSort.compare(left.name, right.name))
+      .map((entry) => ({
+        fileName: entry.name,
+        url: toPublicUrl([...pathSegments, entry.name].join("/")),
+      }));
+  } catch {
+    return [];
+  }
+}
+
+function createAutomaticGalleryItem(asset: PublicImageAsset, index: number): GalleryItem {
+  const baseName = asset.fileName.replace(/\.[^.]+$/, "");
+  const slug =
+    baseName
+      .toLowerCase()
+      .replace(/[^a-z0-9]+/g, "-")
+      .replace(/(^-|-$)/g, "") || `gallery-${index + 1}`;
+
+  return {
+    id: `auto-${slug}`,
+    title: {
+      en: `Campus Snapshot ${String(index + 1).padStart(2, "0")}`,
+      bn: `ক্যাম্পাসের অতিরিক্ত ছবি ${index + 1}`,
+    },
+    summary: {
+      en: "Additional moments from school life, classrooms, and campus activities.",
+      bn: "বিদ্যালয়ের দৈনন্দিন জীবন, শ্রেণিকক্ষ ও ক্যাম্পাস কার্যক্রমের আরও কিছু মুহূর্ত।",
+    },
+    imageUrl: asset.url,
+    mediaType: "image",
+  };
+}
+
+async function getAutomaticGalleryItems(existingItems: GalleryItem[]) {
+  const assets = await listPublicImageAssets("media/Humaniapota School");
+  const knownFileNames = new Set(
+    existingItems.map((item) => decodeURIComponent(item.imageUrl.split("/").pop() ?? "")),
+  );
+
+  return assets
+    .filter((asset) => !knownFileNames.has(asset.fileName))
+    .map(createAutomaticGalleryItem);
+}
+
+async function mapNewsPost(record: RecordWithFileSlug<NewsPostFile>): Promise<NewsPost> {
   const slug = record.slug || record._fileSlug;
+  const galleryImages = record.eventFolder
+    ? (await listPublicImageAssets(record.eventFolder)).map((asset) => asset.url)
+    : [];
 
   return {
     id: record.id || slug,
@@ -144,7 +224,8 @@ function mapNewsPost(record: RecordWithFileSlug<NewsPostFile>): NewsPost {
     title: normalizeBilingualText(record.title),
     excerpt: normalizeBilingualText(record.excerpt),
     body: record.body.map(normalizeBilingualText),
-    imageUrl: record.imageUrl || undefined,
+    imageUrl: record.imageUrl || galleryImages[0] || undefined,
+    galleryImages: galleryImages.length > 0 ? galleryImages : undefined,
   };
 }
 
@@ -228,11 +309,20 @@ const loadCmsCollections = cache(async (): Promise<CmsCollections> => {
     ...parseRedisItems(dynamicGallery, galleryItemSchema),
   ];
 
+  const publishedNewsRecords = allNewsFiles
+    .filter((record) => record.published)
+    .sort((left, right) => compareDatesDescending(left.publishedAt, right.publishedAt));
+  const curatedGallery = allGalleryFiles
+    .filter((record) => record.published)
+    .sort((left, right) => (left.order ?? 999) - (right.order ?? 999))
+    .map(mapGalleryItem);
+  const [news, automaticGallery] = await Promise.all([
+    Promise.all(publishedNewsRecords.map(mapNewsPost)),
+    getAutomaticGalleryItems(curatedGallery),
+  ]);
+
   return {
-    news: allNewsFiles
-      .filter((record) => record.published)
-      .sort((left, right) => compareDatesDescending(left.publishedAt, right.publishedAt))
-      .map(mapNewsPost),
+    news,
     results: staticResultFiles
       .filter((record) => record.published)
       .sort((left, right) => {
@@ -246,10 +336,7 @@ const loadCmsCollections = cache(async (): Promise<CmsCollections> => {
       .filter((record) => record.published)
       .sort((left, right) => (left.order ?? 999) - (right.order ?? 999))
       .map(mapDocument),
-    gallery: allGalleryFiles
-      .filter((record) => record.published)
-      .sort((left, right) => (left.order ?? 999) - (right.order ?? 999))
-      .map(mapGalleryItem),
+    gallery: [...curatedGallery, ...automaticGallery],
   };
 });
 

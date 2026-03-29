@@ -38,6 +38,7 @@ export default async function PostPage({ params }: PostPageProps) {
     post.body[0] && isSameBilingualText(post.excerpt, post.body[0])
       ? post.body.slice(1)
       : post.body;
+  const hasEventGallery = (post.galleryImages?.length ?? 0) > 0;
 
   return (
     <section className="section">
@@ -55,7 +56,7 @@ export default async function PostPage({ params }: PostPageProps) {
         <LocalizedDate className="story-card__meta" value={post.publishedAt} />
 
         <article className="story-card">
-          {post.imageUrl ? (
+          {post.imageUrl && !hasEventGallery ? (
             <div className="story-card__image-wrap">
               <Image
                 alt={post.title.en}
@@ -71,6 +72,28 @@ export default async function PostPage({ params }: PostPageProps) {
             {bodyParagraphs.map((paragraph) => (
               <LocalizedText as="p" key={paragraph.en} text={paragraph} />
             ))}
+            {hasEventGallery ? (
+              <div className="post-event-gallery stack">
+                <LocalizedText
+                  as="h2"
+                  className="post-event-gallery__title"
+                  text={{ en: "Event Gallery", bn: "অনুষ্ঠানের ছবি" }}
+                />
+                <div className="post-event-gallery__grid">
+                  {post.galleryImages?.map((imageUrl, index) => (
+                    <div className="post-event-gallery__item" key={imageUrl}>
+                      <Image
+                        alt={`${post.title.en} ${index + 1}`}
+                        className="post-event-gallery__image"
+                        fill
+                        sizes="(max-width: 768px) 44vw, 180px"
+                        src={imageUrl}
+                      />
+                    </div>
+                  ))}
+                </div>
+              </div>
+            ) : null}
           </div>
         </article>
       </div>

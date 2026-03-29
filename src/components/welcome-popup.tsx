@@ -14,14 +14,11 @@ export function WelcomePopup() {
   const [isOpen, setIsOpen] = useState(false);
 
   useEffect(() => {
-    // Only show the popup once per session
-    if (!sessionStorage.getItem("welcome-popup-seen")) {
-      const timer = setTimeout(() => {
-        setIsOpen(true);
-        sessionStorage.setItem("welcome-popup-seen", "true");
-      }, 500);
-      return () => clearTimeout(timer);
-    }
+    const timer = setTimeout(() => {
+      setIsOpen(true);
+    }, 500);
+
+    return () => clearTimeout(timer);
   }, []);
 
   if (!isOpen) return null;
