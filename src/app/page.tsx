@@ -206,7 +206,6 @@ const homeTopics: HomeTopicItem[] = [
     paragraphs: headTeacherParagraphs,
     teaser: headTeacherGreeting,
     image: {
-      src: "/media/Humaniapota%20School/pricipal.jpg",
       alt: "Placeholder for the head teacher message image",
     },
   },
@@ -230,6 +229,16 @@ const viewGalleryText = {
 const viewAllUpdatesText = {
   en: "View all updates",
   bn: "সব আপডেট দেখুন",
+};
+
+const announcementMetaText = {
+  en: "Announcement",
+  bn: "বিজ্ঞপ্তি",
+};
+
+const announcementActionText = {
+  en: "Open Announcements",
+  bn: "বিজ্ঞপ্তি দেখুন",
 };
 
 const readMoreText = {
@@ -286,6 +295,68 @@ export default async function HomePage() {
   ]);
 
   const latestResult = results[0];
+  const announcementHighlights: {
+    id: string;
+    title: BilingualText;
+    excerpt: BilingualText;
+    href: string;
+    imageUrl?: string;
+    meta: BilingualText;
+    action: BilingualText;
+  }[] = [
+    {
+      id: "announcement-tuition-support",
+      title: {
+        en: "Free / Low-Cost Tuition for Students",
+        bn: "ছাত্র-ছাত্রীদের জন্য বিনামূল্যে বা স্বল্প খরচে টিউশন",
+      },
+      excerpt: {
+        en: "The NGBM Pathshala at Humaniapota will offer free or low-cost tuition for students from Class 2 to Class 8 starting January 2026.",
+        bn: "হুমানিয়াপোতায় অবস্থিত এনজিবিএম পাঠশালায় ২০২৬ সালের জানুয়ারি থেকে দ্বিতীয় শ্রেণি থেকে অষ্টম শ্রেণি পর্যন্ত ছাত্র-ছাত্রীদের জন্য বিনামূল্যে বা স্বল্প খরচে টিউশনের ব্যবস্থা করা হবে।",
+      },
+      href: "/announcements" as Route,
+      imageUrl: "/media/simple_announcements_board.png",
+      meta: announcementMetaText,
+      action: announcementActionText,
+    },
+    latestResult
+      ? {
+          id: `announcement-${latestResult.id}`,
+          title: latestResult.title,
+          excerpt: latestResult.summary,
+          href: `/events/${latestResult.slug}` as Route,
+          imageUrl: "/media/simple_media_announcements.png",
+          meta: { en: "Results & Notice", bn: "ফলাফল ও নোটিশ" },
+          action: viewNoticeText,
+        }
+      : {
+          id: "announcement-general-updates",
+          title: {
+            en: "Notices & Updates",
+            bn: "বিজ্ঞপ্তি ও আপডেট",
+          },
+          excerpt: {
+            en: "Important school notices, tuition programs, and public updates are available on the announcements page.",
+            bn: "বিদ্যালয়ের গুরুত্বপূর্ণ বিজ্ঞপ্তি, টিউশন-সংক্রান্ত খবর এবং প্রয়োজনীয় আপডেট ঘোষণাপত্রের পাতায় পাওয়া যাবে।",
+          },
+          href: "/announcements" as Route,
+          imageUrl: "/media/simple_media_announcements.png",
+          meta: announcementMetaText,
+          action: announcementActionText,
+        },
+  ];
+  const homeHighlights =
+    featuredPosts.length > 0
+      ? featuredPosts.map((post) => ({
+          id: post.id,
+          title: post.title,
+          excerpt: post.excerpt,
+          href: `/post/${post.slug}` as Route,
+          imageUrl: post.imageUrl,
+          publishedAt: post.publishedAt,
+          action: readMoreText,
+        }))
+      : announcementHighlights;
 
   // Build the ordered, deduped slider items from the full gallery
   const galleryMap = new Map(galleryItems.map((item) => [item.id, item]));
@@ -380,25 +451,29 @@ export default async function HomePage() {
           </div>
 
           <div className="grid-2">
-            {featuredPosts.map((post) => (
-              <article className="story-card story-card--home" key={post.id}>
-                {post.imageUrl ? (
+            {homeHighlights.map((item) => (
+              <article className="story-card story-card--home" key={item.id}>
+                {item.imageUrl ? (
                   <div className="story-card__image-wrap">
                     <Image
-                      alt={post.title.en}
+                      alt={item.title.en}
                       className="story-card__image"
                       fill
                       sizes="(max-width: 1080px) 100vw, 50vw"
-                      src={post.imageUrl}
+                      src={item.imageUrl}
                     />
                   </div>
                 ) : null}
                 <div className="story-card__body stack">
-                  <LocalizedDate className="story-card__meta" value={post.publishedAt} />
-                  <LocalizedText as="h3" text={post.title} />
-                  <LocalizedText as="p" text={post.excerpt} />
-                  <Link className="btn btn--ghost" href={`/post/${post.slug}`}>
-                    <LocalizedText text={readMoreText} />
+                  {"publishedAt" in item ? (
+                    <LocalizedDate className="story-card__meta" value={item.publishedAt} />
+                  ) : (
+                    <LocalizedText as="p" className="story-card__meta" text={item.meta} />
+                  )}
+                  <LocalizedText as="h3" text={item.title} />
+                  <LocalizedText as="p" text={item.excerpt} />
+                  <Link className="btn btn--ghost" href={item.href as Route}>
+                    <LocalizedText text={item.action} />
                   </Link>
                 </div>
               </article>
