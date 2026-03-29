@@ -77,15 +77,15 @@ export const siteMeta = {
   },
   safetyMessage: {
     en: "SAFETY FIRST: We're taking extra measures to ensure your children are safe in our school.",
-    bn: "সুরক্ষা: শিক্ষাক্ষেত্রে ছাত্র-ছাত্রীদের নিরাপদ ও সুরক্ষিত রাখা আমাদের কর্তব্য।",
+    bn: "সুরক্ষা: শিক্ষাক্ষেত্রের ছাত্র-ছাত্রীদের নিরাপদ ও সুরক্ষিত রাখা আমাদের কর্তব্য।",
   },
   address: {
     en: "Post & Village - Humaniapota, Thakurbari, PS - Gangnapur, Ranaghat - II, Nadia, Pin - 741238",
-    bn: "ডাকঘর ও গ্রাম - হুমানিয়া পোতা, ঠাকুরবাড়ি, থানা - গাংনাপুর, রাণাঘাট - ২, নদীয়া, পিন - ৭৪১২৩৮",
+    bn: "ডাকঘর ও গ্রাম - হুমানিয়া পোতা, ঠাকুরবাড়ি, থানা - গাংনাপুর, রানাঘাট - ২, নদীয়া, পিন - ৭৪১২৩৮",
   },
   eventLocation: {
     en: "Post & Village - Humaniapota, Thakurbari, PS - Gangnapur, Ranaghat - II, Nadia, Pin - 741238",
-    bn: "ডাকঘর ও গ্রাম - হুমানিয়া পোতা, ঠাকুরবাড়ি, থানা - গাংনাপুর, রাণাঘাট - ২, নদীয়া, পিন - ৭৪১২৩৮",
+    bn: "ডাকঘর ও গ্রাম - হুমানিয়া পোতা, ঠাকুরবাড়ি, থানা - গাংনাপুর, রানাঘাট - ২, নদীয়া, পিন - ৭৪১২৩৮",
   },
   schoolPhone: "+91-8756339237",
   schoolEmail: "write2kms23@gmail.com",

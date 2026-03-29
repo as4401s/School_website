@@ -50,7 +50,7 @@ const whoWeAreParagraphs: BilingualText[] = [
   },
   {
     en: "The school was founded with a simple aim: to bring quality English-medium early education closer to local families and give children a joyful beginning to their learning journey.",
-    bn: "স্কুলটির মূল লক্ষ্য হল: স্থানীয় পরিবারে শিশুদের কাছে মানসম্মত ইংরেজি মাধ্যমের প্রারম্ভিক শিক্ষাকে আরও সহজলভ্য করে তোলা এবং তাদের শিক্ষাজীবনকে আরও আনন্দময় করে তোলা।",
+    bn: "স্কুলটির মূল লক্ষ্য হল: স্থানীয় পরিবারের শিশুদের কাছে মানসম্মত ইংরেজি মাধ্যমের প্রারম্ভিক শিক্ষাকে আরও সহজলভ্য করে তোলা এবং তাদের শিক্ষাজীবনকে আরও আনন্দময় করে তোলা।",
   },
   {
     en: "At KMS, school life is shaped by stories, songs, play, creative work, and caring relationships so that children grow with confidence, curiosity, and a strong sense of belonging.",
@@ -66,7 +66,7 @@ const montessoriTitle = {
 const montessoriParagraphs: BilingualText[] = [
   {
     en: "KMS follows the Montessori approach, which respects each child as an individual learner and encourages discovery through observation, movement, and hands-on experiences.",
-    bn: "কেএমএস-এ মন্টেসরি শিক্ষাদর্শ অনুসরণ করা হয়, যা প্রতিটি শিশুকে একজন স্বতন্ত্র শিক্ষার্থী হিসেবে মূল্যায়ন করে এবং বিভিন্ন হাতে-কলমে অভিজ্ঞতার মাধ্যমে শিক্ষা অর্জনে উৎসাহিত করে।",
+    bn: "কেএমএস-এ মন্টেসরি শিক্ষাদর্শ অনুসরণ করা হয়, যা প্রতিটি শিশুকে একজন স্বতন্ত্র শিক্ষার্থী হিসেবে মূল্যায়ন করে এবং বিভিন্ন হাতে-কলমে অভিজ্ঞতার মাধ্যমে শিক্ষা অর্জন করতে উৎসাহিত করে।",
   },
   {
     en: "Children are guided step by step to explore materials, ask questions, make choices, and think independently rather than only memorizing or listening.",
@@ -74,7 +74,7 @@ const montessoriParagraphs: BilingualText[] = [
   },
   {
     en: "With patient guidance and a supportive environment, this method helps children build independence, concentration, creativity, and problem-solving skills.",
-    bn: "সঠিক পরিচালনা ও সহায়ক পরিবেশ শিশুদের স্বনির্ভর, মনোযোগী, সৃজনশীল এবং বিভিন্ন সমস্যা সমাধানে দক্ষ হতে সাহায্য করে।",
+    bn: "সঠিক পরিচালনা ও সহায়ক পরিবেশ শিশুদের স্বনির্ভর, মনোযোগী, সৃজনশীল ও বিভিন্ন সমস্যা সমাধানে দক্ষ হতে সাহায্য করে।",
   },
 ];
 
@@ -91,15 +91,15 @@ const headTeacherGreeting = {
 const headTeacherParagraphs: BilingualText[] = [
   {
     en: "It is a pleasure to welcome you to a school where every child is cared for, respected, and encouraged to grow. We believe the early years should be joyful, meaningful, and full of discovery.",
-    bn: "এমন একটি বিদ্যালয়ে আপনাদের স্বাগত জানাতে পেরে আমরা আনন্দিত, যেখানে প্রতিটি শিশুকে যত্ন, সম্মান এবং উৎসাহের সঙ্গে বড় হতে সাহায্য করা হয়। আমাদের বিশ্বাস, শৈশবের শিক্ষা হওয়া উচিত আনন্দময়, অর্থপূর্ণ এবং আবিষ্কারের উচ্ছ্বাসে ভরা।",
+    bn: "এমন একটি বিদ্যালয়ে আপনাদের স্বাগত জানাতে পেরে আমরা আনন্দিত, যেখানে প্রতিটি শিশুকে যত্ন, সম্মান এবং উৎসাহের সঙ্গে বড় হতে সাহায্য করা হয়। আমাদের বিশ্বাস, শৈশবের শিক্ষা হওয়া উচিত আনন্দময়, অর্থপূর্ণ ও বৈচিত্রের উচ্ছ্বাসে ভরা।",
   },
   {
     en: "Our teachers work with dedication to create a warm and safe environment where children feel confident to explore, ask questions, and express themselves.",
-    bn: "আমাদের শিক্ষকরা আন্তরিক নিষ্ঠার সঙ্গে এমন এক উষ্ণ ও নিরাপদ পরিবেশ গড়ে তোলেন, যেখানে শিশুরা নির্ভয়ে জানতে, প্রশ্ন করতে এবং নিজেকে প্রকাশ করতে শেখে।",
+    bn: "আমাদের শিক্ষকবৃন্দ অত্যন্ত নিষ্ঠার সাথে একটি মমতাময় ও নিরাপদ পরিবেশ গড়ে তুলতে কাজ করেন, যেখানে শিশুরা আত্মবিশ্বাসের সাথে অজানাকে জানতে, প্রশ্ন করতে এবং নিজেদের প্রকাশ করতে স্বাচ্ছন্দ্য বোধ করে।",
   },
   {
     en: "We also believe that close communication between school and parents plays an essential role in a child's progress. Together, we hope to build a strong foundation for confidence, curiosity, and a lifelong love for learning.",
-    bn: "আমরা আরও বিশ্বাস করি, স্কুল ও অভিভাবকের ঘনিষ্ঠ যোগাযোগ শিশুর অগ্রগতির জন্য অত্যন্ত গুরুত্বপূর্ণ। একসঙ্গে আমরা এমন একটি মজবুত ভিত্তি গড়ে তুলতে চাই, যা প্রতিটি শিশুর আত্মবিশ্বাস, কৌতূহল এবং শেখার প্রতি ভালোবাসাকে লালন করবে।",
+    bn: "আমরা আরও বিশ্বাস করি যে, শিশুর সার্বিক উন্নতিতে বিদ্যালয় এবং অভিভাবকদের মধ্যে নিবিড় যোগাযোগ একটি অপরিহার্য ভূমিকা পালন করে। আমরা আশাবাদী যে, সকলে মিলে আমরা শিশুদের আত্মবিশ্বাস, কৌতূহল এবং শেখার প্রতি ভালোবাসার এক সুদৃঢ় ভিত্তি গড়ে তুলতে পারব।",
   },
   {
     en: "Bandana Mukherjee",
@@ -117,33 +117,33 @@ const admissionFormTitle = {
 };
 
 const admissionFormDescription = {
-  en: "Families can download the printable admission form, fill in the child and parent details at home, sign it after printing, and submit it at the school office with the required documents.",
-  bn: "অভিভাবকগণ এখান থেকেই ভর্তি ফর্ম ডাউনলোড করে বাড়িতে বসে শিক্ষার্থী ও অভিভাবকের তথ্য পূরণ করতে পারবেন, প্রিন্ট নেওয়ার পর স্বাক্ষর করে প্রয়োজনীয় নথিসহ স্কুল অফিসে জমা দিতে পারবেন।",
+  en: "Guardians can download the printable admission form, fill in the child and parent details at home, sign it after printing, and submit it at the school office with the required documents.",
+  bn: "অভিভাবকগণ এখান থেকেই ভর্তি ফর্ম ডাউনলোড করে বাড়িতে বসে সকল প্রয়োজনীয় তথ্য পূরণ করতে পারবেন, প্রিন্ট নেওয়ার পর স্বাক্ষর করে প্রয়োজনীয় নথিসহ স্কুল অফিসে জমা দিতে পারবেন।",
 };
 
 const admissionFormSteps: BilingualText[] = [
   {
     en: "Complete the student, parent, and guardian details clearly.",
-    bn: "শিক্ষার্থী, অভিভাবক ও প্রয়োজনে স্থানীয় অভিভাবকের তথ্য স্পষ্টভাবে পূরণ করুন।",
+    bn: "শিক্ষার্থী, অভিভাবক ও প্রয়োজনে স্থানীয় অভিভাবকের তথ্য স্পষ্টভাবে পূরণ করতে হবে।",
   },
   {
     en: "Print the form, attach a recent passport-size photograph, and sign it by hand.",
-    bn: "ফর্মটি প্রিন্ট করে সাম্প্রতিক পাসপোর্ট সাইজ ছবি সংযুক্ত করুন এবং হাতে স্বাক্ষর করুন।",
+    bn: "ফর্মটি প্রিন্ট করে সাম্প্রতিক পাসপোর্ট সাইজ ছবি সংযুক্ত করতে হবে এবং হাতে স্বাক্ষর করতে হবে।",
   },
   {
     en: "Submit it to the school office along with the listed supporting documents.",
-    bn: "উল্লিখিত প্রয়োজনীয় কাগজপত্রসহ স্কুল অফিসে ফর্মটি জমা দিন।",
+    bn: "উল্লিখিত প্রয়োজনীয় কাগজপত্রসহ স্কুল অফিসে ফর্মটি জমা দিতে হবে।",
   },
 ];
 
 const admissionFormDownloadText = {
   en: "Download Form (PDF)",
-  bn: "ফর্ম ডাউনলোড করুন (PDF)",
+  bn: "ফর্ম ডাউনলোড",
 };
 
 const admissionFormLinkText = {
   en: "View Admission Details",
-  bn: "ভর্তির বিস্তারিত দেখুন",
+  bn: "ভর্তির বিস্তারিত তথ্য",
 };
 
 const admissionFormSupportText = {
@@ -222,6 +222,11 @@ const campusReelTitle = {
   bn: "ক্যাম্পাস ভিডিও",
 };
 
+const viewGalleryText = {
+  en: "View Gallery",
+  bn: "গ্যালারি দেখুন",
+};
+
 const viewAllUpdatesText = {
   en: "View all updates",
   bn: "সব আপডেট দেখুন",
@@ -238,7 +243,7 @@ const viewNoticeText = {
 };
 
 const noticeSupportText = {
-  en: "Latest public notices, circulars, and result updates for families.",
+  en: "Latest public notices, circulars, and result updates for guardians.",
   bn: "অভিভাবকদের জন্য সাম্প্রতিক খবর ও ফলাফল-সম্পর্কিত তথ্য।",
 };
 
@@ -341,6 +346,9 @@ export default async function HomePage() {
                 <LocalizedText as="h2" text={campusLifeTitle} />
               </div>
             </div>
+            <Link className="btn btn--ghost" href="/gallery">
+              <LocalizedText text={viewGalleryText} />
+            </Link>
           </div>
 
           <GallerySlider items={sliderItems} />

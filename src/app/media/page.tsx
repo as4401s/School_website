@@ -24,7 +24,7 @@ const introTitle = {
 };
 
 const introSummary = {
-  en: "Find school stories, photo highlights, and important notices for families in one place.",
+  en: "Find school stories, photo highlights, and important notices for guardians in one place.",
   bn: "বিদ্যালয়ের অনুষ্ঠান, ছবির ঝলক আর অভিভাবকদের জন্য দরকারি বিজ্ঞপ্তি এই অংশে একসঙ্গে পাওয়া যাবে।",
 };
 
@@ -39,7 +39,7 @@ const mediaOverviewTitle = {
 };
 
 const mediaOverviewSummary = {
-  en: "The media section brings together public updates from across school life so families can quickly find the kind of information they need.",
+  en: "The media section brings together public updates from across school life so guardians can quickly find the kind of information they need.",
   bn: "স্কুলজীবনের নানা দিকের আপডেট এখানে একসঙ্গে সাজানো আছে, যাতে অভিভাবকরা সহজেই প্রয়োজনীয় তথ্য খুঁজে নিতে পারেন।",
 };
 
@@ -68,7 +68,7 @@ const mediaSections: MediaSection[] = [
     },
     summary: {
       en: "A visual collection of classrooms, campus moments, and school celebrations.",
-      bn: "শ্রেণিকক্ষ, ক্যাম্পাসের নানান মুহূর্ত এবং বিদ্যালয়ের বিভিন্ন উদযাপনের ছবি এখানে দেখা যাবে।",
+      bn: "শ্রেণিকক্ষ, ক্যাম্পাসের নানান মুহূর্ত এবং বিদ্যালয়ের বিভিন্ন উদ্‌যাপনের ছবি এখানে দেখা যাবে।",
     },
     action: {
       en: "Open Gallery",
@@ -83,7 +83,7 @@ const mediaSections: MediaSection[] = [
       bn: "বিজ্ঞপ্তি",
     },
     summary: {
-      en: "Important notices, circulars, and updates that families may need to follow.",
+      en: "Important notices, circulars, and updates that guardians may need to follow.",
       bn: "অভিভাবকদের জন্য প্রয়োজনীয় গুরুত্বপূর্ণ নোটিশ, সার্কুলার ও আপডেট এই বিভাগে প্রকাশ করা হয়।",
     },
     action: {

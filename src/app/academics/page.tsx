@@ -26,17 +26,17 @@ const introTitle = {
 
 const introSummary = {
   en: "Learning at KMS is designed to help children explore, discover, and grow with confidence.",
-  bn: "কেএমএস-এর শিক্ষণ পদ্ধতি এমনভাবে গড়ে তোলা, যাতে শিশুরা অনুসন্ধান করতে পারে, নতুন কিছু আবিষ্কার করতে পারে এবং আত্মবিশ্বাসের সঙ্গে বেড়ে উঠতে পারে।",
+  bn: "কেএমএস-এর শিক্ষণ পদ্ধতি এমনভাবে গড়ে তোলা, যাতে শিশুদের মধ্যে অনুসন্ধিৎসু মনোভাব, নতুন কিছু জানার ও শেখার আগ্রহ তৈরি হয় এবং তারা আত্মবিশ্বাসের সাথে বেড়ে উঠতে পারে।",
 };
 
 const learningIntroParagraphs: BilingualText[] = [
   {
     en: "**We believe that young children learn best when they are curious and actively involved in the learning process.**",
-    bn: "**আমাদের বিশ্বাস, ছোট শিশুরা সবচেয়ে ভালো শেখে যখন তাদের মনে কৌতূহল জাগে এবং তারা নিজে সক্রিয়ভাবে শেখার কাজে অংশ নেয়।**",
+    bn: "**আমাদের বিশ্বাস, ছোট শিশুরা তখনই সবচেয়ে ভালো শেখে যখন তারা নিজে সক্রিয়ভাবে শিক্ষণীয় কাজে অংশগ্রহণ করে।**",
   },
   {
     en: "**Through a variety of carefully designed tools and activities, children experience learning in ways that are engaging, meaningful, and enjoyable.**",
-    bn: "**যত্নসহকারে পরিকল্পিত নানা উপকরণ ও কার্যক্রমের মাধ্যমে শেখাকে আমরা এমনভাবে উপস্থাপন করি, যা শিশুদের কাছে আনন্দদায়ক, অর্থপূর্ণ এবং অংশগ্রহণমূলক হয়ে ওঠে।**",
+    bn: "**যত্নসহকারে পরিকল্পিত বিভিন্ন উপকরণ ও কার্যক্রমের মাধ্যমে শিক্ষাপদ্ধতিকে এমনভাবে উপস্থাপন করা হয়, যা শিশুদের কাছে আনন্দদায়ক, অর্থপূর্ণ এবং অংশগ্রহণমূলক হয়ে ওঠে।**",
   },
 ];
 
@@ -49,12 +49,12 @@ const learningCards: LearningCard[] = [
     intro: [
       {
         en: "Children learn by touching, observing, and exploring different learning materials that help them understand ideas in a simple and natural way.",
-        bn: "শিশুরা স্পর্শ, পর্যবেক্ষণ ও অন্বেষণের মাধ্যমে নানা শিক্ষাসামগ্রী ব্যবহার করে সহজ ও স্বাভাবিকভাবে ধারণা বুঝতে শেখে।",
+        bn: "শিশুরা স্পর্শ, পর্যবেক্ষণ এবং বিভিন্ন উপকরণ ব্যবহার করার মাধ্যমেই যে কোনো ধারণা খুব সহজ ও স্বাভাবিকভাবে বুঝতে শেখে।",
       },
     ],
     listIntro: {
       en: "Examples include:",
-      bn: "এর মধ্যে রয়েছে:",
+      bn: "এই ধরনের কার্যক্রমের মধ্যে রয়েছে:",
     },
     bullets: [
       {
@@ -63,7 +63,7 @@ const learningCards: LearningCard[] = [
       },
       {
         en: "Number boards and counting objects",
-        bn: "সংখ্যা বোর্ড ও গোনার উপকরণ",
+        bn: "সংখ্যা বোর্ড ও গণনার সামগ্রী",
       },
       {
         en: "Sorting and matching activities",
@@ -85,11 +85,11 @@ const learningCards: LearningCard[] = [
     intro: [
       {
         en: "Creativity plays an important role in early childhood learning.",
-        bn: "প্রারম্ভিক শিক্ষায় সৃজনশীলতার ভূমিকা অত্যন্ত গুরুত্বপূর্ণ।",
+        bn: "শৈশবের শিক্ষায় সৃজনশীলতা এক গুরুত্বপূর্ণ ভূমিকা পালন করে।",
       },
       {
         en: "Children regularly take part in activities that help them imagine, express, and create with joy.",
-        bn: "শিশুরা নিয়মিত এমন কার্যক্রমে অংশ নেয়, যা তাদের কল্পনা, প্রকাশক্ষমতা ও আনন্দের সঙ্গে সৃষ্টি করার অভ্যাস গড়ে তোলে।",
+        bn: "শিশুরা নিয়মিত এমন সব কাজে অংশ নেয় যা তাদের কল্পনা করতে, নিজেদের প্রকাশ করতে এবং আনন্দের সাথে নতুন কিছু তৈরি করতে সাহায্য করে।",
       },
     ],
     listIntro: {
@@ -99,15 +99,15 @@ const learningCards: LearningCard[] = [
     bullets: [
       {
         en: "Drawing and coloring",
-        bn: "আঁকাআঁকি ও রং করা",
+        bn: "ছবি আঁকা এবং রং করা",
       },
       {
         en: "Paper crafts and simple art projects",
-        bn: "কাগজের কাজ ও সহজ শিল্পচর্চা",
+        bn: "কাগজের কাজ এবং সহজ শিল্পকর্ম",
       },
       {
         en: "Clay modeling",
-        bn: "মাটির কাজে আকার তৈরি",
+        bn: "মাটির কাজ বা ক্লে মডেলিং",
       },
       {
         en: "Creative storytelling",
@@ -125,33 +125,33 @@ const learningCards: LearningCard[] = [
     intro: [
       {
         en: "Strong communication skills begin at an early age.",
-        bn: "ভাষা ও যোগাযোগের শক্ত ভিত তৈরি হয় ছোটবেলা থেকেই।",
+        bn: "যোগাযোগের শক্তিশালী দক্ষতা অর্জনের শুরু হয় শৈশব থেকেই।",
       },
       {
         en: "At KMS, language learning supports listening, speaking, understanding, and confident expression.",
-        bn: "কেএমএস-এ ভাষা শেখার চর্চায় শোনা, বলা, বোঝা এবং আত্মবিশ্বাসের সঙ্গে নিজেকে প্রকাশ করার দক্ষতা একসঙ্গে গড়ে তোলা হয়।",
+        bn: "KMS-এ ভাষা শিক্ষা শিশুদের শোনা, বলা, বোঝা এবং আত্মবিশ্বাসের সাথে নিজেদের প্রকাশ করার ক্ষমতা তৈরি করতে সাহায্য করে।",
       },
     ],
     listIntro: {
       en: "At KMS, language learning includes:",
-      bn: "কেএমএস-এ ভাষা শেখার অংশ হিসেবে রয়েছে:",
+      bn: "এই ধরনের কার্যক্রমের মধ্যে রয়েছে :",
     },
     bullets: [
       {
         en: "Storytelling sessions",
-        bn: "গল্প শোনানো ও গল্প বলা",
+        bn: "গল্প বলার আসর",
       },
       {
         en: "Rhymes and songs",
-        bn: "ছড়া ও গান",
+        bn: "ভাষা ও ছন্দের গান",
       },
       {
         en: "Picture reading activities",
-        bn: "ছবি দেখে বলা ও বোঝার কাজ",
+        bn: "ছবি দেখে ভাষা বোঝার কাজ",
       },
       {
         en: "Simple speaking and listening exercises",
-        bn: "সহজ বলা ও শোনার অনুশীলন",
+        bn: "সহজ ভাষা বলা ও শোনার অভ্যাস",
       },
     ],
     imageUrl: "/media/nano_banana_literacy.png",
@@ -160,38 +160,38 @@ const learningCards: LearningCard[] = [
   {
     title: {
       en: "Play-Based Learning",
-      bn: "খেলার মাধ্যমে শেখা",
+      bn: "খেলাধুলোর মাধ্যমে শিক্ষা",
     },
     intro: [
       {
         en: "Play is an important part of how children understand the world around them.",
-        bn: "শিশুরা চারপাশের জগৎকে বুঝতে শেখে অনেকটাই খেলার মধ্য দিয়ে।",
+        bn: "শিশুরা তাদের চারপাশের পৃথিবীকে বুঝতে শেখে অনেকটাই খেলার মাধ্যমে।",
       },
       {
         en: "Play-based experiences help them build curiosity, teamwork, imagination, and confidence in a natural way.",
-        bn: "খেলাভিত্তিক অভিজ্ঞতা তাদের কৌতূহল, দলগত অংশগ্রহণ, কল্পনাশক্তি ও আত্মবিশ্বাসকে স্বাভাবিকভাবে বিকশিত করে।",
+        bn: "খেলার ছলে অর্জিত অভিজ্ঞতা শিশুদের কৌতূহল, দলগতভাবে কাজ করার মানসিকতা, কল্পনাশক্তি এবং আত্মবিশ্বাস গড়ে তুলতে সাহায্য করে।",
       },
     ],
     listIntro: {
       en: "Our play-based learning includes:",
-      bn: "আমাদের খেলাভিত্তিক শেখার মধ্যে রয়েছে:",
+      bn: "এই ধরনের কার্যক্রমের মধ্যে রয়েছে :",
     },
     bullets: [
       {
         en: "Group games",
-        bn: "দলগত খেলা",
+        bn: "দলগত খেলাধুলো",
       },
       {
         en: "Interactive classroom activities",
-        bn: "শ্রেণিকক্ষে অংশগ্রহণমূলক কার্যক্রম",
+        bn: "শ্রেণিকক্ষে মিথস্ক্রিয়ামূলক কাজ",
       },
       {
         en: "Outdoor play",
-        bn: "বাইরে মুক্তভাবে খেলা",
+        bn: "বাইরে মুক্তভাবে খেলাধুলো",
       },
       {
         en: "Role-play and imagination games",
-        bn: "রোল-প্লে ও কল্পনাভিত্তিক খেলা",
+        bn: "ভূমিকা অভিনয় ও কল্পনাভিত্তিক খেলাধুলো",
       },
     ],
     imageUrl: "/media/nano_banana_pe.png",
@@ -200,17 +200,17 @@ const learningCards: LearningCard[] = [
   {
     title: {
       en: "Practical Life Activities",
-      bn: "দৈনন্দিন জীবনভিত্তিক কার্যক্রম",
+      bn: "দৈনন্দিন জীবনচর্চামূলক কার্যক্রম",
     },
     intro: [
       {
         en: "This Montessori element encourages children to develop independence through everyday tasks and purposeful movement.",
-        bn: "মন্টেসরি শিক্ষাপদ্ধতির এই অংশে দৈনন্দিন কাজের মধ্য দিয়ে শিশুদের স্বনির্ভরতা ও মনোযোগ গড়ে তোলা হয়।",
+        bn: "মন্টেশরি শিক্ষার এই অংশে শিশুদের প্রতিদিনের ছোট ছোট কাজ এবং উদ্দেশ্যমূলক চলাফেরার মাধ্যমে স্বাবলম্বী হয়ে উঠতে উৎসাহিত করে।",
       },
     ],
     listIntro: {
       en: "Examples include:",
-      bn: "উদাহরণ হিসেবে রয়েছে:",
+      bn: "এই ধরনের কার্যক্রমের মধ্যে রয়েছে :",
     },
     bullets: [
       {
@@ -219,11 +219,11 @@ const learningCards: LearningCard[] = [
       },
       {
         en: "Simple classroom responsibilities",
-        bn: "শ্রেণিকক্ষের সহজ দায়িত্ব পালন",
+        bn: "শ্রেণিকক্ষের ছোটখাটো দায়িত্ব পালন করা",
       },
       {
         en: "Hands-on tasks that improve coordination and focus",
-        bn: "হাতের কাজের মাধ্যমে সমন্বয় ও একাগ্রতা বাড়ানো",
+        bn: "হাতে-কলমে কাজ করা, যা শিশুদের মনোযোগ এবং সমন্বয় বাড়াতে সাহায্য করে",
       },
       {
         en: "Sensory activities",

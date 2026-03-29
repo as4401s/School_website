@@ -15,12 +15,12 @@ const introEyebrow = {
 
 const introTitle = {
   en: "School updates and celebrations",
-  bn: "বিদ্যালয়ের খবর ও উদযাপন",
+  bn: "বিদ্যালয়ের খবর ও উদ্‌যাপন",
 };
 
 const introSummary = {
   en: "Latest public updates, school celebrations, and notices.",
-  bn: "বিদ্যালয়ের সাম্প্রতিক খবর, উদযাপন এবং প্রয়োজনীয় নোটিশ।",
+  bn: "বিদ্যালয়ের সাম্প্রতিক খবর, উদ্‌যাপন এবং প্রয়োজনীয় নোটিশ।",
 };
 
 const readArticle = {

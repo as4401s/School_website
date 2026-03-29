@@ -6,12 +6,17 @@ import {
   LocalizedText,
 } from "@/components/language-provider";
 import { getNewsPostBySlug, getNewsPosts } from "@/lib/content";
+import type { BilingualText } from "@/data/site-content";
 
 type PostPageProps = {
   params: Promise<{
     slug: string;
   }>;
 };
+
+function isSameBilingualText(left: BilingualText, right: BilingualText) {
+  return left.en.trim() === right.en.trim() && left.bn.trim() === right.bn.trim();
+}
 
 export async function generateStaticParams() {
   const posts = await getNewsPosts();
@@ -28,6 +33,11 @@ export default async function PostPage({ params }: PostPageProps) {
   if (!post) {
     notFound();
   }
+
+  const bodyParagraphs =
+    post.body[0] && isSameBilingualText(post.excerpt, post.body[0])
+      ? post.body.slice(1)
+      : post.body;
 
   return (
     <section className="section">
@@ -58,7 +68,7 @@ export default async function PostPage({ params }: PostPageProps) {
           ) : null}
           <div className="story-card__body stack">
             <LocalizedText as="p" text={post.excerpt} />
-            {post.body.map((paragraph) => (
+            {bodyParagraphs.map((paragraph) => (
               <LocalizedText as="p" key={paragraph.en} text={paragraph} />
             ))}
           </div>

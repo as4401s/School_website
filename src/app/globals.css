@@ -3151,6 +3151,10 @@ body::before {
   box-shadow: 0 20px 42px rgba(36, 48, 68, 0.09);
 }
 
+.staff-card--middle {
+  grid-column: 2;
+}
+
 .staff-card::before {
   content: "";
   position: absolute;
@@ -4043,6 +4047,10 @@ body::before {
   .staff-grid {
     grid-template-columns: 1fr;
     gap: 18px;
+  }
+
+  .staff-card--middle {
+    grid-column: auto;
   }
 
   .staff-card {

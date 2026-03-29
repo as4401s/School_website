@@ -24,12 +24,12 @@ const introEyebrow = {
 
 const introTitle = {
   en: "A closer look at life and learning at KMS",
-  bn: "কেএমএস সম্পর্কে",
+  bn: "কেএমএস (KMS)-এ পড়াশোনা ও বেড়ে ওঠার এক ঝলক",
 };
 
 const introSummary = {
   en: "This page brings together the environment, values, and learning culture that shape everyday life at Krishnarati Montessori School.",
-  bn: "শ্রেণিকক্ষ-কেন্দ্রিক জীবন, বিদ্যালয়ের অনুষ্ঠানসমূহ, অভিভাবক সভা এবং প্রতিদিনের ধারাবাহিক অগ্রগতির মাধ্যমে KMS এক বন্ধুসুলভ ও আদর্শ শিখন পরিবেশ নিশ্চিত করে।",
+  bn: "কৃষ্ণারতি মন্টেসরি স্কুলের পড়াশোনার ধরণ, স্কুলের পরিবেশ এবং এখানকার মূল লক্ষ্যগুলো এই পাতায় তুলে ধরা হয়েছে।",
 };
 
 const learningEnvironmentTitle = {
@@ -40,17 +40,17 @@ const learningEnvironmentTitle = {
 const learningEnvironmentParagraphs: BilingualText[] = [
   {
     en: "At KMS, we believe that children learn best in an environment where they feel safe, happy, and encouraged to explore.",
-    bn: "কেএমএস-এ আমাদের বিশ্বাস, শিশুরা সবচেয়ে ভালো শেখে এমন শ্রেণিকক্ষের নিরাপদ, আনন্দময় পরিবেশে, যেখানে তারা নতুন কিছু জানতে এবং অনুসন্ধান করতে উৎসাহ পায়।",
+    bn: "কেএমএস (KMS)-এ আমরা বিশ্বাস করি যে, শিশুরা তখনই সবচেয়ে ভালো শেখে যখন শ্রেণীকক্ষের পরিবেশ হয় নিরাপদ ও আনন্দময় ও যেখানে তারা নতুন কিছু জানতে ও অনুসন্ধান করতে উৎসাহ পায়।",
   },
   {
     en: "Our classrooms are designed to support curiosity, creativity, and active learning through daily routines that are warm, engaging, and age-appropriate.",
-    bn: "আমাদের শ্রেণিকক্ষ এমনভাবে গড়ে তোলা হয়, যাতে উষ্ণ, অংশগ্রহণমূলক এবং বয়সোপযোগী কার্যক্রমের মধ্য দিয়ে কৌতূহল, সৃজনশীলতা ও সক্রিয় শেখা বিকশিত হয়।",
+    bn: "আমাদের শ্রেণিকক্ষগুলো এমনভাবে তৈরি যেখানে শিশুরা স্বতঃস্ফূর্ত অংশগ্রহণের মাধ্যমে শিখতে পারে।",
   },
 ];
 
 const learningEnvironmentListIntro = {
   en: "In our school, children experience:",
-  bn: "আমাদের বিদ্যালয়ে শিশুরা পায়:",
+  bn: "আমাদের স্কুলে শিশুরা দৈনন্দিন যা অভিজ্ঞতা করে:",
 };
 
 const learningEnvironmentBullets: BilingualText[] = [
@@ -64,7 +64,7 @@ const learningEnvironmentBullets: BilingualText[] = [
   },
   {
     en: "Teachers who guide children with patience and care",
-    bn: "ধৈর্য ও স্নেহের সঙ্গে শিশুদের পথ দেখান এমন শিক্ষক",
+    bn: "ধৈর্য ও পরম মমতায় শিশুদের সঠিক পথ দেখানোর জন্য সহমর্মী শিক্ষক",
   },
   {
     en: "Activities that support both individual learning and group interaction",
@@ -87,8 +87,8 @@ const aboutCards: AboutCard[] = [
       bn: "প্রারম্ভিক শিক্ষায় আমাদের দৃষ্টিভঙ্গি",
     },
     intro: {
-      en: "At KMS, early education focuses on building a strong foundation for lifelong learning. We believe that young children learn best when learning is engaging, meaningful, and enjoyable.",
-      bn: "কেএমএস-এ প্রারম্ভিক শিক্ষার মূল লক্ষ্য হল এমন এক দৃঢ় ভিত্তি গড়ে তোলা, যা শিশুর আজীবন শিক্ষাযাত্রাকে শক্তপোক্ত করে। আমাদের বিশ্বাস, ছোটরা সবচেয়ে ভালো শেখে যখন শেখা আনন্দময়, অর্থপূর্ণ এবং মনোযোগ টানে।",
+      en: "At KMS, early education focuses on building a strong foundation for lifelong learning.",
+      bn: "কেএমএস-এ প্রারম্ভিক শিক্ষার মূল লক্ষ্য হল এমন এক দৃঢ় ভিত্তি গড়ে তোলা, যা শিশুর আজীবন শিক্ষাযাত্রাকে শক্তপোক্ত করে।",
     },
     listIntro: {
       en: "Our approach includes:",
@@ -109,11 +109,11 @@ const aboutCards: AboutCard[] = [
       },
       {
         en: "Promoting creativity through drawing, storytelling, and play",
-        bn: "আঁকা, গল্প বলা ও খেলার মাধ্যমে সৃজনশীলতা লালন করা",
+        bn: "সৃজনশীল হয়ে উঠতে সাহায্য করা।",
       },
       {
         en: "Helping children build confidence and independence",
-        bn: "শিশুদের আত্মবিশ্বাস ও স্বনির্ভরতা গড়ে তুলতে সাহায্য করা",
+        bn: "আত্মবিশ্বাসী ও স্বনির্ভর হয়ে উঠতে",
       },
       {
         en: "Supporting emotional and social development through group interaction",
@@ -146,7 +146,7 @@ const aboutCards: AboutCard[] = [
       },
       {
         en: "Supporting each child’s individual pace of learning",
-        bn: "প্রতিটি শিশুর নিজস্ব গতিতে শেখার পথকে সম্মান করা",
+        bn: "প্রতিটি শিশুর শেখার ছন্দকে সম্মান করা",
       },
       {
         en: "Encouraging positive values such as kindness and respect",
@@ -325,7 +325,10 @@ export default function OurSchoolPage() {
 
           <div className="staff-grid">
             {staffMembers.map((member) => (
-              <article className="staff-card" key={member.name.en}>
+              <article
+                className={`staff-card${member.name.en === "Manisha Roy" ? " staff-card--middle" : ""}`}
+                key={member.name.en}
+              >
                 <div aria-hidden="true" className="staff-card__avatar" />
                 <LocalizedText as="h3" text={member.name} />
                 <div className="staff-card__details">

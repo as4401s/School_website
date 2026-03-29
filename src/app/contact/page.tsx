@@ -84,7 +84,7 @@ export default function ContactPage() {
             <LocalizedText
               as="p"
               text={{
-                en: "For admissions, school updates, or general enquiries, families may write to the school email shown here.",
+                en: "For admissions, school updates, or general enquiries, guardians may write to the school email shown here.",
                 bn: "ভর্তি, বিদ্যালয়ের আপডেট বা সাধারণ কোনো জিজ্ঞাসার জন্য অভিভাবকগণ এখানে দেওয়া বিদ্যালয়ের ইমেলে যোগাযোগ করতে পারেন।",
               }}
             />

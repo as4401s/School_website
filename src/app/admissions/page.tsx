@@ -71,7 +71,7 @@ const admissionProcess: DetailBlock[] = [
   {
     title: {
       en: "Collect or download the admission form",
-      bn: "ভর্তি ফর্ম সংগ্রহ করুন বা ডাউনলোড করুন",
+      bn: "ভর্তি ফর্ম সংগ্রহ করতে হবে বা ডাউনলোড করতে হবে",
     },
     body: {
       en: "Parents may collect the form from the school office or use the download option provided on this page.",
@@ -81,17 +81,17 @@ const admissionProcess: DetailBlock[] = [
   {
     title: {
       en: "Fill in the form carefully",
-      bn: "ফর্মটি যত্নসহকারে পূরণ করুন",
+      bn: "ফর্মটি যত্নসহকারে পূরণ করতে হবে",
     },
     body: {
       en: "Please complete all required details clearly and attach the necessary documents before submission.",
-      bn: "ফর্ম জমা দেওয়ার আগে প্রয়োজনীয় সব তথ্য স্পষ্টভাবে পূরণ করুন এবং দরকারি নথিগুলি সংযুক্ত করুন।",
+      bn: "ফর্ম জমা দেওয়ার আগে সকল প্রয়োজনীয় তথ্য স্পষ্টভাবে পূরণ করতে হবে এবং দরকারি নথিগুলি সংযুক্ত করতে হবে।",
     },
   },
   {
     title: {
       en: "Submit the form at the school office",
-      bn: "স্কুল অফিসে ফর্ম জমা দিন",
+      bn: "স্কুল অফিসে ফর্ম জমা দিতে হবে",
     },
     body: {
       en: "There is currently no online admission system. Completed forms should be submitted directly at the school office.",
@@ -104,7 +104,7 @@ const admissionProcess: DetailBlock[] = [
       bn: "বিদ্যালয়ের পরবর্তী নির্দেশের জন্য অপেক্ষা করুন",
     },
     body: {
-      en: "After submission, the school will guide families about the next formalities, if required.",
+      en: "After submission, the school will guide guardians about the next formalities, if required.",
       bn: "ফর্ম জমা দেওয়ার পর প্রয়োজন হলে বিদ্যালয় পরবর্তী ধাপ সম্পর্কে অভিভাবকদের জানিয়ে দেবে।",
     },
   },
@@ -153,8 +153,8 @@ const formTitle = {
 };
 
 const formSummary = {
-  en: "For now, admissions are handled offline. Families may download the form, fill it in, and submit it to the school office.",
-  bn: "এই মুহূর্তে ভর্তি-প্রক্রিয়া অফলাইনে সম্পন্ন হচ্ছে। অভিভাবকগণ ফর্ম ডাউনলোড করে পূরণ করে স্কুল অফিসে জমা দিতে পারবেন।",
+  en: "For now, admissions are handled offline. Guardians may download the form, fill it in, and submit it to the school office.",
+  bn: "এই মুহূর্তে ভর্তি-প্রক্রিয়া অফলাইনে সম্পন্ন হচ্ছে। অভিভাবকগণ ফর্ম ডাউনলোড করে সকল প্রয়োজনীয় তথ্য পূরণ করে স্কুল অফিসে জমা দিতে পারবেন।",
 };
 
 const formButton = {
@@ -173,7 +173,7 @@ const contactTitle = {
 };
 
 const contactSummary = {
-  en: "For form collection, document clarification, or admission queries, families may contact the school office directly.",
+  en: "For form collection, document clarification, or admission queries, guardians may contact the school office directly.",
   bn: "ফর্ম সংগ্রহ, নথিপত্র সম্পর্কে স্পষ্ট ধারণা বা ভর্তি-সংক্রান্ত অন্য কোনো প্রয়োজনে অভিভাবকগণ সরাসরি স্কুল অফিসের সঙ্গে যোগাযোগ করতে পারেন।",
 };
 
