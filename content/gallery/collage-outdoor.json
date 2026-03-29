@@ -1,0 +1,14 @@
+{
+  "id": "collage-outdoor",
+  "order": 53,
+  "published": true,
+  "title": {
+    "en": "Outdoor Activities Collage",
+    "bn": "আউটডোর কার্যক্রমের কোলাজ"
+  },
+  "summary": {
+    "en": "A collage of movement, outdoor participation, and joyful campus activity.",
+    "bn": "চলাফেরা, আউটডোর অংশগ্রহণ এবং আনন্দময় ক্যাম্পাস কার্যক্রমের এক কোলাজ।"
+  },
+  "imageUrl": "/media/collage/outdoor.png"
+}

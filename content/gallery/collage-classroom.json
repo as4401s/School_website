@@ -1,0 +1,14 @@
+{
+  "id": "collage-classroom",
+  "order": 50,
+  "published": true,
+  "title": {
+    "en": "Classroom Life Collage",
+    "bn": "শ্রেণিকক্ষ জীবনের কোলাজ"
+  },
+  "summary": {
+    "en": "A collage of classroom learning, student focus, and everyday school moments.",
+    "bn": "শ্রেণিকক্ষের পড়াশোনা, শিক্ষার্থীদের মনোযোগ এবং প্রতিদিনের বিদ্যালয়জীবনের এক কোলাজ।"
+  },
+  "imageUrl": "/media/collage/clss.png"
+}

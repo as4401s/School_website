@@ -1,0 +1,14 @@
+{
+  "id": "collage-national",
+  "order": 52,
+  "published": true,
+  "title": {
+    "en": "National Celebrations Collage",
+    "bn": "জাতীয় উদ্‌যাপনের কোলাজ"
+  },
+  "summary": {
+    "en": "Highlights from patriotic programs, school observances, and national celebration moments.",
+    "bn": "দেশাত্মবোধক অনুষ্ঠান, বিদ্যালয়ের পালনীয় দিবস এবং জাতীয় উদ্‌যাপনের নির্বাচিত মুহূর্তের কোলাজ।"
+  },
+  "imageUrl": "/media/collage/NATIONAL.png"
+}

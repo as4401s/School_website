@@ -1,0 +1,14 @@
+{
+  "id": "collage-indoor",
+  "order": 51,
+  "published": true,
+  "title": {
+    "en": "Indoor Activities Collage",
+    "bn": "ইনডোর কার্যক্রমের কোলাজ"
+  },
+  "summary": {
+    "en": "Creative indoor activities and hands-on classroom engagement collected in one collage.",
+    "bn": "সৃজনশীল ইনডোর কার্যক্রম ও হাতে-কলমে শ্রেণিকক্ষ অংশগ্রহণের একত্রিত কোলাজ।"
+  },
+  "imageUrl": "/media/collage/INDOOOR.png"
+}

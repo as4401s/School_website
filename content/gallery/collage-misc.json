@@ -1,0 +1,14 @@
+{
+  "id": "collage-misc",
+  "order": 55,
+  "published": true,
+  "title": {
+    "en": "School Moments Collage",
+    "bn": "বিদ্যালয়ের মুহূর্তের কোলাজ"
+  },
+  "summary": {
+    "en": "A mixed collage of school memories, activities, and snapshots from campus life.",
+    "bn": "বিদ্যালয়জীবনের স্মৃতি, কার্যক্রম এবং ক্যাম্পাসের নানা মুহূর্ত নিয়ে তৈরি একটি মিশ্র কোলাজ।"
+  },
+  "imageUrl": "/media/collage/misc.png"
+}

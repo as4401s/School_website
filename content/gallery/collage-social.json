@@ -1,0 +1,14 @@
+{
+  "id": "collage-social",
+  "order": 54,
+  "published": true,
+  "title": {
+    "en": "Social Moments Collage",
+    "bn": "সামাজিক মুহূর্তের কোলাজ"
+  },
+  "summary": {
+    "en": "Shared moments of togetherness, celebration, and community life at school.",
+    "bn": "একসঙ্গে থাকা, উদ্‌যাপন এবং বিদ্যালয়ের সামাজিক জীবনের কিছু মুহূর্তের কোলাজ।"
+  },
+  "imageUrl": "/media/collage/SOCIAL.png"
+}
