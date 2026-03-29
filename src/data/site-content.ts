@@ -34,9 +34,10 @@ export type NewsPost = {
   slug: string;
   excerpt: BilingualText;
   body: BilingualText[];
-  imageUrl: string;
+  imageUrl?: string;
   publishedAt: string;
   featured?: boolean;
+  showOnHome?: boolean;
 };
 
 export type ResultNotice = {
@@ -87,8 +88,8 @@ export const siteMeta = {
     bn: "ডাকঘর ও গ্রাম - হুমানিয়া পোতা, ঠাকুরবাড়ি, থানা - গাংনাপুর, রাণাঘাট - ২, নদীয়া, পিন - ৭৪১২৩৮",
   },
   schoolPhone: "+91-8756339237",
-  schoolEmail: "info@kmschool.co.in",
-  foundationEmail: "contact@ngbmfoundation.com",
+  schoolEmail: "write2kms23@gmail.com",
+  foundationEmail: "write2kms23@gmail.com",
   facebookUrl: "https://www.facebook.com/share/17S2pWwVEf/",
 };
 

@@ -224,6 +224,30 @@ const staffMembers: StaffMember[] = [
       },
     ],
   },
+  {
+    name: {
+      en: "Manisha Roy",
+      bn: "Manisha Roy",
+    },
+    details: [
+      {
+        en: "Trainee Teacher",
+        bn: "Trainee Teacher",
+      },
+      {
+        en: "B.A Honours in Bengali",
+        bn: "B.A Honours in Bengali",
+      },
+      {
+        en: "M.A in Bengali",
+        bn: "M.A in Bengali",
+      },
+      {
+        en: "D.el ed (Diploma in Elementary Education)",
+        bn: "D.el ed (Diploma in Elementary Education)",
+      },
+    ],
+  },
 ];
 
 export default function OurSchoolPage() {

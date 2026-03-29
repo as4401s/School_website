@@ -45,15 +45,17 @@ export default async function PostPage({ params }: PostPageProps) {
         <LocalizedDate className="story-card__meta" value={post.publishedAt} />
 
         <article className="story-card">
-          <div className="story-card__image-wrap">
-            <Image
-              alt={post.title.en}
-              className="story-card__image"
-              fill
-              sizes="100vw"
-              src={post.imageUrl}
-            />
-          </div>
+          {post.imageUrl ? (
+            <div className="story-card__image-wrap">
+              <Image
+                alt={post.title.en}
+                className="story-card__image"
+                fill
+                sizes="100vw"
+                src={post.imageUrl}
+              />
+            </div>
+          ) : null}
           <div className="story-card__body stack">
             <LocalizedText as="p" text={post.excerpt} />
             {post.body.map((paragraph) => (

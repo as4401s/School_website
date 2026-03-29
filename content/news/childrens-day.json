@@ -1,0 +1,27 @@
+{
+  "id": "childrens-day",
+  "slug": "childrens-day",
+  "published": true,
+  "featured": false,
+  "showOnHome": false,
+  "publishedAt": "2025-11-14",
+  "title": {
+    "en": "Children's Day",
+    "bn": "শিশু দিবস"
+  },
+  "excerpt": {
+    "en": "Children's Day is celebrated in our school with fun activities and special programs for students.",
+    "bn": "আমাদের স্কুলে আনন্দঘন কার্যক্রম ও বিশেষ অনুষ্ঠানের মাধ্যমে শিশু দিবস উদযাপিত হয়।"
+  },
+  "body": [
+    {
+      "en": "Children's Day is celebrated in our school with fun activities and special programs for students.",
+      "bn": "আমাদের স্কুলে আনন্দঘন কার্যক্রম ও বিশেষ অনুষ্ঠানের মাধ্যমে শিশু দিবস উদযাপিত হয়।"
+    },
+    {
+      "en": "It is a day filled with joy, laughter, and appreciation for every child.",
+      "bn": "এটি আনন্দ, হাসি ও প্রতিটি শিশুর প্রতি ভালোবাসা ও সম্মানে ভরা একটি দিন।"
+    }
+  ],
+  "imageUrl": ""
+}

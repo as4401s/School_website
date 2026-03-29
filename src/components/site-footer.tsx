@@ -99,7 +99,7 @@ export function SiteFooter() {
                 {siteMeta.foundation}
               </a>
               <a href={`tel:${siteMeta.schoolPhone.replace(/-/g, "")}`}>{siteMeta.schoolPhone}</a>
-              <a href="mailto:contact@ngbmfoundation.com">contact@ngbmfoundation.com</a>
+              <a href={`mailto:${siteMeta.foundationEmail}`}>{siteMeta.foundationEmail}</a>
             </p>
             <div className="site-footer__social">
               <a

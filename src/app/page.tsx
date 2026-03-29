@@ -24,7 +24,7 @@ import {
 import { HomeVideoReel } from "@/components/home-video-reel";
 import {
   getGalleryItems,
-  getNewsPosts,
+  getHomeNewsPosts,
   getResults,
 } from "@/lib/content";
 
@@ -100,6 +100,14 @@ const headTeacherParagraphs: BilingualText[] = [
   {
     en: "We also believe that close communication between school and parents plays an essential role in a child's progress. Together, we hope to build a strong foundation for confidence, curiosity, and a lifelong love for learning.",
     bn: "আমরা আরও বিশ্বাস করি, স্কুল ও অভিভাবকের ঘনিষ্ঠ যোগাযোগ শিশুর অগ্রগতির জন্য অত্যন্ত গুরুত্বপূর্ণ। একসঙ্গে আমরা এমন একটি মজবুত ভিত্তি গড়ে তুলতে চাই, যা প্রতিটি শিশুর আত্মবিশ্বাস, কৌতূহল এবং শেখার প্রতি ভালোবাসাকে লালন করবে।",
+  },
+  {
+    en: "Bandana Mukherjee",
+    bn: "Bandana Mukherjee",
+  },
+  {
+    en: "Principal, KMS",
+    bn: "Principal, KMS",
   },
 ];
 
@@ -266,13 +274,12 @@ const campusVideos = [
 ];
 
 export default async function HomePage() {
-  const [galleryItems, posts, results] = await Promise.all([
+  const [galleryItems, featuredPosts, results] = await Promise.all([
     getGalleryItems(),
-    getNewsPosts(),
+    getHomeNewsPosts(),
     getResults(),
   ]);
 
-  const featuredPosts = posts.slice(0, 2);
   const latestResult = results[0];
 
   // Build the ordered, deduped slider items from the full gallery
@@ -367,15 +374,17 @@ export default async function HomePage() {
           <div className="grid-2">
             {featuredPosts.map((post) => (
               <article className="story-card story-card--home" key={post.id}>
-                <div className="story-card__image-wrap">
-                  <Image
-                    alt={post.title.en}
-                    className="story-card__image"
-                    fill
-                    sizes="(max-width: 1080px) 100vw, 50vw"
-                    src={post.imageUrl}
-                  />
-                </div>
+                {post.imageUrl ? (
+                  <div className="story-card__image-wrap">
+                    <Image
+                      alt={post.title.en}
+                      className="story-card__image"
+                      fill
+                      sizes="(max-width: 1080px) 100vw, 50vw"
+                      src={post.imageUrl}
+                    />
+                  </div>
+                ) : null}
                 <div className="story-card__body stack">
                   <LocalizedDate className="story-card__meta" value={post.publishedAt} />
                   <LocalizedText as="h3" text={post.title} />

@@ -39,15 +39,17 @@ export default async function BlogPage() {
         <div className="shell grid-2">
           {posts.map((post) => (
             <article className="story-card" key={post.id}>
-              <div className="story-card__image-wrap">
-                <Image
-                  alt={post.title.en}
-                  className="story-card__image"
-                  fill
-                  sizes="(max-width: 1080px) 100vw, 50vw"
-                  src={post.imageUrl}
-                />
-              </div>
+              {post.imageUrl ? (
+                <div className="story-card__image-wrap">
+                  <Image
+                    alt={post.title.en}
+                    className="story-card__image"
+                    fill
+                    sizes="(max-width: 1080px) 100vw, 50vw"
+                    src={post.imageUrl}
+                  />
+                </div>
+              ) : null}
               <div className="story-card__body stack">
                 <LocalizedDate className="story-card__meta" value={post.publishedAt} />
                 <LocalizedText as="h3" text={post.title} />

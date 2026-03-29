@@ -1,0 +1,27 @@
+{
+  "id": "saraswati-puja",
+  "slug": "saraswati-puja",
+  "published": true,
+  "featured": false,
+  "showOnHome": false,
+  "publishedAt": "2026-01-26",
+  "title": {
+    "en": "Saraswati Puja",
+    "bn": "সরস্বতী পূজা"
+  },
+  "excerpt": {
+    "en": "Our school celebrates Saraswati Puja with devotion, seeking blessings for knowledge and wisdom.",
+    "bn": "জ্ঞান ও প্রজ্ঞার আশীর্বাদ কামনায় আমাদের স্কুলে ভক্তিভরে সরস্বতী পূজা উদযাপিত হয়।"
+  },
+  "body": [
+    {
+      "en": "Our school celebrates Saraswati Puja with devotion, seeking blessings for knowledge and wisdom.",
+      "bn": "জ্ঞান ও প্রজ্ঞার আশীর্বাদ কামনায় আমাদের স্কুলে ভক্তিভরে সরস্বতী পূজা উদযাপিত হয়।"
+    },
+    {
+      "en": "The occasion brings together students in a spirit of learning, culture, and positivity.",
+      "bn": "এই উপলক্ষ শিক্ষার্থীদের শেখা, সংস্কৃতি ও ইতিবাচকতার এক সুন্দর আবহে একত্রিত করে।"
+    }
+  ],
+  "imageUrl": ""
+}

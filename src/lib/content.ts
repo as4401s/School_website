@@ -31,11 +31,12 @@ const newsPostSchema = z.object({
   slug: z.string().trim().min(1).optional(),
   published: z.boolean().default(true),
   featured: z.boolean().optional().default(false),
+  showOnHome: z.boolean().optional().default(true),
   publishedAt: z.string().trim().min(1),
   title: bilingualTextSchema,
   excerpt: bilingualTextSchema,
   body: z.array(bilingualTextSchema).min(1),
-  imageUrl: z.string().trim().min(1),
+  imageUrl: z.string().trim().optional().default(""),
 });
 
 const resultNoticeSchema = z.object({
@@ -139,10 +140,11 @@ function mapNewsPost(record: RecordWithFileSlug<NewsPostFile>): NewsPost {
     slug,
     publishedAt: record.publishedAt,
     featured: record.featured,
+    showOnHome: record.showOnHome,
     title: normalizeBilingualText(record.title),
     excerpt: normalizeBilingualText(record.excerpt),
     body: record.body.map(normalizeBilingualText),
-    imageUrl: record.imageUrl,
+    imageUrl: record.imageUrl || undefined,
   };
 }
 
@@ -253,6 +255,12 @@ const loadCmsCollections = cache(async (): Promise<CmsCollections> => {
 
 export async function getNewsPosts() {
   return (await loadCmsCollections()).news;
+}
+
+export async function getHomeNewsPosts(limit = 2) {
+  return (await getNewsPosts())
+    .filter((post) => post.showOnHome !== false)
+    .slice(0, limit);
 }
 
 export async function getNewsPostBySlug(slug: string) {

@@ -2,25 +2,26 @@
   "id": "raksha-bandhan",
   "slug": "raksha-bandhan",
   "published": true,
-  "featured": true,
-  "publishedAt": "2025-08-09",
+  "featured": false,
+  "showOnHome": false,
+  "publishedAt": "2025-08-05",
   "title": {
     "en": "Raksha Bandhan",
     "bn": "রক্ষাবন্ধন"
   },
   "excerpt": {
-    "en": "Celebration of Raksha Bandhan among students through cultural activities and togetherness.",
-    "bn": "সাংস্কৃতিক কার্যক্রম ও ভ্রাতৃত্বের বন্ধনের মধ্য দিয়ে শিক্ষার্থীদের রক্ষাবন্ধন উদযাপন।"
+    "en": "Raksha Bandhan is celebrated in our school to promote love, care, and unity among students.",
+    "bn": "শিক্ষার্থীদের মধ্যে ভালোবাসা, যত্ন ও ঐক্য গড়ে তুলতে আমাদের স্কুলে রক্ষাবন্ধন উদযাপন করা হয়।"
   },
   "body": [
     {
-      "en": "Students celebrated Raksha Bandhan together in a joyful atmosphere inside the school.",
-      "bn": "শিক্ষার্থীরা বিদ্যালয়ে আনন্দঘন পরিবেশে একসঙ্গে রক্ষাবন্ধন উদযাপন করেছে।"
+      "en": "Raksha Bandhan is celebrated in our school to promote love, care, and unity among students.",
+      "bn": "শিক্ষার্থীদের মধ্যে ভালোবাসা, যত্ন ও ঐক্য গড়ে তুলতে আমাদের স্কুলে রক্ষাবন্ধন উদযাপন করা হয়।"
     },
     {
-      "en": "Events like this help make school life memorable and strengthen the sense of community among children.",
-      "bn": "এই ধরনের অনুষ্ঠান স্কুল জীবনকে স্মরণীয় করে তুলতে এবং শিক্ষার্থীদের মাঝে পারস্পরিক সংহতি ও একতাবোধ দৃঢ় করতে সাহায্য করে।"
+      "en": "It symbolizes love, protection, and lifelong care.",
+      "bn": "এই উৎসব ভালোবাসা, সুরক্ষা ও আজীবন যত্নের প্রতীক।"
     }
   ],
-  "imageUrl": "/media/post-raksha.jpeg"
+  "imageUrl": ""
 }

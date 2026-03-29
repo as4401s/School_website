@@ -1,0 +1,27 @@
+{
+  "id": "rabindra-jayanti",
+  "slug": "rabindra-jayanti",
+  "published": true,
+  "featured": false,
+  "showOnHome": false,
+  "publishedAt": "2025-05-09",
+  "title": {
+    "en": "Rabindra Jayanti",
+    "bn": "রবীন্দ্র জয়ন্তী"
+  },
+  "excerpt": {
+    "en": "Rabindra Jayanti is observed in our school through songs, recitations, and performances.",
+    "bn": "আমাদের স্কুলে গান, আবৃত্তি ও পরিবেশনার মাধ্যমে রবীন্দ্র জয়ন্তী উদযাপিত হয়।"
+  },
+  "body": [
+    {
+      "en": "Rabindra Jayanti is observed in our school through songs, recitations, and performances.",
+      "bn": "আমাদের স্কুলে গান, আবৃত্তি ও পরিবেশনার মাধ্যমে রবীন্দ্র জয়ন্তী উদযাপিত হয়।"
+    },
+    {
+      "en": "Students celebrate the legacy of Rabindranath Tagore with creativity and pride.",
+      "bn": "সৃজনশীলতা ও গর্বের সঙ্গে শিক্ষার্থীরা রবীন্দ্রনাথ ঠাকুরের উত্তরাধিকারকে স্মরণ করে।"
+    }
+  ],
+  "imageUrl": ""
+}

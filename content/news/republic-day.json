@@ -1,0 +1,27 @@
+{
+  "id": "republic-day",
+  "slug": "republic-day",
+  "published": true,
+  "featured": false,
+  "showOnHome": false,
+  "publishedAt": "2026-01-26",
+  "title": {
+    "en": "Republic Day",
+    "bn": "প্রজাতন্ত্র দিবস"
+  },
+  "excerpt": {
+    "en": "Republic Day is celebrated with pride through flag hoisting and cultural programs in our school.",
+    "bn": "আমাদের স্কুলে পতাকা উত্তোলন ও সাংস্কৃতিক অনুষ্ঠানের মাধ্যমে গর্বের সঙ্গে প্রজাতন্ত্র দিবস উদযাপিত হয়।"
+  },
+  "body": [
+    {
+      "en": "Republic Day is celebrated with pride through flag hoisting and cultural programs in our school.",
+      "bn": "আমাদের স্কুলে পতাকা উত্তোলন ও সাংস্কৃতিক অনুষ্ঠানের মাধ্যমে গর্বের সঙ্গে প্রজাতন্ত্র দিবস উদযাপিত হয়।"
+    },
+    {
+      "en": "It reminds students of the values of unity, responsibility, and democracy.",
+      "bn": "এটি শিক্ষার্থীদের ঐক্য, দায়িত্ববোধ ও গণতন্ত্রের মূল্যবোধ স্মরণ করিয়ে দেয়।"
+    }
+  ],
+  "imageUrl": ""
+}

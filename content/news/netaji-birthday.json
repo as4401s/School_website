@@ -1,0 +1,27 @@
+{
+  "id": "netaji-birthday",
+  "slug": "netaji-birthday",
+  "published": true,
+  "featured": false,
+  "showOnHome": false,
+  "publishedAt": "2026-01-23",
+  "title": {
+    "en": "Netaji Birthday",
+    "bn": "নেতাজির জন্মদিন"
+  },
+  "excerpt": {
+    "en": "We honor the birth anniversary of Netaji Subhas Chandra Bose, a great leader of India's freedom struggle.",
+    "bn": "ভারতের স্বাধীনতা সংগ্রামের মহান নেতা নেতাজি সুভাষচন্দ্র বসুর জন্মবার্ষিকী আমরা শ্রদ্ধার সঙ্গে পালন করি।"
+  },
+  "body": [
+    {
+      "en": "We honor the birth anniversary of Netaji Subhas Chandra Bose, a great leader of India's freedom struggle.",
+      "bn": "ভারতের স্বাধীনতা সংগ্রামের মহান নেতা নেতাজি সুভাষচন্দ্র বসুর জন্মবার্ষিকী আমরা শ্রদ্ধার সঙ্গে পালন করি।"
+    },
+    {
+      "en": "Students are inspired by his courage, leadership, and deep love for patriotism.",
+      "bn": "তাঁর সাহস, নেতৃত্ব ও গভীর দেশপ্রেম শিক্ষার্থীদের অনুপ্রাণিত করে।"
+    }
+  ],
+  "imageUrl": ""
+}

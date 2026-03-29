@@ -3,6 +3,7 @@ import Image from "next/image";
 
 import { LocalizedText } from "@/components/language-provider";
 import { PageIntro } from "@/components/page-intro";
+import { siteMeta } from "@/data/site-content";
 import { getResults } from "@/lib/content";
 
 const introEyebrow = {
@@ -152,7 +153,7 @@ export default async function AnnouncementsPage() {
                                         }}
                                     />
                                 </p>
-                                <p><a href="mailto:contact@ngbmfoundation.com">contact@ngbmfoundation.com</a></p>
+                                <p><a href={`mailto:${siteMeta.foundationEmail}`}>{siteMeta.foundationEmail}</a></p>
                             </div>
                         </div>
                     </div>

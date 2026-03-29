@@ -3,24 +3,25 @@
   "slug": "independence-day-celebration",
   "published": true,
   "featured": false,
+  "showOnHome": false,
   "publishedAt": "2025-08-15",
   "title": {
-    "en": "Independence Day Celebration",
-    "bn": "স্বাধীনতা দিবস উদযাপন"
+    "en": "Independence Day",
+    "bn": "স্বাধীনতা দিবস"
   },
   "excerpt": {
-    "en": "Celebration of Independence Day on 15th August with cultural programs and the hoisting of the national flag.",
-    "bn": "১৫ই আগস্ট সাংস্কৃতিক অনুষ্ঠান ও জাতীয় পতাকা উত্তোলনের মাধ্যমে স্বাধীনতা দিবস উদযাপন।"
+    "en": "Our school celebrates Independence Day with patriotic programs and flag hoisting.",
+    "bn": "আমাদের স্কুলে দেশাত্মবোধক অনুষ্ঠান ও পতাকা উত্তোলনের মাধ্যমে স্বাধীনতা দিবস উদযাপিত হয়।"
   },
   "body": [
     {
-      "en": "Children and teachers marked Independence Day through cultural participation and a formal flag hoisting ceremony.",
-      "bn": "শিক্ষক ও শিক্ষার্থীগণ সাংস্কৃতিক অনুষ্ঠান ও আনুষ্ঠানিক পতাকা উত্তোলনের মাধ্যমে স্বাধীনতা দিবস উদযাপন করেছেন।"
+      "en": "Our school celebrates Independence Day with patriotic programs and flag hoisting.",
+      "bn": "আমাদের স্কুলে দেশাত্মবোধক অনুষ্ঠান ও পতাকা উত্তোলনের মাধ্যমে স্বাধীনতা দিবস উদযাপিত হয়।"
     },
     {
-      "en": "The event brought together the school community in a spirit of pride, participation, and celebration.",
-      "bn": "অনুষ্ঠানটির মাধ্যমে স্কুলের সকল সদস্য স্বতঃস্ফূর্ত অংশগ্রহণ এবং উদযাপনের এক অনন্য স্পৃহা নিয়ে একত্রিত হয়েছিলেন।"
+      "en": "Students express their love for the nation through speeches, songs, and performances.",
+      "bn": "ভাষণ, গান ও সাংস্কৃতিক পরিবেশনার মাধ্যমে শিক্ষার্থীরা দেশের প্রতি তাদের ভালোবাসা প্রকাশ করে।"
     }
   ],
-  "imageUrl": "/media/post-independence.jpeg"
+  "imageUrl": ""
 }

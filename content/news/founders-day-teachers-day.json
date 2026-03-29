@@ -1,0 +1,27 @@
+{
+  "id": "founders-day-teachers-day",
+  "slug": "founders-day-teachers-day",
+  "published": true,
+  "featured": false,
+  "showOnHome": false,
+  "publishedAt": "2025-09-06",
+  "title": {
+    "en": "Founder's Day & Teacher's Day",
+    "bn": "প্রতিষ্ঠাতা দিবস ও শিক্ষক দিবস"
+  },
+  "excerpt": {
+    "en": "Founder's Day and Teacher's Day are celebrated with gratitude and respect in our school.",
+    "bn": "আমাদের স্কুলে কৃতজ্ঞতা ও শ্রদ্ধার সঙ্গে প্রতিষ্ঠাতা দিবস ও শিক্ষক দিবস উদযাপিত হয়।"
+  },
+  "body": [
+    {
+      "en": "Founder's Day and Teacher's Day are celebrated with gratitude and respect in our school.",
+      "bn": "আমাদের স্কুলে কৃতজ্ঞতা ও শ্রদ্ধার সঙ্গে প্রতিষ্ঠাতা দিবস ও শিক্ষক দিবস উদযাপিত হয়।"
+    },
+    {
+      "en": "Students express appreciation through performances and heartfelt messages.",
+      "bn": "শিক্ষার্থীরা পরিবেশনা ও আন্তরিক শুভেচ্ছাবার্তার মাধ্যমে তাঁদের কৃতজ্ঞতা প্রকাশ করে।"
+    }
+  ],
+  "imageUrl": ""
+}
