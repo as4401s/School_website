@@ -7,10 +7,19 @@ import { LocalizedText } from "@/components/language-provider";
 
 interface GalleryGridProps {
     items: GalleryItem[];
+    variant?: "default" | "event";
 }
 
-export function GalleryGrid({ items }: GalleryGridProps) {
+export function GalleryGrid({ items, variant = "default" }: GalleryGridProps) {
     const [selectedImage, setSelectedImage] = useState<GalleryItem | null>(null);
+    const layoutClassName =
+        variant === "event" ? "gallery-grid-layout gallery-grid-layout--event" : "gallery-grid-layout";
+    const cardClassName =
+        variant === "event" ? "gallery-grid-card gallery-grid-card--event" : "gallery-grid-card";
+    const imageSizes =
+        variant === "event"
+            ? "(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+            : "(max-width: 1080px) 100vw, 33vw";
 
     if (items.length === 0) {
         return <p className="muted">No images found.</p>;
@@ -18,10 +27,10 @@ export function GalleryGrid({ items }: GalleryGridProps) {
 
     return (
         <>
-            <div className="gallery-grid-layout">
+            <div className={layoutClassName}>
                 {items.map((item) => (
                     <article
-                        className="gallery-grid-card"
+                        className={cardClassName}
                         key={item.id}
                         onClick={() => setSelectedImage(item)}
                     >
@@ -30,7 +39,7 @@ export function GalleryGrid({ items }: GalleryGridProps) {
                                 alt={item.title.en}
                                 className="gallery-grid-card__image"
                                 fill
-                                sizes="(max-width: 1080px) 100vw, 33vw"
+                                sizes={imageSizes}
                                 src={item.imageUrl}
                             />
                         </div>
