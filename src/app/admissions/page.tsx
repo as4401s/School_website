@@ -184,6 +184,25 @@ export default function AdmissionsPage() {
     <>
       <PageIntro eyebrow={introEyebrow} summary={introSummary} title={introTitle} />
 
+      <section className="section" style={{ paddingBottom: "2rem" }}>
+        <div className="shell" style={{ display: "flex", justifyContent: "center" }}>
+          <Image
+            src="/media/Popup.jpeg"
+            alt="Admissions Start Poster"
+            width={1080}
+            height={1080}
+            style={{ 
+              width: "100%", 
+              maxWidth: "640px", 
+              height: "auto", 
+              borderRadius: "24px", 
+              boxShadow: "0 20px 40px rgba(15, 23, 38, 0.12)"
+            }}
+            priority
+          />
+        </div>
+      </section>
+
       <section className="section">
         <div className="shell admissions-overview">
           <div className="admissions-overview__grid">
