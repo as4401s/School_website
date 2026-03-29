@@ -7,6 +7,7 @@ import { LanguageProvider } from "@/components/language-provider";
 import { PageMotion } from "@/components/page-motion";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
+import { WelcomePopup } from "@/components/welcome-popup";
 import { siteMeta } from "@/data/site-content";
 
 import "./globals.css";
@@ -93,6 +94,7 @@ export default function RootLayout({
           <PageMotion />
           <div className="site-backdrop" />
           <SiteHeader />
+          <WelcomePopup />
           <main>{children}</main>
           <SiteFooter />
           <Analytics />
