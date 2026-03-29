@@ -3,7 +3,7 @@
   "slug": "independence-day-celebration",
   "published": true,
   "featured": false,
-  "showOnHome": false,
+  "showOnHome": true,
   "publishedAt": "2025-08-15",
   "title": {
     "en": "Independence Day",
@@ -23,5 +23,5 @@
       "bn": "অনুষ্ঠানটির মাধ্যমে স্কুলের সকল সদস্য স্বতঃস্ফূর্ত অংশগ্রহণ এবং উদযাপনের এক অনন্য স্পৃহা নিয়ে একত্রিত হয়েছিলেন।"
     }
   ],
-  "imageUrl": ""
+  "imageUrl": "/media/post-independence.jpeg"
 }

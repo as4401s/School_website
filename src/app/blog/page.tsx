@@ -39,8 +39,8 @@ export default async function BlogPage() {
         <div className="shell grid-2">
           {posts.map((post) => (
             <article className="story-card" key={post.id}>
-              {post.imageUrl ? (
-                <div className="story-card__image-wrap">
+              <div className="story-card__image-wrap" style={{ backgroundColor: '#000' }}>
+                {post.imageUrl ? (
                   <Image
                     alt={post.title.en}
                     className="story-card__image"
@@ -48,8 +48,8 @@ export default async function BlogPage() {
                     sizes="(max-width: 1080px) 100vw, 50vw"
                     src={post.imageUrl}
                   />
-                </div>
-              ) : null}
+                ) : null}
+              </div>
               <div className="story-card__body stack">
                 <LocalizedDate className="story-card__meta" value={post.publishedAt} />
                 <LocalizedText as="h3" text={post.title} />

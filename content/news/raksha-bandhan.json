@@ -3,7 +3,7 @@
   "slug": "raksha-bandhan",
   "published": true,
   "featured": false,
-  "showOnHome": false,
+  "showOnHome": true,
   "publishedAt": "2025-08-05",
   "title": {
     "en": "Raksha Bandhan",
@@ -23,5 +23,5 @@
       "bn": "এই ধরনের অনুষ্ঠান স্কুল জীবনকে স্মরণীয় করে তুলতে এবং শিক্ষার্থীদের মাঝে পারস্পরিক সংহতি ও একতাবোধ দৃঢ় করতে সাহায্য করে।"
     }
   ],
-  "imageUrl": ""
+  "imageUrl": "/media/post-raksha.jpeg"
 }

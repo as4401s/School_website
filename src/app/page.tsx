@@ -206,7 +206,8 @@ const homeTopics: HomeTopicItem[] = [
     paragraphs: headTeacherParagraphs,
     teaser: headTeacherGreeting,
     image: {
-      alt: "Placeholder for the head teacher message image",
+      src: "/media/head_teacher.jpg",
+      alt: "Head Teacher of KMS",
     },
   },
 ];
@@ -453,8 +454,8 @@ export default async function HomePage() {
           <div className="grid-2">
             {homeHighlights.map((item) => (
               <article className="story-card story-card--home" key={item.id}>
-                {item.imageUrl ? (
-                  <div className="story-card__image-wrap">
+                <div className="story-card__image-wrap" style={{ backgroundColor: '#000' }}>
+                  {item.imageUrl ? (
                     <Image
                       alt={item.title.en}
                       className="story-card__image"
@@ -462,8 +463,8 @@ export default async function HomePage() {
                       sizes="(max-width: 1080px) 100vw, 50vw"
                       src={item.imageUrl}
                     />
-                  </div>
-                ) : null}
+                  ) : null}
+                </div>
                 <div className="story-card__body stack">
                   {"publishedAt" in item ? (
                     <LocalizedDate className="story-card__meta" value={item.publishedAt} />
