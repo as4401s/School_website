@@ -79,8 +79,8 @@ const montessoriParagraphs: BilingualText[] = [
 ];
 
 const headTeacherTitle = {
-  en: "A Message from the Head Teacher",
-  bn: "প্রধান শিক্ষকের বার্তা",
+  en: "A Message from the Principal",
+  bn: "অধ্যক্ষের বার্তা",
 };
 
 const headTeacherGreeting = {
@@ -206,8 +206,8 @@ const homeTopics: HomeTopicItem[] = [
     paragraphs: headTeacherParagraphs,
     teaser: headTeacherGreeting,
     image: {
-      src: "/media/head_teacher.jpg",
-      alt: "Head Teacher of KMS",
+      src: "/media/Princi01.png",
+      alt: "Principal of KMS",
     },
   },
 ];
