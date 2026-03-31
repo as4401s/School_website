@@ -184,7 +184,7 @@ const staffMembers: StaffMember[] = [
         bn: "Graduate (NTT)",
       },
     ],
-    imageUrl: "/media/teachers/Mamata.jpeg",
+    imageUrl: "/media/teachers/Mamata.jpg",
   },
   {
     name: {
@@ -205,7 +205,7 @@ const staffMembers: StaffMember[] = [
         bn: "M.A. in English (Pursuing)",
       },
     ],
-    imageUrl: "/media/teachers/aritri.jpeg",
+    imageUrl: "/media/teachers/aritri.jpg",
   },
   {
     name: {
@@ -226,7 +226,7 @@ const staffMembers: StaffMember[] = [
         bn: "Trainee Teacher",
       },
     ],
-    imageUrl: "/media/teachers/aditi.jpeg",
+    imageUrl: "/media/teachers/aditi.jpg",
   },
   {
     name: {
@@ -251,7 +251,7 @@ const staffMembers: StaffMember[] = [
         bn: "D.el ed (Diploma in Elementary Education)",
       },
     ],
-    imageUrl: "/media/teachers/manisha.jpeg",
+    imageUrl: "/media/teachers/manisha.jpg",
   },
 ];
 
