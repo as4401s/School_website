@@ -3173,7 +3173,7 @@ body::before {
 .staff-card__avatar {
   position: relative;
   overflow: hidden;
-  width: 120px;
+  width: 160px;
   aspect-ratio: 1;
   border-radius: 50%;
   border: 0;

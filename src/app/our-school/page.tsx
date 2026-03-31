@@ -342,7 +342,7 @@ export default function OurSchoolPage() {
                     <Image
                       alt={member.name.en}
                       fill
-                      sizes="120px"
+                      sizes="160px"
                       src={member.imageUrl}
                       style={{ objectFit: "cover" }}
                     />
