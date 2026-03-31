@@ -90,7 +90,7 @@ export const siteMeta = {
   },
   schoolPhone: "+91-8756339237",
   schoolEmail: "write2kms23@gmail.com",
-  foundationEmail: "write2kms23@gmail.com",
+  foundationEmail: "contact@ngbmfoundation.com",
   facebookUrl: "https://www.facebook.com/share/17S2pWwVEf/",
 };
 
