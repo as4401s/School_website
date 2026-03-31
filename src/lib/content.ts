@@ -349,9 +349,7 @@ export async function getNewsPosts() {
 }
 
 export async function getHomeNewsPosts(limit = 2) {
-  return (await getNewsPosts())
-    .filter((post) => post.showOnHome !== false)
-    .slice(0, limit);
+  return (await getNewsPosts()).slice(0, limit);
 }
 
 export async function getNewsPostBySlug(slug: string) {
