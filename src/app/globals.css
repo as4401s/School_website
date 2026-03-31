@@ -3213,6 +3213,15 @@ body::before {
     0 10px 18px rgba(36, 48, 68, 0.08);
 }
 
+.staff-card__avatar--has-image {
+  background: var(--surface-strong);
+}
+
+.staff-card__avatar--has-image::before,
+.staff-card__avatar--has-image::after {
+  display: none;
+}
+
 .staff-card h3 {
   margin: 0;
   font-family: var(--font-display), var(--font-bengali), var(--font-body), sans-serif;

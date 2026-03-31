@@ -15,6 +15,7 @@ type AboutCard = {
 type StaffMember = {
   name: BilingualText;
   details: BilingualText[];
+  imageUrl?: string;
 };
 
 const introEyebrow = {
@@ -183,6 +184,7 @@ const staffMembers: StaffMember[] = [
         bn: "Graduate (NTT)",
       },
     ],
+    imageUrl: "/media/teachers/Mamata.jpeg",
   },
   {
     name: {
@@ -203,6 +205,7 @@ const staffMembers: StaffMember[] = [
         bn: "M.A. in English (Pursuing)",
       },
     ],
+    imageUrl: "/media/teachers/aritri.jpeg",
   },
   {
     name: {
@@ -223,6 +226,7 @@ const staffMembers: StaffMember[] = [
         bn: "Trainee Teacher",
       },
     ],
+    imageUrl: "/media/teachers/aditi.jpeg",
   },
   {
     name: {
@@ -247,6 +251,7 @@ const staffMembers: StaffMember[] = [
         bn: "D.el ed (Diploma in Elementary Education)",
       },
     ],
+    imageUrl: "/media/teachers/manisha.jpeg",
   },
 ];
 
@@ -329,7 +334,20 @@ export default function OurSchoolPage() {
                 className={`staff-card${member.name.en === "Manisha Roy" ? " staff-card--middle" : ""}`}
                 key={member.name.en}
               >
-                <div aria-hidden="true" className="staff-card__avatar" />
+                <div
+                  aria-label={member.name.en}
+                  className={`staff-card__avatar${member.imageUrl ? " staff-card__avatar--has-image" : ""}`}
+                >
+                  {member.imageUrl && (
+                    <Image
+                      alt={member.name.en}
+                      fill
+                      sizes="86px"
+                      src={member.imageUrl}
+                      style={{ objectFit: "cover" }}
+                    />
+                  )}
+                </div>
                 <LocalizedText as="h3" text={member.name} />
                 <div className="staff-card__details">
                   {member.details.map((detail) => (
