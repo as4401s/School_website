@@ -21,7 +21,7 @@ const introSummary = {
 };
 
 export default function ContactPage() {
-  const mapQuery = encodeURIComponent(siteMeta.eventLocation.en);
+  const mapQuery = encodeURIComponent("4MPP+5XP, Humania Pota, West Bengal 741238, India");
 
   return (
     <>
