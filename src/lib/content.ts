@@ -175,6 +175,10 @@ async function listPublicImageAssets(relativeDirectory: string): Promise<PublicI
   }
 }
 
+function getCoverAsset(assets: PublicImageAsset[]) {
+  return assets.find((asset) => /^cover\.[^.]+$/i.test(asset.fileName));
+}
+
 function createAutomaticGalleryItem(asset: PublicImageAsset, index: number): GalleryItem {
   const baseName = asset.fileName.replace(/\.[^.]+$/, "");
   const slug =
@@ -211,9 +215,9 @@ async function getAutomaticGalleryItems(existingItems: GalleryItem[]) {
 
 async function mapNewsPost(record: RecordWithFileSlug<NewsPostFile>): Promise<NewsPost> {
   const slug = record.slug || record._fileSlug;
-  const galleryImages = record.eventFolder
-    ? (await listPublicImageAssets(record.eventFolder)).map((asset) => asset.url)
-    : [];
+  const galleryAssets = record.eventFolder ? await listPublicImageAssets(record.eventFolder) : [];
+  const coverAsset = getCoverAsset(galleryAssets);
+  const galleryImages = galleryAssets.map((asset) => asset.url);
 
   return {
     id: record.id || slug,
@@ -224,7 +228,7 @@ async function mapNewsPost(record: RecordWithFileSlug<NewsPostFile>): Promise<Ne
     title: normalizeBilingualText(record.title),
     excerpt: normalizeBilingualText(record.excerpt),
     body: record.body.map(normalizeBilingualText),
-    imageUrl: record.imageUrl || galleryImages[0] || undefined,
+    imageUrl: coverAsset?.url || record.imageUrl || galleryImages[0] || undefined,
     galleryImages: galleryImages.length > 0 ? galleryImages : undefined,
   };
 }
